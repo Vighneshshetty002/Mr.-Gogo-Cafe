@@ -541,81 +541,79 @@
     <footer>
         <p>Powered by: <a href="https://github.com/vighneshshetty002"><img src="VS Tech.png" alt="Logo"></a></p>
     </footer>
+    
     <script>
+// Define an array to store cart items
+        const cartItems = [];
+
         // Function to handle ordering the veg pizza
-function orderVegPizza() {
-    // Define the order details
-    const itemName = "Veg Pizza";
-    const itemPrice = "109/-";
+        function orderVegPizza() {
+            // Define the order details
+            const itemName = "Veg Pizza";
+            const itemPrice = "109/-";
 
-    // Construct the email content
-    const emailContent = `Order Details:\n\nItem: ${itemName}\nPrice: ${itemPrice}`;
+            // Construct the email content
+            const emailContent = `Order Details:\n\nItem: ${itemName}\nPrice: ${itemPrice}`;
 
-    // Define the recipient email address
-    const recipientEmail = 'vighneshshetty002@gmail.com';
+            // Define the recipient email address
+            const recipientEmail = 'vighneshshetty002@gmail.com';
 
-    // Send the email
-    window.location.href = `mailto:${recipientEmail}?subject=Order%20${itemName}&body=${encodeURIComponent(emailContent)}`;
-}
+            // Send the email
+            window.location.href = `mailto:${recipientEmail}?subject=Order%20${itemName}&body=${encodeURIComponent(emailContent)}`;
+        }
 
-// Add event listener to the order button of the veg pizza
-const orderButton = document.querySelector('.menu-item:nth-child(1) .menu-item-buttons button:nth-child(1)');
-orderButton.addEventListener('click', orderVegPizza);
+        // Add event listener to the order button of the veg pizza
+        const vegPizzaOrderButton = document.querySelector('.menu-item:nth-child(1) .menu-item-buttons button:nth-child(1)');
+        vegPizzaOrderButton.addEventListener('click', orderVegPizza);
 
+        // Function to handle ordering the kulhad pizza
+        function orderKulhadPizza() {
+            // Define the order details
+            const itemName = "Kulhad Pizza";
+            const itemPrice = "199/-";
 
+            // Construct the email content
+            const emailContent = `Order Details:\n\nItem: ${itemName}\nPrice: ${itemPrice}`;
 
+            // Define the recipient email address
+            const recipientEmail = 'vighneshshetty002@gmail.com';
 
+            // Send the email
+            window.location.href = `mailto:${recipientEmail}?subject=Order%20${itemName}&body=${encodeURIComponent(emailContent)}`;
+        }
 
-// Function to handle ordering the veg pizza
-function orderKulhadPizza() {
-    // Define the order details
-    const itemName = "Kulhad Pizza";
-    const itemPrice = "199/-";
-
-    // Construct the email content
-    const emailContent = `Order Details:\n\nItem: ${itemName}\nPrice: ${itemPrice}`;
-
-    // Define the recipient email address
-    const recipientEmail = 'vighneshshetty002@gmail.com';
-
-    // Send the email
-    window.location.href = `mailto:${recipientEmail}?subject=Order%20${itemName}&body=${encodeURIComponent(emailContent)}`;
-}
-
-// Add event listener to the order button of the veg pizza
-const orderButton = document.querySelector('.menu-item:nth-child(1) .menu-item-buttons button:nth-child(1)');
-orderButton.addEventListener('click', orderKulhadPizza);
-
-
-
+        // Add event listener to the order button of the kulhad pizza
+        const kulhadPizzaOrderButton = document.querySelector('.menu-item:nth-child(2) .menu-item-buttons button:nth-child(1)');
+        kulhadPizzaOrderButton.addEventListener('click', orderKulhadPizza);
 
         // Function to handle adding items to the cart
-function addToCart(event) {
-    // Get the menu item details
-    const menuItem = event.target.closest('.menu-item');
-    const itemName = menuItem.querySelector('h3').innerText;
-    const itemPrice = menuItem.querySelector('h3:last-child').innerText;
+        function addToCart(event) {
+            // Get the menu item details
+            const menuItem = event.target.closest('.menu-item');
+            const itemName = menuItem.querySelector('h3').innerText;
+            const itemPrice = menuItem.querySelector('h3:last-child').innerText;
 
-    // Construct item object
-    const item = {
-        itemName: itemName,
-        itemPrice: itemPrice
-    };
+            // Construct item object
+            const item = {
+                itemName: itemName,
+                itemPrice: itemPrice
+            };
 
-    // Add item to cart
-    cartItems.push(item);
+            // Add item to cart
+            cartItems.push(item);
 
-    // Show pop-up message for the first item added to the cart
-    if (cartItems.length === 1) {
-        alert('Item added to cart!');
-    }
-}
+            // Show pop-up message for the first item added to the cart
+            if (cartItems.length === 1) {
+                alert('Item added to cart!');
+            }
+        }
 
-// Add event listener to "Add to Cart" buttons of Veg Pizza and Kulhad Pizza
-const addToCartButtons = document.querySelectorAll('.menu-item-buttons button:nth-child(2)');
-addToCartButtons.forEach(button => {
-    button.addEventListener('click', addToCart);
-});
+        // Add event listener to "Add to Cart" buttons of Veg Pizza and Kulhad Pizza
+        const addToCartButtons = document.querySelectorAll('.menu-item-buttons button:nth-child(2)');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', addToCart);
+        });
+    </script>
     </script>
 
 
