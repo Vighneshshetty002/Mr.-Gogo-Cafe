@@ -530,5 +530,64 @@
     <footer>
         <p>Powered by: <img src="VS Tech.png" alt="Logo"></p>
     </footer>
+
+
+
+<a href="#" class="menu-button" id="order-button">Order <img src="menu-icon.png" alt="Menu Icon" class="menu-icon"></a>
+
+    <script>
+        // Function to handle order submission
+        function submitOrder() {
+            // Get table number (for demonstration purposes, using a hardcoded value)
+            const tableNumber = '1'; // You can replace this with a dynamic value based on the table QR code clicked
+
+            // Example of items ordered (replace with actual logic to get selected items)
+            const itemsOrdered = ['Coffee', 'Sandwich', 'Cake']; // Example items
+
+            // Construct order object
+            const order = {
+                tableNumber: tableNumber,
+                itemsOrdered: itemsOrdered
+            };
+
+            // Send order to backend
+            fetch('/submitOrder', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(order)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Order placed successfully!');
+                } else {
+                    throw new Error('Failed to place order');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to place order. Please try again later.');
+            });
+
+            // Send notification email to restaurant staff
+            sendNotification(tableNumber, itemsOrdered);
+        }
+
+        // Function to send notification email
+        function sendNotification(tableNumber, itemsOrdered) {
+            // Construct email content
+            const subject = `New Order from Table ${tableNumber}`;
+            const body = `Table ${tableNumber} has placed the following order:\n\n${itemsOrdered.join('\n')}`;
+
+            // Send email using mailto link
+            window.location.href = `mailto:vighneshshetty002@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        // Add click event listener to the order button
+        document.getElementById('order-button').addEventListener('click', submitOrder);
+    </script>
+</body>
+</html>
 </body>
 </html>
