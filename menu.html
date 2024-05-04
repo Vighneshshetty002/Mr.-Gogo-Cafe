@@ -536,73 +536,73 @@
 <a href="#" class="menu-button" id="order-button">Order <img src="menu-icon.png" alt="Menu Icon" class="menu-icon"></a>
 
 <script>
-    // Function to handle order submission
-    function submitOrder(event) {
-        // Prevent default form submission behavior
-        event.preventDefault();
+        // Function to handle order submission
+        function submitOrder(event) {
+            // Prevent default form submission behavior
+            event.preventDefault();
 
-        // Get the menu item details
-        const menuItem = event.target.closest('.menu-item');
-        const itemName = menuItem.querySelector('h3').innerText;
-        const itemPrice = menuItem.querySelector('h3:last-child').innerText;
-        const tableNumber = '1'; // For demonstration purposes, you can replace this with a dynamic value based on the table QR code clicked
+            // Get the menu item details
+            const menuItem = event.target.closest('.menu-item');
+            const itemName = menuItem.querySelector('h3').innerText;
+            const itemPrice = menuItem.querySelector('h3:last-child').innerText;
+            const tableNumber = '1'; // For demonstration purposes, you can replace this with a dynamic value based on the table QR code clicked
 
-        // Construct order object
-        const order = {
-            tableNumber: tableNumber,
-            itemName: itemName,
-            itemPrice: itemPrice
-        };
+            // Construct order object
+            const order = {
+                tableNumber: tableNumber,
+                itemName: itemName,
+                itemPrice: itemPrice
+            };
 
-        // Send order to backend (replace this with your actual backend endpoint)
-        fetch('/submitOrder', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(order)
-        })
-        .then(response => {
-            if (response.ok) {
-                alert('Order placed successfully!');
-            } else {
-                throw new Error('Failed to place order');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Failed to place order. Please try again later.');
-        });
+            // Send order to backend (replace this with your actual backend endpoint)
+            fetch('/submitOrder', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(order)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Order placed successfully!');
+                } else {
+                    throw new Error('Failed to place order');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to place order. Please try again later.');
+            });
 
-        // Send notification email to restaurant staff
-        sendNotification(tableNumber, itemName, itemPrice);
-    }
-
-    // Function to send notification email
-    function sendNotification(tableNumber, itemName, itemPrice) {
-        // Construct email content
-        const subject = `New Order from Table ${tableNumber}`;
-        const body = `Table ${tableNumber} has placed an order:\n\nItem: ${itemName}\nPrice: ${itemPrice}`;
-
-        // Encode subject and body for URL
-        const encodedSubject = encodeURIComponent(subject);
-        const encodedBody = encodeURIComponent(body);
-
-        // Construct mailto link
-        const mailtoLink = `mailto:vighneshshetty002@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
-
-        // Redirect to Gmail with mailto link
-        window.location.href = mailtoLink;
-    }
-
-    // Add click event listeners to all "Order" buttons
-    const orderButtons = document.querySelectorAll('button');
-    orderButtons.forEach(button => {
-        if (button.innerText === 'Order') {
-            button.addEventListener('click', submitOrder);
+            // Send notification email to restaurant staff
+            sendNotification(tableNumber, itemName, itemPrice);
         }
-    });
-</script>
+
+        // Function to send notification email
+        function sendNotification(tableNumber, itemName, itemPrice) {
+            // Construct email content
+            const subject = `New Order from Table ${tableNumber}`;
+            const body = `Table ${tableNumber} has placed an order:\n\nItem: ${itemName}\nPrice: ${itemPrice}`;
+
+            // Encode subject and body for URL
+            const encodedSubject = encodeURIComponent(subject);
+            const encodedBody = encodeURIComponent(body);
+
+            // Construct mailto link
+            const mailtoLink = `mailto:vighneshshetty002@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+
+            // Redirect to Gmail with mailto link
+            window.location.href = mailtoLink;
+        }
+
+        // Add click event listeners to all "Order" buttons
+        const orderButtons = document.querySelectorAll('button');
+        orderButtons.forEach(button => {
+            if (button.innerText === 'Order') {
+                button.addEventListener('click', submitOrder);
+            }
+        });
+    </script>
 
 
 </body>
