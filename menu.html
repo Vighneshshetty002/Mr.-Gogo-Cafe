@@ -586,6 +586,36 @@ function orderKulhadPizza() {
 const orderButton = document.querySelector('.menu-item:nth-child(1) .menu-item-buttons button:nth-child(1)');
 orderButton.addEventListener('click', orderKulhadPizza);
 
+
+
+
+        // Function to handle adding items to the cart
+function addToCart(event) {
+    // Get the menu item details
+    const menuItem = event.target.closest('.menu-item');
+    const itemName = menuItem.querySelector('h3').innerText;
+    const itemPrice = menuItem.querySelector('h3:last-child').innerText;
+
+    // Construct item object
+    const item = {
+        itemName: itemName,
+        itemPrice: itemPrice
+    };
+
+    // Add item to cart
+    cartItems.push(item);
+
+    // Show pop-up message for the first item added to the cart
+    if (cartItems.length === 1) {
+        alert('Item added to cart!');
+    }
+}
+
+// Add event listener to "Add to Cart" buttons of Veg Pizza and Kulhad Pizza
+const addToCartButtons = document.querySelectorAll('.menu-item-buttons button:nth-child(2)');
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', addToCart);
+});
     </script>
 
 
