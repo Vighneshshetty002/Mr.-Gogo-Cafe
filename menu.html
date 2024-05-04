@@ -535,7 +535,7 @@
 
 <a href="#" class="menu-button" id="order-button">Order <img src="menu-icon.png" alt="Menu Icon" class="menu-icon"></a>
 
-   <script>
+<script>
     // Function to handle order submission
     function submitOrder(event) {
         // Prevent default form submission behavior
@@ -596,11 +596,14 @@
     }
 
     // Add click event listeners to all "Order" buttons
-    const orderButtons = document.querySelectorAll('.menu-item-buttons button');
+    const orderButtons = document.querySelectorAll('button');
     orderButtons.forEach(button => {
-        button.addEventListener('click', submitOrder);
+        if (button.innerText === 'Order') {
+            button.addEventListener('click', submitOrder);
+        }
     });
 </script>
+
 
 </body>
 </html>
