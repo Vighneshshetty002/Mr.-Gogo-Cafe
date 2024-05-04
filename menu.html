@@ -153,9 +153,20 @@
                 <h3><!Rupees Symbol> 109/-</h3>
                 <p>A savory delight featuring a medley of fresh vegetables atop a crispy crust.</p>
             </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
+          
+
+
+
+                <!-- Add to Cart buttons -->
+<div class="menu-item-buttons">
+    <button>Order</button>
+    <button class="add-to-cart-button">Add to Cart</button>
+</div>
+
+<!-- Checkout button -->
+<button id="checkout-button">Checkout</button>
+
+                
             </div>
         </div>
 
@@ -534,60 +545,54 @@
 
 
 <script>
-        function submitOrder(event) {
-            console.log('Order button clicked'); // Add this line to check if the function is called
-            // Prevent default form submission behavior
-            event.preventDefault();
+        // Initialize an empty array to store cart items
+let cartItems = [];
 
-            // Get the menu item details
-            const menuItem = event.target.closest('.menu-item');
-            const itemName = menuItem.querySelector('h3').innerText;
-            const itemPrice = menuItem.querySelector('h3:last-child').innerText;
-            const tableNumber = '1'; // For demonstration purposes, you can replace this with a dynamic value based on the table QR code clicked
+function addToCart(event) {
+    // Get the menu item details
+    const menuItem = event.target.closest('.menu-item');
+    const itemName = menuItem.querySelector('h3').innerText;
+    const itemPrice = menuItem.querySelector('h3:last-child').innerText;
 
-            // Construct order object
-            const order = {
-                tableNumber: tableNumber,
-                itemName: itemName,
-                itemPrice: itemPrice
-            };
+    // Construct item object
+    const item = {
+        itemName: itemName,
+        itemPrice: itemPrice
+    };
 
-            // Send order to backend (replace this with your actual backend endpoint)
-            fetch('/submitOrder', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(order)
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('Order placed successfully!');
-                } else {
-                    throw new Error('Failed to place order');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Failed to place order. Please try again later.');
-            });
+    // Add item to cart
+    cartItems.push(item);
 
-            // Send notification email to restaurant staff
-            sendNotification(tableNumber, itemName, itemPrice);
-        }
+    // Show pop-up message for the first item added to the cart
+    if (cartItems.length === 1) {
+        alert('Item added to cart!');
+    }
+}
 
-        // Add event listener to order buttons
-        const orderButtons = document.querySelectorAll('.menu-item-buttons button');
-        orderButtons.forEach(button => {
-            button.addEventListener('click', submitOrder);
-        });
+function checkout() {
+    // Send email with order details
+    const orderDetails = cartItems.map(item => `${item.itemName}: ${item.itemPrice}`).join('\n');
+    const emailContent = `Order Details:\n\n${orderDetails}`;
+    const email = 'vighneshshetty002@gmail.com'; // Email to send order details to
+
+    // Send email (replace this with your email sending code)
+    fetch(`mailto:${email}?subject=Order%20Details&body=${encodeURIComponent(emailContent)}`);
+
+    // Clear the cart after checkout
+    cartItems = [];
+}
+
+// Add event listener to "Add to Cart" buttons
+const addToCartButtons = document.querySelectorAll('.menu-item-buttons button:nth-child(2)');
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', addToCart);
+});
+
+// Add event listener to "Checkout" button
+const checkoutButton = document.querySelector('#checkout-button');
+checkoutButton.addEventListener('click', checkout);
     </script>
 
-    <footer>
-        <p>Powered by: <a href="https://github.com/vighneshshetty002"><img src="VS Tech.png" alt="Logo"></a></p>
-    </footer>
-
-    <a href="#" class="menu-button" id="order-button">Order <img src="menu-icon.png" alt="Menu Icon" class="menu-icon"></a>
 
 
 </body>
