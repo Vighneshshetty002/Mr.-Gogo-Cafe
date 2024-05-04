@@ -541,56 +541,27 @@
     <footer>
         <p>Powered by: <a href="https://github.com/vighneshshetty002"><img src="VS Tech.png" alt="Logo"></a></p>
     </footer>
+    <script>
+        // Function to handle ordering the veg pizza
+function orderVegPizza() {
+    // Define the order details
+    const itemName = "Veg Pizza";
+    const itemPrice = "109/-";
 
+    // Construct the email content
+    const emailContent = `Order Details:\n\nItem: ${itemName}\nPrice: ${itemPrice}`;
 
+    // Define the recipient email address
+    const recipientEmail = 'vighneshshetty002@gmail.com';
 
-<script>
-        // Initialize an empty array to store cart items
-let cartItems = [];
-
-function addToCart(event) {
-    // Get the menu item details
-    const menuItem = event.target.closest('.menu-item');
-    const itemName = menuItem.querySelector('h3').innerText;
-    const itemPrice = menuItem.querySelector('h3:last-child').innerText;
-
-    // Construct item object
-    const item = {
-        itemName: itemName,
-        itemPrice: itemPrice
-    };
-
-    // Add item to cart
-    cartItems.push(item);
-
-    // Show pop-up message for the first item added to the cart
-    if (cartItems.length === 1) {
-        alert('Item added to cart!');
-    }
+    // Send the email
+    window.location.href = `mailto:${recipientEmail}?subject=Order%20${itemName}&body=${encodeURIComponent(emailContent)}`;
 }
 
-function checkout() {
-    // Send email with order details
-    const orderDetails = cartItems.map(item => `${item.itemName}: ${item.itemPrice}`).join('\n');
-    const emailContent = `Order Details:\n\n${orderDetails}`;
-    const email = 'vighneshshetty002@gmail.com'; // Email to send order details to
+// Add event listener to the order button of the veg pizza
+const orderButton = document.querySelector('.menu-item:nth-child(1) .menu-item-buttons button:nth-child(1)');
+orderButton.addEventListener('click', orderVegPizza);
 
-    // Send email (replace this with your email sending code)
-    fetch(`mailto:${email}?subject=Order%20Details&body=${encodeURIComponent(emailContent)}`);
-
-    // Clear the cart after checkout
-    cartItems = [];
-}
-
-// Add event listener to "Add to Cart" buttons
-const addToCartButtons = document.querySelectorAll('.menu-item-buttons button:nth-child(2)');
-addToCartButtons.forEach(button => {
-    button.addEventListener('click', addToCart);
-});
-
-// Add event listener to "Checkout" button
-const checkoutButton = document.querySelector('#checkout-button');
-checkoutButton.addEventListener('click', checkout);
     </script>
 
 
