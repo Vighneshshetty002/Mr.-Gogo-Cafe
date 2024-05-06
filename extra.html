@@ -73,7 +73,7 @@
 
         .menu-item img {
             margin-right: 20px;
-            max-width: 100px;
+            max-width: 80px; /* Reduced image size */
             border-radius: 5px;
         }
 
@@ -138,13 +138,13 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: black; /* Updated background color */
-            border: 2px solid white; /* Updated border color */
+            background-color: black;
+            border: 2px solid white;
             padding: 20px;
             z-index: 1000;
-            color: white; /* Updated text color */
-            border-radius: 10px; /* Added border radius */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Added box shadow */
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .popup-overlay {
@@ -163,8 +163,8 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: black; /* Updated button background color */
-            color: white; /* Updated button text color */
+            background-color: black;
+            color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
@@ -184,8 +184,39 @@
         }
 
         .popup-content img {
-            width: 150px;
+            width: 100px; /* Adjusted image size */
             margin-bottom: 20px;
+        }
+
+        .checkout-btn {
+            background-color: #ffcc00; /* Yellow color */
+            color: black; /* Black text */
+        }
+
+        .cancel-btn {
+            background-color: #333; /* Dark gray color */
+            color: white; /* White text */
+        }
+
+        .btn-container {
+            margin-top: 20px;
+        }
+
+        .btn-container button {
+            margin: 0 10px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-container button:hover {
+            filter: brightness(85%);
+        }
+
+        .amount {
+            font-weight: bold; /* Bold font weight */
         }
     </style>
 </head>
@@ -243,8 +274,10 @@
             <img src="gogo-cafe-white.png" alt="Mr. Gogo Cafe">
             <h2>Cart</h2>
             <div id="cartItems"></div>
-            <button onclick="closeCartPopup()">Close</button>
-            <button onclick="checkout()">Checkout</button>
+            <div class="btn-container">
+                <button class="checkout-btn" onclick="checkout()">Checkout</button>
+                <button class="cancel-btn" onclick="closeCartPopup()">Cancel</button>
+            </div>
         </div>
     </div>
 
