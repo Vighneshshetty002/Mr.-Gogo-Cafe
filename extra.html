@@ -6,103 +6,267 @@
     <title>Mr. Gogo Cafe | Menu</title>
 
     <style>
-        /* CSS styles remain unchanged */
-        /* Add styles for the cart popup */
-        .cart-popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.8);
+        body {
+            background-color: black;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
             color: white;
-            padding: 20px;
-            border-radius: 10px;
-            z-index: 9999;
         }
 
-        .cart-popup h2 {
+        nav {
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        nav a {
+            color: white;
+            background-color: #333;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background-color: #555;
+        }
+
+        .menu-container {
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .menu-item {
+            border-bottom: 1px solid #666;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item h3 {
             margin-top: 0;
         }
 
-        .cart-popup p {
-            margin-bottom: 10px;
+        .menu-item p {
+            margin-bottom: 0;
         }
 
-        .cart-popup button {
+        .menu-item img {
+            margin-right: 20px;
+            max-width: 100px;
+            border-radius: 5px;
+        }
+
+        .menu-item-buttons {
+            margin-left: auto;
+        }
+
+        .menu-item-buttons button {
             background-color: #333;
             color: white;
             padding: 8px 16px;
             border: none;
             border-radius: 5px;
+            margin-left: 10px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
         }
 
-        .cart-popup button:hover {
+        .menu-item-buttons button:hover {
             background-color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .menu-container {
+                width: 90%;
+            }
+        }
+
+        h1 {
+            margin-left: 20px;
+        }
+
+        .menu-Title {
+            background-color: white;
+            margin-left: 30px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            padding-left: 15px;
+            border-radius: 5px;
+            color: black;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px 0;
+            background-color: #333;
+            color: white;
+        }
+
+        footer img {
+            width: 100px;
+            vertical-align: middle;
+        }
+
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 2px solid black;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
         }
     </style>
 </head>
 <body>
-    <!-- Header and navigation -->
-    <!-- Omitted for brevity -->
+    <center><img src="gogo-cafe-white.png" width="200px"></center>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html" class="active">Menu</a></li>
+            <li><a href="about_us.html">About</a></li>
+        </ul>
+    </nav>
 
-    <!-- Main content -->
+    <br>
+    <hr>
+    <center><h1>Menu <img src="icons8-dish-91.png" width="50px"></h1></center>
+    <hr>
     <div class="menu-Title">
         <p>Pizzas</p>
     </div>
     <div class="menu-container">
         <!-- Pizza Items -->
-        <!-- Omitted for brevity -->
-    </div>
+        <div class="menu-item">
+            <img src="Klassieke club sandwich.jpeg" alt="Veg Pizza">
+            <div>
+                <h3>Veg Pizza</h3>
+                <h3>109/-</h3>
+                <p>A savory delight featuring a medley of fresh vegetables atop a crispy crust.</p>
+            </div>
+            <div class="menu-item-buttons">
+                <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
+            </div>
+        </div>
 
-    <!-- Repeat similar structure for other menu sections -->
+        <div class="menu-item">
+            <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
+            <div>
+                <h3>Kulhad Pizza</h3>
+                <h3>199/-</h3>
+                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
+            </div>
+            <div class="menu-item-buttons">
+                <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Checkout button -->
-    <button onclick="openCartPopup()">View Cart</button>
+    <button onclick="openCartPopup()">Checkout</button>
 
-    <!-- Cart popup -->
-    <div class="cart-popup" id="cartPopup">
-        <h2>Shopping Cart</h2>
+    <!-- Popup for cart view -->
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup" id="cartPopup">
+        <h2>Cart</h2>
         <div id="cartItems"></div>
-        <button onclick="checkout()">Checkout</button>
         <button onclick="closeCartPopup()">Close</button>
+        <button onclick="checkout()">Checkout</button>
     </div>
 
-    <!-- Footer -->
-    <!-- Omitted for brevity -->
+    <footer>
+        <p>Powered by: <a href="https://github.com/vighneshshetty002"><img src="VS Tech.png" alt="Logo"></a></p>
+    </footer>
 
     <script>
-        // JavaScript code remains unchanged
+        const cartItems = [];
 
-        // Function to open the cart popup
-        function openCartPopup() {
-            // Get the cart popup element
-            const cartPopup = document.getElementById('cartPopup');
-
-            // Clear the existing content
-            cartPopup.innerHTML = '<h2>Shopping Cart</h2><div id="cartItems"></div><button onclick="checkout()">Checkout</button><button onclick="closeCartPopup()">Close</button>';
-
-            // Get the cart items container
-            const cartItemsContainer = document.getElementById('cartItems');
-
-            // Add each cart item to the popup
-            cartItems.forEach(item => {
-                const itemElement = document.createElement('div');
-                itemElement.innerHTML = `<p>${item.itemName} - ${item.itemPrice}</p>`;
-                cartItemsContainer.appendChild(itemElement);
-            });
-
-            // Display the cart popup
-            cartPopup.style.display = 'block';
+        function addToCart(itemName, itemPrice) {
+            const item = {
+                itemName: itemName,
+                itemPrice: itemPrice
+            };
+            cartItems.push(item);
+            alert(`${itemName} added to cart!`);
+            console.log(cartItems);
         }
 
-        // Function to close the cart popup
+        function openCartPopup() {
+            var cartPopup = document.getElementById('cartPopup');
+            var overlay = document.getElementById('popupOverlay');
+            cartPopup.style.display = 'block';
+            overlay.style.display = 'block';
+            populateCartItems();
+        }
+
         function closeCartPopup() {
-            // Hide the cart popup
-            const cartPopup = document.getElementById('cartPopup');
+            var cartPopup = document.getElementById('cartPopup');
+            var overlay = document.getElementById('popupOverlay');
             cartPopup.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+
+        function populateCartItems() {
+            var cartItemsContainer = document.getElementById('cartItems');
+            cartItemsContainer.innerHTML = '';
+            cartItems.forEach(function(item) {
+                var itemElement = document.createElement('div');
+                itemElement.textContent = item.itemName + ' - ' + item.itemPrice;
+                cartItemsContainer.appendChild(itemElement);
+            });
+        }
+
+        function checkout() {
+            let totalPrice = 0;
+            let emailContent = "Order Details:\n\n";
+            
+            cartItems.forEach(item => {
+                emailContent += `Item: ${item.itemName}\nPrice: ${item.itemPrice}\n\n`;
+                totalPrice += parseInt(item.itemPrice);
+            });
+
+            emailContent += `Total Price: ${totalPrice}/-`;
+
+            const recipientEmail = 'vighneshshetty002@gmail.com';
+            window.location.href = `mailto:${recipientEmail}?subject=Order%20Details&body=${encodeURIComponent(emailContent)}`;
         }
     </script>
 </body>
