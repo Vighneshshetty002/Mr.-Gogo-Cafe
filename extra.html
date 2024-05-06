@@ -309,5 +309,27 @@
             }, 2000); // Simulate a delay of 2 seconds
         }
     </script>
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $to_email = "vighneshshetty002@gmail.com";
+        $subject = "Order Details";
+        $message = "Order Details:\n\n";
+
+        foreach ($_POST['cartItems'] as $item) {
+            $message .= "Item: " . $item['itemName'] . "\nPrice: " . $item['itemPrice'] . "\n\n";
+        }
+
+        $totalPrice = $_POST['totalPrice'];
+        $message .= "Total Price: " . $totalPrice . "/-";
+
+        // Send email
+        mail($to_email, $subject, $message);
+
+        // Clear the cart
+        $cartItems = [];
+    }
+    ?>
 </body>
 </html>
+
