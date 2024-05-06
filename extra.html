@@ -7,11 +7,11 @@
 
     <style>
         body {
-            background-color: black;
+            background-color: #f7f7f7; /* Updated background color */
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            color: white;
+            color: #333; /* Updated text color */
         }
 
         nav {
@@ -32,8 +32,8 @@
         }
 
         nav a {
-            color: white;
-            background-color: #333;
+            color: #333; /* Updated link color */
+            background-color: #fff; /* Updated link background color */
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
@@ -43,6 +43,7 @@
         nav a:hover,
         nav a.active {
             background-color: #555;
+            color: #fff; /* Updated hover color */
         }
 
         .menu-container {
@@ -50,10 +51,13 @@
             margin: 20px auto;
             width: 80%;
             max-width: 600px;
+            background-color: #fff; /* Updated menu background color */
+            border-radius: 10px; /* Added border radius */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Added box shadow */
         }
 
         .menu-item {
-            border-bottom: 1px solid #666;
+            border-bottom: 1px solid #ddd; /* Updated border color */
             padding: 10px 0;
             display: flex;
             align-items: center;
@@ -83,7 +87,7 @@
 
         .menu-item-buttons button {
             background-color: #333;
-            color: white;
+            color: #fff; /* Updated button text color */
             padding: 8px 16px;
             border: none;
             border-radius: 5px;
@@ -96,26 +100,21 @@
             background-color: #555;
         }
 
-        @media (max-width: 768px) {
-            .menu-container {
-                width: 90%;
-            }
-        }
-
         h1 {
             margin-left: 20px;
+            color: #333; /* Updated heading color */
         }
 
         .menu-Title {
-            background-color: white;
+            background-color: #ffcc00; /* Updated title background color */
             margin-left: 30px;
             margin-top: 30px;
             margin-bottom: 20px;
             font-size: 30px;
             font-weight: bold;
-            padding-left: 15px;
+            padding: 15px;
             border-radius: 5px;
-            color: black;
+            color: #333; /* Updated title text color */
         }
 
         footer {
@@ -123,7 +122,7 @@
             margin-top: 30px;
             padding: 20px 0;
             background-color: #333;
-            color: white;
+            color: #fff; /* Updated footer text color */
         }
 
         footer img {
@@ -138,11 +137,13 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: black; /* Updated background color */
-            border: 2px solid white; /* Updated border color */
+            background-color: #fff; /* Updated popup background color */
+            border: 2px solid #333; /* Updated popup border color */
             padding: 20px;
             z-index: 1000;
-            color: white; /* Updated text color */
+            color: #333; /* Updated popup text color */
+            border-radius: 10px; /* Added border radius */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Added box shadow */
         }
 
         .popup-overlay {
@@ -161,8 +162,8 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: black; /* Updated button background color */
-            color: white; /* Updated button text color */
+            background-color: #333;
+            color: #fff; /* Updated popup button text color */
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
