@@ -73,7 +73,7 @@
 
         .menu-item img {
             margin-right: 20px;
-            max-width: 80px; /* Reduced image size */
+            max-width: 100px;
             border-radius: 5px;
         }
 
@@ -138,13 +138,13 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: black;
-            border: 2px solid white;
+            background-color: black; /* Updated background color */
+            border: 2px solid white; /* Updated border color */
             padding: 20px;
             z-index: 1000;
-            color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: white; /* Updated text color */
+            max-width: 80%; /* Updated max-width */
+            overflow-y: auto; /* Added overflow-y for scroll */
         }
 
         .popup-overlay {
@@ -163,8 +163,8 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: black;
-            color: white;
+            background-color: black; /* Updated button background color */
+            color: white; /* Updated button text color */
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
@@ -177,51 +177,35 @@
             background-color: #555;
         }
 
-        /* Popup content styles */
-        .popup-content {
-            text-align: center;
-            padding: 20px;
-        }
-
-        .popup-content img {
-            width: 100px; /* Adjusted image size */
-            margin-bottom: 20px;
-        }
-
-        .checkout-btn {
-            background-color: #ffcc00; /* Yellow color */
-            color: black; /* Black text */
-        }
-
-        .cancel-btn {
-            background-color: #333; /* Dark gray color */
-            color: white; /* White text */
-        }
-
-        .btn-container {
-            margin-top: 20px;
-        }
-
-        .btn-container button {
-            margin: 0 10px;
-            padding: 8px 16px;
+        /* Checkout and cancel button styles */
+        .popup button {
+            background-color: #ffcc00; /* Updated checkout button background color */
+            color: black; /* Updated checkout button text color */
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
+            margin-right: 10px;
         }
 
-        .btn-container button:hover {
-            filter: brightness(85%);
+        .popup button:hover {
+            background-color: #e6b800; /* Updated hover background color */
+            color: white; /* Updated hover text color */
         }
 
-        .amount {
-            font-weight: bold; /* Bold font weight */
+        .popup button:last-child {
+            background-color: #555; /* Updated cancel button background color */
+            color: white; /* Updated cancel button text color */
+        }
+
+        .popup button:last-child:hover {
+            background-color: #777; /* Updated hover background color */
         }
     </style>
 </head>
 <body>
-    <center><img src="gogo-cafe-white.png" width="200px"></center>
+    <center><img src="gogo-cafe-white.png" width="150px"></center>
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -270,15 +254,11 @@
     <!-- Popup for cart view -->
     <div class="popup-overlay" id="popupOverlay"></div>
     <div class="popup" id="cartPopup">
-        <div class="popup-content">
-            <img src="gogo-cafe-white.png" alt="Mr. Gogo Cafe">
-            <h2>Cart</h2>
-            <div id="cartItems"></div>
-            <div class="btn-container">
-                <button class="checkout-btn" onclick="checkout()">Checkout</button>
-                <button class="cancel-btn" onclick="closeCartPopup()">Cancel</button>
-            </div>
-        </div>
+        <h2>Cart</h2>
+        <div id="cartItems"></div>
+        <p><strong>Total Price:</strong> <span id="totalPrice"></span>/-</p>
+        <button onclick="checkout()">Checkout</button>
+        <button onclick="closeCartPopup()">Cancel</button>
     </div>
 
     <footer>
@@ -296,6 +276,7 @@
             cartItems.push(item);
             alert(`${itemName} added to cart!`);
             console.log(cartItems);
+            populateCartItems();
         }
 
         function togglePopup() {
@@ -320,27 +301,39 @@
 
         function populateCartItems() {
             var cartItemsContainer = document.getElementById('cartItems');
+            var totalPriceElement = document.getElementById('totalPrice');
+            var totalPrice = 0;
             cartItemsContainer.innerHTML = '';
             cartItems.forEach(function(item) {
                 var itemElement = document.createElement('div');
                 itemElement.textContent = item.itemName + ' - ' + item.itemPrice;
                 cartItemsContainer.appendChild(itemElement);
+                totalPrice += parseInt(item.itemPrice);
             });
+            totalPriceElement.textContent = totalPrice;
         }
 
         function checkout() {
-            let totalPrice = 0;
-            let emailContent = "Order Details:\n\n";
-            
-            cartItems.forEach(item => {
-                emailContent += `Item: ${item.itemName}\nPrice: ${item.itemPrice}\n\n`;
-                totalPrice += parseInt(item.itemPrice);
-            });
-
-            emailContent += `Total Price: ${totalPrice}/-`;
-
-            const recipientEmail = 'vighneshshetty002@gmail.com';
-            window.location.href = `mailto:${recipientEmail}?subject=Order%20Details&body=${encodeURIComponent(emailContent)}`;
+            // Send AJAX request to PHP backend
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "send_email.php", true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.status === "success") {
+                        alert("Order placed successfully!");
+                        // Clear cart items after successful checkout
+                        cartItems.length = 0;
+                        populateCartItems();
+                        closeCartPopup();
+                    } else {
+                        alert("Failed to place order. Please try again later.");
+                    }
+                }
+            };
+            var data = JSON.stringify({ cartItems: cartItems });
+            xhr.send(data);
         }
     </script>
 </body>
