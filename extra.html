@@ -7,11 +7,11 @@
 
     <style>
         body {
-            background-color: #f7f7f7; /* Updated background color */
+            background-color: black;
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            color: #333; /* Updated text color */
+            color: white;
         }
 
         nav {
@@ -32,8 +32,8 @@
         }
 
         nav a {
-            color: #333; /* Updated link color */
-            background-color: #fff; /* Updated link background color */
+            color: white;
+            background-color: #333;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
@@ -43,7 +43,6 @@
         nav a:hover,
         nav a.active {
             background-color: #555;
-            color: #fff; /* Updated hover color */
         }
 
         .menu-container {
@@ -51,13 +50,10 @@
             margin: 20px auto;
             width: 80%;
             max-width: 600px;
-            background-color: #fff; /* Updated menu background color */
-            border-radius: 10px; /* Added border radius */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Added box shadow */
         }
 
         .menu-item {
-            border-bottom: 1px solid #ddd; /* Updated border color */
+            border-bottom: 1px solid #666;
             padding: 10px 0;
             display: flex;
             align-items: center;
@@ -87,7 +83,7 @@
 
         .menu-item-buttons button {
             background-color: #333;
-            color: #fff; /* Updated button text color */
+            color: white;
             padding: 8px 16px;
             border: none;
             border-radius: 5px;
@@ -100,21 +96,26 @@
             background-color: #555;
         }
 
+        @media (max-width: 768px) {
+            .menu-container {
+                width: 90%;
+            }
+        }
+
         h1 {
             margin-left: 20px;
-            color: #333; /* Updated heading color */
         }
 
         .menu-Title {
-            background-color: #ffcc00; /* Updated title background color */
+            background-color: white;
             margin-left: 30px;
             margin-top: 30px;
             margin-bottom: 20px;
             font-size: 30px;
             font-weight: bold;
-            padding: 15px;
+            padding-left: 15px;
             border-radius: 5px;
-            color: #333; /* Updated title text color */
+            color: black;
         }
 
         footer {
@@ -122,7 +123,7 @@
             margin-top: 30px;
             padding: 20px 0;
             background-color: #333;
-            color: #fff; /* Updated footer text color */
+            color: white;
         }
 
         footer img {
@@ -137,13 +138,13 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: black; /* Updated popup background color */
-            border: 2px solid white; /* Updated popup border color */
+            background-color: black; /* Updated background color */
+            border: 2px solid white; /* Updated border color */
             padding: 20px;
             z-index: 1000;
-            color: white; /* Updated popup text color */
+            color: white; /* Updated text color */
             border-radius: 10px; /* Added border radius */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Added box shadow */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Added box shadow */
         }
 
         .popup-overlay {
@@ -162,8 +163,8 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #333;
-            color: #fff; /* Updated popup button text color */
+            background-color: black; /* Updated button background color */
+            color: white; /* Updated button text color */
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
@@ -174,6 +175,17 @@
 
         #popupBtn:hover {
             background-color: #555;
+        }
+
+        /* Popup content styles */
+        .popup-content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .popup-content img {
+            width: 150px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -227,10 +239,13 @@
     <!-- Popup for cart view -->
     <div class="popup-overlay" id="popupOverlay"></div>
     <div class="popup" id="cartPopup">
-        <h2>Cart</h2>
-        <div id="cartItems"></div>
-        <button onclick="closeCartPopup()">Close</button>
-        <button onclick="checkout()">Checkout</button>
+        <div class="popup-content">
+            <img src="gogo-cafe-white.png" alt="Mr. Gogo Cafe">
+            <h2>Cart</h2>
+            <div id="cartItems"></div>
+            <button onclick="closeCartPopup()">Close</button>
+            <button onclick="checkout()">Checkout</button>
+        </div>
     </div>
 
     <footer>
