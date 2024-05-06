@@ -154,6 +154,25 @@
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
+
+        /* Popup button styles */
+        #popupBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            z-index: 1000;
+        }
+
+        #popupBtn:hover {
+            background-color: #555;
+        }
     </style>
 </head>
 <body>
@@ -200,8 +219,8 @@
         </div>
     </div>
 
-    <!-- Checkout button -->
-    <button onclick="openCartPopup()">Checkout</button>
+    <!-- Popup button -->
+    <button id="popupBtn" onclick="togglePopup()">View Cart</button>
 
     <!-- Popup for cart view -->
     <div class="popup-overlay" id="popupOverlay"></div>
@@ -229,12 +248,17 @@
             console.log(cartItems);
         }
 
-        function openCartPopup() {
+        function togglePopup() {
             var cartPopup = document.getElementById('cartPopup');
             var overlay = document.getElementById('popupOverlay');
-            cartPopup.style.display = 'block';
-            overlay.style.display = 'block';
-            populateCartItems();
+            if (cartPopup.style.display === 'block') {
+                cartPopup.style.display = 'none';
+                overlay.style.display = 'none';
+            } else {
+                cartPopup.style.display = 'block';
+                overlay.style.display = 'block';
+                populateCartItems();
+            }
         }
 
         function closeCartPopup() {
