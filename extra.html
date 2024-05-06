@@ -143,69 +143,26 @@
             padding: 20px;
             z-index: 1000;
             color: white; /* Updated text color */
-            max-width: 80%; /* Updated max-width */
+            width: 70%; /* Updated width */
+            max-height: 80%; /* Updated max-height */
             overflow-y: auto; /* Added overflow-y for scroll */
         }
 
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
+        .popup h2 {
+            margin-bottom: 20px; /* Added margin-bottom for spacing */
         }
 
-        /* Popup button styles */
-        #popupBtn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: black; /* Updated button background color */
-            color: white; /* Updated button text color */
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            z-index: 1000;
+        .popup p {
+            margin-bottom: 10px; /* Added margin-bottom for spacing */
         }
 
-        #popupBtn:hover {
-            background-color: #555;
-        }
-
-        /* Checkout and cancel button styles */
         .popup button {
-            background-color: #ffcc00; /* Updated checkout button background color */
-            color: black; /* Updated checkout button text color */
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            margin-right: 10px;
-        }
-
-        .popup button:hover {
-            background-color: #e6b800; /* Updated hover background color */
-            color: white; /* Updated hover text color */
-        }
-
-        .popup button:last-child {
-            background-color: #555; /* Updated cancel button background color */
-            color: white; /* Updated cancel button text color */
-        }
-
-        .popup button:last-child:hover {
-            background-color: #777; /* Updated hover background color */
+            margin-top: 10px; /* Added margin-top for spacing */
         }
     </style>
 </head>
 <body>
-    <center><img src="gogo-cafe-white.png" width="150px"></center>
+    <center><img src="gogo-cafe-white.png" width="200px"></center>
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -254,11 +211,13 @@
     <!-- Popup for cart view -->
     <div class="popup-overlay" id="popupOverlay"></div>
     <div class="popup" id="cartPopup">
-        <h2>Cart</h2>
-        <div id="cartItems"></div>
-        <p><strong>Total Price:</strong> <span id="totalPrice"></span>/-</p>
-        <button onclick="checkout()">Checkout</button>
-        <button onclick="closeCartPopup()">Cancel</button>
+        <h2 id="popupTitle">Cart</h2>
+        <div id="popupContent">
+            <div id="cartItems"></div>
+            <p><strong>Total Price: <span id="totalPrice"></span>/-</strong></p>
+            <button id="checkoutBtn" onclick="checkout()">Checkout</button>
+            <button onclick="closeCartPopup()">Cancel</button>
+        </div>
     </div>
 
     <footer>
@@ -276,7 +235,6 @@
             cartItems.push(item);
             alert(`${itemName} added to cart!`);
             console.log(cartItems);
-            populateCartItems();
         }
 
         function togglePopup() {
@@ -301,39 +259,25 @@
 
         function populateCartItems() {
             var cartItemsContainer = document.getElementById('cartItems');
-            var totalPriceElement = document.getElementById('totalPrice');
-            var totalPrice = 0;
             cartItemsContainer.innerHTML = '';
+            var totalPrice = 0;
             cartItems.forEach(function(item) {
                 var itemElement = document.createElement('div');
                 itemElement.textContent = item.itemName + ' - ' + item.itemPrice;
                 cartItemsContainer.appendChild(itemElement);
                 totalPrice += parseInt(item.itemPrice);
             });
-            totalPriceElement.textContent = totalPrice;
+            document.getElementById('totalPrice').textContent = totalPrice;
         }
 
         function checkout() {
-            // Send AJAX request to PHP backend
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "send_email.php", true);
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    if (response.status === "success") {
-                        alert("Order placed successfully!");
-                        // Clear cart items after successful checkout
-                        cartItems.length = 0;
-                        populateCartItems();
-                        closeCartPopup();
-                    } else {
-                        alert("Failed to place order. Please try again later.");
-                    }
-                }
-            };
-            var data = JSON.stringify({ cartItems: cartItems });
-            xhr.send(data);
+            // Simulate sending email
+            // Replace with actual email sending code
+            setTimeout(function() {
+                // Display success message and change popup content
+                document.getElementById('popupTitle').innerText = "Order Received";
+                document.getElementById('popupContent').innerHTML = '<img src="tick_mark_image.png" width="50px">';
+            }, 2000); // Simulate a delay of 2 seconds
         }
     </script>
 </body>
