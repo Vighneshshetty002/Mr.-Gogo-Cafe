@@ -158,6 +158,35 @@
 
         .popup button {
             margin-top: 10px; /* Added margin-top for spacing */
+            padding: 10px 20px; /* Updated padding */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .popup button#checkoutBtn {
+            background-color: #ffcc00; /* Updated button background color */
+            color: black; /* Updated button text color */
+        }
+
+        #popupBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffcc00; /* Updated button background color */
+            color: black; /* Updated button text color */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            z-index: 1000;
+        }
+
+        #popupBtn:hover {
+            background-color: #555;
+            color: white;
         }
     </style>
 </head>
@@ -233,7 +262,7 @@
                 itemPrice: itemPrice
             };
             cartItems.push(item);
-            alert(`${itemName} added to cart!`);
+            document.getElementById('popupContent').innerHTML += '<marquee behavior="scroll" direction="left">Item added to cart</marquee>';
             console.log(cartItems);
         }
 
