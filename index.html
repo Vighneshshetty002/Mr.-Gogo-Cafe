@@ -45,14 +45,20 @@
             color: white;
         }
 
+        .container {
+            background-color: #333; /* Choose a suitable color */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            text-align: center;
+            max-width: 80%;
+        }
+
         .text-container {
             background-color: white;
             padding: 20px;
             border-radius: 10px;
-            margin: 20px auto;
-            width: 80%;
-            max-width: 80%;
-            min-height: 100px;
+            margin-bottom: 20px;
             text-align: center;
             overflow: hidden;
             animation: fade-in 1s ease-out, typing 0.5s steps(40, end) 1s;
@@ -65,12 +71,16 @@
 
         .popular-dishes-container {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 20px;
+            position: relative; /* Necessary for absolute positioning */
         }
 
         .popular-dish {
             display: inline-block;
             margin: 10px;
+            position: absolute; /* Positioning within the container */
+            opacity: 0; /* Hide initially */
+            transition: opacity 0.5s ease-in-out; /* Smooth transition */
         }
 
         .popular-dish img {
@@ -86,7 +96,6 @@
             text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
-            display: inline-block;
             margin-top: 20px;
         }
 
@@ -140,13 +149,8 @@
 
         /* Mobile Styles */
         @media (max-width: 768px) {
-            .text-container {
-                width: 90%;
-            }
-
-            .popular-dish img {
-                width: 100%;
-                height: auto;
+            .container {
+                max-width: 90%;
             }
         }
     </style>
@@ -160,23 +164,25 @@
         </ul>
     </nav>
     <hr>
-    <div class="text-container">
-        <p id="typewriter-text"></p>
-    </div>
+    <div class="container">
+        <div class="text-container">
+            <p id="typewriter-text"></p>
+        </div>
 
-    <div class="popular-dishes-container">
-        <div class="popular-dish">
-            <img src="Menu Food images/Tasty Kulhad Pizza.jpeg" alt="Popular Dish 1">
+        <div class="popular-dishes-container">
+            <div class="popular-dish">
+                <img src="Menu Food images/Tasty Kulhad Pizza.jpeg" alt="Popular Dish 1">
+            </div>
+            <div class="popular-dish">
+                <img src="Menu Food images/Veg Pizza.jpeg" alt="Popular Dish 2">
+            </div>
+            <div class="popular-dish">
+                <img src="Menu Food images/Paneer Pizza.jpeg" alt="Popular Dish 3">
+            </div>
         </div>
-        <div class="popular-dish">
-            <img src="Menu Food images/Veg Pizza.jpeg" alt="Popular Dish 2">
-        </div>
-        <div class="popular-dish">
-            <img src="Menu Food images/Paneer Pizza" alt="Popular Dish 3">
-        </div>
-    </div>
 
-    <a href="#" class="menu-button">Menu <img src="menu-icon.png" alt="Menu Icon" class="menu-icon"></a>
+        <a href="#" class="menu-button">Menu <img src="menu-icon.png" alt="Menu Icon" class="menu-icon"></a>
+    </div>
 
     <script>
         const text = "Welcome to Mr. Gogo Cafe! Delicious treats await you. Explore our menu and enjoy the cozy ambiance. Visit us today!";
@@ -203,6 +209,16 @@
 
         window.onload = function () {
             typeWriter();
+            setTimeout(showDishes, 1000); // Delay to show dishes after typewriter effect
+        }
+
+        function showDishes() {
+            const dishes = document.querySelectorAll(".popular-dish");
+            dishes.forEach((dish, index) => {
+                setTimeout(() => {
+                    dish.style.opacity = 1;
+                }, index * 500); // Adjust the delay for each dish
+            });
         }
     </script>
 </body>
