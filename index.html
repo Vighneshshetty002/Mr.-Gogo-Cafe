@@ -46,7 +46,7 @@
         }
 
         .container {
-            background-color: white; /* Choose a suitable color */
+            background-color: #333; /* Choose a suitable color */
             padding: 20px;
             border-radius: 10px;
             margin: 20px auto;
@@ -61,15 +61,12 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            position: relative; /* Required for absolute positioning */
-            overflow: hidden; /* Hide overflowing images */
         }
 
         .popular-dish {
             margin: 10px;
-            opacity: 1;
+            opacity: 0;
             transition: opacity 0.5s ease-in-out;
-            position: absolute; /* Position the images absolutely */
         }
 
         .popular-dish img {
@@ -85,17 +82,14 @@
             transform: scale(1.05); /* Increase size on hover */
         }
 
-        .menu-button-container {
-            margin-top: 20px;
-        }
-
         .menu-button {
-            background-color: black;
+            background-color: #333;
             color: white;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
+            margin-top: 20px;
         }
 
         .menu-button:hover {
@@ -105,7 +99,6 @@
         .menu-icon {
             vertical-align: middle;
             margin-left: 5px;
-            width: 20px; /* Adjust the width of the icon */
         }
 
         @keyframes typing {
@@ -167,17 +160,15 @@
             <div class="popular-dish">
                 <img src="Menu Food images/Tasty Kulhad Pizza.jpeg" alt="Popular Dish 1">
             </div>
-            <div class="popular-dish" style="animation-delay: 5s;">
+            <div class="popular-dish">
                 <img src="Menu Food images/Veg Pizza.jpeg" alt="Popular Dish 2">
             </div>
-            <div class="popular-dish" style="animation-delay: 10s;">
+            <div class="popular-dish">
                 <img src="Menu Food images/Panner Pizza.jpeg" alt="Popular Dish 3">
             </div>
         </div>
 
-        <div class="menu-button-container">
-            <a href="#" class="menu-button">Menu <img src="Menu Food images/menu icon.png" alt="Menu Icon" class="menu-icon"></a>
-        </div>
+        <a href="menu.html" class="menu-button">Menu <img src="Menu Food images/menu icon.png" alt="Menu Icon" class="menu-icon"></a>
     </div>
 
     <script>
@@ -211,8 +202,9 @@
         function showDishes() {
             const dishes = document.querySelectorAll(".popular-dish");
             dishes.forEach((dish, index) => {
-                dish.style.opacity = 1;
-                dish.style.animation = `fade-in 0.5s ease-in-out ${index * 5}s`; // Adjust the delay for each dish
+                setTimeout(() => {
+                    dish.style.opacity = 1;
+                }, index * 500); // Adjust the delay for each dish
             });
         }
     </script>
