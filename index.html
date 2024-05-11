@@ -68,16 +68,18 @@
         .popular-dishes-slideshow {
             display: flex; /* Enable flexbox for horizontal layout */
             transition: transform 0.5s ease-in-out; /* Smooth transition */
+            max-width: 100%; /* Ensure the slideshow doesn't exceed container width */
+            margin: 0 auto; /* Center the slideshow */
         }
 
         .popular-dish {
-            flex: 200px 200px auto; /* Ensure equal width for each image */
-            margin: 0 30px; /* Adjust spacing between images */
+            flex: 0 0 auto; /* Allow images to shrink but not grow */
+            margin: 0 10px; /* Adjust spacing between images */
         }
 
         .popular-dish img {
-            width: 250px;
-            height: 250px;
+            width: 200px; /* Adjust image width */
+            height: 200px; /* Adjust image height */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow effect */
             transition: transform 0.3s ease-in-out; /* Add a subtle hover effect */
@@ -106,18 +108,6 @@
             vertical-align: middle;
             margin-left: 5px;
             max-height: 20px; /* Limit icon height */
-        }
-
-         footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px 0;
-            background-color: #333;
-            color: white;
-        }
-        footer img {
-            width: 100px;
-            vertical-align: middle;
         }
 
         @keyframes typing {
@@ -184,10 +174,6 @@
         <a href="#" class="menu-button">Menu <img src="Menu Food images/menu icon.png" alt="Menu Icon" class="menu-icon"></a>
     </div>
 
-<footer>
-        <p>Powered by: <img src="VS Tech.png" alt="Logo"></p>
-    </footer>
-    
     <script>
         const text = "Welcome to Mr. Gogo Cafe! Delicious treats await you. Explore our menu and enjoy the cozy ambiance. Visit us today!";
         const textElement = document.getElementById("typewriter-text");
