@@ -61,18 +61,18 @@
             margin: 20px auto;
             text-align: center;
             margin-top: 20px;
+            position: relative; /* Necessary for absolute positioning */
+            overflow: hidden; /* Ensure that only one image is visible at a time */
+        }
+
+        .popular-dishes-slideshow {
+            display: flex; /* Enable flexbox for horizontal layout */
+            transition: transform 0.5s ease-in-out; /* Smooth transition */
         }
 
         .popular-dish {
-            display: none; /* Hide initially */
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out; /* Smooth transition */
-            margin: 20px; /* Add margin to separate dishes */
-            display: inline-block; /* Ensure dishes are displayed horizontally */
-        }
-
-        .popular-dish.active {
-            display: inline-block; /* Show the active dish */
+            flex: 0 0 auto; /* Ensure equal width for each image */
+            margin: 0 10px; /* Adjust spacing between images */
         }
 
         .popular-dish img {
@@ -154,14 +154,16 @@
         </div>
 
         <div class="popular-dishes-container">
-            <div class="popular-dish active">
-                <img src="Menu Food images/Tasty Kulhad Pizza.jpeg" alt="Popular Dish 1">
-            </div>
-            <div class="popular-dish">
-                <img src="Menu Food images/Veg Pizza.jpeg" alt="Popular Dish 2">
-            </div>
-            <div class="popular-dish">
-                <img src="Menu Food images/Panner Pizza.jpeg" alt="Popular Dish 3">
+            <div class="popular-dishes-slideshow">
+                <div class="popular-dish active">
+                    <img src="Menu Food images/Tasty Kulhad Pizza.jpeg" alt="Popular Dish 1">
+                </div>
+                <div class="popular-dish">
+                    <img src="Menu Food images/Veg Pizza.jpeg" alt="Popular Dish 2">
+                </div>
+                <div class="popular-dish">
+                    <img src="Menu Food images/Panner Pizza.jpeg" alt="Popular Dish 3">
+                </div>
             </div>
         </div>
 
@@ -207,11 +209,13 @@
         }
 
         function nextSlide() {
-            const dishes = document.querySelectorAll(".popular-dish");
-            const activeIndex = Array.from(dishes).findIndex(dish => dish.classList.contains("active"));
-            dishes[activeIndex].classList.remove("active");
-            const nextIndex = (activeIndex + 1) % dishes.length;
-            dishes[nextIndex].classList.add("active");
+            const slideshow = document.querySelector(".popular-dishes-slideshow");
+            const activeIndex = Array.from(slideshow.children).findIndex(child => child.classList.contains("active"));
+            const nextIndex = (activeIndex + 1) % slideshow.children.length;
+            const transformValue = -nextIndex * 100; // Calculate the transform value
+            slideshow.style.transform = `translateX(${transformValue}%)`; // Apply the transform
+            slideshow.children[activeIndex].classList.remove("active");
+            slideshow.children[nextIndex].classList.add("active");
         }
     </script>
 </body>
