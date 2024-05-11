@@ -65,6 +65,8 @@
             position: absolute; /* Positioning within the container */
             opacity: 0;
             transition: opacity 0.5s ease-in-out; /* Smooth transition */
+            left: 50%; /* Move to the center horizontally */
+            transform: translateX(-50%); /* Adjust horizontally to center */
         }
 
         .popular-dish.active {
@@ -151,13 +153,13 @@
         </div>
 
         <div class="popular-dishes-container">
-            <div class="popular-dish active">
+            <div class="popular-dish active" style="left: 0;"> <!-- Adjusted position -->
                 <img src="Menu Food images/Tasty Kulhad Pizza.jpeg" alt="Popular Dish 1">
             </div>
-            <div class="popular-dish">
+            <div class="popular-dish" style="left: 50%;"> <!-- Adjusted position -->
                 <img src="Menu Food images/Veg Pizza.jpeg" alt="Popular Dish 2">
             </div>
-            <div class="popular-dish">
+            <div class="popular-dish" style="right: 0;"> <!-- Adjusted position -->
                 <img src="Menu Food images/Panner Pizza.jpeg" alt="Popular Dish 3">
             </div>
         </div>
