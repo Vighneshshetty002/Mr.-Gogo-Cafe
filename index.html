@@ -61,28 +61,24 @@
             margin: 20px auto;
             text-align: center;
             margin-top: 20px;
-            position: relative; /* Necessary for absolute positioning */
         }
 
         .popular-dish {
             display: none; /* Hide initially */
-            position: absolute; /* Positioning within the container */
             opacity: 0;
             transition: opacity 0.5s ease-in-out; /* Smooth transition */
-            left: 0; /* Set left position to 0 */
-            right: 0; /* Set right position to 0 */
-            margin: auto; /* Center horizontally */
+            margin: 20px; /* Add margin to separate dishes */
+            display: inline-block; /* Ensure dishes are displayed horizontally */
         }
 
         .popular-dish.active {
-            display: block; /* Show the active dish */
+            display: inline-block; /* Show the active dish */
         }
 
         .popular-dish img {
             width: 250px;
             height: 250px;
             border-radius: 10px;
-            
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow effect */
             transition: transform 0.3s ease-in-out; /* Add a subtle hover effect */
         }
