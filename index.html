@@ -54,39 +54,32 @@
             max-width: 80%;
         }
 
-        .text-container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-            overflow: hidden;
-            animation: fade-in 1s ease-out, typing 0.5s steps(40, end) 1s;
-        }
-
-        #typewriter-text {
-            height: auto;
-            max-height: none;
-        }
-
         .popular-dishes-container {
             text-align: center;
             margin-top: 20px;
-            position: relative; /* Necessary for absolute positioning */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .popular-dish {
-            display: inline-block;
             margin: 10px;
-            position: absolute; /* Positioning within the container */
-            opacity: 0; /* Hide initially */
-            transition: opacity 0.5s ease-in-out; /* Smooth transition */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
 
         .popular-dish img {
-            width: 150px;
-            height: 150px;
+            width: 250px;
+            height: 250px;
             border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow effect */
+            transition: transform 0.3s ease-in-out; /* Add a subtle hover effect */
+        }
+
+        .popular-dish img:hover {
+            transform: scale(1.05); /* Increase size on hover */
         }
 
         .menu-button {
@@ -134,12 +127,6 @@
             50% {
                 border-color: orange;
             }
-        }
-
-        img {
-            display: block;
-            margin: 20px auto;
-            max-width: 100%;
         }
 
         hr {
