@@ -9,14 +9,14 @@
         body {
             background-color: black;
             font-family: 'Poppins', sans-serif;
-            margin: 0; /* Remove default margin */
-            padding: 0; /* Remove default padding */
+            margin: 0;
+            padding: 0;
         }
 
         nav {
             text-align: center;
-            margin-bottom: 20px; /* Reduce margin */
-            margin-top: 10px; /* Reduce margin */
+            margin-bottom: 20px;
+            margin-top: 10px;
         }
 
         nav ul {
@@ -36,12 +36,12 @@
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+            transition: background-color 0.3s, color 0.3s;
         }
 
         nav a:hover,
         nav a.active {
-            background-color: #333; /* Lighter shade of orange on hover and active state #ff7043 */
+            background-color: #333;
             color: white;
         }
 
@@ -49,18 +49,18 @@
             background-color: white;
             padding: 20px;
             border-radius: 10px;
-            margin: 20px auto; /* Center the box */
-            width: 80%; /* Set a fixed width for desktop */
-            max-width: 600px; /* Max width for large screens */
-            min-height: 100px; /* Set a minimum height */
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            min-height: 100px;
             text-align: center;
-            overflow: hidden; /* Prevent text overflow */
-            animation: fade-in 1s ease-out, typing 3.5s steps(40, end) 1s; /* Added fade-in animation and delay for typing */
+            overflow: hidden;
+            animation: fade-in 1s ease-out, typing 3.5s steps(40, end) 1s;
         }
 
         #typewriter-text {
-            height: auto; /* Let the height adjust dynamically */
-            max-height: 200px; /* Set a maximum height */
+            height: auto;
+            max-height: none;
         }
 
         .popular-dishes-container {
@@ -128,9 +128,9 @@
         }
 
         img {
-            display: block; /* Center the image */
-            margin: 20px auto; /* Center the image */
-            max-width: 100%; /* Ensure image doesn't overflow */
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
         }
 
         hr {
@@ -141,7 +141,7 @@
         /* Mobile Styles */
         @media (max-width: 768px) {
             .text-container {
-                width: 90%; /* Adjust width for smaller screens */
+                width: 90%;
             }
 
             .popular-dish img {
@@ -152,7 +152,6 @@
     </style>
 </head>
 <body>
-    <center><img src="gogo-cafe-white.png" width="200px"></center>
     <nav>
         <ul>
             <li><a href="index.html" class="active">Home</a></li>
@@ -182,7 +181,7 @@
     <script>
         const text = "Welcome to Mr. Gogo Cafe! Delicious treats await you. Explore our menu and enjoy the cozy ambiance. Visit us today!";
         const textElement = document.getElementById("typewriter-text");
-        const maxHeight = 200; // Maximum height for the text container
+        const maxHeight = 200;
 
         let index = 0;
 
@@ -190,20 +189,18 @@
             if (index < text.length) {
                 textElement.textContent += text.charAt(index);
                 index++;
-                adjustHeight(); // Adjust height dynamically
-                setTimeout(typeWriter, 100); // Change the delay as needed
+                adjustHeight();
+                setTimeout(typeWriter, 100);
             }
         }
 
         function adjustHeight() {
-            // Calculate the height of the text container based on the content
             const lineHeight = parseInt(window.getComputedStyle(textElement).lineHeight);
             const numLines = Math.ceil(textElement.clientHeight / lineHeight);
             const newHeight = Math.min(numLines * lineHeight, maxHeight);
             textElement.style.height = newHeight + "px";
         }
 
-        // Start the typewriting effect
         window.onload = function () {
             typeWriter();
         }
