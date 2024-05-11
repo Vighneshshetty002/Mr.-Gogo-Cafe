@@ -57,16 +57,18 @@
         .popular-dishes-container {
             text-align: center;
             margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
+            position: relative; /* Necessary for absolute positioning */
         }
 
         .popular-dish {
-            margin: 10px;
+            display: none; /* Hide initially */
+            position: absolute; /* Positioning within the container */
             opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            transition: opacity 0.5s ease-in-out; /* Smooth transition */
+        }
+
+        .popular-dish.active {
+            display: block; /* Show the active dish */
         }
 
         .popular-dish img {
@@ -90,6 +92,7 @@
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
             margin-top: 20px;
+            display: inline-block; /* Ensure button stays within container */
         }
 
         .menu-button:hover {
@@ -99,6 +102,7 @@
         .menu-icon {
             vertical-align: middle;
             margin-left: 5px;
+            max-height: 20px; /* Limit icon height */
         }
 
         @keyframes typing {
@@ -116,16 +120,6 @@
             }
             to {
                 opacity: 1;
-            }
-        }
-
-        @keyframes blink-caret {
-            from,
-            to {
-                border-color: transparent;
-            }
-            50% {
-                border-color: orange;
             }
         }
 
@@ -157,7 +151,7 @@
         </div>
 
         <div class="popular-dishes-container">
-            <div class="popular-dish">
+            <div class="popular-dish active">
                 <img src="Menu Food images/Tasty Kulhad Pizza.jpeg" alt="Popular Dish 1">
             </div>
             <div class="popular-dish">
@@ -168,7 +162,7 @@
             </div>
         </div>
 
-        <a href="menu.html" class="menu-button">Menu <img src="Menu Food images/menu icon.png" alt="Menu Icon" class="menu-icon"></a>
+        <a href="#" class="menu-button">Menu <img src="Menu Food images/menu icon.png" alt="Menu Icon" class="menu-icon"></a>
     </div>
 
     <script>
@@ -197,6 +191,7 @@
         window.onload = function () {
             typeWriter();
             setTimeout(showDishes, 1000); // Delay to show dishes after typewriter effect
+            setInterval(nextSlide, 3000); // Auto-rotate slides every 3 seconds
         }
 
         function showDishes() {
@@ -206,6 +201,14 @@
                     dish.style.opacity = 1;
                 }, index * 500); // Adjust the delay for each dish
             });
+        }
+
+        function nextSlide() {
+            const dishes = document.querySelectorAll(".popular-dish");
+            const activeIndex = Array.from(dishes).findIndex(dish => dish.classList.contains("active"));
+            dishes[activeIndex].classList.remove("active");
+            const nextIndex = (activeIndex + 1) % dishes.length;
+            dishes[nextIndex].classList.add("active");
         }
     </script>
 </body>
