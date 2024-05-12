@@ -6,13 +6,18 @@
     <title>Mr. Gogo Cafe | Menu</title>
 
     <style>
+        /* Resetting default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background-color: black;
             font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
             color: white;
-            position: relative;
+            padding-bottom: 50px; /* Adding space for the footer */
         }
 
         nav {
@@ -49,7 +54,6 @@
         .menu-container {
             padding: 20px;
             margin: 20px auto;
-            width: 80%;
             max-width: 600px;
         }
 
@@ -62,14 +66,6 @@
 
         .menu-item:last-child {
             border-bottom: none;
-        }
-
-        .menu-item h3 {
-            margin-top: 0;
-        }
-
-        .menu-item p {
-            margin-bottom: 0;
         }
 
         .menu-item img {
@@ -119,12 +115,6 @@
 
         @keyframes slideOut {
             from { transform: translateX(0); }
-            to { transform: translateX(-100%); }
-        }
-
-        /* Adjusted status bar animation */
-        @keyframes slideOut {
-            from { transform: translateX(0); }
             to { transform: translateX(-100%); opacity: 0; }
         }
 
@@ -161,33 +151,20 @@
             margin-bottom: 20px;
         }
 
-        .popup p {
-            margin-bottom: 10px;
+        .popup-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .popup button {
-            margin-top: 10px;
-            margin-right: 2px;
-            margin-left: 2px
-
-            
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .popup button#checkoutBtn {
-            background-color: white;
-            color: black;
+        .popup-content p {
+            margin: 10px 0;
         }
 
         /* Footer styling */
         footer {
             text-align: center;
-            margin-top: 1px;
-            padding: 0px 0;
+            padding: 10px 0; /* Reduced padding */
             background-color: #333;
             color: white;
             position: fixed;
@@ -207,11 +184,9 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: whitw;
+            background-color: white;
             color: black;
             padding: 10px 20px;
-            margin-right: 2px;
-            margin-left: 2px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -221,22 +196,6 @@
 
         #popupBtn:hover {
             background-color: #555;
-        }
-        
-        /* Add spacing between Order and Add to Cart buttons */
-        .menu-item-buttons button:first-child {
-            margin-right: 10px;
-        }
-
-        /* Popup content styling */
-        .popup-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .popup-content p {
-            margin: 10px 0;
         }
     </style>
 </head>
@@ -250,7 +209,6 @@
         </ul>
     </nav>
 
-    <br>
     <hr>
     <center><h1>Menu <img src="Menu Food images/menu icon.png" width="50px"></h1></center>
     <hr>
@@ -258,6 +216,7 @@
         <p>Pizzas</p>
     </div>
     <div class="menu-container">
+        <!-- Menu items here -->
         <div class="menu-item">
             <!-- Image, name, price, and description -->
             <img src="Klassieke club sandwich.jpeg" alt="Veg Pizza">
