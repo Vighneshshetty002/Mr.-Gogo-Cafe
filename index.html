@@ -219,7 +219,6 @@
         window.onload = function () {
             typeWriter();
             setTimeout(showDishes, 1000);
-            setInterval(nextSlide, 3000);
         }
 
         function showDishes() {
@@ -229,14 +228,6 @@
                     dish.classList.add("active");
                 }, index * 500);
             });
-        }
-
-        function nextSlide() {
-            const slideshow = document.querySelector(".popular-dishes-slideshow");
-            const activeIndex = Array.from(slideshow.children).findIndex(child => child.classList.contains("active"));
-            const nextIndex = (activeIndex + 1) % slideshow.children.length;
-            slideshow.children[activeIndex].classList.remove("active");
-            slideshow.children[nextIndex].classList.add("active");
         }
     </script>
 </body>
