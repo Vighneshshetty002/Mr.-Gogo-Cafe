@@ -73,6 +73,7 @@
             max-width: 100%;
             margin: 0 auto;
             position: relative; /* Added for centering */
+            overflow: hidden; /* Ensure images don't overflow */
         }
 
         .popular-dish {
@@ -81,8 +82,8 @@
         }
 
         .popular-dish img {
-            width: 200px;
-            height: 200px;
+            max-width: 100%; /* Adjust image width */
+            max-height: 200px; /* Adjust image height */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease-in-out;
@@ -141,6 +142,10 @@
             .container {
                 max-width: 90%;
             }
+            
+            .popular-dish img {
+                max-width: 90%; /* Adjust image width for smaller screens */
+            }
         }
     </style>
 </head>
@@ -162,7 +167,7 @@
 
         <div class="popular-dishes-container">
             <div class="popular-dishes-slideshow">
-                <div class="popular-dish">
+                <div class="popular-dish active">
                     <img src="Menu Food images/Tasty Kulhad Pizza.jpeg" alt="Popular Dish 1">
                 </div>
                 <div class="popular-dish">
