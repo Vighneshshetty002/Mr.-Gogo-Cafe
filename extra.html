@@ -301,12 +301,34 @@
         const cartItems = [];
         let cartButtonShown = false;
 
+        // Function to increase quantity
+        function increaseQuantity(index) {
+            cartItems[index].quantity++;
+            populateCartItems();
+        }
+
+        // Function to decrease quantity
+        function decreaseQuantity(index) {
+            if (cartItems[index].quantity > 1) {
+                cartItems[index].quantity--;
+                populateCartItems();
+            }
+        }
+
         function addToCart(itemName, itemPrice) {
-            const item = {
-                itemName: itemName,
-                itemPrice: itemPrice
-            };
-            cartItems.push(item);
+            // Check if item already exists in cart
+            let existingItem = cartItems.find(item => item.itemName === itemName);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                // Add new item to cart
+                const item = {
+                    itemName: itemName,
+                    itemPrice: itemPrice,
+                    quantity: 1
+                };
+                cartItems.push(item);
+            }
             showStatusBar();
             showCartButton();
             console.log(cartItems);
@@ -336,11 +358,22 @@
             var cartItemsContainer = document.getElementById('cartItems');
             cartItemsContainer.innerHTML = '';
             var totalPrice = 0;
-            cartItems.forEach(function(item) {
+            cartItems.forEach(function(item, index) {
                 var itemElement = document.createElement('div');
-                itemElement.textContent = item.itemName + ' - ' + item.itemPrice;
+                var quantitySpan = document.createElement('span');
+                quantitySpan.textContent = item.quantity + 'x ';
+                var increaseButton = document.createElement('button');
+                increaseButton.textContent = '+';
+                increaseButton.onclick = function() { increaseQuantity(index); };
+                var decreaseButton = document.createElement('button');
+                decreaseButton.textContent = '-';
+                decreaseButton.onclick = function() { decreaseQuantity(index); };
+                itemElement.appendChild(quantitySpan);
+                itemElement.appendChild(document.createTextNode(item.itemName + ' - ' + item.itemPrice));
+                itemElement.appendChild(increaseButton);
+                itemElement.appendChild(decreaseButton);
                 cartItemsContainer.appendChild(itemElement);
-                totalPrice += parseInt(item.itemPrice);
+                totalPrice += parseInt(item.itemPrice) * item.quantity;
             });
             document.getElementById('totalPrice').textContent = totalPrice;
         }
