@@ -208,27 +208,37 @@
         <p>Pizzas</p>
     </div>
     <div class="menu-container">
-        <!-- Pizza Items -->
         <div class="menu-item">
+            <!-- Image, name, price, and description -->
             <img src="Klassieke club sandwich.jpeg" alt="Veg Pizza">
             <div>
                 <h3>Veg Pizza</h3>
                 <h3>109/-</h3>
                 <p>A savory delight featuring a medley of fresh vegetables atop a crispy crust.</p>
             </div>
+            <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
+                <!-- Order button -->
+                <button onclick="orderItem('Veg Pizza', '109')">Order</button>
+                <!-- Add to Cart button -->
                 <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
             </div>
         </div>
 
+        <!-- Another menu item -->
         <div class="menu-item">
+            <!-- Image, name, price, and description -->
             <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
             <div>
                 <h3>Kulhad Pizza</h3>
                 <h3>199/-</h3>
                 <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
             </div>
+            <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
+                <!-- Order button -->
+                <button onclick="orderItem('Kulhad Pizza', '199')">Order</button>
+                <!-- Add to Cart button -->
                 <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
             </div>
         </div>
@@ -308,6 +318,19 @@
                 document.getElementById('popupContent').innerHTML = '<img src="tick_mark_image.png" width="50px">';
             }, 2000); // Simulate a delay of 2 seconds
         }
+
+        function orderItem(itemName, itemPrice) {
+            // Construct order details
+            var orderDetails = itemName + ' - ' + itemPrice + '\n';
+
+            // Send email
+            var subject = "New Order";
+            var body = "Order Details:\n\n" + orderDetails;
+            var mailtoLink = "mailto:vighneshshetty002@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+            window.location.href = mailtoLink;
+        }
+
+        
     </script>
 
     <?php
