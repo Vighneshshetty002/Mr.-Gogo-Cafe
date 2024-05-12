@@ -46,7 +46,7 @@
         }
 
         .container {
-            background-color: white; /* Choose a suitable color */
+            background-color: white;
             padding: 20px;
             border-radius: 10px;
             margin: 20px auto;
@@ -55,39 +55,40 @@
         }
 
         .popular-dishes-container {
-            background-color: white; /* Choose a suitable color */
+            background-color: white;
             padding: 20px;
             border-radius: 10px;
             margin: 20px auto;
             text-align: center;
             margin-top: 20px;
-            position: relative; /* Necessary for absolute positioning */
-            overflow: hidden; /* Ensure that only one image is visible at a time */
+            position: relative;
+            overflow: hidden;
         }
 
         .popular-dishes-slideshow {
-            display: flex; /* Enable flexbox for horizontal layout */
-            justify-content: center; /* Center the images horizontally */
-            transition: transform 0.5s ease-in-out; /* Smooth transition */
-            max-width: 100%; /* Ensure the slideshow doesn't exceed container width */
-            margin: 0 auto; /* Center the slideshow */
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Center items vertically */
+            transition: transform 0.5s ease-in-out;
+            max-width: 100%;
+            margin: 0 auto;
         }
 
         .popular-dish {
-            flex: 0 0 auto; /* Allow images to shrink but not grow */
-            margin: 0 10px; /* Adjust spacing between images */
+            flex: 0 0 auto;
+            margin: 0 10px;
         }
 
         .popular-dish img {
-            width: 200px; /* Adjust image width */
-            height: 200px; /* Adjust image height */
+            width: 200px;
+            height: 200px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow effect */
-            transition: transform 0.3s ease-in-out; /* Add a subtle hover effect */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
         }
 
         .popular-dish img:hover {
-            transform: scale(1.05); /* Increase size on hover */
+            transform: scale(1.05);
         }
 
         .menu-button {
@@ -98,7 +99,7 @@
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
             margin-top: 20px;
-            display: inline-block; /* Ensure button stays within container */
+            display: inline-block;
         }
 
         .menu-button:hover {
@@ -108,7 +109,7 @@
         .menu-icon {
             vertical-align: middle;
             margin-left: 5px;
-            max-height: 20px; /* Limit icon height */
+            max-height: 20px;
         }
 
         @keyframes typing {
@@ -200,8 +201,8 @@
 
         window.onload = function () {
             typeWriter();
-            setTimeout(showDishes, 1000); // Delay to show dishes after typewriter effect
-            setInterval(nextSlide, 3000); // Auto-rotate slides every 3 seconds
+            setTimeout(showDishes, 1000);
+            setInterval(nextSlide, 3000);
         }
 
         function showDishes() {
@@ -209,7 +210,7 @@
             dishes.forEach((dish, index) => {
                 setTimeout(() => {
                     dish.style.opacity = 1;
-                }, index * 500); // Adjust the delay for each dish
+                }, index * 500);
             });
         }
 
@@ -217,8 +218,8 @@
             const slideshow = document.querySelector(".popular-dishes-slideshow");
             const activeIndex = Array.from(slideshow.children).findIndex(child => child.classList.contains("active"));
             const nextIndex = (activeIndex + 1) % slideshow.children.length;
-            const transformValue = -nextIndex * 100; // Calculate the transform value
-            slideshow.style.transform = `translateX(${transformValue}%)`; // Apply the transform
+            const transformValue = -nextIndex * 100;
+            slideshow.style.transform = `translateX(${transformValue}%)`;
             slideshow.children[activeIndex].classList.remove("active");
             slideshow.children[nextIndex].classList.add("active");
         }
