@@ -66,9 +66,6 @@
         }
 
         .popular-dishes-slideshow {
-            display: flex;
-            justify-content: center;
-            align-items: center; /* Center items vertically */
             max-width: 100%;
             margin: 0 auto;
             position: relative; /* Added for centering */
@@ -76,10 +73,7 @@
         }
 
         .popular-dish {
-            flex: 0 0 auto;
-            margin: 0 10px;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            display: none;
             position: absolute;
             top: 0;
             left: 0;
@@ -88,8 +82,7 @@
         }
 
         .popular-dish.active {
-            opacity: 1;
-            transition: opacity 0.5s ease-in-out;
+            display: block;
         }
 
         .popular-dish img {
