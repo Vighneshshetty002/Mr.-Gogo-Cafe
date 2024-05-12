@@ -225,31 +225,6 @@
         .menu-item-buttons button:first-child {
             margin-right: 10px;
         }
-
-        /* Aligning +/- buttons vertically */
-        .menu-item-buttons .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Email order details table */
-        .order-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        .order-table th,
-        .order-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .order-table th {
-            background-color: #f2f2f2;
-        }
     </style>
 </head>
 <body>
@@ -281,23 +256,9 @@
             <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
                 <!-- Order button -->
-                <div class="button-container">
-                    <button onclick="orderItem('Veg Pizza', '109')">Order</button>
-                    <!-- +/- buttons -->
-                    <div>
-                        <button onclick="increaseQuantity(0)">+</button>
-                        <button onclick="decreaseQuantity(0)">-</button>
-                    </div>
-                </div>
+                <button onclick="orderItem('Veg Pizza', '109')">Order</button>
                 <!-- Add to Cart button -->
-                <div class="button-container">
-                    <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
-                    <!-- +/- buttons -->
-                    <div>
-                        <button onclick="increaseQuantity(0)">+</button>
-                        <button onclick="decreaseQuantity(0)">-</button>
-                    </div>
-                </div>
+                <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
             </div>
         </div>
 
@@ -313,23 +274,9 @@
             <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
                 <!-- Order button -->
-                <div class="button-container">
-                    <button onclick="orderItem('Kulhad Pizza', '199')">Order</button>
-                    <!-- +/- buttons -->
-                    <div>
-                        <button onclick="increaseQuantity(1)">+</button>
-                        <button onclick="decreaseQuantity(1)">-</button>
-                    </div>
-                </div>
+                <button onclick="orderItem('Kulhad Pizza', '199')">Order</button>
                 <!-- Add to Cart button -->
-                <div class="button-container">
-                    <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
-                    <!-- +/- buttons -->
-                    <div>
-                        <button onclick="increaseQuantity(1)">+</button>
-                        <button onclick="decreaseQuantity(1)">-</button>
-                    </div>
-                </div>
+                <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
             </div>
         </div>
     </div>
@@ -342,16 +289,7 @@
     <div class="popup" id="cartPopup">
         <h2 id="popupTitle">Cart</h2>
         <div id="popupContent">
-            <table class="order-table">
-                <thead>
-                    <tr>
-                        <th>Qty</th>
-                        <th>Item Name</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody id="cartItems"></tbody>
-            </table>
+            <div id="cartItems"></div>
             <p><strong>Total Price: <span id="totalPrice"></span>/-</strong></p>
             <button id="checkoutBtn" onclick="checkout()">Checkout</button>
             <button onclick="closeCartPopup()">Cancel</button>
@@ -425,16 +363,19 @@
             cartItemsContainer.innerHTML = '';
             var totalPrice = 0;
             cartItems.forEach(function(item, index) {
-                var itemElement = document.createElement('tr');
-                var quantityTd = document.createElement('td');
-                quantityTd.textContent = item.quantity;
-                var nameTd = document.createElement('td');
-                nameTd.textContent = item.itemName;
-                var priceTd = document.createElement('td');
-                priceTd.textContent = item.itemPrice;
-                itemElement.appendChild(quantityTd);
-                itemElement.appendChild(nameTd);
-                itemElement.appendChild(priceTd);
+                var itemElement = document.createElement('div');
+                var quantitySpan = document.createElement('span');
+                quantitySpan.textContent = item.quantity + 'x ';
+                var increaseButton = document.createElement('button');
+                increaseButton.textContent = '+';
+                increaseButton.onclick = function() { increaseQuantity(index); };
+                var decreaseButton = document.createElement('button');
+                decreaseButton.textContent = '-';
+                decreaseButton.onclick = function() { decreaseQuantity(index); };
+                itemElement.appendChild(quantitySpan);
+                itemElement.appendChild(document.createTextNode(item.itemName + ' - ' + item.itemPrice));
+                itemElement.appendChild(increaseButton);
+                itemElement.appendChild(decreaseButton);
                 cartItemsContainer.appendChild(itemElement);
                 totalPrice += parseInt(item.itemPrice) * item.quantity;
             });
