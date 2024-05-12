@@ -80,6 +80,9 @@
 
         .menu-item-buttons {
             margin-left: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .menu-item-buttons button {
@@ -88,7 +91,7 @@
             padding: 8px 16px;
             border: none;
             border-radius: 5px;
-            margin-left: 10px;
+            margin: 5px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
         }
@@ -117,12 +120,6 @@
             to { transform: translateX(0); }
         }
 
-        @keyframes slideOut {
-            from { transform: translateX(0); }
-            to { transform: translateX(-100%); }
-        }
-
-        /* Adjusted status bar animation */
         @keyframes slideOut {
             from { transform: translateX(0); }
             to { transform: translateX(-100%); opacity: 0; }
@@ -174,13 +171,13 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
-            background-color: #ffcc00;
+            background-color: white;
             color: black;
             font-weight: bold;
         }
 
         .popup button:hover {
-            background-color: #ffdd33;
+            background-color: #eee;
         }
 
         /* Footer styling */
@@ -225,6 +222,12 @@
         .menu-item-buttons button:first-child {
             margin-right: 10px;
         }
+
+        /* Adjusted status bar animation */
+        @keyframes slideOut {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -256,7 +259,7 @@
             <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
                 <!-- Order button -->
-                <button onclick="orderItem('Veg Pizza', '109')">Order</button>
+                <button onclick="sendEmail()">Order</button>
                 <!-- Add to Cart button -->
                 <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
             </div>
@@ -274,7 +277,7 @@
             <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
                 <!-- Order button -->
-                <button onclick="orderItem('Kulhad Pizza', '199')">Order</button>
+                <button onclick="sendEmail()">Order</button>
                 <!-- Add to Cart button -->
                 <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
             </div>
@@ -432,6 +435,24 @@
                 popupBtn.style.display = 'block';
                 cartButtonShown = true;
             }
+        }
+
+        function sendEmail() {
+            // Construct order details
+            var orderDetails = '';
+            var currentDate = new Date();
+            var orderTime = currentDate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+            orderDetails += 'Date & Time of Order: ' + orderTime + '\n\n';
+            orderDetails += 'Name: Veg Pizza, Quantity: 1, Price: 109/-\n';
+
+            // Send email
+            var subject = "New Order";
+            var body = "Order Details:\n\n" + orderDetails + "\nClick on Send to place the order";
+            var mailtoLink = "mailto:vighneshshetty002@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+            window.location.href = mailtoLink;
+
+            // Show success popup
+            toggleSuccessPopup();
         }
     </script>
 </body>
