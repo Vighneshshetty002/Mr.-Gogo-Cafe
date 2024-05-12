@@ -146,7 +146,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #333;
+            background-color: black;
             border: 2px solid white;
             padding: 20px;
             z-index: 1001;
@@ -154,13 +154,10 @@
             width: 70%;
             max-height: 80%;
             overflow-y: auto;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .popup h2 {
             margin-bottom: 20px;
-            color: #ffcc00;
         }
 
         .popup p {
@@ -174,13 +171,11 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
-            background-color: #ffcc00;
-            color: black;
-            font-weight: bold;
         }
 
-        .popup button:hover {
-            background-color: #ffdd33;
+        .popup button#checkoutBtn {
+            background-color: #ffcc00;
+            color: black;
         }
 
         /* Footer styling */
@@ -226,46 +221,15 @@
             margin-right: 10px;
         }
 
-        /* Aligning +/- buttons vertically */
-        .menu-item-buttons .button-container {
+        /* Popup content styling */
+        .popup-content {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* Email order details table */
-        .order-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        .order-table th,
-        .order-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .order-table th {
-            background-color: #f2f2f2;
-        }
-
-        /* +/- buttons in cart popup */
-        .popup .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Cart item styling in cart popup */
-        .popup .order-table {
-            margin-bottom: 0;
-        }
-
-        /* Remove border between cart items in cart popup */
-        .popup .order-table tbody tr:last-child td {
-            border-bottom: none;
+        .popup-content p {
+            margin: 10px 0;
         }
     </style>
 </head>
@@ -330,18 +294,11 @@
     <div class="popup-overlay" id="popupOverlay"></div>
     <div class="popup" id="cartPopup">
         <h2 id="popupTitle">Cart</h2>
-        <div id="popupContent">
-            <!-- Cart items -->
-            <div class="order-table">
-                <tbody id="cartItems"></tbody>
-            </div>
-            <!-- Total price -->
+        <div class="popup-content">
+            <div id="cartItems"></div>
             <p><strong>Total Price: <span id="totalPrice"></span>/-</strong></p>
-            <!-- Checkout and Cancel buttons -->
-            <div class="button-container">
-                <button id="checkoutBtn" onclick="checkout()">Checkout</button>
-                <button onclick="closeCartPopup()">Cancel</button>
-            </div>
+            <button id="checkoutBtn" onclick="checkout()">Checkout</button>
+            <button onclick="closeCartPopup()">Cancel</button>
         </div>
     </div>
 
@@ -353,8 +310,22 @@
 
     <script>
         const cartItems = [];
+        let cartButtonShown = false;
 
-        // Function to add an item to cart
+        // Function to increase quantity
+        function increaseQuantity(index) {
+            cartItems[index].quantity++;
+            populateCartItems();
+        }
+
+        // Function to decrease quantity
+        function decreaseQuantity(index) {
+            if (cartItems[index].quantity > 1) {
+                cartItems[index].quantity--;
+                populateCartItems();
+            }
+        }
+
         function addToCart(itemName, itemPrice) {
             // Check if item already exists in cart
             let existingItem = cartItems.find(item => item.itemName === itemName);
@@ -371,33 +342,8 @@
             }
             showStatusBar();
             showCartButton();
-            populateCartItems();
         }
 
-        // Function to populate cart items in the cart popup
-        function populateCartItems() {
-            var cartItemsContainer = document.getElementById('cartItems');
-            cartItemsContainer.innerHTML = '';
-            var totalPrice = 0;
-            cartItems.forEach(function(item, index) {
-                var itemElement = document.createElement('div');
-                itemElement.classList.add('menu-item');
-                var nameDiv = document.createElement('div');
-                nameDiv.textContent = item.itemName;
-                var priceDiv = document.createElement('div');
-                priceDiv.textContent = item.itemPrice;
-                var quantityDiv = document.createElement('div');
-                quantityDiv.textContent = 'Quantity: ' + item.quantity;
-                itemElement.appendChild(nameDiv);
-                itemElement.appendChild(priceDiv);
-                itemElement.appendChild(quantityDiv);
-                cartItemsContainer.appendChild(itemElement);
-                totalPrice += parseInt(item.itemPrice) * item.quantity;
-            });
-            document.getElementById('totalPrice').textContent = totalPrice;
-        }
-
-        // Function to toggle the cart popup
         function togglePopup() {
             var cartPopup = document.getElementById('cartPopup');
             var overlay = document.getElementById('popupOverlay');
@@ -411,7 +357,6 @@
             }
         }
 
-        // Function to close the cart popup
         function closeCartPopup() {
             var cartPopup = document.getElementById('cartPopup');
             var overlay = document.getElementById('popupOverlay');
@@ -419,35 +364,41 @@
             overlay.style.display = 'none';
         }
 
-        // Function to show status bar
-        function showStatusBar() {
-            var statusBar = document.getElementById('statusBar');
-            statusBar.style.display = 'block';
-            setTimeout(function() {
-                statusBar.style.display = 'none';
-            }, 2000); // Hide after 2 seconds
+        function populateCartItems() {
+            var cartItemsContainer = document.getElementById('cartItems');
+            cartItemsContainer.innerHTML = '';
+            var totalPrice = 0;
+            cartItems.forEach(function(item, index) {
+                var itemElement = document.createElement('div');
+                var quantitySpan = document.createElement('span');
+                quantitySpan.textContent = item.quantity + 'x ';
+                var increaseButton = document.createElement('button');
+                increaseButton.textContent = '+';
+                increaseButton.onclick = function() { increaseQuantity(index); };
+                var decreaseButton = document.createElement('button');
+                decreaseButton.textContent = '-';
+                decreaseButton.onclick = function() { decreaseQuantity(index); };
+                itemElement.appendChild(quantitySpan);
+                itemElement.appendChild(document.createTextNode(item.itemName + ' - ' + item.itemPrice));
+                itemElement.appendChild(increaseButton);
+                itemElement.appendChild(decreaseButton);
+                cartItemsContainer.appendChild(itemElement);
+                totalPrice += parseInt(item.itemPrice) * item.quantity;
+            });
+            document.getElementById('totalPrice').textContent = totalPrice;
         }
 
-        // Function to show cart button
-        function showCartButton() {
-            var popupBtn = document.getElementById('popupBtn');
-            popupBtn.style.display = 'block';
-        }
-
-        // Function to handle ordering an item
-        function orderItem(itemName, itemPrice) {
-            // Your ordering logic goes here
-            // For now, let's just show a success message
-            alert('Order placed for ' + itemName + ' at ' + itemPrice);
-        }
-
-        // Function to handle checkout
         function checkout() {
             // Construct order details
             var orderDetails = '';
             var currentDate = new Date();
-            var orderTime = currentDate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-            orderDetails += 'Date & Time of Order: ' + orderTime + '\n\n';
+            var hours = currentDate.getHours();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            var minutes = currentDate.getMinutes();
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            var timeString = hours + ':' + minutes + ' ' + ampm;
+            orderDetails += 'Date & Time of Order: ' + currentDate.toDateString() + ' ' + timeString + '\n\n';
             cartItems.forEach(function(item) {
                 orderDetails += 'Name: ' + item.itemName + ', Quantity: ' + item.quantity + ', Price: ' + item.itemPrice + ' \n';
             });
@@ -458,10 +409,28 @@
             var mailtoLink = "mailto:vighneshshetty002@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
             window.location.href = mailtoLink;
 
-            // Show success message
-            alert('Order placed successfully! Check your email for confirmation.');
-            closeCartPopup();
-            cartItems.length = 0; // Clear cart
+            // Thank you message
+            setTimeout(function() {
+                alert("Thanks for the Order. Visit Again!");
+                // Reload the page
+                window.location.reload();
+            }, 500);
+        }
+
+        function showStatusBar() {
+            var statusBar = document.getElementById('statusBar');
+            statusBar.style.display = 'block';
+            setTimeout(function() {
+                statusBar.style.display = 'none';
+            }, 2000); // Hide after 2 seconds
+        }
+
+        function showCartButton() {
+            if (!cartButtonShown) {
+                var popupBtn = document.getElementById('popupBtn');
+                popupBtn.style.display = 'block';
+                cartButtonShown = true;
+            }
         }
     </script>
 </body>
