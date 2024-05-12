@@ -250,6 +250,23 @@
         .order-table th {
             background-color: #f2f2f2;
         }
+
+        /* +/- buttons in cart popup */
+        .popup .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Cart item styling in cart popup */
+        .popup .order-table {
+            margin-bottom: 0;
+        }
+
+        /* Remove border between cart items in cart popup */
+        .popup .order-table tbody tr:last-child td {
+            border-bottom: none;
+        }
     </style>
 </head>
 <body>
@@ -281,23 +298,9 @@
             <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
                 <!-- Order button -->
-                <div class="button-container">
-                    <button onclick="orderItem('Veg Pizza', '109')">Order</button>
-                    <!-- +/- buttons -->
-                    <div>
-                        <button onclick="increaseQuantity(0)">+</button>
-                        <button onclick="decreaseQuantity(0)">-</button>
-                    </div>
-                </div>
+                <button onclick="orderItem('Veg Pizza', '109')">Order</button>
                 <!-- Add to Cart button -->
-                <div class="button-container">
-                    <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
-                    <!-- +/- buttons -->
-                    <div>
-                        <button onclick="increaseQuantity(0)">+</button>
-                        <button onclick="decreaseQuantity(0)">-</button>
-                    </div>
-                </div>
+                <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
             </div>
         </div>
 
@@ -313,23 +316,9 @@
             <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
                 <!-- Order button -->
-                <div class="button-container">
-                    <button onclick="orderItem('Kulhad Pizza', '199')">Order</button>
-                    <!-- +/- buttons -->
-                    <div>
-                        <button onclick="increaseQuantity(1)">+</button>
-                        <button onclick="decreaseQuantity(1)">-</button>
-                    </div>
-                </div>
+                <button onclick="orderItem('Kulhad Pizza', '199')">Order</button>
                 <!-- Add to Cart button -->
-                <div class="button-container">
-                    <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
-                    <!-- +/- buttons -->
-                    <div>
-                        <button onclick="increaseQuantity(1)">+</button>
-                        <button onclick="decreaseQuantity(1)">-</button>
-                    </div>
-                </div>
+                <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
             </div>
         </div>
     </div>
@@ -342,19 +331,17 @@
     <div class="popup" id="cartPopup">
         <h2 id="popupTitle">Cart</h2>
         <div id="popupContent">
-            <table class="order-table">
-                <thead>
-                    <tr>
-                        <th>Qty</th>
-                        <th>Item Name</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
+            <!-- Cart items -->
+            <div class="order-table">
                 <tbody id="cartItems"></tbody>
-            </table>
+            </div>
+            <!-- Total price -->
             <p><strong>Total Price: <span id="totalPrice"></span>/-</strong></p>
-            <button id="checkoutBtn" onclick="checkout()">Checkout</button>
-            <button onclick="closeCartPopup()">Cancel</button>
+            <!-- Checkout and Cancel buttons -->
+            <div class="button-container">
+                <button id="checkoutBtn" onclick="checkout()">Checkout</button>
+                <button onclick="closeCartPopup()">Cancel</button>
+            </div>
         </div>
     </div>
 
@@ -366,22 +353,8 @@
 
     <script>
         const cartItems = [];
-        let cartButtonShown = false;
 
-        // Function to increase quantity
-        function increaseQuantity(index) {
-            cartItems[index].quantity++;
-            populateCartItems();
-        }
-
-        // Function to decrease quantity
-        function decreaseQuantity(index) {
-            if (cartItems[index].quantity > 1) {
-                cartItems[index].quantity--;
-                populateCartItems();
-            }
-        }
-
+        // Function to add an item to cart
         function addToCart(itemName, itemPrice) {
             // Check if item already exists in cart
             let existingItem = cartItems.find(item => item.itemName === itemName);
@@ -398,8 +371,33 @@
             }
             showStatusBar();
             showCartButton();
+            populateCartItems();
         }
 
+        // Function to populate cart items in the cart popup
+        function populateCartItems() {
+            var cartItemsContainer = document.getElementById('cartItems');
+            cartItemsContainer.innerHTML = '';
+            var totalPrice = 0;
+            cartItems.forEach(function(item, index) {
+                var itemElement = document.createElement('div');
+                itemElement.classList.add('menu-item');
+                var nameDiv = document.createElement('div');
+                nameDiv.textContent = item.itemName;
+                var priceDiv = document.createElement('div');
+                priceDiv.textContent = item.itemPrice;
+                var quantityDiv = document.createElement('div');
+                quantityDiv.textContent = 'Quantity: ' + item.quantity;
+                itemElement.appendChild(nameDiv);
+                itemElement.appendChild(priceDiv);
+                itemElement.appendChild(quantityDiv);
+                cartItemsContainer.appendChild(itemElement);
+                totalPrice += parseInt(item.itemPrice) * item.quantity;
+            });
+            document.getElementById('totalPrice').textContent = totalPrice;
+        }
+
+        // Function to toggle the cart popup
         function togglePopup() {
             var cartPopup = document.getElementById('cartPopup');
             var overlay = document.getElementById('popupOverlay');
@@ -413,6 +411,7 @@
             }
         }
 
+        // Function to close the cart popup
         function closeCartPopup() {
             var cartPopup = document.getElementById('cartPopup');
             var overlay = document.getElementById('popupOverlay');
@@ -420,27 +419,29 @@
             overlay.style.display = 'none';
         }
 
-        function populateCartItems() {
-            var cartItemsContainer = document.getElementById('cartItems');
-            cartItemsContainer.innerHTML = '';
-            var totalPrice = 0;
-            cartItems.forEach(function(item, index) {
-                var itemElement = document.createElement('tr');
-                var quantityTd = document.createElement('td');
-                quantityTd.textContent = item.quantity;
-                var nameTd = document.createElement('td');
-                nameTd.textContent = item.itemName;
-                var priceTd = document.createElement('td');
-                priceTd.textContent = item.itemPrice;
-                itemElement.appendChild(quantityTd);
-                itemElement.appendChild(nameTd);
-                itemElement.appendChild(priceTd);
-                cartItemsContainer.appendChild(itemElement);
-                totalPrice += parseInt(item.itemPrice) * item.quantity;
-            });
-            document.getElementById('totalPrice').textContent = totalPrice;
+        // Function to show status bar
+        function showStatusBar() {
+            var statusBar = document.getElementById('statusBar');
+            statusBar.style.display = 'block';
+            setTimeout(function() {
+                statusBar.style.display = 'none';
+            }, 2000); // Hide after 2 seconds
         }
 
+        // Function to show cart button
+        function showCartButton() {
+            var popupBtn = document.getElementById('popupBtn');
+            popupBtn.style.display = 'block';
+        }
+
+        // Function to handle ordering an item
+        function orderItem(itemName, itemPrice) {
+            // Your ordering logic goes here
+            // For now, let's just show a success message
+            alert('Order placed for ' + itemName + ' at ' + itemPrice);
+        }
+
+        // Function to handle checkout
         function checkout() {
             // Construct order details
             var orderDetails = '';
@@ -457,40 +458,10 @@
             var mailtoLink = "mailto:vighneshshetty002@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
             window.location.href = mailtoLink;
 
-            // Show success popup
-            toggleSuccessPopup();
-        }
-
-        function toggleSuccessPopup() {
-            var successPopup = document.getElementById('successPopup');
-            var overlay = document.getElementById('popupOverlay');
-            successPopup.style.display = 'block';
-            overlay.style.display = 'block';
-        }
-
-        function closeSuccessPopup() {
-            var successPopup = document.getElementById('successPopup');
-            var overlay = document.getElementById('popupOverlay');
-            successPopup.style.display = 'none';
-            overlay.style.display = 'none';
-            // Reload the page
-            location.reload();
-        }
-
-        function showStatusBar() {
-            var statusBar = document.getElementById('statusBar');
-            statusBar.style.display = 'block';
-            setTimeout(function() {
-                statusBar.style.display = 'none';
-            }, 2000); // Hide after 2 seconds
-        }
-
-        function showCartButton() {
-            if (!cartButtonShown) {
-                var popupBtn = document.getElementById('popupBtn');
-                popupBtn.style.display = 'block';
-                cartButtonShown = true;
-            }
+            // Show success message
+            alert('Order placed successfully! Check your email for confirmation.');
+            closeCartPopup();
+            cartItems.length = 0; // Clear cart
         }
     </script>
 </body>
