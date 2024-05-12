@@ -215,6 +215,11 @@
         #popupBtn:hover {
             background-color: #555;
         }
+        
+        /* Add spacing between Order and Add to Cart buttons */
+        .menu-item-buttons button:first-child {
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -289,8 +294,8 @@
     <div class="status-bar" id="statusBar">Item added to cart</div>
 
     <footer>
-        <p>To place the order, click on the <strong>Send</strong> button.</p>
         <p>Powered by: <a href="https://github.com/vighneshshetty002"><img src="VS Tech.png" alt="Logo"></a></p>
+        <p>To place the order, click on the <strong>Send</strong> button.</p>
     </footer>
 
     <script>
@@ -350,7 +355,7 @@
 
             // Send email
             var subject = "New Order";
-            var body = "Order Details:\n\n" + orderDetails + "\nTotal Price: " + document.getElementById('totalPrice').textContent + "/-";
+            var body = "Order Details:\n\n" + orderDetails + "\nTotal Price: " + document.getElementById('totalPrice').textContent + "/-\n\nTo place the order, click on the Send button.";
             var mailtoLink = "mailto:vighneshshetty002@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
             window.location.href = mailtoLink;
         }
