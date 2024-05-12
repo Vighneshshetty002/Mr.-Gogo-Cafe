@@ -6,129 +6,9 @@
     <title>Mr. Gogo Cafe | Menu</title>
 
     <style>
-        body {
-            background-color: black;
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: white;
-            position: relative;
-        }
+        /* Your existing CSS styles */
 
-        nav {
-            text-align: center;
-            margin-bottom: 20px;
-            margin-top: 10px;
-        }
-
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav li {
-            display: inline-block;
-            margin: 0 10px;
-        }
-
-        nav a {
-            color: white;
-            background-color: #333;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        nav a:hover,
-        nav a.active {
-            background-color: #555;
-        }
-
-        .menu-container {
-            padding: 20px;
-            margin: 20px auto;
-            width: 80%;
-            max-width: 600px;
-        }
-
-        .menu-item {
-            border-bottom: 1px solid #666;
-            padding: 10px 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .menu-item:last-child {
-            border-bottom: none;
-        }
-
-        .menu-item h3 {
-            margin-top: 0;
-        }
-
-        .menu-item p {
-            margin-bottom: 0;
-        }
-
-        .menu-item img {
-            margin-right: 20px;
-            max-width: 100px;
-            border-radius: 5px;
-        }
-
-        .menu-item-buttons {
-            margin-left: auto;
-        }
-
-        .menu-item-buttons button {
-            background-color: #333;
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 5px;
-            margin-left: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .menu-item-buttons button:hover {
-            background-color: #555;
-        }
-
-        .status-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50px;
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            line-height: 50px;
-            z-index: 10000;
-            display: none;
-            animation: slideIn 0.5s ease-out, slideOut 0.5s 2.5s ease-in forwards;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
-        }
-
-        @keyframes slideOut {
-            from { transform: translateX(0); }
-            to { transform: translateX(-100%); }
-        }
-
-        /* Adjusted status bar animation */
-        @keyframes slideOut {
-            from { transform: translateX(0); }
-            to { transform: translateX(-100%); opacity: 0; }
-        }
-
-        /* Popup styles */
+        /* Popup styling */
         .popup-overlay {
             display: none;
             position: fixed;
@@ -146,7 +26,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: black;
+            background-color: #333;
             border: 2px solid white;
             padding: 20px;
             z-index: 1001;
@@ -154,10 +34,13 @@
             width: 70%;
             max-height: 80%;
             overflow-y: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .popup h2 {
             margin-bottom: 20px;
+            color: #ffcc00;
         }
 
         .popup p {
@@ -171,217 +54,36 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
-        }
-
-        .popup button#checkoutBtn {
             background-color: #ffcc00;
             color: black;
+            font-weight: bold;
         }
 
-        /* Footer styling */
-        footer {
-            text-align: center;
-            margin-top: 10px;
-            padding: 5px 0;
-            background-color: #333;
-            color: white;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            font-size: 14px;
-        }
-
-        footer img {
-            width: 100px;
-            vertical-align: middle;
-        }
-
-        /* View Cart Button */
-        #popupBtn {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            z-index: 10000;
-        }
-
-        #popupBtn:hover {
-            background-color: #555;
-        }
-        
-        /* Add spacing between Order and Add to Cart buttons */
-        .menu-item-buttons button:first-child {
-            margin-right: 10px;
+        .popup button:hover {
+            background-color: #ffdd33;
         }
     </style>
 </head>
 <body>
-    <center><img src="gogo-cafe-white.png" width="200px"></center>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="menu.html" class="active">Menu</a></li>
-            <li><a href="about_us.html">About</a></li>
-        </ul>
-    </nav>
+    <!-- Your existing HTML content -->
 
-    <br>
-    <hr>
-    <center><h1>Menu <img src="icons8-dish-91.png" width="50px"></h1></center>
-    <hr>
-    <div class="menu-Title">
-        <p>Pizzas</p>
-    </div>
-    <div class="menu-container">
-        <div class="menu-item">
-            <!-- Image, name, price, and description -->
-            <img src="Klassieke club sandwich.jpeg" alt="Veg Pizza">
-            <div>
-                <h3>Veg Pizza</h3>
-                <h3>109/-</h3>
-                <p>A savory delight featuring a medley of fresh vegetables atop a crispy crust.</p>
-            </div>
-            <!-- Order and Add to Cart buttons -->
-            <div class="menu-item-buttons">
-                <!-- Order button -->
-                <button onclick="orderItem('Veg Pizza', '109')">Order</button>
-                <!-- Add to Cart button -->
-                <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
-            </div>
-        </div>
-
-        <!-- Another menu item -->
-        <div class="menu-item">
-            <!-- Image, name, price, and description -->
-            <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
-            <div>
-                <h3>Kulhad Pizza</h3>
-                <h3>199/-</h3>
-                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
-            </div>
-            <!-- Order and Add to Cart buttons -->
-            <div class="menu-item-buttons">
-                <!-- Order button -->
-                <button onclick="orderItem('Kulhad Pizza', '199')">Order</button>
-                <!-- Add to Cart button -->
-                <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Popup button -->
-    <button id="popupBtn" onclick="togglePopup()">View Cart</button>
-
-    <!-- Popup for cart view -->
+    <!-- Popup for success message -->
     <div class="popup-overlay" id="popupOverlay"></div>
-    <div class="popup" id="cartPopup">
-        <h2 id="popupTitle">Cart</h2>
-        <div id="popupContent">
-            <div id="cartItems"></div>
-            <p><strong>Total Price: <span id="totalPrice"></span>/-</strong></p>
-            <button id="checkoutBtn" onclick="checkout()">Checkout</button>
-            <button onclick="closeCartPopup()">Cancel</button>
-        </div>
+    <div class="popup" id="successPopup">
+        <h2>Mr. Gogo Cafe says</h2>
+        <p>Thanks for the Order. Visit Again!</p>
+        <button onclick="refreshPage()">OK</button>
     </div>
-
-    <div class="status-bar" id="statusBar">Item added to cart</div>
-
-    <footer>
-        <p>Powered by: <a href="https://github.com/vighneshshetty002"><img src="VS Tech.png" alt="Logo"></a></p>
-    </footer>
 
     <script>
-        const cartItems = [];
-        let cartButtonShown = false;
-
-        // Function to increase quantity
-        function increaseQuantity(index) {
-            cartItems[index].quantity++;
-            populateCartItems();
-        }
-
-        // Function to decrease quantity
-        function decreaseQuantity(index) {
-            if (cartItems[index].quantity > 1) {
-                cartItems[index].quantity--;
-                populateCartItems();
-            }
-        }
-
-        function addToCart(itemName, itemPrice) {
-            // Check if item already exists in cart
-            let existingItem = cartItems.find(item => item.itemName === itemName);
-            if (existingItem) {
-                existingItem.quantity++;
-            } else {
-                // Add new item to cart
-                const item = {
-                    itemName: itemName,
-                    itemPrice: itemPrice,
-                    quantity: 1
-                };
-                cartItems.push(item);
-            }
-            showStatusBar();
-            showCartButton();
-        }
-
-        function togglePopup() {
-            var cartPopup = document.getElementById('cartPopup');
-            var overlay = document.getElementById('popupOverlay');
-            if (cartPopup.style.display === 'block') {
-                cartPopup.style.display = 'none';
-                overlay.style.display = 'none';
-            } else {
-                cartPopup.style.display = 'block';
-                overlay.style.display = 'block';
-                populateCartItems();
-            }
-        }
-
-        function closeCartPopup() {
-            var cartPopup = document.getElementById('cartPopup');
-            var overlay = document.getElementById('popupOverlay');
-            cartPopup.style.display = 'none';
-            overlay.style.display = 'none';
-        }
-
-        function populateCartItems() {
-            var cartItemsContainer = document.getElementById('cartItems');
-            cartItemsContainer.innerHTML = '';
-            var totalPrice = 0;
-            cartItems.forEach(function(item, index) {
-                var itemElement = document.createElement('div');
-                var quantitySpan = document.createElement('span');
-                quantitySpan.textContent = item.quantity + 'x ';
-                var increaseButton = document.createElement('button');
-                increaseButton.textContent = '+';
-                increaseButton.onclick = function() { increaseQuantity(index); };
-                var decreaseButton = document.createElement('button');
-                decreaseButton.textContent = '-';
-                decreaseButton.onclick = function() { decreaseQuantity(index); };
-                itemElement.appendChild(quantitySpan);
-                itemElement.appendChild(document.createTextNode(item.itemName + ' - ' + item.itemPrice));
-                itemElement.appendChild(increaseButton);
-                itemElement.appendChild(decreaseButton);
-                cartItemsContainer.appendChild(itemElement);
-                totalPrice += parseInt(item.itemPrice) * item.quantity;
-            });
-            document.getElementById('totalPrice').textContent = totalPrice;
-        }
+        // Your existing JavaScript code
 
         function checkout() {
             // Construct order details
             var orderDetails = '';
             var currentDate = new Date();
-            orderDetails += 'Date & Time of Order: ' + currentDate.toLocaleString() + '\n\n';
+            var orderTime = currentDate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+            orderDetails += 'Date & Time of Order: ' + orderTime + '\n\n';
             cartItems.forEach(function(item) {
                 orderDetails += 'Name: ' + item.itemName + ', Quantity: ' + item.quantity + ', Price: ' + item.itemPrice + ' \n';
             });
@@ -392,26 +94,19 @@
             var mailtoLink = "mailto:vighneshshetty002@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
             window.location.href = mailtoLink;
 
-            // Thank you message
-            setTimeout(function() {
-                alert("Thanks for the Order. Visit Again!");
-            }, 500);
+            // Show success popup
+            toggleSuccessPopup();
         }
 
-        function showStatusBar() {
-            var statusBar = document.getElementById('statusBar');
-            statusBar.style.display = 'block';
-            setTimeout(function() {
-                statusBar.style.display = 'none';
-            }, 2000); // Hide after 2 seconds
+        function toggleSuccessPopup() {
+            var successPopup = document.getElementById('successPopup');
+            var overlay = document.getElementById('popupOverlay');
+            successPopup.style.display = 'block';
+            overlay.style.display = 'block';
         }
 
-        function showCartButton() {
-            if (!cartButtonShown) {
-                var popupBtn = document.getElementById('popupBtn');
-                popupBtn.style.display = 'block';
-                cartButtonShown = true;
-            }
+        function refreshPage() {
+            location.reload();
         }
     </script>
 </body>
