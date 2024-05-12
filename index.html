@@ -76,12 +76,19 @@
             overflow: hidden; /* Ensure images don't overflow */
         }
 
-        .popular-dish {
+        .popular-dishes-slideshow .popular-dish {
             flex: 0 0 auto;
             margin: 0 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
 
-        .popular-dish img {
+        .popular-dishes-slideshow .popular-dish.active {
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .popular-dishes-slideshow img {
             max-width: 100%; /* Adjust image width */
             max-height: 200px; /* Adjust image height */
             border-radius: 10px;
@@ -89,7 +96,7 @@
             transition: transform 0.3s ease-in-out;
         }
 
-        .popular-dish img:hover {
+        .popular-dishes-slideshow img:hover {
             transform: scale(1.05);
         }
 
@@ -143,7 +150,7 @@
                 max-width: 90%;
             }
             
-            .popular-dish img {
+            .popular-dishes-slideshow img {
                 max-width: 90%; /* Adjust image width for smaller screens */
             }
         }
@@ -215,7 +222,7 @@
             const dishes = document.querySelectorAll(".popular-dish");
             dishes.forEach((dish, index) => {
                 setTimeout(() => {
-                    dish.style.opacity = 1;
+                    dish.classList.add("active");
                 }, index * 500);
             });
         }
