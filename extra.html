@@ -80,9 +80,6 @@
 
         .menu-item-buttons {
             margin-left: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .menu-item-buttons button {
@@ -91,7 +88,7 @@
             padding: 8px 16px;
             border: none;
             border-radius: 5px;
-            margin: 5px;
+            margin-left: 10px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
         }
@@ -120,6 +117,12 @@
             to { transform: translateX(0); }
         }
 
+        @keyframes slideOut {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+
+        /* Adjusted status bar animation */
         @keyframes slideOut {
             from { transform: translateX(0); }
             to { transform: translateX(-100%); opacity: 0; }
@@ -171,13 +174,13 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
-            background-color: white;
+            background-color: #ffcc00;
             color: black;
             font-weight: bold;
         }
 
         .popup button:hover {
-            background-color: #eee;
+            background-color: #ffdd33;
         }
 
         /* Footer styling */
@@ -223,10 +226,29 @@
             margin-right: 10px;
         }
 
-        /* Adjusted status bar animation */
-        @keyframes slideOut {
-            from { transform: translateX(0); }
-            to { transform: translateX(-100%); opacity: 0; }
+        /* Aligning +/- buttons vertically */
+        .menu-item-buttons .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Email order details table */
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .order-table th,
+        .order-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .order-table th {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
@@ -259,9 +281,23 @@
             <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
                 <!-- Order button -->
-                <button onclick="sendEmail()">Order</button>
+                <div class="button-container">
+                    <button onclick="orderItem('Veg Pizza', '109')">Order</button>
+                    <!-- +/- buttons -->
+                    <div>
+                        <button onclick="increaseQuantity(0)">+</button>
+                        <button onclick="decreaseQuantity(0)">-</button>
+                    </div>
+                </div>
                 <!-- Add to Cart button -->
-                <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
+                <div class="button-container">
+                    <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
+                    <!-- +/- buttons -->
+                    <div>
+                        <button onclick="increaseQuantity(0)">+</button>
+                        <button onclick="decreaseQuantity(0)">-</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -277,9 +313,23 @@
             <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
                 <!-- Order button -->
-                <button onclick="sendEmail()">Order</button>
+                <div class="button-container">
+                    <button onclick="orderItem('Kulhad Pizza', '199')">Order</button>
+                    <!-- +/- buttons -->
+                    <div>
+                        <button onclick="increaseQuantity(1)">+</button>
+                        <button onclick="decreaseQuantity(1)">-</button>
+                    </div>
+                </div>
                 <!-- Add to Cart button -->
-                <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
+                <div class="button-container">
+                    <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
+                    <!-- +/- buttons -->
+                    <div>
+                        <button onclick="increaseQuantity(1)">+</button>
+                        <button onclick="decreaseQuantity(1)">-</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -292,7 +342,16 @@
     <div class="popup" id="cartPopup">
         <h2 id="popupTitle">Cart</h2>
         <div id="popupContent">
-            <div id="cartItems"></div>
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Qty</th>
+                        <th>Item Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody id="cartItems"></tbody>
+            </table>
             <p><strong>Total Price: <span id="totalPrice"></span>/-</strong></p>
             <button id="checkoutBtn" onclick="checkout()">Checkout</button>
             <button onclick="closeCartPopup()">Cancel</button>
@@ -366,19 +425,16 @@
             cartItemsContainer.innerHTML = '';
             var totalPrice = 0;
             cartItems.forEach(function(item, index) {
-                var itemElement = document.createElement('div');
-                var quantitySpan = document.createElement('span');
-                quantitySpan.textContent = item.quantity + 'x ';
-                var increaseButton = document.createElement('button');
-                increaseButton.textContent = '+';
-                increaseButton.onclick = function() { increaseQuantity(index); };
-                var decreaseButton = document.createElement('button');
-                decreaseButton.textContent = '-';
-                decreaseButton.onclick = function() { decreaseQuantity(index); };
-                itemElement.appendChild(quantitySpan);
-                itemElement.appendChild(document.createTextNode(item.itemName + ' - ' + item.itemPrice));
-                itemElement.appendChild(increaseButton);
-                itemElement.appendChild(decreaseButton);
+                var itemElement = document.createElement('tr');
+                var quantityTd = document.createElement('td');
+                quantityTd.textContent = item.quantity;
+                var nameTd = document.createElement('td');
+                nameTd.textContent = item.itemName;
+                var priceTd = document.createElement('td');
+                priceTd.textContent = item.itemPrice;
+                itemElement.appendChild(quantityTd);
+                itemElement.appendChild(nameTd);
+                itemElement.appendChild(priceTd);
                 cartItemsContainer.appendChild(itemElement);
                 totalPrice += parseInt(item.itemPrice) * item.quantity;
             });
@@ -435,24 +491,6 @@
                 popupBtn.style.display = 'block';
                 cartButtonShown = true;
             }
-        }
-
-        function sendEmail() {
-            // Construct order details
-            var orderDetails = '';
-            var currentDate = new Date();
-            var orderTime = currentDate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-            orderDetails += 'Date & Time of Order: ' + orderTime + '\n\n';
-            orderDetails += 'Name: Veg Pizza, Quantity: 1, Price: 109/-\n';
-
-            // Send email
-            var subject = "New Order";
-            var body = "Order Details:\n\n" + orderDetails + "\nClick on Send to place the order";
-            var mailtoLink = "mailto:vighneshshetty002@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-            window.location.href = mailtoLink;
-
-            // Show success popup
-            toggleSuccessPopup();
         }
     </script>
 </body>
