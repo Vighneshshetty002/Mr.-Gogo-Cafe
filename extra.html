@@ -12,6 +12,7 @@
             margin: 0;
             padding: 0;
             color: white;
+            position: relative; /* Add this to make status bar stay at top */
         }
 
         nav {
@@ -181,17 +182,38 @@
         footer {
             text-align: center;
             margin-top: 20px;
-            padding: 20px 0;
+            padding: 10px 0; /* Adjusted padding */
             background-color: #333;
             color: white;
             position: fixed;
             bottom: 0;
             width: 100%;
+            font-size: 14px; /* Adjusted font size */
         }
 
         footer img {
             width: 100px;
             vertical-align: middle;
+        }
+
+        /* View Cart Button */
+        #popupBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            z-index: 10000;
+        }
+
+        #popupBtn:hover {
+            background-color: #555;
         }
     </style>
 </head>
@@ -267,11 +289,13 @@
     <div class="status-bar" id="statusBar">Item added to cart</div>
 
     <footer>
+        <p>To place the order, click on the <strong>Send</strong> button.</p>
         <p>Powered by: <a href="https://github.com/vighneshshetty002"><img src="VS Tech.png" alt="Logo"></a></p>
     </footer>
 
     <script>
         const cartItems = [];
+        let cartButtonShown = false;
 
         function addToCart(itemName, itemPrice) {
             const item = {
@@ -280,6 +304,7 @@
             };
             cartItems.push(item);
             showStatusBar();
+            showCartButton();
             console.log(cartItems);
         }
 
@@ -317,22 +342,15 @@
         }
 
         function checkout() {
-            // Simulate sending email
-            // Replace with actual email sending code
-            setTimeout(function() {
-                // Display success message and change popup content
-                document.getElementById('popupTitle').innerText = "Order Received";
-                document.getElementById('popupContent').innerHTML = '<img src="tick_mark_image.png" width="50px">';
-            }, 2000); // Simulate a delay of 2 seconds
-        }
-
-        function orderItem(itemName, itemPrice) {
             // Construct order details
-            var orderDetails = itemName + ' - ' + itemPrice + '\n';
+            var orderDetails = '';
+            cartItems.forEach(function(item) {
+                orderDetails += item.itemName + ' - ' + item.itemPrice + '\n';
+            });
 
             // Send email
             var subject = "New Order";
-            var body = "Order Details:\n\n" + orderDetails;
+            var body = "Order Details:\n\n" + orderDetails + "\nTotal Price: " + document.getElementById('totalPrice').textContent + "/-";
             var mailtoLink = "mailto:vighneshshetty002@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
             window.location.href = mailtoLink;
         }
@@ -343,6 +361,14 @@
             setTimeout(function() {
                 statusBar.style.display = 'none';
             }, 2000); // Hide after 2 seconds
+        }
+
+        function showCartButton() {
+            if (!cartButtonShown) {
+                var popupBtn = document.getElementById('popupBtn');
+                popupBtn.style.display = 'block';
+                cartButtonShown = true;
+            }
         }
     </script>
 </body>
