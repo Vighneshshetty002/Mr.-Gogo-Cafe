@@ -142,8 +142,8 @@
             padding: 20px;
             z-index: 1001;
             color: white;
-            width: 70%;
-            max-height: 80%;
+            width: 80%; /* Adjusted width */
+            max-height: 90%; /* Adjusted max-height */
             overflow-y: auto;
         }
 
@@ -169,8 +169,9 @@
             color: white;
             position: fixed;
             bottom: 0;
-            width: 100%;
+            width: calc(100% - 80px); /* Adjusted width */
             font-size: 14px;
+            z-index: 9999; /* Ensure it's above the popup */
         }
 
         footer img {
@@ -196,6 +197,12 @@
 
         #popupBtn:hover {
             background-color: #555;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .menu-item-buttons button {
+                margin-top: 10px; /* Added space between buttons */
+            }
         }
     </style>
 </head>
