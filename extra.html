@@ -200,12 +200,8 @@
             background-color: #555;
         }
 
-
-
         .popup button {
-            margin-top: 10px;
-            margin-right: 5px;
-            margin-left: 5px
+            margin: 5px;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
@@ -213,37 +209,23 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        .popup button#checkoutBtn {
-            background-color: white;
-            color: black;
-            padding: 10px 20px
+        .popup button:hover {
+            background-color: #555;
+            color: white;
         }
 
-
-        
-        .popup button#cancelBtn {
-            background-color: white;
-            color: black;
-            padding: 10px 20px
+        /* Adjusted buttons in the popup */
+        .popup-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
         }
 
-
-        .popup button#+Btn {
-            background-color: white;
-            color: black;
-            padding: 10px 20px
+        .popup-buttons button {
+            flex: 1;
+            margin: 0 5px;
         }
-
-        .popup button#-Btn {
-            background-color: white;
-            color: black;
-            padding: 10px 20px
-        }
-        
-
-        
-        
-        
 
         @media only screen and (max-width: 600px) {
             .menu-item-buttons button {
@@ -318,8 +300,10 @@
         <div class="popup-content">
             <div id="cartItems"></div>
             <p><strong>Total Price: <span id="totalPrice"></span>/-</strong></p>
-            <button id="checkoutBtn" onclick="checkout()">Checkout</button>
-            <button onclick="closeCartPopup()">Cancel</button>
+            <div class="popup-buttons">
+                <button id="checkoutBtn" onclick="checkout()">Checkout</button>
+                <button onclick="closeCartPopup()">Cancel</button>
+            </div>
         </div>
     </div>
 
