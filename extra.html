@@ -274,7 +274,7 @@
             <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
                 <!-- Order button -->
-                <button onclick="orderItem('Veg Pizza', '109')">Order</button>
+                <button onclick="orderItem('Veg Pizza', '109', '1')">Order</button>
                 <!-- Add to Cart button -->
                 <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
             </div>
@@ -292,7 +292,7 @@
             <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
                 <!-- Order button -->
-                <button onclick="orderItem('Kulhad Pizza', '199')">Order</button>
+                <button onclick="orderItem('Kulhad Pizza', '199', '2')">Order</button>
                 <!-- Add to Cart button -->
                 <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
             </div>
@@ -343,14 +343,14 @@
         }
 
         // Function to send order details via email
-        function sendOrderEmail(orderDetails) {
-            var subject = "New Order";
+        function sendOrderEmail(orderDetails, tableNumber) {
+            var subject = "Order from Table No. " + tableNumber;
             var body = "Order Details:\n\n" + orderDetails + "\nClick on Send to place the order";
             var mailtoLink = "mailto:vighneshshetty002@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
             window.location.href = mailtoLink;
         }
 
-        function orderItem(itemName, itemPrice) {
+        function orderItem(itemName, itemPrice, tableNumber) {
             // Construct order details
             var orderDetails = '';
             var currentDate = new Date();
@@ -363,8 +363,8 @@
             orderDetails += 'Date & Time of Order: ' + currentDate.toDateString() + ' ' + timeString + '\n\n';
             orderDetails += 'Name: ' + itemName + ', Price: ' + itemPrice + '\n\n';
 
-            // Send email
-            sendOrderEmail(orderDetails);
+            // Send email with table number
+            sendOrderEmail(orderDetails, tableNumber);
 
             // Thank you message
             setTimeout(function() {
@@ -455,7 +455,7 @@
             });
 
             // Send email
-            sendOrderEmail(orderDetails);
+            sendOrderEmail(orderDetails, '');
 
             // Thank you message
             setTimeout(function() {
