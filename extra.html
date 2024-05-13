@@ -231,6 +231,9 @@
             .menu-item-buttons button {
                 margin-top: 10px; /* Added space between buttons */
             }
+            .popup-item {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -415,8 +418,10 @@
                 var decreaseButton = document.createElement('button');
                 decreaseButton.textContent = '-';
                 decreaseButton.onclick = function() { decreaseQuantity(index); };
+                var itemNameSpan = document.createElement('span');
+                itemNameSpan.textContent = item.itemName + ' - ' + item.itemPrice;
                 itemElement.appendChild(quantitySpan);
-                itemElement.appendChild(document.createTextNode(item.itemName + ' - ' + item.itemPrice));
+                itemElement.appendChild(itemNameSpan);
                 itemElement.appendChild(increaseButton);
                 itemElement.appendChild(decreaseButton);
                 cartItemsContainer.appendChild(itemElement);
