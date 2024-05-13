@@ -92,31 +92,6 @@
             background-color: #555;
         }
 
-        .status-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50px;
-            background-color: white;
-            color: black;
-            text-align: center;
-            line-height: 50px;
-            z-index: 10000;
-            display: none;
-            animation: slideIn 0.5s ease-out, slideOut 0.5s 2.5s ease-in forwards;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
-        }
-
-        @keyframes slideOut {
-            from { transform: translateX(0); }
-            to { transform: translateX(-100%); opacity: 0; }
-        }
-
         /* Popup styles */
         .popup-overlay {
             display: none;
@@ -132,7 +107,7 @@
         .popup {
             display: none;
             position: fixed;
-            top: 40%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: black; /* Adjusted background color */
@@ -142,7 +117,7 @@
             z-index: 1001;
             color: white;
             width: 80%; /* Adjusted width */
-            max-height: 100%; /* Adjusted max-height */
+            max-height: 80%; /* Adjusted max-height */
             overflow-y: auto;
         }
 
@@ -164,7 +139,7 @@
         /* Footer styling */
         footer {
             text-align: center;
-            padding: 0px 0; /* Reduced padding vertically */
+            padding: 10px 0; /* Reduced padding vertically */
             background-color: black; /* Adjusted background color */
             color: white;
             position: fixed;
@@ -296,6 +271,7 @@
                 <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
             </div>
         </div>
+        <!-- Add more menu items as needed -->
     </div>
 
     <!-- Popup button -->
@@ -315,372 +291,6 @@
                 <button onclick="closeCartPopup()">Cancel</button>
             </div>
         </div>
-
-<div class="menu-item">
-            <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
-            <div>
-                <h3>Corn Pizza</h3>
-                <h3><!Rupees Symbol> 129/-</h3>
-                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
-            <div>
-                <h3>Panner Pizza</h3>
-                <h3><!Rupees Symbol> 129/-</h3>
-                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
-            <div>
-                <h3>Olive Pizza</h3>
-                <h3><!Rupees Symbol> 149/-</h3>
-                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
-            <div>
-                <h3>Jaba Peno Pizza</h3>
-                <h3><!Rupees Symbol> 149/-</h3>
-                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
-            <div>
-                <h3>Margherita Pizza</h3>
-                <h3><!Rupees Symbol> 129/-</h3>
-                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-        <!-- Repeat similar structure for other menu items -->
-    </div>
-
-
-<div class="menu-Title">
-    <p>Burgers</p>
-</div>
-    <div class="menu-container">
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Veg Burger</h3>
-                <h3><!Rupees Symbol> 90/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        
-            <div class="menu-item">
-                <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-                <div>
-                    <h3>Cheese Burger</h3>
-                    <h3><!Rupees Symbol> 99/-</h3>
-                    <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-                </div>
-                <div class="menu-item-buttons">
-                    <button>Order</button>
-                    <button>Add to Cart</button>
-                </div>
-            </div>
-
-           
-            <div class="menu-item">
-                <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-                <div>
-                    <h3>Panner Burger</h3>
-                    <h3><!Rupees Symbol> 99/-</h3>
-                    <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-                </div>
-                <div class="menu-item-buttons">
-                    <button>Order</button>
-                    <button>Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="menu-item">
-                <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-                <div>
-                    <h3>Double Tikki Burger</h3>
-                    <h3><!Rupees Symbol> 119/-</h3>
-                    <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-                </div>
-                <div class="menu-item-buttons">
-                    <button>Order</button>
-                    <button>Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="menu-item">
-                <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-                <div>
-                    <h3>Loaded Burger</h3>
-                    <h3><!Rupees Symbol> 149/-</h3>
-                    <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-                </div>
-                <div class="menu-item-buttons">
-                    <button>Order</button>
-                    <button>Add to Cart</button>
-                </div>
-            </div>
-<!-- Repeat similar structure for other menu items -->
-</div>
-
-<div class="menu-Title">
-    <p>Chats</p>
-</div>
-    <div class="menu-container">
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Samosa</h3>
-                <h3><!Rupees Symbol> 20/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Samosa Chat</h3>
-                <h3><!Rupees Symbol> 30/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-       
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Kachori</h3>
-                <h3><!Rupees Symbol> 20/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Kachori Chat</h3>
-                <h3><!Rupees Symbol> 30/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Pani Puri</h3>
-                <h3><!Rupees Symbol> 149/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-<!-- Repeat similar structure for other menu items -->
-</div>
-    
-
-<div class="menu-Title">
-    <p>Beverages</p>
-</div>
-    <div class="menu-container">
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Tea</h3>
-                <h3><!Rupees Symbol> 15/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Lemon Tea</h3>
-                <h3><!Rupees Symbol> 20/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-       
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Coffee</h3>
-                <h3><!Rupees Symbol> 20/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-<!-- Repeat similar structure for other menu items -->
-</div>
-
-<div class="menu-Title">
-    <p>Pastas</p>
-</div>
-    <div class="menu-container">
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>White Sauce Pasta</h3>
-                <h3><!Rupees Symbol> 140/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Red Sauce Pasta</h3>
-                <h3><!Rupees Symbol> 140/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-<!-- Repeat similar structure for other menu items -->
-</div>
-
-
-<div class="menu-Title">
-    <p>Maggi</p>
-</div>
-    <div class="menu-container">
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Plain Maggi</h3>
-                <h3><!Rupees Symbol> 50/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Veggie Maggi</h3>
-                <h3><!Rupees Symbol> 60/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-       
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Cheese Maggi</h3>
-                <h3><!Rupees Symbol> 60/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Tandoori Maggi</h3>
-                <h3><!Rupees Symbol> 70/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
 
     <div class="status-bar" id="statusBar">Item added to cart</div>
