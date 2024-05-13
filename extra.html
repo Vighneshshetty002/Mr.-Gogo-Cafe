@@ -343,11 +343,17 @@
 
         // Function to send order details via email
         function sendOrderEmail(orderDetails, tableNumber) {
-            var subject = "Order from Table No. " + tableNumber;
-            var body = "Order Details:\n\n" + orderDetails + "\nClick on Send to place the order";
-            var mailtoLink = "mailto:vighneshshetty002@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-            window.location.href = mailtoLink;
-        }
+    // Get table number from URL query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const tableParam = urlParams.get('table');
+    const subjectTableNumber = tableParam ? tableParam : tableNumber;
+
+    var subject = "Order from Table No. " + subjectTableNumber;
+    var body = "Order Details:\n\n" + orderDetails + "\nClick on Send to place the order";
+    var mailtoLink = "mailto:vighneshshetty002@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    window.location.href = mailtoLink;
+}
+
 
         function orderItem(itemName, itemPrice, tableNumber) {
             // Construct order details
