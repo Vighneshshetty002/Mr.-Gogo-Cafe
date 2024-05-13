@@ -235,6 +235,14 @@
                 width: 100%;
             }
         }
+
+        /* Added styles for popup items */
+        .popup-item {
+            width: 100%; /* Ensure the item takes up the full width */
+            display: flex; /* Use flexbox layout */
+            justify-content: space-between; /* Align items with space between them */
+            align-items: center; /* Align items vertically */
+        }
     </style>
 </head>
 <body>
@@ -410,6 +418,7 @@
             var totalPrice = 0;
             cartItems.forEach(function(item, index) {
                 var itemElement = document.createElement('div');
+                itemElement.classList.add('popup-item'); // Add class for popup items
                 var quantitySpan = document.createElement('span');
                 quantitySpan.textContent = item.quantity + 'x ';
                 var increaseButton = document.createElement('button');
