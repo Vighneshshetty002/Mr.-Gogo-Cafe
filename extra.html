@@ -242,6 +242,23 @@
             justify-content: space-between; /* Align items with space between them */
             align-items: center; /* Align items vertically */
         }
+
+        /* Search Input Style */
+        #searchInput {
+            width: 80%;
+            padding: 10px;
+            margin: 20px auto;
+            display: block;
+            background-color: #333;
+            color: white;
+            border: 1px solid #666;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #searchInput::placeholder {
+            color: #aaa;
+        }
     </style>
 </head>
 <body>
@@ -290,9 +307,63 @@
                 <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
             </div>
         </div>
+
+        <div class="menu-item" data-name="Mr Gogo Special Pizza">
+            <img src="chocolade taart.jpeg" alt="Mr Gogo Special Pizza">
+            <div>
+                <h3>Mr Gogo Special Pizza</h3>
+                <h3>269/-</h3>
+                <p>A rich and decadent chocolate cake with layers of moist cake and creamy frosting.</p>
+            </div>
+            <div class="menu-item-buttons">
+                <button onclick="orderItem('Mr Gogo Special Pizza', '269', '3')">Order</button>
+                <button onclick="addToCart('Mr Gogo Special Pizza', '269')">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="menu-item" data-name="Chicken Pizza">
+            <img src="Paneer Tikka Pizza.jpeg" alt="Chicken Pizza">
+            <div>
+                <h3>Chicken Pizza</h3>
+                <h3>159/-</h3>
+                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
+            </div>
+            <div class="menu-item-buttons">
+                <button onclick="orderItem('Chicken Pizza', '159', '2')">Order</button>
+                <button onclick="addToCart('Chicken Pizza', '159')">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="menu-Title">
+            <p>Salads</p>
+        </div>
+        <div class="menu-item" data-name="Caesar Salad">
+            <img src="Salads and soups/klassieke caesar salade.jpeg" alt="Caesar Salad">
+            <div>
+                <h3>Caesar Salad</h3>
+                <h3>99/-</h3>
+                <p>Classic Caesar Salad with crisp romaine lettuce, Parmesan cheese, and croutons.</p>
+            </div>
+            <div class="menu-item-buttons">
+                <button onclick="orderItem('Caesar Salad', '99', '4')">Order</button>
+                <button onclick="addToCart('Caesar Salad', '99')">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="menu-item" data-name="Greek Salad">
+            <img src="Salads and soups/klassieke caesar salade.jpeg" alt="Greek Salad">
+            <div>
+                <h3>Greek Salad</h3>
+                <h3>119/-</h3>
+                <p>Greek Salad with cucumbers, tomatoes, olives, feta cheese, and red onions.</p>
+            </div>
+            <div class="menu-item-buttons">
+                <button onclick="orderItem('Greek Salad', '119', '5')">Order</button>
+                <button onclick="addToCart('Greek Salad', '119')">Add to Cart</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Popup button -->
     <button id="popupBtn" onclick="openPopup()">View Cart</button>
 
     <!-- Popup -->
