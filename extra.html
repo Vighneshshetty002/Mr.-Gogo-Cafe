@@ -92,6 +92,31 @@
             background-color: #555;
         }
 
+        .status-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: white;
+            color: black;
+            text-align: center;
+            line-height: 50px;
+            z-index: 10000;
+            display: none;
+            animation: slideIn 0.5s ease-out, slideOut 0.5s 2.5s ease-in forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); opacity: 0; }
+        }
+
         /* Popup styles */
         .popup-overlay {
             display: none;
@@ -107,7 +132,7 @@
         .popup {
             display: none;
             position: fixed;
-            top: 50%;
+            top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: black; /* Adjusted background color */
@@ -117,7 +142,7 @@
             z-index: 1001;
             color: white;
             width: 80%; /* Adjusted width */
-            max-height: 80%; /* Adjusted max-height */
+            max-height: 100%; /* Adjusted max-height */
             overflow-y: auto;
         }
 
@@ -139,7 +164,7 @@
         /* Footer styling */
         footer {
             text-align: center;
-            padding: 10px 0; /* Reduced padding vertically */
+            padding: 0px 0; /* Reduced padding vertically */
             background-color: black; /* Adjusted background color */
             color: white;
             position: fixed;
@@ -217,6 +242,58 @@
             justify-content: space-between; /* Align items with space between them */
             align-items: center; /* Align items vertically */
         }
+
+        .dropdown-container {
+            margin-bottom: 20px;
+        }
+
+        .dropdown-btn {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-btn:hover {
+            background-color: #555;
+        }
+
+        .dropdown-content {
+            display: none;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #222;
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            padding: 10px;
+            font-size: 18px;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 5px;
+            border: 1px solid #555;
+        }
+
+        .search-input::placeholder {
+            color: #999;
+        }
+
     </style>
 </head>
 <body>
@@ -229,596 +306,180 @@
         </ul>
     </nav>
 
+    <div class="search-container">
+        <input type="text" class="search-input" id="searchInput" onkeyup="searchMenu()" placeholder="Search for dishes...">
+    </div>
+
     <hr>
     <center><h1>Menu <img src="Menu Food images/menu icon.png" width="50px"></h1></center>
     <hr>
-    <div class="menu-Title">
-        <p>Pizzas</p>
-    </div>
-    <div class="menu-container">
-        <!-- Menu items here -->
-        <div class="menu-item">
-            <!-- Image, name, price, and description -->
-            <img src="Klassieke club sandwich.jpeg" alt="Veg Pizza">
-            <div>
-                <h3>Veg Pizza</h3>
-                <h3>109/-</h3>
-                <p>A savory delight featuring a medley of fresh vegetables atop a crispy crust.</p>
-            </div>
-            <!-- Order and Add to Cart buttons -->
-            <div class="menu-item-buttons">
-                <!-- Order button -->
-                <button onclick="orderItem('Veg Pizza', '109', '1')">Order</button>
-                <!-- Add to Cart button -->
-                <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
-            </div>
-        </div>
 
-        <!-- Another menu item -->
-        <div class="menu-item">
-            <!-- Image, name, price, and description -->
-            <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
-            <div>
-                <h3>Kulhad Pizza</h3>
-                <h3>199/-</h3>
-                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
+    <div class="dropdown-container">
+        <button class="dropdown-btn" onclick="toggleDropdown('pizzaDropdown')">Pizzas</button>
+        <div class="dropdown-content" id="pizzaDropdown">
+            <div class="menu-item">
+                <img src="Klassieke club sandwich.jpeg" alt="Veg Pizza">
+                <div>
+                    <h3>Veg Pizza</h3>
+                    <h5>Price: $11.99</h5>
+                    <p>Ingredients: Tomato, Mozarella, Basil, Olive Oil, Salt</p>
+                    <div class="menu-item-buttons">
+                        <button onclick="addToCart('Veg Pizza', 11.99)">Add to Cart</button>
+                        <button onclick="showPopup('Veg Pizza', 'Tomato, Mozarella, Basil, Olive Oil, Salt', 11.99, 'Klassieke club sandwich.jpeg')">View More</button>
+                    </div>
+                </div>
             </div>
-            <!-- Order and Add to Cart buttons -->
-            <div class="menu-item-buttons">
-                <!-- Order button -->
-                <button onclick="orderItem('Kulhad Pizza', '199', '2')">Order</button>
-                <!-- Add to Cart button -->
-                <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
-            </div>
+            <!-- Add more pizza items here -->
         </div>
-        <!-- Add more menu items as needed -->
-<div class="menu-item">
-            <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
-            <div>
-                <h3>Corn Pizza</h3>
-                <h3><!Rupees Symbol> 129/-</h3>
-                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
-            <div>
-                <h3>Panner Pizza</h3>
-                <h3><!Rupees Symbol> 129/-</h3>
-                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
-            <div>
-                <h3>Olive Pizza</h3>
-                <h3><!Rupees Symbol> 149/-</h3>
-                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
-            <div>
-                <h3>Jaba Peno Pizza</h3>
-                <h3><!Rupees Symbol> 149/-</h3>
-                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
-            <div>
-                <h3>Margherita Pizza</h3>
-                <h3><!Rupees Symbol> 129/-</h3>
-                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-        <!-- Repeat similar structure for other menu items -->
     </div>
 
-
-<div class="menu-Title">
-    <p>Burgers</p>
-</div>
-    <div class="menu-container">
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Veg Burger</h3>
-                <h3><!Rupees Symbol> 90/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        
+    <div class="dropdown-container">
+        <button class="dropdown-btn" onclick="toggleDropdown('sandwichDropdown')">Sandwiches</button>
+        <div class="dropdown-content" id="sandwichDropdown">
             <div class="menu-item">
-                <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
+                <img src="Klassieke club sandwich.jpeg" alt="Classic Club Sandwich">
                 <div>
-                    <h3>Cheese Burger</h3>
-                    <h3><!Rupees Symbol> 99/-</h3>
-                    <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-                </div>
-                <div class="menu-item-buttons">
-                    <button>Order</button>
-                    <button>Add to Cart</button>
-                </div>
-            </div>
-
-           
-            <div class="menu-item">
-                <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-                <div>
-                    <h3>Panner Burger</h3>
-                    <h3><!Rupees Symbol> 99/-</h3>
-                    <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-                </div>
-                <div class="menu-item-buttons">
-                    <button>Order</button>
-                    <button>Add to Cart</button>
+                    <h3>Classic Club Sandwich</h3>
+                    <h5>Price: $7.99</h5>
+                    <p>Ingredients: Turkey, Bacon, Lettuce, Tomato, Mayo</p>
+                    <div class="menu-item-buttons">
+                        <button onclick="addToCart('Classic Club Sandwich', 7.99)">Add to Cart</button>
+                        <button onclick="showPopup('Classic Club Sandwich', 'Turkey, Bacon, Lettuce, Tomato, Mayo', 7.99, 'Klassieke club sandwich.jpeg')">View More</button>
+                    </div>
                 </div>
             </div>
-
-            <div class="menu-item">
-                <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-                <div>
-                    <h3>Double Tikki Burger</h3>
-                    <h3><!Rupees Symbol> 119/-</h3>
-                    <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-                </div>
-                <div class="menu-item-buttons">
-                    <button>Order</button>
-                    <button>Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="menu-item">
-                <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-                <div>
-                    <h3>Loaded Burger</h3>
-                    <h3><!Rupees Symbol> 149/-</h3>
-                    <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-                </div>
-                <div class="menu-item-buttons">
-                    <button>Order</button>
-                    <button>Add to Cart</button>
-                </div>
-            </div>
-<!-- Repeat similar structure for other menu items -->
-</div>
-
-<div class="menu-Title">
-    <p>Chats</p>
-</div>
-    <div class="menu-container">
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Samosa</h3>
-                <h3><!Rupees Symbol> 20/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
+            <!-- Add more sandwich items here -->
         </div>
-
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Samosa Chat</h3>
-                <h3><!Rupees Symbol> 30/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-       
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Kachori</h3>
-                <h3><!Rupees Symbol> 20/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Kachori Chat</h3>
-                <h3><!Rupees Symbol> 30/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Pani Puri</h3>
-                <h3><!Rupees Symbol> 149/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-<!-- Repeat similar structure for other menu items -->
-</div>
-    
-
-<div class="menu-Title">
-    <p>Beverages</p>
-</div>
-    <div class="menu-container">
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Tea</h3>
-                <h3><!Rupees Symbol> 15/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Lemon Tea</h3>
-                <h3><!Rupees Symbol> 20/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-       
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Coffee</h3>
-                <h3><!Rupees Symbol> 20/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-<!-- Repeat similar structure for other menu items -->
-</div>
-
-<div class="menu-Title">
-    <p>Pastas</p>
-</div>
-    <div class="menu-container">
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>White Sauce Pasta</h3>
-                <h3><!Rupees Symbol> 140/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Red Sauce Pasta</h3>
-                <h3><!Rupees Symbol> 140/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-<!-- Repeat similar structure for other menu items -->
-</div>
-
-
-<div class="menu-Title">
-    <p>Maggi</p>
-</div>
-    <div class="menu-container">
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Plain Maggi</h3>
-                <h3><!Rupees Symbol> 50/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Veggie Maggi</h3>
-                <h3><!Rupees Symbol> 60/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-       
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Cheese Maggi</h3>
-                <h3><!Rupees Symbol> 60/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <img src="Klassieke club sandwich.jpeg" alt="Specialty Coffee">
-            <div>
-                <h3>Tandoori Maggi</h3>
-                <h3><!Rupees Symbol> 70/-</h3>
-                <p>A rich blend of freshly roasted beans, served with steamed milk and a hint of caramel.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button>Order</button>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-
-
-
-
-
-
-
-
     </div>
 
-    <!-- Popup button -->
-    <button id="popupBtn" onclick="togglePopup()">View Cart</button>
+    <div class="dropdown-container">
+        <button class="dropdown-btn" onclick="toggleDropdown('burgerDropdown')">Burgers</button>
+        <div class="dropdown-content" id="burgerDropdown">
+            <div class="menu-item">
+                <img src="Cheeseburger.jpeg" alt="Cheeseburger">
+                <div>
+                    <h3>Cheeseburger</h3>
+                    <h5>Price: $8.99</h5>
+                    <p>Ingredients: Beef, Cheese, Lettuce, Tomato, Onion</p>
+                    <div class="menu-item-buttons">
+                        <button onclick="addToCart('Cheeseburger', 8.99)">Add to Cart</button>
+                        <button onclick="showPopup('Cheeseburger', 'Beef, Cheese, Lettuce, Tomato, Onion', 8.99, 'Cheeseburger.jpeg')">View More</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more burger items here -->
+        </div>
+    </div>
 
-    <!-- Popup for cart view -->
-    <div class="popup-overlay" id="popupOverlay"></div>
-    <div class="popup" id="cartPopup">
-         <center><img src="gogo-cafe-white.png" width="60px"></center>
-        <h2 id="popupTitle"><center>Cart</center></h2>
-        <hr>
+    <div class="dropdown-container">
+        <button class="dropdown-btn" onclick="toggleDropdown('chineseDropdown')">Chinese Dishes</button>
+        <div class="dropdown-content" id="chineseDropdown">
+            <div class="menu-item">
+                <img src="noodles.jpeg" alt="Veg Hakka Noodles">
+                <div>
+                    <h3>Veg Hakka Noodles</h3>
+                    <h5>Price: $5.99</h5>
+                    <p>Ingredients: Noodles, Cabbage, Carrot, Capsicum, Soy Sauce</p>
+                    <div class="menu-item-buttons">
+                        <button onclick="addToCart('Veg Hakka Noodles', 5.99)">Add to Cart</button>
+                        <button onclick="showPopup('Veg Hakka Noodles', 'Noodles, Cabbage, Carrot, Capsicum, Soy Sauce', 5.99, 'noodles.jpeg')">View More</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more Chinese dishes here -->
+        </div>
+    </div>
+
+    <!-- Add more dropdowns for other categories as needed -->
+
+    <div class="status-bar" id="statusBar">Item added to cart!</div>
+
+    <div class="popup-overlay" id="popupOverlay" onclick="closePopup()"></div>
+
+    <div class="popup" id="popup">
+        <h2 id="popupTitle"></h2>
         <div class="popup-content">
-            <div id="cartItems"></div>
-            <p><strong>Total Price: <span id="totalPrice"></span>/-</strong></p>
+            <img id="popupImage" src="" alt="Dish Image" style="width: 200px; height: auto; margin-bottom: 20px;">
+            <p id="popupDescription"></p>
+            <p id="popupPrice"></p>
             <div class="popup-buttons">
-                <button id="checkoutBtn" onclick="checkout()">Checkout</button>
-                <button onclick="closeCartPopup()">Cancel</button>
+                <button onclick="addToCartFromPopup()">Add to Cart</button>
+                <button onclick="closePopup()">Close</button>
             </div>
         </div>
     </div>
 
-    <div class="status-bar" id="statusBar">Item added to cart</div>
+    <button id="popupBtn" onclick="openPopup()">View Cart</button>
 
     <footer>
-        <p>Powered by: <a href="https://github.com/vighneshshetty002"><img src="VS Tech.png" alt="Logo"></a></p>
+        <p><img src="Menu Food images/menu icon.png"> Mr. Gogo Cafe &copy; 2024</p>
     </footer>
 
     <script>
-        const cartItems = [];
-        let cartButtonShown = false;
+        const cart = [];
+        const statusBar = document.getElementById('statusBar');
+        const popup = document.getElementById('popup');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popupTitle = document.getElementById('popupTitle');
+        const popupDescription = document.getElementById('popupDescription');
+        const popupPrice = document.getElementById('popupPrice');
+        const popupImage = document.getElementById('popupImage');
+        let currentPopupItem = null;
+        let currentPopupPrice = 0;
 
-        // Function to increase quantity
-        function increaseQuantity(index) {
-            cartItems[index].quantity++;
-            populateCartItems();
-        }
-
-        // Function to decrease quantity
-        function decreaseQuantity(index) {
-            if (cartItems[index].quantity > 1) {
-                cartItems[index].quantity--;
-                populateCartItems();
-            }
-        }
-
-        // Function to send order details via email
-        function sendOrderEmail(orderDetails, tableNumber) {
-    // Get table number from URL query parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const tableParam = urlParams.get('table');
-    const subjectTableNumber = tableParam ? tableParam : tableNumber;
-
-    var subject = "Order from Table No. " + subjectTableNumber;
-    var body = "Order Details:\n\n" + orderDetails + "\nClick on Send to place the order";
-    var mailtoLink = "mailto:vighneshshetty002@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-    window.location.href = mailtoLink;
-}
-
-
-        function orderItem(itemName, itemPrice, tableNumber) {
-            // Construct order details
-            var orderDetails = '';
-            var currentDate = new Date();
-            var hours = currentDate.getHours();
-            var ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12 || 12;
-            var minutes = currentDate.getMinutes();
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-            var timeString = hours + ':' + minutes + ' ' + ampm;
-            orderDetails += 'Date & Time of Order: ' + currentDate.toDateString() + ' ' + timeString + '\n\n';
-            orderDetails += 'Name: ' + itemName + ', Price: ' + itemPrice + '\n\n';
-
-            // Send email with table number
-            sendOrderEmail(orderDetails, tableNumber);
-
-            // Thank you message
-            setTimeout(function() {
-                alert("Thanks for the Order. Visit Again!");
-                // Reload the page
-                window.location.reload();
-            }, 500);
-        }
-
-        function addToCart(itemName, itemPrice) {
-            // Check if item already exists in cart
-            let existingItem = cartItems.find(item => item.itemName === itemName);
-            if (existingItem) {
-                existingItem.quantity++;
-            } else {
-                // Add new item to cart
-                const item = {
-                    itemName: itemName,
-                    itemPrice: itemPrice,
-                    quantity: 1
-                };
-                cartItems.push(item);
-            }
+        function addToCart(item, price) {
+            cart.push({ item, price });
             showStatusBar();
-            showCartButton();
-        }
-
-        function togglePopup() {
-            var cartPopup = document.getElementById('cartPopup');
-            var overlay = document.getElementById('popupOverlay');
-            if (cartPopup.style.display === 'block') {
-                cartPopup.style.display = 'none';
-                overlay.style.display = 'none';
-            } else {
-                cartPopup.style.display = 'block';
-                overlay.style.display = 'block';
-                populateCartItems();
-            }
-        }
-
-        function closeCartPopup() {
-            var cartPopup = document.getElementById('cartPopup');
-            var overlay = document.getElementById('popupOverlay');
-            cartPopup.style.display = 'none';
-            overlay.style.display = 'none';
-        }
-
-        function populateCartItems() {
-            var cartItemsContainer = document.getElementById('cartItems');
-            cartItemsContainer.innerHTML = '';
-            var totalPrice = 0;
-            cartItems.forEach(function(item, index) {
-                var itemElement = document.createElement('div');
-                itemElement.classList.add('popup-item'); // Add class for popup items
-                var quantitySpan = document.createElement('span');
-                quantitySpan.textContent = item.quantity + 'x ';
-                var increaseButton = document.createElement('button');
-                increaseButton.textContent = '+';
-                increaseButton.onclick = function() { increaseQuantity(index); };
-                var decreaseButton = document.createElement('button');
-                decreaseButton.textContent = '-';
-                decreaseButton.onclick = function() { decreaseQuantity(index); };
-                var itemNameSpan = document.createElement('span');
-                itemNameSpan.textContent = item.itemName + ' - ' + item.itemPrice;
-                itemElement.appendChild(quantitySpan);
-                itemElement.appendChild(itemNameSpan);
-                itemElement.appendChild(increaseButton);
-                itemElement.appendChild(decreaseButton);
-                cartItemsContainer.appendChild(itemElement);
-                totalPrice += parseInt(item.itemPrice) * item.quantity;
-            });
-            document.getElementById('totalPrice').textContent = totalPrice;
-        }
-
-        function checkout() {
-            // Construct order details
-            var orderDetails = '';
-            var currentDate = new Date();
-            var hours = currentDate.getHours();
-            var ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12 || 12;
-            var minutes = currentDate.getMinutes();
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-            var timeString = hours + ':' + minutes + ' ' + ampm;
-            orderDetails += 'Date & Time of Order: ' + currentDate.toDateString() + ' ' + timeString + '\n\n';
-            cartItems.forEach(function(item) {
-                orderDetails += 'Name: ' + item.itemName + ', Quantity: ' + item.quantity + ', Price: ' + item.itemPrice + ' \n\n';
-            });
-
-            // Send email
-            sendOrderEmail(orderDetails, '');
-
-            // Thank you message
-            setTimeout(function() {
-                alert("Thanks for the Order. Visit Again!");
-                // Reload the page
-                window.location.reload();
-            }, 500);
+            updatePopupButton();
         }
 
         function showStatusBar() {
-            var statusBar = document.getElementById('statusBar');
             statusBar.style.display = 'block';
-            setTimeout(function() {
+            setTimeout(() => {
                 statusBar.style.display = 'none';
-            }, 2000); // Hide after 2 seconds
+            }, 3000);
         }
 
-        function showCartButton() {
-            if (!cartButtonShown) {
-                var popupBtn = document.getElementById('popupBtn');
-                popupBtn.style.display = 'block';
-                cartButtonShown = true;
-            }
+        function showPopup(item, description, price, imageUrl) {
+            currentPopupItem = item;
+            currentPopupPrice = price;
+            popupTitle.textContent = item;
+            popupDescription.textContent = description;
+            popupPrice.textContent = 'Price: $' + price.toFixed(2);
+            popupImage.src = imageUrl;
+            popup.style.display = 'block';
+            popupOverlay.style.display = 'block';
+        }
+
+        function closePopup() {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+        }
+
+        function addToCartFromPopup() {
+            addToCart(currentPopupItem, currentPopupPrice);
+            closePopup();
+        }
+
+        function updatePopupButton() {
+            const popupBtn = document.getElementById('popupBtn');
+            popupBtn.textContent = `View Cart (${cart.length})`;
+            popupBtn.style.display = 'block';
+        }
+
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            dropdown.classList.toggle('show');
+        }
+
+        function searchMenu() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const items = document.querySelectorAll('.menu-item');
+            items.forEach(item => {
+                const text = item.textContent || item.innerText;
+                item.style.display = text.toLowerCase().includes(filter) ? '' : 'none';
+            });
         }
     </script>
 </body>
