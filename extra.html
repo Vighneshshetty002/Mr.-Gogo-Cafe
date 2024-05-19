@@ -202,7 +202,7 @@ nav a.active {
     </footer>
 
     <script>
-        const cartItems = [];
+      const cartItems = [];
 let cartButtonShown = false;
 
 // Function to increase quantity
@@ -219,17 +219,31 @@ function decreaseQuantity(index) {
     }
 }
 
-// Function to send order details via email
+// Function to send order details via EmailUs service
 function sendOrderEmail(orderDetails, tableNumber) {
-    // Get table number from URL query parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const tableParam = urlParams.get('table');
-    const subjectTableNumber = tableParam ? tableParam : tableNumber;
-
-    var subject = "Order from Table No. " + subjectTableNumber;
-    var body = "Order Details:\n\n" + orderDetails + "\nClick on Send to place the order";
-    var mailtoLink = "mailto:vighneshshetty002@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-    window.location.href = mailtoLink;
+    // Replace 'YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', and 'YOUR_USER_ID' with your EmailUs service details
+    EmailUs.sendEmail({
+        service_id: 'service_8y2ru2g',
+        template_id: 'template_yrk4mbd',
+        user_id: 'ZTLLkEu2m9zcOrE1i',
+        template_params: {
+            to_email: 'vighneshshetty002@gmail.com', // Receiver's email address
+            from_name: 'Customer - Mr. Gogo Cafe',
+            subject: 'Order from Table No. ' + tableNumber,
+            order_details: orderDetails
+        }
+    }).then(
+        function(response) {
+            console.log('Email sent successfully', response);
+            // Thank you message
+            alert('Thanks for the Order. Visit Again!');
+            // Reload the page
+            window.location.reload();
+        },
+        function(error) {
+            console.error('Email sending failed', error);
+        }
+    );
 }
 
 function orderItem(itemName, itemPrice, tableNumber) {
@@ -247,13 +261,6 @@ function orderItem(itemName, itemPrice, tableNumber) {
 
     // Send email with table number
     sendOrderEmail(orderDetails, tableNumber);
-
-    // Thank you message
-    setTimeout(function() {
-        alert("Thanks for the Order. Visit Again!");
-        // Reload the page
-        window.location.reload();
-    }, 500);
 }
 
 function addToCart(itemName, itemPrice) {
@@ -321,32 +328,6 @@ function populateCartItems() {
     document.getElementById('totalPrice').textContent = totalPrice;
 }
 
-function checkout() {
-    // Construct order details
-    var orderDetails = '';
-    var currentDate = new Date();
-    var hours = currentDate.getHours();
-    var ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12 || 12;
-    var minutes = currentDate.getMinutes();
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    var timeString = hours + ':' + minutes + ' ' + ampm;
-    orderDetails += 'Date & Time of Order: ' + currentDate.toDateString() + ' ' + timeString + '\n\n';
-    cartItems.forEach(function(item) {
-        orderDetails += 'Name: ' + item.itemName + ', Quantity: ' + item.quantity + ', Price: ' + item.itemPrice + ' \n\n';
-    });
-
-    // Send email
-    sendOrderEmail(orderDetails, '');
-
-    // Thank you message
-    setTimeout(function() {
-        alert("Thanks for the Order. Visit Again!");
-        // Reload the page
-        window.location.reload();
-    }, 500);
-}
-
 function showStatusBar() {
     var statusBar = document.getElementById('statusBar');
     statusBar.style.display = 'block';
@@ -362,6 +343,10 @@ function showCartButton() {
         cartButtonShown = true;
     }
 }
+
+// Initialize EmailUs with your user ID
+EmailUs.initialize('ZTLLkEu2m9zcOrE1i');
+
 
     </script>
 </body>
