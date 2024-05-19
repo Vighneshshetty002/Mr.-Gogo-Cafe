@@ -243,57 +243,19 @@
             align-items: center; /* Align items vertically */
         }
 
-        .dropdown-container {
-            margin-bottom: 20px;
-        }
-
-        .dropdown-btn {
-            width: 100%;
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            text-align: left;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s;
-        }
-
-        .dropdown-btn:hover {
-            background-color: #555;
-        }
-
-        .dropdown-content {
-            display: none;
-            padding: 10px;
-            border: 1px solid #555;
-            border-radius: 5px;
-            background-color: #222;
-        }
-
-        .dropdown-content.show {
-            display: block;
-        }
-
+        /* Search bar styling */
         .search-container {
             text-align: center;
             margin-bottom: 20px;
         }
 
-        .search-input {
-            padding: 10px;
-            font-size: 18px;
+        .search-container input {
             width: 80%;
-            max-width: 500px;
+            padding: 10px;
             border-radius: 5px;
-            border: 1px solid #555;
+            border: 1px solid #ccc;
+            font-size: 16px;
         }
-
-        .search-input::placeholder {
-            color: #999;
-        }
-
     </style>
 </head>
 <body>
@@ -307,148 +269,142 @@
     </nav>
 
     <div class="search-container">
-        <input type="text" class="search-input" id="searchInput" onkeyup="searchMenu()" placeholder="Search for dishes...">
+        <input type="text" id="searchInput" onkeyup="searchMenu()" placeholder="Search for dishes..">
     </div>
 
     <hr>
     <center><h1>Menu <img src="Menu Food images/menu icon.png" width="50px"></h1></center>
     <hr>
-
-    <div class="dropdown-container">
-        <button class="dropdown-btn" onclick="toggleDropdown('pizzaDropdown')">Pizzas</button>
-        <div class="dropdown-content" id="pizzaDropdown">
-            <div class="menu-item">
-                <img src="Klassieke club sandwich.jpeg" alt="Veg Pizza">
-                <div>
-                    <h3>Veg Pizza</h3>
-                    <h5>Price: $11.99</h5>
-                    <p>Ingredients: Tomato, Mozarella, Basil, Olive Oil, Salt</p>
-                    <div class="menu-item-buttons">
-                        <button onclick="addToCart('Veg Pizza', 11.99)">Add to Cart</button>
-                        <button onclick="showPopup('Veg Pizza', 'Tomato, Mozarella, Basil, Olive Oil, Salt', 11.99, 'Klassieke club sandwich.jpeg')">View More</button>
-                    </div>
-                </div>
+    <div class="menu-container">
+        <!-- Menu items here -->
+        <div class="menu-item">
+            <!-- Image, name, price, and description -->
+            <img src="Klassieke club sandwich.jpeg" alt="Veg Pizza">
+            <div>
+                <h3>Veg Pizza</h3>
+                <h3>109/-</h3>
+                <p>A savory delight featuring a medley of fresh vegetables atop a crispy crust.</p>
             </div>
-            <!-- Add more pizza items here -->
+            <!-- Order and Add to Cart buttons -->
+            <div class="menu-item-buttons">
+                <!-- Order button -->
+                <button onclick="orderItem('Veg Pizza', '109', '1')">Order</button>
+                <!-- Add to Cart button -->
+                <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Another menu item -->
+        <div class="menu-item">
+            <!-- Image, name, price, and description -->
+            <img src="Paneer Tikka Pizza.jpeg" alt="Kulhad Pizza">
+            <div>
+                <h3>Kulhad Pizza</h3>
+                <h3>199/-</h3>
+                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
+            </div>
+            <!-- Order and Add to Cart buttons -->
+            <div class="menu-item-buttons">
+                <!-- Order button -->
+                <button onclick="orderItem('Kulhad Pizza', '199', '1')">Order</button>
+                <!-- Add to Cart button -->
+                <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Another menu item -->
+        <div class="menu-item">
+            <!-- Image, name, price, and description -->
+            <img src="Margareta Pizza.jpeg" alt="Margherita Pizza">
+            <div>
+                <h3>Margherita Pizza</h3>
+                <h3>349/-</h3>
+                <p>A classic Italian pizza with fresh tomatoes, mozzarella cheese, and basil.</p>
+            </div>
+            <!-- Order and Add to Cart buttons -->
+            <div class="menu-item-buttons">
+                <!-- Order button -->
+                <button onclick="orderItem('Margherita Pizza', '349', '1')">Order</button>
+                <!-- Add to Cart button -->
+                <button onclick="addToCart('Margherita Pizza', '349')">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Another menu item -->
+        <div class="menu-item">
+            <!-- Image, name, price, and description -->
+            <img src="Chef special Pizza.jpeg" alt="Chef special Pizza">
+            <div>
+                <h3>Chef Special Pizza</h3>
+                <h3>399/-</h3>
+                <p>A gourmet pizza with chef's special ingredients and toppings.</p>
+            </div>
+            <!-- Order and Add to Cart buttons -->
+            <div class="menu-item-buttons">
+                <!-- Order button -->
+                <button onclick="orderItem('Chef Special Pizza', '399', '1')">Order</button>
+                <!-- Add to Cart button -->
+                <button onclick="addToCart('Chef Special Pizza', '399')">Add to Cart</button>
+            </div>
         </div>
     </div>
 
-    <div class="dropdown-container">
-        <button class="dropdown-btn" onclick="toggleDropdown('sandwichDropdown')">Sandwiches</button>
-        <div class="dropdown-content" id="sandwichDropdown">
-            <div class="menu-item">
-                <img src="Klassieke club sandwich.jpeg" alt="Classic Club Sandwich">
-                <div>
-                    <h3>Classic Club Sandwich</h3>
-                    <h5>Price: $7.99</h5>
-                    <p>Ingredients: Turkey, Bacon, Lettuce, Tomato, Mayo</p>
-                    <div class="menu-item-buttons">
-                        <button onclick="addToCart('Classic Club Sandwich', 7.99)">Add to Cart</button>
-                        <button onclick="showPopup('Classic Club Sandwich', 'Turkey, Bacon, Lettuce, Tomato, Mayo', 7.99, 'Klassieke club sandwich.jpeg')">View More</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Add more sandwich items here -->
+    <div id="statusBar" class="status-bar"></div>
+
+    <!-- Popup overlay and content -->
+    <div id="popupOverlay" class="popup-overlay"></div>
+    <div id="popup" class="popup">
+        <h2>Cart</h2>
+        <div class="popup-content" id="cartItems">
+            <!-- Cart items will be populated here -->
         </div>
-    </div>
-
-    <div class="dropdown-container">
-        <button class="dropdown-btn" onclick="toggleDropdown('burgerDropdown')">Burgers</button>
-        <div class="dropdown-content" id="burgerDropdown">
-            <div class="menu-item">
-                <img src="Cheeseburger.jpeg" alt="Cheeseburger">
-                <div>
-                    <h3>Cheeseburger</h3>
-                    <h5>Price: $8.99</h5>
-                    <p>Ingredients: Beef, Cheese, Lettuce, Tomato, Onion</p>
-                    <div class="menu-item-buttons">
-                        <button onclick="addToCart('Cheeseburger', 8.99)">Add to Cart</button>
-                        <button onclick="showPopup('Cheeseburger', 'Beef, Cheese, Lettuce, Tomato, Onion', 8.99, 'Cheeseburger.jpeg')">View More</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Add more burger items here -->
-        </div>
-    </div>
-
-    <div class="dropdown-container">
-        <button class="dropdown-btn" onclick="toggleDropdown('chineseDropdown')">Chinese Dishes</button>
-        <div class="dropdown-content" id="chineseDropdown">
-            <div class="menu-item">
-                <img src="noodles.jpeg" alt="Veg Hakka Noodles">
-                <div>
-                    <h3>Veg Hakka Noodles</h3>
-                    <h5>Price: $5.99</h5>
-                    <p>Ingredients: Noodles, Cabbage, Carrot, Capsicum, Soy Sauce</p>
-                    <div class="menu-item-buttons">
-                        <button onclick="addToCart('Veg Hakka Noodles', 5.99)">Add to Cart</button>
-                        <button onclick="showPopup('Veg Hakka Noodles', 'Noodles, Cabbage, Carrot, Capsicum, Soy Sauce', 5.99, 'noodles.jpeg')">View More</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Add more Chinese dishes here -->
-        </div>
-    </div>
-
-    <!-- Add more dropdowns for other categories as needed -->
-
-    <div class="status-bar" id="statusBar">Item added to cart!</div>
-
-    <div class="popup-overlay" id="popupOverlay" onclick="closePopup()"></div>
-
-    <div class="popup" id="popup">
-        <h2 id="popupTitle"></h2>
-        <div class="popup-content">
-            <img id="popupImage" src="" alt="Dish Image" style="width: 200px; height: auto; margin-bottom: 20px;">
-            <p id="popupDescription"></p>
-            <p id="popupPrice"></p>
-            <div class="popup-buttons">
-                <button onclick="addToCartFromPopup()">Add to Cart</button>
-                <button onclick="closePopup()">Close</button>
-            </div>
+        <div class="popup-buttons">
+            <button onclick="placeOrder()">Place Order</button>
+            <button onclick="closePopup()">Close</button>
         </div>
     </div>
 
     <button id="popupBtn" onclick="openPopup()">View Cart</button>
 
     <footer>
-        <p><img src="Menu Food images/menu icon.png"> Mr. Gogo Cafe &copy; 2024</p>
+        <p>Vighnesh Shetty's Mr. Gogo Cafe</p>
     </footer>
 
     <script>
-        const cart = [];
+        let cart = [];
         const statusBar = document.getElementById('statusBar');
         const popup = document.getElementById('popup');
         const popupOverlay = document.getElementById('popupOverlay');
-        const popupTitle = document.getElementById('popupTitle');
-        const popupDescription = document.getElementById('popupDescription');
-        const popupPrice = document.getElementById('popupPrice');
-        const popupImage = document.getElementById('popupImage');
-        let currentPopupItem = null;
-        let currentPopupPrice = 0;
+        const cartItemsContainer = document.getElementById('cartItems');
+        const popupBtn = document.getElementById('popupBtn');
 
-        function addToCart(item, price) {
-            cart.push({ item, price });
-            showStatusBar();
-            updatePopupButton();
+        function orderItem(itemName, price, quantity) {
+            showStatusBar(`Ordered ${quantity} ${itemName} for ${price}`);
         }
 
-        function showStatusBar() {
+        function addToCart(itemName, price) {
+            const existingItem = cart.find(item => item.name === itemName);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name: itemName, price: parseFloat(price), quantity: 1 });
+            }
+            updateCartDisplay();
+            showStatusBar(`Added ${itemName} to cart`);
+        }
+
+        function showStatusBar(message) {
+            statusBar.textContent = message;
             statusBar.style.display = 'block';
             setTimeout(() => {
                 statusBar.style.display = 'none';
             }, 3000);
         }
 
-        function showPopup(item, description, price, imageUrl) {
-            currentPopupItem = item;
-            currentPopupPrice = price;
-            popupTitle.textContent = item;
-            popupDescription.textContent = description;
-            popupPrice.textContent = 'Price: $' + price.toFixed(2);
-            popupImage.src = imageUrl;
+        function openPopup() {
             popup.style.display = 'block';
             popupOverlay.style.display = 'block';
+            updateCartDisplay();
         }
 
         function closePopup() {
@@ -456,30 +412,51 @@
             popupOverlay.style.display = 'none';
         }
 
-        function addToCartFromPopup() {
-            addToCart(currentPopupItem, currentPopupPrice);
+        function placeOrder() {
+            alert('Order placed successfully!');
+            cart = [];
+            updateCartDisplay();
             closePopup();
         }
 
-        function updatePopupButton() {
-            const popupBtn = document.getElementById('popupBtn');
-            popupBtn.textContent = `View Cart (${cart.length})`;
-            popupBtn.style.display = 'block';
+        function updateCartDisplay() {
+            cartItemsContainer.innerHTML = '';
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty</p>';
+                popupBtn.style.display = 'none';
+            } else {
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('popup-item');
+                    itemElement.innerHTML = `
+                        <span>${item.name} - ${item.quantity} x ${item.price.toFixed(2)} = ${(item.quantity * item.price).toFixed(2)}</span>
+                        <button onclick="removeFromCart('${item.name}')">Remove</button>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+                popupBtn.style.display = 'block';
+            }
         }
 
-        function toggleDropdown(dropdownId) {
-            const dropdown = document.getElementById(dropdownId);
-            dropdown.classList.toggle('show');
+        function removeFromCart(itemName) {
+            cart = cart.filter(item => item.name !== itemName);
+            updateCartDisplay();
         }
 
         function searchMenu() {
             const input = document.getElementById('searchInput');
             const filter = input.value.toLowerCase();
-            const items = document.querySelectorAll('.menu-item');
-            items.forEach(item => {
-                const text = item.textContent || item.innerText;
-                item.style.display = text.toLowerCase().includes(filter) ? '' : 'none';
-            });
+            const menuItems = document.getElementsByClassName('menu-item');
+            
+            for (let i = 0; i < menuItems.length; i++) {
+                const item = menuItems[i];
+                const itemName = item.getElementsByTagName('h3')[0].textContent.toLowerCase();
+                if (itemName.includes(filter)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            }
         }
     </script>
 </body>
