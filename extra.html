@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mr. Gogo Cafe | Menu</title>
-
     <style>
         /* Resetting default margin and padding */
         * {
@@ -76,7 +75,7 @@
 
         .menu-item-buttons {
             margin-left: auto;
-          /*  display: flex; Use flexbox layout */
+            display: flex; /* Use flexbox layout */
             gap: 10px; /* Added gap for spacing */
         }
 
@@ -249,6 +248,11 @@
             border-bottom: 1px solid #666; /* Added border for separation */
         }
 
+        .popup-item div {
+            display: flex;
+            gap: 5px; /* Ensure the buttons are right next to each other */
+        }
+
         .popup-item:last-child {
             border-bottom: none; /* Remove border from the last item */
         }
@@ -297,247 +301,159 @@
             <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
                 <!-- Order button -->
-                <button onclick="orderItem('Veg Pizza', '109', '1')">Order</button>
+                <button onclick="orderItem('Veg Pizza', '109', 'A savory delight featuring a medley of fresh vegetables atop a crispy crust.')">Order</button>
                 <!-- Add to Cart button -->
                 <button onclick="addToCart('Veg Pizza', 109)">Add to Cart</button>
             </div>
         </div>
-        <!-- More menu items... -->
-        <!-- Add more items here in a similar format -->
-        <div class="menu-item">
-            <img src="Mexican pizza.jpeg" alt="Mexican Pizza">
-            <div>
-                <h3>Mexican Pizza</h3>
-                <h3>179/-</h3>
-                <p>A zesty fusion of Mexican flavors on a delicious pizza base.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button onclick="orderItem('Mexican Pizza', '179', '1')">Order</button>
-                <button onclick="addToCart('Mexican Pizza', 179)">Add to Cart</button>
-            </div>
-        </div>
-        <div class="menu-item">
-            <img src="bbq-pizza.jpg" alt="BBQ Pizza">
-            <div>
-                <h3>BBQ Pizza</h3>
-                <h3>199/-</h3>
-                <p>A smoky barbecue sensation with a crispy crust.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button onclick="orderItem('BBQ Pizza', '199', '1')">Order</button>
-                <button onclick="addToCart('BBQ Pizza', 199)">Add to Cart</button>
-            </div>
-        </div>
+        <!-- Other menu items... -->
     </div>
 
-    <div class="menu-Title">
-        <p>Burgers</p>
-    </div>
-    <div class="menu-container">
-        <div class="menu-item">
-            <img src="Amerikaanse hamburger.jpeg" alt="Veg Burger">
-            <div>
-                <h3>Veg Burger</h3>
-                <h3>69/-</h3>
-                <p>A hearty burger with a perfectly grilled vegetable patty.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button onclick="orderItem('Veg Burger', '69', '1')">Order</button>
-                <button onclick="addToCart('Veg Burger', 69)">Add to Cart</button>
-            </div>
-        </div>
-        <div class="menu-item">
-            <img src="Big Mac hamburger.jpeg" alt="Chicken Burger">
-            <div>
-                <h3>Chicken Burger</h3>
-                <h3>99/-</h3>
-                <p>A delicious chicken patty sandwiched between soft buns.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button onclick="orderItem('Chicken Burger', '99', '1')">Order</button>
-                <button onclick="addToCart('Chicken Burger', 99)">Add to Cart</button>
-            </div>
-        </div>
-        <div class="menu-item">
-            <img src="Cheeseburger.jpeg" alt="Cheese Burger">
-            <div>
-                <h3>Cheese Burger</h3>
-                <h3>109/-</h3>
-                <p>A classic favorite topped with melted cheese.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button onclick="orderItem('Cheese Burger', '109', '1')">Order</button>
-                <button onclick="addToCart('Cheese Burger', 109)">Add to Cart</button>
-            </div>
-        </div>
-    </div>
+    <!-- View Cart Button -->
+    <button id="popupBtn" onclick="showPopup()">View Cart</button>
 
-    <div class="menu-Title">
-        <p>Drinks</p>
-    </div>
-    <div class="menu-container">
-        <div class="menu-item">
-            <img src="Smoothie.jpeg" alt="Coffee">
-            <div>
-                <h3>Coffee</h3>
-                <h3>49/-</h3>
-                <p>A freshly brewed cup of rich and aromatic coffee.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button onclick="orderItem('Coffee', '49', '1')">Order</button>
-                <button onclick="addToCart('Coffee', 49)">Add to Cart</button>
-            </div>
-        </div>
-        <div class="menu-item">
-            <img src="Cafe latte.jpeg" alt="Latte">
-            <div>
-                <h3>Latte</h3>
-                <h3>79/-</h3>
-                <p>A smooth and creamy latte made to perfection.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button onclick="orderItem('Latte', '79', '1')">Order</button>
-                <button onclick="addToCart('Latte', 79)">Add to Cart</button>
-            </div>
-        </div>
-        <div class="menu-item">
-            <img src="koffie.jpeg" alt="Smoothie">
-            <div>
-                <h3>Smoothie</h3>
-                <h3>89/-</h3>
-                <p>A refreshing smoothie made with fresh fruits.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button onclick="orderItem('Smoothie', '89', '1')">Order</button>
-                <button onclick="addToCart('Smoothie', 89)">Add to Cart</button>
-            </div>
-        </div>
-    </div>
+    <!-- Status bar -->
+    <div id="statusBar" class="status-bar"></div>
 
-    <div class="status-bar" id="statusBar"></div>
-    <button id="popupBtn" onclick="togglePopup()">View Cart</button>
+    <!-- Popup -->
     <div id="popupOverlay" class="popup-overlay"></div>
     <div id="popup" class="popup">
-        <h2>Cart</h2>
-        <div id="cartItems" class="popup-content"></div>
-        <div id="totalPrice" class="popup-total"></div>
+        <h2>Your Cart</h2>
+        <div id="popupContent" class="popup-content"></div>
+        <div class="popup-total" id="popupTotal"></div>
         <div class="popup-buttons">
-            <button onclick="clearCart()">Clear Cart</button>
-            <button onclick="sendEmailOrder()">Place Order</button>
-            <button onclick="togglePopup()">Close</button>
+            <button onclick="sendEmail()">Checkout</button>
+            <button onclick="hidePopup()">Close</button>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
-        <img src="https://www.pinclipart.com/picdir/middle/137-1375602_food-icon-transparent-background-clipart.png" alt="Food Icon">
-        <p>Thank you for dining with us!</p>
-        <p>© 2023 Mr. Gogo Cafe. All rights reserved.</p>
+        <p>&copy; 2024 Mr. Gogo Cafe. All rights reserved.</p>
+        <a href="https://www.instagram.com/mrgogocafe/"><img src="Menu Food images/instagram.png" alt="Instagram"></a>
+        <a href="https://www.zomato.com/mumbai/mr-gogo-cafe-vile-parle-west/"><img src="Menu Food images/zomato.png" alt="Zomato"></a>
+        <a href="https://www.swiggy.com/restaurants/mr-gogo-cafe-vile-parle-west-mumbai-421261"><img src="Menu Food images/swiggy.png" alt="Swiggy"></a>
+        <a href="https://www.google.com/search?q=mr+gogo+cafe+mumbai"><img src="Menu Food images/google.png" alt="Google"></a>
     </footer>
 
     <script>
-        let cart = [];
+        let cartItems = [];
 
-        function addToCart(itemName, itemPrice) {
-            const existingItem = cart.find(item => item.name === itemName);
+        function orderItem(name, price, description) {
+            const orderDetails = `Order Details:\n\nName: ${name}\nPrice: ${price}\nDescription: ${description}`;
+            const phoneNumber = "+919004694346";
+            const message = encodeURIComponent(orderDetails);
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        }
+
+        function addToCart(name, price) {
+            const existingItem = cartItems.find(item => item.name === name);
             if (existingItem) {
-                existingItem.quantity++;
+                existingItem.quantity += 1;
             } else {
-                cart.push({ name: itemName, price: itemPrice, quantity: 1 });
+                cartItems.push({ name, price, quantity: 1 });
             }
-            showStatusBar("Item added to cart");
-            updateCart();
+            updateStatusBar(`${name} added to cart!`);
+            togglePopupBtn();
         }
 
-        function updateCart() {
-            const cartItemsContainer = document.getElementById('cartItems');
-            cartItemsContainer.innerHTML = '';
-            cart.forEach(item => {
-                const cartItem = document.createElement('div');
-                cartItem.className = 'popup-item';
-                cartItem.innerHTML = `
-                    <span>${item.name} (${item.price} x ${item.quantity})</span>
-                    <div>
-                        <button onclick="decreaseQuantity('${item.name}')">-</button>
-                        <button onclick="increaseQuantity('${item.name}')">+</button>
-                    </div>
-                `;
-                cartItemsContainer.appendChild(cartItem);
-            });
-
-            const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-            document.getElementById('totalPrice').innerText = `Total: ${totalPrice}`;
-            document.getElementById('popupBtn').style.display = cart.length > 0 ? 'block' : 'none';
-        }
-
-        function showStatusBar(message) {
+        function updateStatusBar(message) {
             const statusBar = document.getElementById('statusBar');
-            statusBar.innerText = message;
+            statusBar.textContent = message;
             statusBar.style.display = 'block';
             setTimeout(() => {
                 statusBar.style.display = 'none';
             }, 3000);
         }
 
-        function togglePopup() {
+        function togglePopupBtn() {
+            const popupBtn = document.getElementById('popupBtn');
+            popupBtn.style.display = cartItems.length > 0 ? 'block' : 'none';
+        }
+
+        function showPopup() {
+            const popupContent = document.getElementById('popupContent');
+            popupContent.innerHTML = '';
+
+            cartItems.forEach(item => {
+                const popupItem = document.createElement('div');
+                popupItem.className = 'popup-item';
+                popupItem.innerHTML = `
+                    <span>${item.name} - ${item.price}/-</span>
+                    <div>
+                        <button onclick="decreaseQuantity('${item.name}')">-</button>
+                        <span>${item.quantity}</span>
+                        <button onclick="increaseQuantity('${item.name}')">+</button>
+                    </div>
+                `;
+                popupContent.appendChild(popupItem);
+            });
+
+            const popupOverlay = document.getElementById('popupOverlay');
             const popup = document.getElementById('popup');
-            const overlay = document.getElementById('popupOverlay');
-            const isOpen = popup.style.display === 'block';
-
-            if (isOpen) {
-                popup.style.display = 'none';
-                overlay.style.display = 'none';
-            } else {
-                popup.style.display = 'block';
-                overlay.style.display = 'block';
-            }
+            popupOverlay.style.display = 'block';
+            popup.style.display = 'block';
+            updateTotal();
         }
 
-        function clearCart() {
-            cart = [];
-            updateCart();
-            togglePopup();
+        function hidePopup() {
+            const popupOverlay = document.getElementById('popupOverlay');
+            const popup = document.getElementById('popup');
+            popupOverlay.style.display = 'none';
+            popup.style.display = 'none';
         }
 
-        function increaseQuantity(itemName) {
-            const item = cart.find(item => item.name === itemName);
+        function increaseQuantity(name) {
+            const item = cartItems.find(item => item.name === name);
             if (item) {
-                item.quantity++;
-                updateCart();
+                item.quantity += 1;
+                showPopup();
             }
         }
 
-        function decreaseQuantity(itemName) {
-            const item = cart.find(item => item.name === itemName);
-            if (item) {
-                if (item.quantity > 1) {
-                    item.quantity--;
-                } else {
-                    cart = cart.filter(cartItem => cartItem.name !== itemName);
-                }
-                updateCart();
-            }
-        }
-
-        function orderItem(itemName, itemPrice, itemQuantity) {
-            // For this example, we'll consider 'ordering' as simply adding to cart.
-            const existingItem = cart.find(item => item.name === itemName);
-            if (existingItem) {
-                existingItem.quantity += parseInt(itemQuantity);
+        function decreaseQuantity(name) {
+            const item = cartItems.find(item => item.name === name);
+            if (item && item.quantity > 1) {
+                item.quantity -= 1;
             } else {
-                cart.push({ name: itemName, price: parseInt(itemPrice), quantity: parseInt(itemQuantity) });
+                cartItems = cartItems.filter(item => item.name !== name);
             }
-            updateCart();
-            showStatusBar("Order placed successfully");
+            showPopup();
+            togglePopupBtn();
         }
 
-        function sendEmailOrder() {
-            const email = "customer@example.com"; // This would be dynamic in a real application
-            const subject = "Order Confirmation";
-            const body = cart.map(item => `${item.name} - ${item.price} x ${item.quantity}`).join('\n');
-            const total = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-            const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}%0ATotal: ${total}`;
+        function updateTotal() {
+            const total = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+            const popupTotal = document.getElementById('popupTotal');
+            popupTotal.textContent = `Total: ${total}/-`;
+        }
 
-            window.location.href = mailtoLink;
+        function sendEmail() {
+            if (cartItems.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            const cartDetails = cartItems.map(item => `${item.name} - ${item.price}/- x ${item.quantity}`).join('\n');
+            const total = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+            const emailParams = {
+                to_email: 's.sudanshu.2003@gmail.com',
+                cart_details: cartDetails,
+                total: `${total}/-`
+            };
+
+            emailjs.send('service_3wbpv5j', 'template_3f8u84f', emailParams)
+                .then(response => {
+                    console.log('Email sent successfully!', response.status, response.text);
+                    alert('Email sent successfully!');
+                    cartItems = [];
+                    togglePopupBtn();
+                    hidePopup();
+                })
+                .catch(error => {
+                    console.error('Failed to send email.', error);
+                    alert('Failed to send email. Please try again.');
+                });
         }
     </script>
 </body>
