@@ -50,6 +50,20 @@
             background-color: #555;
         }
 
+        .search-bar {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
         .menu-container {
             padding: 20px;
             margin: 20px auto;
@@ -281,6 +295,12 @@
     <hr>
     <center><h1>Menu <img src="Menu Food images/menu icon.png" width="50px"></h1></center>
     <hr>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search for your favorite dishes...">
+    </div>
+
+    
     <div class="menu-Title">
         <p>Pizzas</p>
     </div>
@@ -400,6 +420,20 @@
     </footer>
 
     <script>
+          // JavaScript code for search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            let filter = this.value.toLowerCase();
+            let menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(function(item) {
+                let itemName = item.getAttribute('data-name').toLowerCase();
+                if (itemName.includes(filter)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+        
         let cart = [];
 
         function showStatusBar(message) {
