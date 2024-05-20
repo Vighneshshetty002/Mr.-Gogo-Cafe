@@ -389,7 +389,7 @@
         }
 
         function orderItem(name, price) {
-            emailjs.send("service_kcqe3qb", "template_67qqy0m", {
+            emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
                 item: name,
                 total: price
             })
@@ -443,7 +443,7 @@
         function sendOrder() {
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             const items = cart.map(item => item.name).join(', ');
-            emailjs.send("service_kcqe3qb", "template_67qqy0m", {
+            emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
                 item: items,
                 total: total.toFixed(2)
             })
