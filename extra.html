@@ -299,230 +299,246 @@
                 <!-- Order button -->
                 <button onclick="orderItem('Veg Pizza', '109', '1')">Order</button>
                 <!-- Add to Cart button -->
-                <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
+                <button onclick="addToCart('Veg Pizza', 109)">Add to Cart</button>
             </div>
         </div>
+        <!-- More menu items... -->
+        <!-- Add more items here in a similar format -->
         <div class="menu-item">
-            <!-- Image, name, price, and description -->
-            <img src="food13.jpeg" alt="Paneer Pizza">
+            <img src="Mexican pizza.jpeg" alt="Mexican Pizza">
             <div>
-                <h3>Paneer Pizza</h3>
+                <h3>Mexican Pizza</h3>
                 <h3>179/-</h3>
-                <p>Delicious pizza topped with succulent paneer cubes and fresh veggies.</p>
+                <p>A zesty fusion of Mexican flavors on a delicious pizza base.</p>
             </div>
-            <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
-                <!-- Order button -->
-                <button onclick="orderItem('Paneer Pizza', '179', '1')">Order</button>
-                <!-- Add to Cart button -->
-                <button onclick="addToCart('Paneer Pizza', '179')">Add to Cart</button>
+                <button onclick="orderItem('Mexican Pizza', '179', '1')">Order</button>
+                <button onclick="addToCart('Mexican Pizza', 179)">Add to Cart</button>
             </div>
         </div>
         <div class="menu-item">
-            <!-- Image, name, price, and description -->
-            <img src="food2.jpeg" alt="Kulhad Pizza">
+            <img src="bbq-pizza.jpg" alt="BBQ Pizza">
             <div>
-                <h3>Kulhad Pizza</h3>
+                <h3>BBQ Pizza</h3>
                 <h3>199/-</h3>
-                <p>Unique and tasty Kulhad Pizza with a blend of spices and cheese.</p>
+                <p>A smoky barbecue sensation with a crispy crust.</p>
             </div>
-            <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
-                <!-- Order button -->
-                <button onclick="orderItem('Kulhad Pizza', '199', '2')">Order</button>
-                <!-- Add to Cart button -->
-                <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
-            </div>
-        </div>
-
-        <div class="menu-Title">
-            <p>Beverages</p>
-        </div>
-
-        <!-- Another menu item -->
-        <div class="menu-item">
-            <!-- Image, name, price, and description -->
-            <img src="cappuccino.jpeg" alt="Cappuccino">
-            <div>
-                <h3>Cappuccino</h3>
-                <h3>150/-</h3>
-                <p>Rich and creamy espresso-based coffee topped with foamed milk.</p>
-            </div>
-            <!-- Order and Add to Cart buttons -->
-            <div class="menu-item-buttons">
-                <!-- Order button -->
-                <button onclick="orderItem('Cappuccino', '150', '3')">Order</button>
-                <!-- Add to Cart button -->
-                <button onclick="addToCart('Cappuccino', '150')">Add to Cart</button>
-            </div>
-        </div>
-
-        <!-- Another menu item -->
-        <div class="menu-item">
-            <!-- Image, name, price, and description -->
-            <img src="milkshake.jpeg" alt="Milkshake">
-            <div>
-                <h3>Milkshake</h3>
-                <h3>250/-</h3>
-                <p>Thick and creamy milkshake made with premium ice cream and milk.</p>
-            </div>
-            <!-- Order and Add to Cart buttons -->
-            <div class="menu-item-buttons">
-                <!-- Order button -->
-                <button onclick="orderItem('Milkshake', '250', '4')">Order</button>
-                <!-- Add to Cart button -->
-                <button onclick="addToCart('Milkshake', '250')">Add to Cart</button>
+                <button onclick="orderItem('BBQ Pizza', '199', '1')">Order</button>
+                <button onclick="addToCart('BBQ Pizza', 199)">Add to Cart</button>
             </div>
         </div>
     </div>
 
-    <div id="statusBar" class="status-bar"></div>
+    <div class="menu-Title">
+        <p>Burgers</p>
+    </div>
+    <div class="menu-container">
+        <div class="menu-item">
+            <img src="Amerikaanse hamburger.jpeg" alt="Veg Burger">
+            <div>
+                <h3>Veg Burger</h3>
+                <h3>69/-</h3>
+                <p>A hearty burger with a perfectly grilled vegetable patty.</p>
+            </div>
+            <div class="menu-item-buttons">
+                <button onclick="orderItem('Veg Burger', '69', '1')">Order</button>
+                <button onclick="addToCart('Veg Burger', 69)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="Big Mac hamburger.jpeg" alt="Chicken Burger">
+            <div>
+                <h3>Chicken Burger</h3>
+                <h3>99/-</h3>
+                <p>A delicious chicken patty sandwiched between soft buns.</p>
+            </div>
+            <div class="menu-item-buttons">
+                <button onclick="orderItem('Chicken Burger', '99', '1')">Order</button>
+                <button onclick="addToCart('Chicken Burger', 99)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="Cheeseburger.jpeg" alt="Cheese Burger">
+            <div>
+                <h3>Cheese Burger</h3>
+                <h3>109/-</h3>
+                <p>A classic favorite topped with melted cheese.</p>
+            </div>
+            <div class="menu-item-buttons">
+                <button onclick="orderItem('Cheese Burger', '109', '1')">Order</button>
+                <button onclick="addToCart('Cheese Burger', 109)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
 
-    <button id="popupBtn">View Cart (<span id="cartCount">0</span>)</button>
+    <div class="menu-Title">
+        <p>Drinks</p>
+    </div>
+    <div class="menu-container">
+        <div class="menu-item">
+            <img src="Smoothie.jpeg" alt="Coffee">
+            <div>
+                <h3>Coffee</h3>
+                <h3>49/-</h3>
+                <p>A freshly brewed cup of rich and aromatic coffee.</p>
+            </div>
+            <div class="menu-item-buttons">
+                <button onclick="orderItem('Coffee', '49', '1')">Order</button>
+                <button onclick="addToCart('Coffee', 49)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="Cafe latte.jpeg" alt="Latte">
+            <div>
+                <h3>Latte</h3>
+                <h3>79/-</h3>
+                <p>A smooth and creamy latte made to perfection.</p>
+            </div>
+            <div class="menu-item-buttons">
+                <button onclick="orderItem('Latte', '79', '1')">Order</button>
+                <button onclick="addToCart('Latte', 79)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="koffie.jpeg" alt="Smoothie">
+            <div>
+                <h3>Smoothie</h3>
+                <h3>89/-</h3>
+                <p>A refreshing smoothie made with fresh fruits.</p>
+            </div>
+            <div class="menu-item-buttons">
+                <button onclick="orderItem('Smoothie', '89', '1')">Order</button>
+                <button onclick="addToCart('Smoothie', 89)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
 
+    <div class="status-bar" id="statusBar"></div>
+    <button id="popupBtn" onclick="togglePopup()">View Cart</button>
     <div id="popupOverlay" class="popup-overlay"></div>
     <div id="popup" class="popup">
-        <h2>My Cart</h2>
-        <div id="popupContent" class="popup-content"></div>
-        <div class="popup-total" id="popupTotal"></div>
+        <h2>Cart</h2>
+        <div id="cartItems" class="popup-content"></div>
+        <div id="totalPrice" class="popup-total"></div>
         <div class="popup-buttons">
             <button onclick="clearCart()">Clear Cart</button>
-            <button onclick="sendOrder()">Place Order</button>
-            <button onclick="closePopup()">Close</button>
+            <button onclick="sendEmailOrder()">Place Order</button>
+            <button onclick="togglePopup()">Close</button>
         </div>
     </div>
 
     <footer>
-        <center>
-            <img src="gogo-cafe-white.png" alt="Mr. Gogo Cafe">
-            <p>Contact us: 123-456-7890 | info@mrgogocafe.com</p>
-        </center>
+        <img src="https://www.pinclipart.com/picdir/middle/137-1375602_food-icon-transparent-background-clipart.png" alt="Food Icon">
+        <p>Thank you for dining with us!</p>
+        <p>© 2023 Mr. Gogo Cafe. All rights reserved.</p>
     </footer>
 
     <script>
         let cart = [];
 
+        function addToCart(itemName, itemPrice) {
+            const existingItem = cart.find(item => item.name === itemName);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ name: itemName, price: itemPrice, quantity: 1 });
+            }
+            showStatusBar("Item added to cart");
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            cartItemsContainer.innerHTML = '';
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'popup-item';
+                cartItem.innerHTML = `
+                    <span>${item.name} (${item.price} x ${item.quantity})</span>
+                    <div>
+                        <button onclick="decreaseQuantity('${item.name}')">-</button>
+                        <button onclick="increaseQuantity('${item.name}')">+</button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            document.getElementById('totalPrice').innerText = `Total: ${totalPrice}`;
+            document.getElementById('popupBtn').style.display = cart.length > 0 ? 'block' : 'none';
+        }
+
         function showStatusBar(message) {
             const statusBar = document.getElementById('statusBar');
-            statusBar.textContent = message;
+            statusBar.innerText = message;
             statusBar.style.display = 'block';
             setTimeout(() => {
                 statusBar.style.display = 'none';
             }, 3000);
         }
 
-        function addToCart(item, price) {
-            cart.push({ item, price: parseFloat(price) });
-            updateCartCount();
-            showStatusBar(`Added ${item} to the cart.`);
-        }
-
-        function updateCartCount() {
-            const cartCount = document.getElementById('cartCount');
-            cartCount.textContent = cart.length;
-            const popupBtn = document.getElementById('popupBtn');
-            popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
-        }
-
-        function openPopup() {
-            const popupOverlay = document.getElementById('popupOverlay');
+        function togglePopup() {
             const popup = document.getElementById('popup');
-            const popupContent = document.getElementById('popupContent');
-            const popupTotal = document.getElementById('popupTotal');
-            popupContent.innerHTML = '';
+            const overlay = document.getElementById('popupOverlay');
+            const isOpen = popup.style.display === 'block';
 
-            let totalPrice = 0;
-
-            cart.forEach((cartItem, index) => {
-                const itemDiv = document.createElement('div');
-                itemDiv.classList.add('popup-item');
-                itemDiv.innerHTML = `
-                    <span>${cartItem.item} - ₹${cartItem.price}</span>
-                    <button onclick="removeFromCart(${index})">Remove</button>
-                `;
-                popupContent.appendChild(itemDiv);
-                totalPrice += cartItem.price;
-            });
-
-            popupTotal.textContent = `Total: ₹${totalPrice.toFixed(2)}`;
-            popupOverlay.style.display = 'block';
-            popup.style.display = 'block';
-        }
-
-        function closePopup() {
-            const popupOverlay = document.getElementById('popupOverlay');
-            const popup = document.getElementById('popup');
-            popupOverlay.style.display = 'none';
-            popup.style.display = 'none';
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartCount();
-            openPopup();
+            if (isOpen) {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            } else {
+                popup.style.display = 'block';
+                overlay.style.display = 'block';
+            }
         }
 
         function clearCart() {
             cart = [];
-            updateCartCount();
-            closePopup();
-            showStatusBar('Cart cleared.');
+            updateCart();
+            togglePopup();
         }
 
-        function sendOrder() {
-            const tableNumber = new URLSearchParams(window.location.search).get('table');
-            const orderDetails = cart.map(cartItem => `${cartItem.item} - ₹${cartItem.price}`).join('\n');
-            const orderDateTime = new Date().toLocaleString();
-            const totalPrice = cart.reduce((total, item) => total + item.price, 0).toFixed(2);
+        function increaseQuantity(itemName) {
+            const item = cart.find(item => item.name === itemName);
+            if (item) {
+                item.quantity++;
+                updateCart();
+            }
+        }
 
-            const emailParams = {
-                service_id: 'service_8y2ru2g',
-                template_id: 'template_yrk4mbd',
-                user_id: 'ZTLLkEu2m9zcOrE1i',
-                template_params: {
-                    'table_number': tableNumber,
-                    'order_details': orderDetails,
-                    'order_date_time': orderDateTime,
-                    'total_price': totalPrice
+        function decreaseQuantity(itemName) {
+            const item = cart.find(item => item.name === itemName);
+            if (item) {
+                if (item.quantity > 1) {
+                    item.quantity--;
+                } else {
+                    cart = cart.filter(cartItem => cartItem.name !== itemName);
                 }
-            };
-
-            emailjs.send(emailParams.service_id, emailParams.template_id, emailParams.template_params)
-                .then(() => {
-                    clearCart();
-                    closePopup();
-                    showStatusBar('Order placed.');
-                }, (error) => {
-                    console.error('Failed to send order:', error);
-                    showStatusBar('Failed to place order. Please try again.');
-                });
+                updateCart();
+            }
         }
 
-        function orderItem(item, price, quantity) {
-            const tableNumber = new URLSearchParams(window.location.search).get('table');
-            const orderDateTime = new Date().toLocaleString();
-
-            const emailParams = {
-                service_id: 'service_8y2ru2g',
-                template_id: 'template_yrk4mbd',
-                user_id: 'ZTLLkEu2m9zcOrE1i',
-                template_params: {
-                    'table_number': tableNumber,
-                    'order_details': `${item} - ₹${price}\nQuantity: ${quantity}`,
-                    'order_date_time': orderDateTime
-                }
-            };
-
-            emailjs.send(emailParams.service_id, emailParams.template_id, emailParams.template_params)
-                .then(() => {
-                    showStatusBar('Order placed.');
-                }, (error) => {
-                    console.error('Failed to send order:', error);
-                    showStatusBar('Failed to place order. Please try again.');
-                });
+        function orderItem(itemName, itemPrice, itemQuantity) {
+            // For this example, we'll consider 'ordering' as simply adding to cart.
+            const existingItem = cart.find(item => item.name === itemName);
+            if (existingItem) {
+                existingItem.quantity += parseInt(itemQuantity);
+            } else {
+                cart.push({ name: itemName, price: parseInt(itemPrice), quantity: parseInt(itemQuantity) });
+            }
+            updateCart();
+            showStatusBar("Order placed successfully");
         }
 
-        document.getElementById('popupBtn').addEventListener('click', openPopup);
+        function sendEmailOrder() {
+            const email = "customer@example.com"; // This would be dynamic in a real application
+            const subject = "Order Confirmation";
+            const body = cart.map(item => `${item.name} - ${item.price} x ${item.quantity}`).join('\n');
+            const total = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}%0ATotal: ${total}`;
+
+            window.location.href = mailtoLink;
+        }
     </script>
 </body>
 </html>
