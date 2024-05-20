@@ -61,6 +61,7 @@
             padding: 10px 0;
             display: flex;
             align-items: center;
+            gap: 10px; /* Added gap for spacing */
         }
 
         .menu-item:last-child {
@@ -75,6 +76,8 @@
 
         .menu-item-buttons {
             margin-left: auto;
+            display: flex; /* Use flexbox layout */
+            gap: 10px; /* Added gap for spacing */
         }
 
         .menu-item-buttons button {
@@ -83,13 +86,13 @@
             padding: 8px 16px;
             border: none;
             border-radius: 5px;
-            margin-left: 10px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
         }
 
         .menu-item-buttons button:hover {
             background-color: #555;
+            color: white; /* Added hover color for buttons */
         }
 
         .status-bar {
@@ -155,6 +158,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 10px; /* Added gap for spacing */
         }
 
         .popup-content p {
@@ -241,6 +245,19 @@
             display: flex; /* Use flexbox layout */
             justify-content: space-between; /* Align items with space between them */
             align-items: center; /* Align items vertically */
+            padding: 10px; /* Added padding for spacing */
+            border-bottom: 1px solid #666; /* Added border for separation */
+        }
+
+        .popup-item:last-child {
+            border-bottom: none; /* Remove border from the last item */
+        }
+
+        .popup-total {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
         }
     </style>
     <!-- Add EmailJS SDK -->
@@ -285,15 +302,29 @@
                 <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
             </div>
         </div>
-
-        <!-- Another menu item -->
         <div class="menu-item">
             <!-- Image, name, price, and description -->
-            <img src="Paneer Tikka Pizza.jpeg" alt="Smoked Salmon Bagel">
+            <img src="food13.jpeg" alt="Paneer Pizza">
+            <div>
+                <h3>Paneer Pizza</h3>
+                <h3>179/-</h3>
+                <p>Delicious pizza topped with succulent paneer cubes and fresh veggies.</p>
+            </div>
+            <!-- Order and Add to Cart buttons -->
+            <div class="menu-item-buttons">
+                <!-- Order button -->
+                <button onclick="orderItem('Paneer Pizza', '179', '1')">Order</button>
+                <!-- Add to Cart button -->
+                <button onclick="addToCart('Paneer Pizza', '179')">Add to Cart</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <!-- Image, name, price, and description -->
+            <img src="food2.jpeg" alt="Kulhad Pizza">
             <div>
                 <h3>Kulhad Pizza</h3>
                 <h3>199/-</h3>
-                <p>Freshly baked bagel topped with cream cheese, smoked salmon, and capers.</p>
+                <p>Unique and tasty Kulhad Pizza with a blend of spices and cheese.</p>
             </div>
             <!-- Order and Add to Cart buttons -->
             <div class="menu-item-buttons">
@@ -353,6 +384,7 @@
     <div id="popup" class="popup">
         <h2>My Cart</h2>
         <div id="popupContent" class="popup-content"></div>
+        <div class="popup-total" id="popupTotal"></div>
         <div class="popup-buttons">
             <button onclick="clearCart()">Clear Cart</button>
             <button onclick="sendOrder()">Place Order</button>
@@ -380,7 +412,7 @@
         }
 
         function addToCart(item, price) {
-            cart.push({ item, price });
+            cart.push({ item, price: parseFloat(price) });
             updateCartCount();
             showStatusBar(`Added ${item} to the cart.`);
         }
@@ -396,7 +428,10 @@
             const popupOverlay = document.getElementById('popupOverlay');
             const popup = document.getElementById('popup');
             const popupContent = document.getElementById('popupContent');
+            const popupTotal = document.getElementById('popupTotal');
             popupContent.innerHTML = '';
+
+            let totalPrice = 0;
 
             cart.forEach((cartItem, index) => {
                 const itemDiv = document.createElement('div');
@@ -406,8 +441,10 @@
                     <button onclick="removeFromCart(${index})">Remove</button>
                 `;
                 popupContent.appendChild(itemDiv);
+                totalPrice += cartItem.price;
             });
 
+            popupTotal.textContent = `Total: ₹${totalPrice.toFixed(2)}`;
             popupOverlay.style.display = 'block';
             popup.style.display = 'block';
         }
@@ -436,6 +473,7 @@
             const tableNumber = new URLSearchParams(window.location.search).get('table');
             const orderDetails = cart.map(cartItem => `${cartItem.item} - ₹${cartItem.price}`).join('\n');
             const orderDateTime = new Date().toLocaleString();
+            const totalPrice = cart.reduce((total, item) => total + item.price, 0).toFixed(2);
 
             const emailParams = {
                 service_id: 'service_8y2ru2g',
@@ -444,7 +482,8 @@
                 template_params: {
                     'table_number': tableNumber,
                     'order_details': orderDetails,
-                    'order_date_time': orderDateTime
+                    'order_date_time': orderDateTime,
+                    'total_price': totalPrice
                 }
             };
 
