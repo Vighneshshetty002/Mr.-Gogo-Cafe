@@ -303,7 +303,6 @@
         <p>Pizzas</p>
     </div>
     <div class="menu-container" id="menuContainer">
-        <!-- Menu items here -->
         <div class="menu-item">
             <img src="Menu Food images/1.png" alt="Pizza" />
             <div>
@@ -365,6 +364,14 @@
 
         let cart = [];
 
+        // Extract table number from URL
+        function getTableNumber() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
+        }
+
+        const tableNumber = getTableNumber();
+
         searchInput.addEventListener('input', filterMenu);
 
         function filterMenu() {
@@ -389,7 +396,6 @@
         }
 
         function orderItem(name, price) {
-            const tableNumber = prompt("Please enter your table number:");
             const orderDetails = name;
             const totalPrice = price.toFixed(2);
             const orderDateTime = new Date().toLocaleString();
@@ -447,7 +453,6 @@
         }
 
         function sendOrder() {
-            const tableNumber = prompt("Please enter your table number:");
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             const orderDetails = cart.map(item => `${item.name} - $${item.price.toFixed(2)}`).join('<br/>');
             const orderDateTime = new Date().toLocaleString();
