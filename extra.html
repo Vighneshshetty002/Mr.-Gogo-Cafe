@@ -389,9 +389,15 @@
         }
 
         function orderItem(name, price) {
+            const tableNumber = prompt("Please enter your table number:");
+            const orderDetails = name;
+            const totalPrice = price.toFixed(2);
+            const orderDateTime = new Date().toLocaleString();
             emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-                item: name,
-                total: price
+                table_number: tableNumber,
+                order_details: orderDetails,
+                total_price: totalPrice,
+                order_date_time: orderDateTime
             })
             .then(function(response) {
                 showStatus('Order placed successfully!');
@@ -441,11 +447,15 @@
         }
 
         function sendOrder() {
+            const tableNumber = prompt("Please enter your table number:");
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const items = cart.map(item => item.name).join(', ');
+            const orderDetails = cart.map(item => `${item.name} - $${item.price.toFixed(2)}`).join('<br/>');
+            const orderDateTime = new Date().toLocaleString();
             emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-                item: items,
-                total: total.toFixed(2)
+                table_number: tableNumber,
+                order_details: orderDetails,
+                total_price: total.toFixed(2),
+                order_date_time: orderDateTime
             })
             .then(function(response) {
                 showStatus('Order placed successfully!');
