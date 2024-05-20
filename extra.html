@@ -243,6 +243,13 @@
             align-items: center; /* Align items vertically */
         }
     </style>
+    <!-- Add EmailJS SDK -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("ZTLLkEu2m9zcOrE1i");
+        })();
+    </script>
 </head>
 <body>
     <center><img src="gogo-cafe-white.png" width="200px"></center>
@@ -429,25 +436,51 @@
             const tableNumber = new URLSearchParams(window.location.search).get('table');
             const orderDetails = cart.map(cartItem => `${cartItem.item} - ₹${cartItem.price}`).join('\n');
             const orderDateTime = new Date().toLocaleString();
-            const emailBody = `Table Number: ${tableNumber}\n\nOrder Details:\n${orderDetails}\n\nDate and Time: ${orderDateTime}`;
 
-            const emailLink = `mailto:info@mrgogocafe.com?subject=New Order&body=${encodeURIComponent(emailBody)}`;
-            window.location.href = emailLink;
+            const emailParams = {
+                service_id: 'service_8y2ru2g',
+                template_id: 'template_yrk4mbd',
+                user_id: 'ZTLLkEu2m9zcOrE1i',
+                template_params: {
+                    'table_number': tableNumber,
+                    'order_details': orderDetails,
+                    'order_date_time': orderDateTime
+                }
+            };
 
-            clearCart();
-            closePopup();
-            showStatusBar('Order placed.');
+            emailjs.send(emailParams.service_id, emailParams.template_id, emailParams.template_params)
+                .then(() => {
+                    clearCart();
+                    closePopup();
+                    showStatusBar('Order placed.');
+                }, (error) => {
+                    console.error('Failed to send order:', error);
+                    showStatusBar('Failed to place order. Please try again.');
+                });
         }
 
         function orderItem(item, price, quantity) {
             const tableNumber = new URLSearchParams(window.location.search).get('table');
             const orderDateTime = new Date().toLocaleString();
-            const emailBody = `Table Number: ${tableNumber}\n\nOrder Item:\n${item}\nPrice: ₹${price}\nQuantity: ${quantity}\n\nDate and Time: ${orderDateTime}`;
 
-            const emailLink = `mailto:info@mrgogocafe.com?subject=New Order&body=${encodeURIComponent(emailBody)}`;
-            window.location.href = emailLink;
+            const emailParams = {
+                service_id: 'service_8y2ru2g',
+                template_id: 'template_yrk4mbd',
+                user_id: 'ZTLLkEu2m9zcOrE1i',
+                template_params: {
+                    'table_number': tableNumber,
+                    'order_details': `${item} - ₹${price}\nQuantity: ${quantity}`,
+                    'order_date_time': orderDateTime
+                }
+            };
 
-            showStatusBar('Order placed.');
+            emailjs.send(emailParams.service_id, emailParams.template_id, emailParams.template_params)
+                .then(() => {
+                    showStatusBar('Order placed.');
+                }, (error) => {
+                    console.error('Failed to send order:', error);
+                    showStatusBar('Failed to place order. Please try again.');
+                });
         }
 
         document.getElementById('popupBtn').addEventListener('click', openPopup);
