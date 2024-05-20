@@ -165,7 +165,7 @@
             margin: 10px 0;
         }
 
-         /* Footer styling */
+        /* Footer styling */
         footer {
             text-align: center;
             padding: 0px 0; /* Reduced padding vertically */
@@ -182,7 +182,6 @@
             width: 60px;
             vertical-align: middle;
         }
-
 
         /* View Cart Button */
         #popupBtn {
@@ -260,6 +259,31 @@
             font-weight: bold;
             font-size: 1.2em;
         }
+
+        /* Order Confirmation Popup Styles */
+        #orderConfirmation {
+            display: none;
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: black;
+            border: 1px solid white;
+            border-radius: 15px;
+            padding: 20px;
+            z-index: 1001;
+            color: white;
+            text-align: center;
+        }
+
+        #orderConfirmation h2 {
+            margin-bottom: 20px;
+        }
+
+        #orderConfirmation p {
+            margin: 10px 0;
+        }
+
     </style>
     <!-- Add EmailJS SDK -->
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
@@ -285,270 +309,221 @@
     <div class="menu-Title">
         <p>Pizzas</p>
     </div>
-    <div class="menu-container">
-        <!-- Menu items here -->
-        <div class="menu-item">
-            <!-- Image, name, price, and description -->
-            <img src="Klassieke club sandwich.jpeg" alt="Veg Pizza">
-            <div>
-                <h3>Veg Pizza</h3>
-                <h3>109/-</h3>
-                <p>A savory delight featuring a medley of fresh vegetables atop a crispy crust.</p>
-            </div>
-            <!-- Order and Add to Cart buttons -->
-            <div class="menu-item-buttons">
-                <!-- Order button -->
-                <button onclick="orderItem('Veg Pizza', '109', '1')">Order</button>
-                <!-- Add to Cart button -->
-                <button onclick="addToCart('Veg Pizza', '109')">Add to Cart</button>
-            </div>
-        </div>
-        <div class="menu-item">
-            <!-- Image, name, price, and description -->
-            <img src="food13.jpeg" alt="Paneer Pizza">
-            <div>
-                <h3>Paneer Pizza</h3>
-                <h3>179/-</h3>
-                <p>Delicious pizza topped with succulent paneer cubes and fresh veggies.</p>
-            </div>
-            <!-- Order and Add to Cart buttons -->
-            <div class="menu-item-buttons">
-                <!-- Order button -->
-                <button onclick="orderItem('Paneer Pizza', '179', '1')">Order</button>
-                <!-- Add to Cart button -->
-                <button onclick="addToCart('Paneer Pizza', '179')">Add to Cart</button>
-            </div>
-        </div>
-        <div class="menu-item">
-            <!-- Image, name, price, and description -->
-            <img src="food2.jpeg" alt="Kulhad Pizza">
-            <div>
-                <h3>Kulhad Pizza</h3>
-                <h3>199/-</h3>
-                <p>Unique and tasty Kulhad Pizza with a blend of spices and cheese.</p>
-            </div>
-            <!-- Order and Add to Cart buttons -->
-            <div class="menu-item-buttons">
-                <!-- Order button -->
-                <button onclick="orderItem('Kulhad Pizza', '199', '2')">Order</button>
-                <!-- Add to Cart button -->
-                <button onclick="addToCart('Kulhad Pizza', '199')">Add to Cart</button>
-            </div>
-        </div>
+    <div class="menu-container" id="menu-container">
+        <!-- Menu items will be appended here -->
+    </div>
 
-        <div class="menu-Title">
-            <p>Beverages</p>
-        </div>
+    <button id="popupBtn">View Cart</button>
 
-        <!-- Another menu item -->
-        <div class="menu-item">
-            <!-- Image, name, price, and description -->
-            <img src="cappuccino.jpeg" alt="Cappuccino">
-            <div>
-                <h3>Cappuccino</h3>
-                <h3>150/-</h3>
-                <p>Rich and creamy espresso-based coffee topped with foamed milk.</p>
-            </div>
-            <!-- Order and Add to Cart buttons -->
-            <div class="menu-item-buttons">
-                <!-- Order button -->
-                <button onclick="orderItem('Cappuccino', '150', '3')">Order</button>
-                <!-- Add to Cart button -->
-                <button onclick="addToCart('Cappuccino', '150')">Add to Cart</button>
-            </div>
-        </div>
-
-        <!-- Another menu item -->
-        <div class="menu-item">
-            <!-- Image, name, price, and description -->
-            <img src="milkshake.jpeg" alt="Milkshake">
-            <div>
-                <h3>Milkshake</h3>
-                <h3>250/-</h3>
-                <p>Thick and creamy milkshake made with premium ice cream and milk.</p>
-            </div>
-            <!-- Order and Add to Cart buttons -->
-            <div class="menu-item-buttons">
-                <!-- Order button -->
-                <button onclick="orderItem('Milkshake', '250', '4')">Order</button>
-                <!-- Add to Cart button -->
-                <button onclick="addToCart('Milkshake', '250')">Add to Cart</button>
-            </div>
+    <div id="popupOverlay" class="popup-overlay"></div>
+    <div id="popup" class="popup">
+        <h2>Your Cart</h2>
+        <div class="popup-content" id="popupContent"></div>
+        <div class="popup-total" id="popupTotal">Total: ₹0.00</div>
+        <div class="popup-buttons">
+            <button id="closePopupBtn">Close</button>
+            <button id="placeOrderBtn">Place Order</button>
         </div>
     </div>
+
+    <!-- Order Confirmation Popup -->
+    <div id="orderConfirmation">
+        <h2>Order Confirmed</h2>
+        <p>Thank you for your order!</p>
+        <p>Your order has been placed successfully.</p>
+        <button id="closeOrderConfirmationBtn">Close</button>
+    </div>
+
+    <footer>
+        &copy; 2024 Mr. Gogo Cafe. All rights reserved.
+        <img src="footer.png" alt="Footer Image">
+    </footer>
 
     <div id="statusBar" class="status-bar"></div>
 
-    <button id="popupBtn">View Cart (<span id="cartCount">0</span>)</button>
-
-    <div id="popupOverlay" class="popup-overlay"></div>
-    <div id="popup" class="popup">
-        <h2>My Cart</h2>
-        <div id="popupContent" class="popup-content"></div>
-        <div class="popup-total" id="popupTotal"></div>
-        <div class="popup-buttons">
-            <button onclick="clearCart()">Clear Cart</button>
-            <button onclick="sendOrder()">Place Order</button>
-            <button onclick="closePopup()">Close</button>
-        </div>
-    </div>
-
-
-<!-- Checking-->
-    <div id="popupOverlay" class="popup-overlay"></div>
-    <div id="popup" class="popup">
-        <h2>Order Recieved!!</h2><br/>
-Our Executive Will Visit You Soon<br/>
-To Confirm the Order<br/>
-Thanks for the Order, Visit Again!!
-        <div id="popupContent" class="popup-content"></div>
-        <div class="popup-total" id="popupTotal"></div>
-        <div class="popup-buttons">
-            <button onclick="closePopup()">Close</button>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-    
-    <footer>
-        <center>
-            <p>Powered by: <a href="https://github.com/vighneshshetty002"><img src="VS Tech.png" alt="Logo"></a></p>
-
-        </center>
-    </footer>
-
     <script>
-        let cart = [];
+        document.addEventListener("DOMContentLoaded", function() {
+            // Pizzas
+            var pizzaItems = [
+                { name: "Margarita Pizza", price: 499, image: "Menu Food images/margarita pizza.jpg" },
+                { name: "Veggie Supreme Pizza", price: 699, image: "Menu Food images/veggie supreme pizza.jpg" },
+                { name: "Pepperoni Pizza", price: 799, image: "Menu Food images/pepperoni pizza.jpg" },
+                { name: "BBQ Chicken Pizza", price: 899, image: "Menu Food images/bbq chicken pizza.jpg" },
+                { name: "Four Cheese Pizza", price: 849, image: "Menu Food images/four cheese pizza.jpg" }
+            ];
+
+            var menuContainer = document.getElementById('menu-container');
+
+            pizzaItems.forEach(function(item, index) {
+                var menuItem = document.createElement('div');
+                menuItem.classList.add('menu-item');
+                menuItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="menu-item-details">
+                        <h3>${item.name}</h3>
+                        <p>Price: ₹${item.price}</p>
+                    </div>
+                    <div class="menu-item-buttons">
+                        <button onclick="addToCart(${index}, 'pizza')">Add to Cart</button>
+                    </div>
+                `;
+                menuContainer.appendChild(menuItem);
+            });
+
+            // Show or hide the cart button based on cart items
+            function updateCartButtonVisibility() {
+                var cart = JSON.parse(localStorage.getItem('cart')) || [];
+                var popupBtn = document.getElementById('popupBtn');
+                if (cart.length > 0) {
+                    popupBtn.style.display = 'block';
+                } else {
+                    popupBtn.style.display = 'none';
+                }
+            }
+
+            updateCartButtonVisibility();
+        });
+
+        function addToCart(index, type) {
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (type === 'pizza') {
+                var pizzaItems = [
+                    { name: "Margarita Pizza", price: 499, image: "Menu Food images/margarita pizza.jpg" },
+                    { name: "Veggie Supreme Pizza", price: 699, image: "Menu Food images/veggie supreme pizza.jpg" },
+                    { name: "Pepperoni Pizza", price: 799, image: "Menu Food images/pepperoni pizza.jpg" },
+                    { name: "BBQ Chicken Pizza", price: 899, image: "Menu Food images/bbq chicken pizza.jpg" },
+                    { name: "Four Cheese Pizza", price: 849, image: "Menu Food images/four cheese pizza.jpg" }
+                ];
+                cart.push(pizzaItems[index]);
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            showStatusBar('Item added to cart!');
+            updateCartButtonVisibility();
+        }
 
         function showStatusBar(message) {
-            const statusBar = document.getElementById('statusBar');
+            var statusBar = document.getElementById('statusBar');
             statusBar.textContent = message;
             statusBar.style.display = 'block';
-            setTimeout(() => {
+            setTimeout(function() {
                 statusBar.style.display = 'none';
             }, 3000);
         }
 
-        function addToCart(item, price) {
-            cart.push({ item, price: parseFloat(price) });
-            updateCartCount();
-            showStatusBar(`Added ${item} to the cart.`);
-        }
+        // Event listener for cart button
+        document.getElementById('popupBtn').addEventListener('click', function() {
+            showCartPopup();
+        });
 
-        function updateCartCount() {
-            const cartCount = document.getElementById('cartCount');
-            cartCount.textContent = cart.length;
-            const popupBtn = document.getElementById('popupBtn');
-            popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
-        }
+        // Show cart popup
+        function showCartPopup() {
+            var popupOverlay = document.getElementById('popupOverlay');
+            var popup = document.getElementById('popup');
+            var popupContent = document.getElementById('popupContent');
+            var popupTotal = document.getElementById('popupTotal');
 
-        function openPopup() {
-            const popupOverlay = document.getElementById('popupOverlay');
-            const popup = document.getElementById('popup');
-            const popupContent = document.getElementById('popupContent');
-            const popupTotal = document.getElementById('popupTotal');
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            var total = 0;
+
             popupContent.innerHTML = '';
 
-            let totalPrice = 0;
-
-            cart.forEach((cartItem, index) => {
-                const itemDiv = document.createElement('div');
-                itemDiv.classList.add('popup-item');
-                itemDiv.innerHTML = `
-                    <span>${cartItem.item} - ₹${cartItem.price}</span>
+            cart.forEach(function(item, index) {
+                var popupItem = document.createElement('div');
+                popupItem.classList.add('popup-item');
+                popupItem.innerHTML = `
+                    <span>${item.name} - ₹${item.price}</span>
                     <button onclick="removeFromCart(${index})">Remove</button>
                 `;
-                popupContent.appendChild(itemDiv);
-                totalPrice += cartItem.price;
+                popupContent.appendChild(popupItem);
+                total += item.price;
             });
 
-            popupTotal.textContent = `Total: ₹${totalPrice.toFixed(2)}`;
+            popupTotal.textContent = `Total: ₹${total.toFixed(2)}`;
+
             popupOverlay.style.display = 'block';
             popup.style.display = 'block';
         }
 
-        function closePopup() {
-            const popupOverlay = document.getElementById('popupOverlay');
-            const popup = document.getElementById('popup');
+        // Close cart popup
+        document.getElementById('closePopupBtn').addEventListener('click', function() {
+            closeCartPopup();
+        });
+
+        function closeCartPopup() {
+            var popupOverlay = document.getElementById('popupOverlay');
+            var popup = document.getElementById('popup');
             popupOverlay.style.display = 'none';
             popup.style.display = 'none';
         }
 
+        // Remove item from cart
         function removeFromCart(index) {
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart.splice(index, 1);
-            updateCartCount();
-            openPopup();
+            localStorage.setItem('cart', JSON.stringify(cart));
+            showCartPopup();
+            updateCartButtonVisibility();
         }
 
-        function clearCart() {
-            cart = [];
-            updateCartCount();
-            closePopup();
-            showStatusBar('Cart cleared.');
+        // Event listener for place order button
+        document.getElementById('placeOrderBtn').addEventListener('click', function() {
+            placeOrder();
+        });
+
+        // Place order function
+        function placeOrder() {
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            // Prepare order details
+            var orderDetails = 'Order Details:\n\n';
+            var total = 0;
+
+            cart.forEach(function(item) {
+                orderDetails += `${item.name} - ₹${item.price}\n`;
+                total += item.price;
+            });
+
+            orderDetails += `\nTotal: ₹${total.toFixed(2)}`;
+
+            // Send email using EmailJS
+            emailjs.send('service_xxxxxxx', 'template_xxxxxxx', {
+                to_email: 'example@example.com',
+                order_details: orderDetails
+            }).then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                // Clear cart
+                localStorage.removeItem('cart');
+                updateCartButtonVisibility();
+                // Show order confirmation
+                showOrderConfirmation();
+                // Close the cart popup
+                closeCartPopup();
+            }, function(error) {
+                console.log('FAILED...', error);
+                alert('Failed to place order. Please try again.');
+            });
         }
 
-        function sendOrder() {
-            const tableNumber = new URLSearchParams(window.location.search).get('table');
-            const orderDetails = cart.map(cartItem => `${cartItem.item} - ₹${cartItem.price}`).join('\n');
-            const orderDateTime = new Date().toLocaleString();
-            const totalPrice = cart.reduce((total, item) => total + item.price, 0).toFixed(2);
+        // Show order confirmation
+        function showOrderConfirmation() {
+            var orderConfirmation = document.getElementById('orderConfirmation');
+            orderConfirmation.style.display = 'block';
 
-            const emailParams = {
-                service_id: 'service_8y2ru2g',
-                template_id: 'template_yrk4mbd',
-                user_id: 'ZTLLkEu2m9zcOrE1i',
-                template_params: {
-                    'table_number': tableNumber,
-                    'order_details': orderDetails,
-                    'order_date_time': orderDateTime,
-                    'total_price': totalPrice
-                }
-            };
-
-            emailjs.send(emailParams.service_id, emailParams.template_id, emailParams.template_params)
-                .then(() => {
-                    clearCart();
-                    closePopup();
-                    showStatusBar('Order placed.');
-                }, (error) => {
-                    console.error('Failed to send order:', error);
-                    showStatusBar('Failed to place order. Please try again.');
-                });
+            // Close order confirmation after 3 seconds
+            setTimeout(function() {
+                orderConfirmation.style.display = 'none';
+            }, 3000);
         }
 
-        function orderItem(item, price, quantity) {
-            const tableNumber = new URLSearchParams(window.location.search).get('table');
-            const orderDateTime = new Date().toLocaleString();
-
-            const emailParams = {
-                service_id: 'service_8y2ru2g',
-                template_id: 'template_yrk4mbd',
-                user_id: 'ZTLLkEu2m9zcOrE1i',
-                template_params: {
-                    'table_number': tableNumber,
-                    'order_details': `${item} - ₹${price}\nQuantity: ${quantity}`,
-                    'order_date_time': orderDateTime
-                }
-            };
-
-            emailjs.send(emailParams.service_id, emailParams.template_id, emailParams.template_params)
-                .then(() => {
-                    showStatusBar('Order placed.');
-                }, (error) => {
-                    console.error('Failed to send order:', error);
-                    showStatusBar('Failed to place order. Please try again.');
-                });
-        }
-
-        document.getElementById('popupBtn').addEventListener('click', openPopup);
+        // Event listener for close order confirmation button
+        document.getElementById('closeOrderConfirmationBtn').addEventListener('click', function() {
+            document.getElementById('orderConfirmation').style.display = 'none';
+        });
     </script>
 </body>
 </html>
