@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mr. Gogo Cafe | Menu</title>
-
     <style>
         /* Resetting default margin and padding */
         * {
@@ -303,146 +302,85 @@
     <div class="menu-Title">
         <p>Pizzas</p>
     </div>
-    <div class="menu-container">
+    <div class="menu-container" id="menuContainer">
         <!-- Menu items here -->
-        <div class="menu-item" data-name="Veg Pizza">
-            <!-- Image, name, price, and description -->
-            <img src="Klassieke club sandwich.jpeg" alt="Veg Pizza">
+        <div class="menu-item">
+            <img src="Menu Food images/1.png" alt="Pizza" />
             <div>
-                <h3>Veg Pizza</h3>
-                <p>$10.99</p>
-                <p>Description of Veg Pizza.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button class="add-to-cart">Add to Cart</button>
-                <button class="remove-from-cart" style="display:none;">Remove from Cart</button>
-            </div>
-        </div>
-        <div class="menu-item" data-name="Non Veg Pizza">
-            <!-- Image, name, price, and description -->
-            <img src="Breakfast burrito.jpeg" alt="Non Veg Pizza">
-            <div>
-                <h3>Non Veg Pizza</h3>
+                <h2>Margherita Pizza</h2>
                 <p>$12.99</p>
-                <p>Description of Non Veg Pizza.</p>
             </div>
             <div class="menu-item-buttons">
-                <button class="add-to-cart">Add to Cart</button>
-                <button class="remove-from-cart" style="display:none;">Remove from Cart</button>
+                <button onclick="orderItem('Margherita Pizza', 12.99)">Order</button>
+                <button onclick="addToCart('Margherita Pizza', 12.99)">Add to Cart</button>
             </div>
         </div>
-        <div class="menu-item" data-name="Margherita Pizza">
-            <!-- Image, name, price, and description -->
-            <img src="Food images/garlic-bread-thumbnail.png" alt="Margherita Pizza">
+        <div class="menu-item">
+            <img src="Menu Food images/2.png" alt="Pizza" />
             <div>
-                <h3>Margherita Pizza</h3>
-                <p>$11.99</p>
-                <p>Description of Margherita Pizza.</p>
+                <h2>Pepperoni Pizza</h2>
+                <p>$14.99</p>
             </div>
             <div class="menu-item-buttons">
-                <button class="add-to-cart">Add to Cart</button>
-                <button class="remove-from-cart" style="display:none;">Remove from Cart</button>
+                <button onclick="orderItem('Pepperoni Pizza', 14.99)">Order</button>
+                <button onclick="addToCart('Pepperoni Pizza', 14.99)">Add to Cart</button>
             </div>
         </div>
-        <div class="menu-item" data-name="BBQ Chicken Pizza">
-            <!-- Image, name, price, and description -->
-            <img src="Food images/fries-thumbnail.png" alt="BBQ Chicken Pizza">
-            <div>
-                <h3>BBQ Chicken Pizza</h3>
-                <p>$13.99</p>
-                <p>Description of BBQ Chicken Pizza.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button class="add-to-cart">Add to Cart</button>
-                <button class="remove-from-cart" style="display:none;">Remove from Cart</button>
-            </div>
-        </div>
-    </div>
-    <div class="menu-Title">
-        <p>Pastas</p>
-    </div>
-    <div class="menu-container">
-        <!-- Menu items here -->
-        <div class="menu-item" data-name="Spaghetti Carbonara">
-            <!-- Image, name, price, and description -->
-            <img src="Food images/pasta-thumbnail.png" alt="Spaghetti Carbonara">
-            <div>
-                <h3>Spaghetti Carbonara</h3>
-                <p>$9.99</p>
-                <p>Description of Spaghetti Carbonara.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button class="add-to-cart">Add to Cart</button>
-                <button class="remove-from-cart" style="display:none;">Remove from Cart</button>
-            </div>
-        </div>
-        <div class="menu-item" data-name="Penne Arrabbiata">
-            <!-- Image, name, price, and description -->
-            <img src="Food images/soup-thumbnail.png" alt="Penne Arrabbiata">
-            <div>
-                <h3>Penne Arrabbiata</h3>
-                <p>$8.99</p>
-                <p>Description of Penne Arrabbiata.</p>
-            </div>
-            <div class="menu-item-buttons">
-                <button class="add-to-cart">Add to Cart</button>
-                <button class="remove-from-cart" style="display:none;">Remove from Cart</button>
-            </div>
-        </div>
+        <!-- Add more menu items as needed -->
     </div>
 
     <!-- Status bar -->
-    <div class="status-bar" id="statusBar"></div>
-
-    <!-- View Cart Button -->
-    <button id="popupBtn">View Cart (<span id="cart-count">0</span>)</button>
+    <div id="statusBar" class="status-bar"></div>
 
     <!-- Popup overlay -->
-    <div class="popup-overlay" id="popupOverlay"></div>
-
+    <div id="popupOverlay" class="popup-overlay"></div>
     <!-- Popup -->
-    <div class="popup" id="popup">
-        <h2>Your Cart</h2>
-        <div class="popup-content" id="popupContent">
-            <!-- Items will be dynamically added here -->
-        </div>
+    <div id="popup" class="popup">
+        <h2>Cart</h2>
+        <div class="popup-content" id="popupContent"></div>
         <div class="popup-total" id="popupTotal">Total: $0.00</div>
         <div class="popup-buttons">
-            <button id="closePopup">Close</button>
-            <button id="checkoutBtn">Checkout</button>
+            <button onclick="sendOrder()">Send Order</button>
+            <button onclick="closePopup()">Close</button>
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- View Cart Button -->
+    <button id="popupBtn" onclick="togglePopup()">View Cart</button>
+
     <footer>
-        <p>Website developed by Vighnesh Shetty for Mr. Gogo Cafe &copy; 2023</p>
+        <p>&copy; 2023 Mr. Gogo Cafe. All rights reserved.</p>
+        <p>Powered by <img src="https://yt3.googleusercontent.com/ytc/AGIKgqMU0OXDLP4RfKw6UBmYIuecq6nRXT00PocHGxyuQg=s900-c-k-c0x00ffffff-no-rj" width="20px"> Vighnesh</p>
     </footer>
 
     <script>
-        // Cart array to store items
+        const searchInput = document.getElementById('searchInput');
+        const menuContainer = document.getElementById('menuContainer');
+        const statusBar = document.getElementById('statusBar');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popup = document.getElementById('popup');
+        const popupContent = document.getElementById('popupContent');
+        const popupTotal = document.getElementById('popupTotal');
+        const popupBtn = document.getElementById('popupBtn');
+
         let cart = [];
 
-        // Function to update the cart count
-        function updateCartCount() {
-            const cartCount = document.getElementById('cart-count');
-            cartCount.textContent = cart.length;
-            if (cart.length > 0) {
-                document.getElementById('popupBtn').style.display = 'block';
-            } else {
-                document.getElementById('popupBtn').style.display = 'none';
-            }
+        searchInput.addEventListener('input', filterMenu);
+
+        function filterMenu() {
+            const query = searchInput.value.toLowerCase();
+            const items = menuContainer.querySelectorAll('.menu-item');
+            items.forEach(item => {
+                const itemName = item.querySelector('h2').textContent.toLowerCase();
+                if (itemName.includes(query)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
         }
 
-        // Function to update the total in the popup
-        function updatePopupTotal() {
-            const popupTotal = document.getElementById('popupTotal');
-            let total = cart.reduce((sum, item) => sum + item.price, 0);
-            popupTotal.textContent = `Total: $${total.toFixed(2)}`;
-        }
-
-        // Function to show the status bar with a message
-        function showStatusBar(message) {
-            const statusBar = document.getElementById('statusBar');
+        function showStatus(message) {
             statusBar.textContent = message;
             statusBar.style.display = 'block';
             setTimeout(() => {
@@ -450,103 +388,74 @@
             }, 3000);
         }
 
-        // Add event listeners to buttons
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', () => {
-                const menuItem = button.closest('.menu-item');
-                const itemName = menuItem.querySelector('h3').textContent;
-                const itemPrice = parseFloat(menuItem.querySelector('p').textContent.replace('$', ''));
-                const itemImage = menuItem.querySelector('img').src;
-
-                cart.push({ name: itemName, price: itemPrice, image: itemImage });
-
-                updateCartCount();
-                updatePopupTotal();
-                showStatusBar(`${itemName} added to cart`);
-
-                // Toggle buttons
-                button.style.display = 'none';
-                menuItem.querySelector('.remove-from-cart').style.display = 'block';
+        function orderItem(name, price) {
+            emailjs.send("service_kcqe3qb", "template_67qqy0m", {
+                item: name,
+                total: price
+            })
+            .then(function(response) {
+                showStatus('Order placed successfully!');
+            }, function(error) {
+                showStatus('Failed to place order. Please try again.');
             });
-        });
+        }
 
-        document.querySelectorAll('.remove-from-cart').forEach(button => {
-            button.addEventListener('click', () => {
-                const menuItem = button.closest('.menu-item');
-                const itemName = menuItem.querySelector('h3').textContent;
+        function addToCart(name, price) {
+            const item = { name, price };
+            cart.push(item);
+            updateCart();
+            showStatus('Item added to cart.');
+        }
 
-                cart = cart.filter(item => item.name !== itemName);
-
-                updateCartCount();
-                updatePopupTotal();
-                showStatusBar(`${itemName} removed from cart`);
-
-                // Toggle buttons
-                button.style.display = 'none';
-                menuItem.querySelector('.add-to-cart').style.display = 'block';
-            });
-        });
-
-        // Function to open the cart popup
-        document.getElementById('popupBtn').addEventListener('click', () => {
-            const popupOverlay = document.getElementById('popupOverlay');
-            const popup = document.getElementById('popup');
-            const popupContent = document.getElementById('popupContent');
-
-            // Clear previous content
+        function updateCart() {
             popupContent.innerHTML = '';
-
-            // Add items to the popup
-            cart.forEach(item => {
-                const popupItem = document.createElement('div');
-                popupItem.className = 'popup-item';
-                popupItem.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" style="width: 50px;">
-                    <p>${item.name}</p>
-                    <p>$${item.price.toFixed(2)}</p>
+            let total = 0;
+            cart.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('popup-item');
+                itemDiv.innerHTML = `
+                    <span>${item.name} - $${item.price.toFixed(2)}</span>
+                    <button onclick="removeFromCart(${index})">Remove</button>
                 `;
-                popupContent.appendChild(popupItem);
+                popupContent.appendChild(itemDiv);
+                total += item.price;
             });
+            popupTotal.textContent = `Total: $${total.toFixed(2)}`;
+            popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
+        }
 
-            popupOverlay.style.display = 'block';
-            popup.style.display = 'block';
-        });
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
 
-        // Function to close the cart popup
-        document.getElementById('closePopup').addEventListener('click', () => {
-            document.getElementById('popupOverlay').style.display = 'none';
-            document.getElementById('popup').style.display = 'none';
-        });
+        function togglePopup() {
+            const isVisible = popup.style.display === 'block';
+            popup.style.display = isVisible ? 'none' : 'block';
+            popupOverlay.style.display = isVisible ? 'none' : 'block';
+        }
 
-        // Function to handle checkout
-        document.getElementById('checkoutBtn').addEventListener('click', () => {
-            if (cart.length === 0) {
-                alert('Your cart is empty');
-                return;
-            }
+        function closePopup() {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+        }
 
-            let total = cart.reduce((sum, item) => sum + item.price, 0);
-            let orderDetails = cart.map(item => `${item.name} - $${item.price.toFixed(2)}`).join('\n');
-
-            // Send the order details via EmailJS
-            emailjs.send("service_e59lh9e", "template_n5uqe6g", {
-                order_details: orderDetails,
-                total_price: total.toFixed(2),
-            }).then(() => {
-                alert('Order placed successfully');
+        function sendOrder() {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const items = cart.map(item => item.name).join(', ');
+            emailjs.send("service_kcqe3qb", "template_67qqy0m", {
+                item: items,
+                total: total.toFixed(2)
+            })
+            .then(function(response) {
+                showStatus('Order placed successfully!');
                 cart = [];
-                updateCartCount();
-                updatePopupTotal();
-                document.getElementById('popupOverlay').style.display = 'none';
-                document.getElementById('popup').style.display = 'none';
-            }).catch((error) => {
-                alert('Failed to place order');
-                console.error('EmailJS Error:', error);
+                updateCart();
+                closePopup();
+            }, function(error) {
+                showStatus('Failed to place order. Please try again.');
             });
-        });
-
-        // Initialize cart count and popup button visibility
-        updateCartCount();
+        }
     </script>
 </body>
 </html>
