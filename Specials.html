@@ -101,13 +101,30 @@
     <center>
    <div class="card">
         <img src="Menu Food images/WhatsApp Image 2024-06-06 at 19.30.50_43479c5c.jpg" alt="ad">
-        <p>Combo Price: 139/-</p><button>Order</button>
+        <p>Combo Price: 139/-</p><button onclick="order()">Order</button>
     </div>
              
     </center>
 
 
+ <script>
+        function order() {
+            var today = new Date();
+            var dayOfWeek = today.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
+            var hour = today.getHours();
 
+            // Check if it's Sunday and time is between 1:00 PM and 10:00 PM IST
+            if (dayOfWeek === 0 && hour >= 13 && hour < 22) {
+                // Proceed with sending email (Replace the below code with your email sending logic)
+                alert("Order sent! Check your email for order details.");
+            } else {
+                // Display popup message
+                alert("This order is applicable only on Sundays from 1:00 PM to 10:00 PM IST!!");
+            }
+        }
+    </script>
+</body>
+</html>
 
 
 
