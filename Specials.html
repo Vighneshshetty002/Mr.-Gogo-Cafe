@@ -219,6 +219,59 @@
         function closePopup() {
             document.getElementById("popup").style.display = "none";
         }
+
+
+
+
+
+
+
+         function showStatus(message) {
+            statusBar.textContent = message;
+            statusBar.style.display = 'block';
+            setTimeout(() => {
+                statusBar.style.display = 'none';
+            }, 3000);
+        }
+
+        function orderItem(name, price) {
+            const orderDetails = name;
+            const totalPrice = price.toFixed(2);
+            const orderDateTime = new Date().toLocaleString();
+            emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
+                table_number: tableNumber,
+                order_details: orderDetails,
+                total_price: totalPrice,
+                order_date_time: orderDateTime
+            })
+            .then(function(response) {
+                showStatus('Order placed successfully!');
+            }, function(error) {
+                showStatus('Failed to place order. Please try again.');
+            });
+        }
+
+
+
+        function sendOrder() {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const orderDetails = cart.map(item => `${item.name} - $${item.price.toFixed(2)}`).join('<br/>');
+            const orderDateTime = new Date().toLocaleString();
+            emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
+                table_number: tableNumber,
+                order_details: orderDetails,
+                total_price: total.toFixed(2),
+                order_date_time: orderDateTime
+            })
+            .then(function(response) {
+                showStatus('Order placed successfully!');
+                cart = [];
+                updateCart();
+                closePopup();
+            }, function(error) {
+                showStatus('Failed to place order. Please try again.');
+            });
+        }
     </script>
 </body>
 </html>
