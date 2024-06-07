@@ -129,6 +129,13 @@
             background-color: #ccc;
         }
     </style>
+    <!-- Add EmailJS SDK -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("ZTLLkEu2m9zcOrE1i");
+        })();
+    </script>
 </head>
 <body>
     <center><img src="gogo-cafe-white.png" width="200px"></center>
@@ -150,43 +157,38 @@
         <div class="card">
             <img src="Menu Food images/WhatsApp Image 2024-06-06 at 19.30.50_43479c5c.jpg" alt="Combo 1">
             <h2>Special Combo</h2>
-            <p>Burger,French Fries, Mojito
+            <p>Burger, French Fries, Mojito</p>
             <p>Combo Price: 139/-</p>
             <p>This Offer is Applicable only on Sundays from 1:00 PM to 10:00 PM IST!!</p>
-            <button onclick="orderspl()">Order</button>
+            <button onclick="orderspl('Special Combo', 139)">Order</button>
         </div>
         <div class="card">
             <img src="Menu Food images/kisspng-south-indian-cuisine-vegetarian-cuisine-biryani-na-5aeceede6e1c91.6971258815254770864511-removebg-preview.png" alt="Combo 2">
             <h2>Thali</h2>
-                <p>2 Bhaji, 2 Chapati, Rice, Sambar, <br/>
-                    Chutney, Pickle, Papad, Curd</p>
-            <p style=font-style:"bold";>Combo Price: 80/-</p>
-            
-            <button onclick="order()">Order</button>
+            <p>2 Bhaji, 2 Chapati, Rice, Sambar, <br/> Chutney, Pickle, Papad, Curd</p>
+            <p>Combo Price: 80/-</p>
+            <button onclick="order('Thali', 80)">Order</button>
         </div>
         <div class="card">
             <img src="Menu Food images/82ed3d03484e72bffc6ad7662cbb5be9-removebg-preview.png" alt="Combo 3">
             <h2>Rice Plate</h2>
-            <p> Rice, Sambar, Chutney, <br/> Pickle, Papad, Curd</p>
+            <p>Rice, Sambar, Chutney, <br/> Pickle, Papad, Curd</p>
             <p>Combo Price: 40/-</p>
-            
-            <button onclick="order()">Order</button>
+            <button onclick="order('Rice Plate', 40)">Order</button>
         </div>
         <div class="card">
             <img src="Menu Food images/mangalorean_meal_plate-removebg-preview.png" alt="Combo 4">
             <h2>Chapati Plate</h2>
-               <p>2 Bhaji, 2 Chapati, Chutney, <br/> Pickle, Papad, Curd</p>
+            <p>2 Bhaji, 2 Chapati, Chutney, <br/> Pickle, Papad, Curd</p>
             <p>Combo Price: 50/-</p>
-           
-            <button onclick="order()">Order</button>
+            <button onclick="order('Chapati Plate', 50)">Order</button>
         </div>
         <div class="card">
             <img src="Menu Food images/MiniThaliwithSambarPoriyal-removebg-preview.png" alt="Combo 5">
             <h2>Mini Meals</h2>
-               <p>1 Bhaji, 1 Chapati, Rice, Sambar, <br/> Chutney, Pickle, Papad, Curd</p>
+            <p>1 Bhaji, 1 Chapati, Rice, Sambar, <br/> Chutney, Pickle, Papad, Curd</p>
             <p>Combo Price: 60/-</p>
-           
-            <button onclick="order()">Order</button>
+            <button onclick="order('Mini Meals', 60)">Order</button>
         </div>
     </div>
 
@@ -201,15 +203,25 @@
     </div>
 
     <script>
-        function orderspl() {
+        function orderspl(name, price) {
             var today = new Date();
             var dayOfWeek = today.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
             var hour = today.getHours();
 
             // Check if it's Sunday and time is between 1:00 PM and 10:00 PM IST
             if (dayOfWeek === 0 && hour >= 13 && hour < 22) {
-                // Proceed with sending email (Replace the below code with your email sending logic)
-                alert("Order sent! Check your email for order details.");
+                // Send order email
+                const orderDateTime = new Date().toLocaleString();
+                emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
+                    table_number: "N/A",
+                    order_details: name,
+                    total_price: price.toFixed(2),
+                    order_date_time: orderDateTime
+                }).then(function(response) {
+                    alert("Order placed successfully!");
+                }, function(error) {
+                    alert("Failed to place order. Please try again.");
+                });
             } else {
                 // Display popup message
                 document.getElementById("popup").style.display = "flex";
@@ -220,56 +232,17 @@
             document.getElementById("popup").style.display = "none";
         }
 
-
-
-
-
-
-
-         function showStatus(message) {
-            statusBar.textContent = message;
-            statusBar.style.display = 'block';
-            setTimeout(() => {
-                statusBar.style.display = 'none';
-            }, 3000);
-        }
-
-        function orderItem(name, price) {
-            const orderDetails = name;
-            const totalPrice = price.toFixed(2);
+        function order(name, price) {
             const orderDateTime = new Date().toLocaleString();
             emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-                table_number: tableNumber,
-                order_details: orderDetails,
-                total_price: totalPrice,
+                table_number: "N/A",
+                order_details: name,
+                total_price: price.toFixed(2),
                 order_date_time: orderDateTime
-            })
-            .then(function(response) {
-                showStatus('Order placed successfully!');
+            }).then(function(response) {
+                alert("Order placed successfully!");
             }, function(error) {
-                showStatus('Failed to place order. Please try again.');
-            });
-        }
-
-
-
-        function sendOrder() {
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const orderDetails = cart.map(item => `${item.name} - $${item.price.toFixed(2)}`).join('<br/>');
-            const orderDateTime = new Date().toLocaleString();
-            emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-                table_number: tableNumber,
-                order_details: orderDetails,
-                total_price: total.toFixed(2),
-                order_date_time: orderDateTime
-            })
-            .then(function(response) {
-                showStatus('Order placed successfully!');
-                cart = [];
-                updateCart();
-                closePopup();
-            }, function(error) {
-                showStatus('Failed to place order. Please try again.');
+                alert("Failed to place order. Please try again.");
             });
         }
     </script>
