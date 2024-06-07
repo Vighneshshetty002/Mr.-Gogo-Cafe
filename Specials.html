@@ -48,9 +48,17 @@
         nav a.active {
             background-color: #555;
         }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
         .card {
             background-color: white;
-            color:black;
+            color: black;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 300px;
@@ -78,7 +86,7 @@
         }
 
         .card button:hover {
-            background-color: black;
+            background-color: #333;
         }
 
         /* Styling for the popup */
@@ -87,13 +95,13 @@
             top: 0;
             left: 0;
             width: 100%;
-            
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
             display: flex;
-            max-width: 80%;
-            border-radius: 15px;
             justify-content: center;
             align-items: center;
             z-index: 9999; /* Ensure the popup appears above other elements */
+            display: none;
         }
 
         .popup-content {
@@ -108,14 +116,18 @@
             margin-bottom: 20px;
         }
 
-        .popup button{
+        .popup button {
             background-color: white;
+            color: black;
             padding: 10px 20px;
             border: none;
-            border-radius: 1px;
-            
+            border-radius: 5px;
+            cursor: pointer;
         }
-        
+
+        .popup button:hover {
+            background-color: #ccc;
+        }
     </style>
 </head>
 <body>
@@ -132,19 +144,37 @@
     <hr>
     <center><h1>Special Offers</h1></center>
     <hr>
-    <br/>
-    <br/>
-    <center>
+    <br>
+    <br>
+    <div class="card-container">
         <div class="card">
-            <img src="Menu Food images/WhatsApp Image 2024-06-06 at 19.30.50_43479c5c.jpg" alt="ad">
+            <img src="Menu Food images/WhatsApp Image 2024-06-06 at 19.30.50_43479c5c.jpg" alt="Combo 1">
             <p>Combo Price: 139/-</p>
-            <p>This Offer is Applicable only on Sundays from 1:00 PM to 10:00 PM IST!! </p>
+            <p>This Offer is Applicable only on Sundays from 1:00 PM to 10:00 PM IST!!</p>
             <button onclick="order()">Order</button>
         </div>
-    </center>
+        <div class="card">
+            <img src="Menu Food images/Combo2.jpg" alt="Combo 2">
+            <p>Combo Price: 149/-</p>
+            <p>This Offer is Applicable only on Sundays from 1:00 PM to 10:00 PM IST!!</p>
+            <button onclick="order()">Order</button>
+        </div>
+        <div class="card">
+            <img src="Menu Food images/Combo3.jpg" alt="Combo 3">
+            <p>Combo Price: 159/-</p>
+            <p>This Offer is Applicable only on Sundays from 1:00 PM to 10:00 PM IST!!</p>
+            <button onclick="order()">Order</button>
+        </div>
+        <div class="card">
+            <img src="Menu Food images/Combo4.jpg" alt="Combo 4">
+            <p>Combo Price: 169/-</p>
+            <p>This Offer is Applicable only on Sundays from 1:00 PM to 10:00 PM IST!!</p>
+            <button onclick="order()">Order</button>
+        </div>
+    </div>
 
     <!-- Popup -->
-    <center><div class="popup" id="popup">
+    <div class="popup" id="popup">
         <div class="popup-content">
             <img src="gogo-cafe-white.png" alt="Gogo Cafe">
             <h2 style="color: white;">Alert!!</h2>
@@ -152,7 +182,6 @@
             <button onclick="closePopup()">OK</button>
         </div>
     </div>
-    </center>
 
     <script>
         function order() {
