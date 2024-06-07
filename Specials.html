@@ -149,9 +149,11 @@
     <div class="card-container">
         <div class="card">
             <img src="Menu Food images/WhatsApp Image 2024-06-06 at 19.30.50_43479c5c.jpg" alt="Combo 1">
+            <h2>Special Combo</h2>
+            <p>Burger,French Fries, Mojito
             <p>Combo Price: 139/-</p>
             <p>This Offer is Applicable only on Sundays from 1:00 PM to 10:00 PM IST!!</p>
-            <button onclick="order()">Order</button>
+            <button onclick="orderspl()">Order</button>
         </div>
         <div class="card">
             <img src="Menu Food images/kisspng-south-indian-cuisine-vegetarian-cuisine-biryani-na-5aeceede6e1c91.6971258815254770864511-removebg-preview.png" alt="Combo 2">
@@ -199,7 +201,7 @@
     </div>
 
     <script>
-        function order() {
+        function orderspl() {
             var today = new Date();
             var dayOfWeek = today.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
             var hour = today.getHours();
