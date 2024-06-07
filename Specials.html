@@ -128,6 +128,21 @@
         .popup button:hover {
             background-color: #ccc;
         }
+
+        /* Status bar */
+        .status-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: white;
+            color: black;
+            text-align: center;
+            line-height: 50px;
+            z-index: 10000;
+            display: none;
+        }
     </style>
     <!-- Add EmailJS SDK -->
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
@@ -192,6 +207,9 @@
         </div>
     </div>
 
+    <!-- Status bar -->
+    <div id="statusBar" class="status-bar"></div>
+
     <!-- Popup -->
     <div class="popup" id="popup">
         <div class="popup-content">
@@ -203,6 +221,15 @@
     </div>
 
     <script>
+        function showStatus(message) {
+            const statusBar = document.getElementById('statusBar');
+            statusBar.textContent = message;
+            statusBar.style.display = 'block';
+            setTimeout(() => {
+                statusBar.style.display = 'none';
+            }, 3000);
+        }
+
         function orderspl(name, price) {
             var today = new Date();
             var dayOfWeek = today.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
@@ -218,9 +245,9 @@
                     total_price: price.toFixed(2),
                     order_date_time: orderDateTime
                 }).then(function(response) {
-                    alert("Order placed successfully!");
+                    showStatus('Order placed successfully!');
                 }, function(error) {
-                    alert("Failed to place order. Please try again.");
+                    showStatus('Failed to place order. Please try again.');
                 });
             } else {
                 // Display popup message
@@ -240,9 +267,9 @@
                 total_price: price.toFixed(2),
                 order_date_time: orderDateTime
             }).then(function(response) {
-                alert("Order placed successfully!");
+                showStatus('Order placed successfully!');
             }, function(error) {
-                alert("Failed to place order. Please try again.");
+                showStatus('Failed to place order. Please try again.');
             });
         }
     </script>
