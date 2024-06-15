@@ -14,35 +14,42 @@ body {
     background-color: black;
 }
 nav {
-            text-align: center;
-            margin-bottom: 20px; /* Reduce margin */
-            margin-top: 10px; /* Reduce margin */
+            background-color: white; /* Added background color to nav */
+            padding: 10px 0; /* Added padding for spacing */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added shadow for effect */
         }
 
         nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
+            display: flex;
+            gap: 5px;
+            justify-content: center; /* Centered the nav items */
+            align-items: center;
         }
 
         nav li {
-            display: inline-block;
-            margin: 0 10px;
+            margin: 5px 10px; /* Adjusted margin for better spacing */
         }
 
         nav a {
-            color: white; /* Change link color to white */
-            background-color: #333; /* Darker background color */
+            color: black;
+            background-color: white;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+            transition: background-color 0.3s, color 0.3s;
+            white-space: nowrap; /* Prevents text from wrapping inside the button */
         }
 
         nav a:hover,
         nav a.active {
-            background-color: #555; /* Darker shade on hover and active state */
+            background-color: #333;
+            color: white;
         }
+
+    
 .container {
     max-width: 800px;
     margin: 20px auto;
@@ -157,9 +164,10 @@ h1, h2, p {
 <center><img src="gogo-cafe-white.png" width="200px"></center>
     <nav>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#" class="active">Menu</a></li>
-            <li><a href="about_us.html">About</a></li>
+            <li><a href="https://vighneshshetty002.github.io/Mr.-Gogo-Cafe/">Home</a></li>
+            <li><a href="https://vighneshshetty002.github.io/Mr.-Gogo-Cafe/menu.html">Menu</a></li>
+            <li><a href="https://vighneshshetty002.github.io/Mr.-Gogo-Cafe/Specials.html" >Specials</a></li>
+            <li><a href="https://vighneshshetty002.github.io/Mr.-Gogo-Cafe/about_us.html" class="active">About</a></li>
         </ul>
     </nav>
 
