@@ -343,7 +343,8 @@
             <div class="buttons">
                 <button onclick="orderItem('Veg Pizza', 109)">Order</button>
                 <button onclick="addToCart('Veg Pizza', 109)">Add +</button>
-                <button id="addButton-Veg Pizza" onclick="changeQuantity('Veg Pizza', 109, 1)">Add +</button>
+                <button id="addButton-Veg Pizza" onclick="addToCart('Veg Pizza', 109)">Add +</button>
+
 
             </div>
         </div>
@@ -1322,19 +1323,49 @@ After This should do the Changes!!
         }
         updateCart();
         showStatus('Item added to cart.');
+        updateAddButton(name);
     }
 
-    function changeQuantity(name, price, change) {
+    function incrementQuantity(name) {
         const item = cart.find(item => item.name === name);
         if (item) {
-            item.quantity += change;
-            if (item.quantity === 0) {
-                cart = cart.filter(cartItem => cartItem.name !== name);
-            }
-        } else if (change > 0) {
-            cart.push({ name, price, quantity: 1 });
+            item.quantity += 1;
         }
         updateCart();
+    }
+
+    function decrementQuantity(name) {
+        const item = cart.find(item => item.name === name);
+        if (item) {
+            item.quantity -= 1;
+            if (item.quantity === 0) {
+                cart = cart.filter(cartItem => cartItem.name !== name);
+                revertAddButton(name);
+            }
+        }
+        updateCart();
+    }
+
+    function updateAddButton(name) {
+        const button = document.getElementById(`addButton-${name}`);
+        if (button) {
+            button.innerHTML = `
+                <button onclick="decrementQuantity('${name}')">-</button>
+                <span id="quantity-${name}">1</span>
+                <button onclick="incrementQuantity('${name}')">+</button>
+            `;
+            button.onclick = null;
+        }
+    }
+
+    function revertAddButton(name) {
+        const button = document.getElementById(`addButton-${name}`);
+        if (button) {
+            button.innerHTML = `Add +`;
+            button.onclick = function() {
+                addToCart(name, parseFloat(button.getAttribute('data-price')));
+            };
+        }
     }
 
     function updateCart() {
@@ -1345,8 +1376,8 @@ After This should do the Changes!!
             itemDiv.classList.add('popup-item');
             itemDiv.innerHTML = `
                 <span>${item.name} - $${item.price.toFixed(2)} x ${item.quantity}</span>
-                <button onclick="changeQuantity('${item.name}', ${item.price}, -1)">-</button>
-                <button onclick="changeQuantity('${item.name}', ${item.price}, 1)">+</button>
+                <button onclick="decrementQuantity('${item.name}')">-</button>
+                <button onclick="incrementQuantity('${item.name}')">+</button>
                 <button onclick="removeFromCart(${index})">Remove</button>
             `;
             popupContent.appendChild(itemDiv);
@@ -1357,8 +1388,9 @@ After This should do the Changes!!
     }
 
     function removeFromCart(index) {
-        cart.splice(index, 1);
+        const removedItem = cart.splice(index, 1)[0];
         updateCart();
+        revertAddButton(removedItem.name);
     }
 
     function togglePopup() {
@@ -1392,6 +1424,7 @@ After This should do the Changes!!
         });
     }
 </script>
+
 
 </body>
 </html>
