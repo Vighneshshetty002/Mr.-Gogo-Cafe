@@ -1323,47 +1323,50 @@ After This should do the Changes!!
         }
         updateCart();
         showStatus('Item added to cart.');
-        updateAddButton(name);
+        updateAddButton(name, price);
     }
 
-    function incrementQuantity(name) {
+    function incrementQuantity(name, price) {
         const item = cart.find(item => item.name === name);
         if (item) {
             item.quantity += 1;
+            updateAddButton(name, price);
         }
         updateCart();
     }
 
-    function decrementQuantity(name) {
+    function decrementQuantity(name, price) {
         const item = cart.find(item => item.name === name);
         if (item) {
             item.quantity -= 1;
             if (item.quantity === 0) {
                 cart = cart.filter(cartItem => cartItem.name !== name);
-                revertAddButton(name);
+                revertAddButton(name, price);
+            } else {
+                updateAddButton(name, price);
             }
         }
         updateCart();
     }
 
-    function updateAddButton(name) {
+    function updateAddButton(name, price) {
         const button = document.getElementById(`addButton-${name}`);
-        if (button) {
+        const item = cart.find(item => item.name === name);
+        if (button && item) {
             button.innerHTML = `
-                <button onclick="decrementQuantity('${name}')">-</button>
-                <span id="quantity-${name}">1</span>
-                <button onclick="incrementQuantity('${name}')">+</button>
+                <button onclick="decrementQuantity('${name}', ${price})">-</button>
+                <span id="quantity-${name}">${item.quantity}</span>
+                <button onclick="incrementQuantity('${name}', ${price})">+</button>
             `;
-            button.onclick = null;
         }
     }
 
-    function revertAddButton(name) {
+    function revertAddButton(name, price) {
         const button = document.getElementById(`addButton-${name}`);
         if (button) {
             button.innerHTML = `Add +`;
             button.onclick = function() {
-                addToCart(name, parseFloat(button.getAttribute('data-price')));
+                addToCart(name, price);
             };
         }
     }
@@ -1375,22 +1378,20 @@ After This should do the Changes!!
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('popup-item');
             itemDiv.innerHTML = `
-                <span>${item.name} - $${item.price.toFixed(2)} x ${item.quantity}</span>
-                <button onclick="decrementQuantity('${item.name}')">-</button>
-                <button onclick="incrementQuantity('${item.name}')">+</button>
+                <span>${item.name} - ₹${item.price.toFixed(2)} x ${item.quantity}</span>
                 <button onclick="removeFromCart(${index})">Remove</button>
             `;
             popupContent.appendChild(itemDiv);
             total += item.price * item.quantity;
         });
-        popupTotal.textContent = `Total: $${total.toFixed(2)}`;
+        popupTotal.textContent = `Total: ₹${total.toFixed(2)}`;
         popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
     }
 
     function removeFromCart(index) {
         const removedItem = cart.splice(index, 1)[0];
         updateCart();
-        revertAddButton(removedItem.name);
+        revertAddButton(removedItem.name, removedItem.price);
     }
 
     function togglePopup() {
@@ -1406,7 +1407,7 @@ After This should do the Changes!!
 
     function sendOrder() {
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const orderDetails = cart.map(item => `${item.name} - $${item.price.toFixed(2)} x ${item.quantity}`).join('<br/>');
+        const orderDetails = cart.map(item => `${item.name} - ₹${item.price.toFixed(2)} x ${item.quantity}`).join('<br/>');
         const orderDateTime = new Date().toLocaleString();
         emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
             table_number: tableNumber,
@@ -1424,6 +1425,7 @@ After This should do the Changes!!
         });
     }
 </script>
+
 
 
 </body>
