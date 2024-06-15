@@ -103,25 +103,54 @@
         }
 
         .description .buttons {
-            display: flex;
-            gap: 10px;
-        }
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-        .description button {
-            padding: 10px 20px;
-            font-size: 12px;
-            background-color: white;
-            color: black;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+.description button {
+    padding: 8px 16px; /* Adjusted padding for a more compact look */
+    font-size: 14px; /* Adjusted font size */
+    background-color: white;
+    color: black;
+    border: 1px solid black; /* Added border for better definition */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s; /* Added transition for transform */
+}
 
-        .description button:hover {
-            background-color: black;
-            color: white;
-        }
+.description button:hover {
+    background-color: black;
+    color: white;
+    transform: scale(1.05); /* Slightly increase size on hover for a smoother effect */
+}
+
+.description .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-controls button {
+    padding: 5px 10px; /* Smaller padding for quantity controls */
+    font-size: 14px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.quantity-controls button:hover {
+    background-color: black;
+    color: white;
+}
+
+.quantity-controls span {
+    font-size: 14px;
+    font-weight: bold;
+}
 
         .menu-Title{
             max-width: 95%;
@@ -342,8 +371,11 @@
             <p class="price">Price: 109/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Veg Pizza', 109)">Order</button>
-                <button onclick="addToCart('Veg Pizza', 109)">Add +</button>
-                <button id="addButton-Veg Pizza" onclick="addToCart('Veg Pizza', 109)">Add +</button>
+                <button id="addButton-VegPizza" onclick="addToCart('Veg Pizza', 109)">Add +</button>
+        <div class="quantity-controls" id="quantityControls-VegPizza" style="display: none;">
+            <button onclick="decrementQuantity('Veg Pizza', 109)">-</button>
+            <span id="quantity-VegPizza">1</span>
+            <button onclick="incrementQuantity('Veg Pizza', 109)">+</button>
 
 
             </div>
@@ -354,6 +386,8 @@
 
 
 
+    
+
  <div class="container">
         <img src="Menu Food images/Tasty Kulhad Pizza.jpeg" alt="Veg Pizza">
         <div class="description">
@@ -362,7 +396,7 @@
             <p class="price">Price: 199/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Kulhad Pizza', 199)">Order</button>
-                <button onclick="addToCart('Kulhad Pizza', 199)">Add to Cart</button>
+                <button id="addButton-Veg Pizza" onclick="addToCart('Kulhad Pizza', 109)">Add +</button>
             </div>
         </div>
     </div>
@@ -1315,39 +1349,50 @@ After This should do the Changes!!
     }
 
     function addToCart(name, price) {
-        const existingItem = cart.find(item => item.name === name);
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({ name, price, quantity: 1 });
-        }
-        updateCart();
-        showStatus('Item added to cart.');
+    const existingItem = cart.find(item => item.name === name);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ name, price, quantity: 1 });
+        document.getElementById(`addButton-${name}`).style.display = 'none';
+        document.getElementById(`quantityControls-${name}`).style.display = 'flex';
+    }
+    updateCart();
+    showStatus('Item added to cart.');
+    updateAddButton(name, price);
+}
+
+function updateAddButton(name, price) {
+    const item = cart.find(item => item.name === name);
+    if (item) {
+        document.getElementById(`quantity-${name}`).textContent = item.quantity;
+    }
+}
+
+function incrementQuantity(name, price) {
+    const item = cart.find(item => item.name === name);
+    if (item) {
+        item.quantity += 1;
         updateAddButton(name, price);
     }
+    updateCart();
+}
 
-    function incrementQuantity(name, price) {
-        const item = cart.find(item => item.name === name);
-        if (item) {
-            item.quantity += 1;
+function decrementQuantity(name, price) {
+    const item = cart.find(item => item.name === name);
+    if (item) {
+        item.quantity -= 1;
+        if (item.quantity === 0) {
+            cart = cart.filter(cartItem => cartItem.name !== name);
+            document.getElementById(`addButton-${name}`).style.display = 'inline-block';
+            document.getElementById(`quantityControls-${name}`).style.display = 'none';
+        } else {
             updateAddButton(name, price);
         }
-        updateCart();
     }
+    updateCart();
+}
 
-    function decrementQuantity(name, price) {
-        const item = cart.find(item => item.name === name);
-        if (item) {
-            item.quantity -= 1;
-            if (item.quantity === 0) {
-                cart = cart.filter(cartItem => cartItem.name !== name);
-                revertAddButton(name, price);
-            } else {
-                updateAddButton(name, price);
-            }
-        }
-        updateCart();
-    }
 
     function updateAddButton(name, price) {
         const button = document.getElementById(`addButton-${name}`);
