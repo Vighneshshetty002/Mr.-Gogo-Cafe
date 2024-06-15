@@ -63,60 +63,67 @@
         font-size: 16px;
     }
 
-    .menu-container {
-        padding: 20px;
-        margin: 20px auto;
-        max-width: 600px;
-    }
+   .container {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            max-width: 800px; /* Adjust max-width as needed */
+            margin: 20px auto;
+            background-color: white; /* Background color for the container */
+            color: black; /* Text color for the description */
+            border-radius: 10px; /* Rounded corners */
+        }
 
-    .menu-item {
-        border-bottom: 1px solid #666;
-        padding: 10px 0;
-        display: table;
-        align-items: center;
-        gap: 10px; /* Added gap for spacing */
-    }
+        .container img {
+            max-width: 150px; /* Adjust the image size as needed */
+            margin-right: 20px; /* Space between image and text */
+            border-radius: 10px; /* Rounded corners for the image */
+        }
 
-    .menu-item:last-child {
-        border-bottom: none;
-    }
+        .description {
+            flex: 1;
+        }
 
-    .menu-item img {
-        margin-right: 20px;
-        width: 100px;
-        height: 120px;
-        border-radius: 5px;
-    }
+        .description h2 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+        }
 
-    .menu-item-buttons {
-        margin-left: auto;
-        gap: 10px; /* Added gap for spacing */
-        display: flex;
-        align-items: center;
-    }
+        .description p {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+        }
 
-    .menu-item-buttons button {
-        background-color: white;
-        color: black;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-    }
+        .description .price {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-    .menu-item-buttons button:hover {
-        background-color: #555;
-        color: white; /* Added hover color for buttons */
-    }
+        .description .buttons {
+            display: flex;
+            gap: 10px;
+        }
 
-    .chili-emoji {
-        background-color: white;
-        border-radius: 5px;
-        padding: 8px 8px;
-        font-size: 20px; /* Adjust the size as needed */
-    }
+        .description button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
+        .description button:hover {
+            background-color: #0056b3;
+        }
+
+
+
+        
     .status-bar {
         position: fixed;
         top: 0;
@@ -299,8 +306,7 @@
             <li><a href="https://vighneshshetty002.github.io/Mr.-Gogo-Cafe/about_us.html">About</a></li>
         </ul>
     </nav>
-php
-Copy code
+
 <hr>
 <center><h1>Menu <img src="Menu Food images/menu icon.png" width="50px"></h1></center>
 <hr>
