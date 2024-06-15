@@ -102,37 +102,36 @@
             margin-bottom: 10px;
         }
 
-        .description .buttons {
+.description .buttons {
     display: flex;
-    align-items: center;
     gap: 10px;
 }
 
 .description button {
-    padding: 8px 16px; /* Adjusted padding for a more compact look */
-    font-size: 14px; /* Adjusted font size */
+    padding: 8px 16px;
+    font-size: 14px;
     background-color: white;
     color: black;
-    border: 1px solid black; /* Added border for better definition */
+    border: 1px solid black;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, transform 0.2s; /* Added transition for transform */
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
 }
 
 .description button:hover {
     background-color: black;
     color: white;
-    transform: scale(1.05); /* Slightly increase size on hover for a smoother effect */
+    transform: scale(1.05);
 }
 
-.description .quantity-controls {
+.quantity-controls {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
 .quantity-controls button {
-    padding: 5px 10px; /* Smaller padding for quantity controls */
+    padding: 5px 10px;
     font-size: 14px;
     background-color: white;
     color: black;
@@ -371,11 +370,12 @@
             <p class="price">Price: 109/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Veg Pizza', 109)">Order</button>
-                <button id="addButton-VegPizza" onclick="addToCart('Veg Pizza', 109)">Add +</button>
-        <div class="quantity-controls" id="quantityControls-VegPizza" style="display: none;">
-            <button onclick="decrementQuantity('Veg Pizza', 109)">-</button>
-            <span id="quantity-VegPizza">1</span>
-            <button onclick="incrementQuantity('Veg Pizza', 109)">+</button>
+                <button id="addButton-VegPizza" onclick="addToCart('Veg Pizza', 199)">Add +</button>
+                <div class="quantity-controls" id="quantityControls-KulhadPizza" style="display: none;">
+                <button onclick="decrementQuantity('Veg Pizza', 199)">-</button>
+                <span id="quantity-VegPizza">1</span>
+                <button onclick="incrementQuantity('Veg Pizza', 199)">+</button>
+            </div>
 
 
             </div>
@@ -386,7 +386,6 @@
 
 
 
-    
 
  <div class="container">
         <img src="Menu Food images/Tasty Kulhad Pizza.jpeg" alt="Veg Pizza">
@@ -396,7 +395,12 @@
             <p class="price">Price: 199/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Kulhad Pizza', 199)">Order</button>
-                <button id="addButton-Veg Pizza" onclick="addToCart('Kulhad Pizza', 109)">Add +</button>
+                <button id="addButton-KulhadPizza" onclick="addToCart('Kulhad Pizza', 199)">Add +</button>
+            <div class="quantity-controls" id="quantityControls-KulhadPizza" style="display: none;">
+                <button onclick="decrementQuantity('Kulhad Pizza', 199)">-</button>
+                <span id="quantity-KulhadPizza">1</span>
+                <button onclick="incrementQuantity('Kulhad Pizza', 199)">+</button>
+            </div>
             </div>
         </div>
     </div>
@@ -1289,73 +1293,73 @@ After This should do the Changes!!
 </footer>
 
 <script>
-    const searchInput = document.getElementById('searchInput');
-    const menuContainer = document.getElementById('menuContainer');
-    const statusBar = document.getElementById('statusBar');
-    const popupOverlay = document.getElementById('popupOverlay');
-    const popup = document.getElementById('popup');
-    const popupContent = document.getElementById('popupContent');
-    const popupTotal = document.getElementById('popupTotal');
-    const popupBtn = document.getElementById('popupBtn');
+const searchInput = document.getElementById('searchInput');
+const menuContainer = document.getElementById('menuContainer');
+const statusBar = document.getElementById('statusBar');
+const popupOverlay = document.getElementById('popupOverlay');
+const popup = document.getElementById('popup');
+const popupContent = document.getElementById('popupContent');
+const popupTotal = document.getElementById('popupTotal');
+const popupBtn = document.getElementById('popupBtn');
 
-    let cart = [];
+let cart = [];
 
-    // Extract table number from URL
-    function getTableNumber() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
-    }
+// Extract table number from URL
+function getTableNumber() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
+}
 
-    const tableNumber = getTableNumber();
+const tableNumber = getTableNumber();
 
-    searchInput.addEventListener('input', filterMenu);
+searchInput.addEventListener('input', filterMenu);
 
-    function filterMenu() {
-        const query = searchInput.value.toLowerCase();
-        const items = menuContainer.querySelectorAll('.menu-item');
-        items.forEach(item => {
-            const itemName = item.querySelector('h2').textContent.toLowerCase();
-            if (itemName.includes(query)) {
-                item.style.display = 'flex';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    }
+function filterMenu() {
+    const query = searchInput.value.toLowerCase();
+    const items = menuContainer.querySelectorAll('.menu-item');
+    items.forEach(item => {
+        const itemName = item.querySelector('h2').textContent.toLowerCase();
+        if (itemName.includes(query)) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
 
-    function showStatus(message) {
-        statusBar.textContent = message;
-        statusBar.style.display = 'block';
-        setTimeout(() => {
-            statusBar.style.display = 'none';
-        }, 3000);
-    }
+function showStatus(message) {
+    statusBar.textContent = message;
+    statusBar.style.display = 'block';
+    setTimeout(() => {
+        statusBar.style.display = 'none';
+    }, 3000);
+}
 
-    function orderItem(name, price) {
-        const orderDetails = cart.map(item => `${item.name} - Quantity: ${item.quantity} - Price: ${item.price.toFixed(2)}`).join('<br/>');
-        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2);
-        const orderDateTime = new Date().toLocaleString();
-        emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-            table_number: tableNumber,
-            order_details: orderDetails,
-            total_price: totalPrice,
-            order_date_time: orderDateTime
-        })
-        .then(function(response) {
-            showStatus('Order placed successfully!');
-        }, function(error) {
-            showStatus('Failed to place order. Please try again.');
-        });
-    }
+function orderItem(name, price) {
+    const orderDetails = name;
+    const totalPrice = price.toFixed(2);
+    const orderDateTime = new Date().toLocaleString();
+    emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
+        table_number: tableNumber,
+        order_details: orderDetails,
+        total_price: totalPrice,
+        order_date_time: orderDateTime
+    })
+    .then(function(response) {
+        showStatus('Order placed successfully!');
+    }, function(error) {
+        showStatus('Failed to place order. Please try again.');
+    });
+}
 
-    function addToCart(name, price) {
+function addToCart(name, price) {
     const existingItem = cart.find(item => item.name === name);
     if (existingItem) {
         existingItem.quantity += 1;
     } else {
         cart.push({ name, price, quantity: 1 });
-        document.getElementById(`addButton-${name}`).style.display = 'none';
-        document.getElementById(`quantityControls-${name}`).style.display = 'flex';
+        document.getElementById(`addButton-${name.replace(/\s+/g, '')}`).style.display = 'none';
+        document.getElementById(`quantityControls-${name.replace(/\s+/g, '')}`).style.display = 'flex';
     }
     updateCart();
     showStatus('Item added to cart.');
@@ -1365,7 +1369,7 @@ After This should do the Changes!!
 function updateAddButton(name, price) {
     const item = cart.find(item => item.name === name);
     if (item) {
-        document.getElementById(`quantity-${name}`).textContent = item.quantity;
+        document.getElementById(`quantity-${name.replace(/\s+/g, '')}`).textContent = item.quantity;
     }
 }
 
@@ -1384,8 +1388,8 @@ function decrementQuantity(name, price) {
         item.quantity -= 1;
         if (item.quantity === 0) {
             cart = cart.filter(cartItem => cartItem.name !== name);
-            document.getElementById(`addButton-${name}`).style.display = 'inline-block';
-            document.getElementById(`quantityControls-${name}`).style.display = 'none';
+            document.getElementById(`addButton-${name.replace(/\s+/g, '')}`).style.display = 'inline-block';
+            document.getElementById(`quantityControls-${name.replace(/\s+/g, '')}`).style.display = 'none';
         } else {
             updateAddButton(name, price);
         }
@@ -1393,82 +1397,60 @@ function decrementQuantity(name, price) {
     updateCart();
 }
 
+function updateCart() {
+    popupContent.innerHTML = '';
+    let total = 0;
+    cart.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('popup-item');
+        itemDiv.innerHTML = `
+            <span>${item.name} - ${item.price.toFixed(2)}</span>
+            <span>Quantity: ${item.quantity}</span>
+            <button onclick="removeFromCart(${index})">Remove</button>
+        `;
+        popupContent.appendChild(itemDiv);
+        total += item.price * item.quantity;
+    });
+    popupTotal.textContent = `Total: ${total.toFixed(2)}`;
+    popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
+}
 
-    function updateAddButton(name, price) {
-        const button = document.getElementById(`addButton-${name}`);
-        const item = cart.find(item => item.name === name);
-        if (button && item) {
-            button.innerHTML = `
-                <button onclick="decrementQuantity('${name}', ${price})">-</button>
-                <span id="quantity-${name}">${item.quantity}</span>
-                <button onclick="incrementQuantity('${name}', ${price})">+</button>
-            `;
-        }
-    }
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
 
-    function revertAddButton(name, price) {
-        const button = document.getElementById(`addButton-${name}`);
-        if (button) {
-            button.innerHTML = `Add +`;
-            button.onclick = function() {
-                addToCart(name, price);
-            };
-        }
-    }
+function togglePopup() {
+    const isVisible = popup.style.display === 'block';
+    popup.style.display = isVisible ? 'none' : 'block';
+    popupOverlay.style.display = isVisible ? 'none' : 'block';
+}
 
-    function updateCart() {
-        popupContent.innerHTML = '';
-        let total = 0;
-        cart.forEach((item, index) => {
-            const itemDiv = document.createElement('div');
-            itemDiv.classList.add('popup-item');
-            itemDiv.innerHTML = `
-                <span>${item.name} - ₹${item.price.toFixed(2)} x ${item.quantity}</span>
-                <button onclick="removeFromCart(${index})">Remove</button>
-            `;
-            popupContent.appendChild(itemDiv);
-            total += item.price * item.quantity;
-        });
-        popupTotal.textContent = `Total: ₹${total.toFixed(2)}`;
-        popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
-    }
+function closePopup() {
+    popup.style.display = 'none';
+    popupOverlay.style.display = 'none';
+}
 
-    function removeFromCart(index) {
-        const removedItem = cart.splice(index, 1)[0];
+function sendOrder() {
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const orderDetails = cart.map(item => `${item.name} - ${item.price.toFixed(2)} x ${item.quantity}`).join('<br/>');
+    const orderDateTime = new Date().toLocaleString();
+    emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
+        table_number: tableNumber,
+        order_details: orderDetails,
+        total_price: total.toFixed(2),
+        order_date_time: orderDateTime
+    })
+    .then(function(response) {
+        showStatus('Order placed successfully!');
+        cart = [];
         updateCart();
-        revertAddButton(removedItem.name, removedItem.price);
-    }
+        closePopup();
+    }, function(error) {
+        showStatus('Failed to place order. Please try again.');
+    });
+}
 
-    function togglePopup() {
-        const isVisible = popup.style.display === 'block';
-        popup.style.display = isVisible ? 'none' : 'block';
-        popupOverlay.style.display = isVisible ? 'none' : 'block';
-    }
-
-    function closePopup() {
-        popup.style.display = 'none';
-        popupOverlay.style.display = 'none';
-    }
-
-    function sendOrder() {
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const orderDetails = cart.map(item => `${item.name} - ₹${item.price.toFixed(2)} x ${item.quantity}`).join('<br/>');
-        const orderDateTime = new Date().toLocaleString();
-        emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-            table_number: tableNumber,
-            order_details: orderDetails,
-            total_price: total.toFixed(2),
-            order_date_time: orderDateTime
-        })
-        .then(function(response) {
-            showStatus('Order placed successfully!');
-            cart = [];
-            updateCart();
-            closePopup();
-        }, function(error) {
-            showStatus('Failed to place order. Please try again.');
-        });
-    }
 </script>
 
 
