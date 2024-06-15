@@ -313,24 +313,20 @@ Copy code
 <div class="menu-Title">
     <b> <p style="background-color: white; color: black;padding: 10px;">Pizzas</p></b>
 </div>
-<div class="menu-container" id="menuContainer">
-    <div class="menu-item">
-        <h2>Veg Pizza</h2><br>
-        <img src="Menu Food images/Veg Pizza.jpeg" alt="Pizza" />
-        <div><br/>
-            
-            <p>Price: 109/-</p><br>
-            
-        </div>
-        <div class="menu-item-buttons">
-            <div class="order-container">
+ <div class="container">
+        <img src="Menu Food images/Veg Pizza.jpeg" alt="Veg Pizza">
+        <div class="description">
+            <h2>Veg Pizza</h2>
+            <p>A savory delight featuring a medley of fresh vegetables atop a crispy crust.</p>
+            <p class="price">Price: 109/-</p>
+            <div class="buttons">
                 <button onclick="orderItem('Veg Pizza', 109)">Order</button>
-                <span class="chili-emoji">&#127798;</span>
+                <button onclick="addToCart('Veg Pizza', 109)">Add to Cart</button>
             </div>
-            <button onclick="addToCart('Veg Pizza', 109)">Add to Cart</button>
         </div>
-        <p>A savory delight featuring a medley of<br> fresh vegetables atop a crispy crust.</p><br>
     </div>
+
+    
     <div class="menu-item">
         <img src="Menu Food images/Tasty Kulhad Pizza.jpeg" alt="Pizza" />
         <div><br>
