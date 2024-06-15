@@ -19,35 +19,41 @@
         padding-bottom: 50px; /* Adding space for the footer */
     }
 
-    nav {
-        text-align: center;
-        margin-bottom: 20px;
-        margin-top: 10px;
-    }
+     nav {
+            background-color: white; /* Added background color to nav */
+            padding: 10px 0; /* Added padding for spacing */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added shadow for effect */
+        }
 
-    nav ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 10px;
+            justify-content: center; /* Centered the nav items */
+            align-items: center;
+        }
 
-    nav li {
-        display: inline-block;
-        margin: 0 10px;
-    }
+        nav li {
+            margin: 5px 10px; /* Adjusted margin for better spacing */
+        }
 
-    nav a {
-        color: white; /* Changed link color */
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s, color 0.3s;
-    }
+        nav a {
+            color: black;
+            background-color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            white-space: nowrap; /* Prevents text from wrapping inside the button */
+        }
 
-    nav a:hover,
-    nav a.active {
-        background-color: #555;
-    }
+        nav a:hover,
+        nav a.active {
+            background-color: #333;
+            color: white;
+        }
 
     .search-bar {
         text-align: center;
