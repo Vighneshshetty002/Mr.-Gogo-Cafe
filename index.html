@@ -121,6 +121,23 @@
             max-height: 20px;
         }
 
+        footer {
+        text-align: center;
+        padding: 0px 0; /* Reduced padding vertically */
+        background-color: black; /* Adjusted background color */
+        color: white;
+        position: fixed;
+        bottom: 0;
+        width: 100%; /* Adjusted width to fit the screen horizontally */
+        font-size: 12px; /* Reduced font size */
+        z-index: 9999; /* Ensure it's above the popup */
+    }
+
+    footer img {
+        width: 60px;
+        vertical-align: middle;
+    }
+
         @keyframes typing {
             from {
                 width: 0;
@@ -197,7 +214,8 @@
 
         <a href="menu.html" class="menu-button">Menu <img src="Menu Food images/menu icon.png" alt="Menu Icon" class="menu-icon"></a>
     </div>
-
+<p>Powered by <a href="https://github.com/Vighneshshetty002"><img src="VS Tech.png"></a></p>
+</footer>
     <script>
         const text = "Welcome to Mr. Gogo Cafe! Delicious treats await you. Explore our menu and enjoy the cozy ambiance. Visit us today!";
         const textElement = document.getElementById("typewriter-text");
