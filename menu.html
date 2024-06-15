@@ -1227,13 +1227,13 @@
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('popup-item');
             itemDiv.innerHTML = `
-                <span>${item.name} - $${item.price.toFixed(2)}</span>
+                <span>${item.name} - ${item.price.toFixed(2)}</span>
                 <button onclick="removeFromCart(${index})">Remove</button>
             `;
             popupContent.appendChild(itemDiv);
             total += item.price;
         });
-        popupTotal.textContent = `Total: $${total.toFixed(2)}`;
+        popupTotal.textContent = `Total: ${total.toFixed(2)}`;
         popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
     }
 
