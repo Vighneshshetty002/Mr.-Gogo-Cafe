@@ -343,6 +343,8 @@
             <div class="buttons">
                 <button onclick="orderItem('Veg Pizza', 109)">Order</button>
                 <button onclick="addToCart('Veg Pizza', 109)">Add +</button>
+                <button id="addButton-Veg Pizza" onclick="changeQuantity('Veg Pizza', 109, 1)">Add +</button>
+
             </div>
         </div>
     </div>
@@ -1295,8 +1297,8 @@ After This should do the Changes!!
     }
 
     function orderItem(name, price) {
-        const orderDetails = name;
-        const totalPrice = price.toFixed(2);
+        const orderDetails = cart.map(item => `${item.name} - Quantity: ${item.quantity} - Price: ${item.price.toFixed(2)}`).join('<br/>');
+        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2);
         const orderDateTime = new Date().toLocaleString();
         emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
             table_number: tableNumber,
@@ -1312,10 +1314,27 @@ After This should do the Changes!!
     }
 
     function addToCart(name, price) {
-        const item = { name, price };
-        cart.push(item);
+        const existingItem = cart.find(item => item.name === name);
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({ name, price, quantity: 1 });
+        }
         updateCart();
         showStatus('Item added to cart.');
+    }
+
+    function changeQuantity(name, price, change) {
+        const item = cart.find(item => item.name === name);
+        if (item) {
+            item.quantity += change;
+            if (item.quantity === 0) {
+                cart = cart.filter(cartItem => cartItem.name !== name);
+            }
+        } else if (change > 0) {
+            cart.push({ name, price, quantity: 1 });
+        }
+        updateCart();
     }
 
     function updateCart() {
@@ -1325,13 +1344,15 @@ After This should do the Changes!!
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('popup-item');
             itemDiv.innerHTML = `
-                <span>${item.name} - ${item.price.toFixed(2)}</span>
+                <span>${item.name} - $${item.price.toFixed(2)} x ${item.quantity}</span>
+                <button onclick="changeQuantity('${item.name}', ${item.price}, -1)">-</button>
+                <button onclick="changeQuantity('${item.name}', ${item.price}, 1)">+</button>
                 <button onclick="removeFromCart(${index})">Remove</button>
             `;
             popupContent.appendChild(itemDiv);
-            total += item.price;
+            total += item.price * item.quantity;
         });
-        popupTotal.textContent = `Total: ${total.toFixed(2)}`;
+        popupTotal.textContent = `Total: $${total.toFixed(2)}`;
         popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
     }
 
@@ -1352,8 +1373,8 @@ After This should do the Changes!!
     }
 
     function sendOrder() {
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        const orderDetails = cart.map(item => `${item.name} - $${item.price.toFixed(2)}`).join('<br/>');
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const orderDetails = cart.map(item => `${item.name} - $${item.price.toFixed(2)} x ${item.quantity}`).join('<br/>');
         const orderDateTime = new Date().toLocaleString();
         emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
             table_number: tableNumber,
@@ -1371,5 +1392,6 @@ After This should do the Changes!!
         });
     }
 </script>
+
 </body>
 </html>
