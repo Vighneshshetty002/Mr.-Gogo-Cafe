@@ -1315,9 +1315,10 @@ nav {
 
 
 <script>
+
 const searchInput = document.getElementById('searchInput');
 const menuContainer = document.getElementById('menuContainer');
-const menuItems = document.querySelectorAll('.menu-item');
+const menuItems = document.querySelectorAll('.container');
 const menuTitles = document.querySelectorAll('.menu-Title');
 
 searchInput.addEventListener('input', filterMenu);
@@ -1326,26 +1327,24 @@ function filterMenu() {
     const query = searchInput.value.toLowerCase();
     let foundItems = false;
 
-    menuTitles.forEach(title => {
-        let categoryHasItems = false;
-
-        menuItems.forEach(item => {
-            const itemName = item.querySelector('h2').textContent.toLowerCase();
-            if (itemName.includes(query)) {
-                item.style.display = 'flex';
-                categoryHasItems = true;
-                foundItems = true;
-            } else {
-                item.style.display = 'none';
-            }
-        });
-
-        title.style.display = categoryHasItems ? 'block' : 'none';
+    menuItems.forEach(item => {
+        const itemName = item.querySelector('h2').textContent.toLowerCase();
+        if (itemName.includes(query)) {
+            item.style.display = 'flex';
+            foundItems = true;
+        } else {
+            item.style.display = 'none';
+        }
     });
 
-    if (!foundItems) {
-        menuTitles.forEach(title => title.style.display = 'none');
-    }
+    menuTitles.forEach(title => {
+        const nextElement = title.nextElementSibling;
+        if (nextElement && nextElement.style.display === 'flex') {
+            title.style.display = 'block';
+        } else {
+            title.style.display = 'none';
+        }
+    });
 }
 
 const statusBar = document.getElementById('statusBar');
@@ -1500,6 +1499,8 @@ function sendOrder() {
         showStatus('Failed to place order. Please try again.');
     });
 }
+
+
 </script>
 
 
