@@ -1317,11 +1317,11 @@ nav {
 <script>
 document.getElementById('searchInput').addEventListener('focus', function() {
     window.scrollTo({
-        top: this.getBoundingClientRect().top + window.scrollY - 1000, // Adjust the offset if needed
+        top: this.getBoundingClientRect().top + window.scrollY - 100, // Adjust the offset to scroll more
         behavior: 'smooth'
     });
 });
-
+  
 const searchInput = document.getElementById('searchInput');
 const menuContainer = document.getElementById('menuContainer');
 const menuItems = document.querySelectorAll('.container');
