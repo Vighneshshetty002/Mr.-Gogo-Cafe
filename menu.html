@@ -1315,12 +1315,14 @@ nav {
 
 
 
-<script>
-const searchInput = document.getElementById('searchInput');
-searchInput.addEventListener('focus', function() {
-    this.scrollIntoView({ behavior: 'smooth', block: 'start' });
+document.getElementById('searchInput').addEventListener('focus', function() {
+    window.scrollTo({
+        top: this.getBoundingClientRect().top + window.scrollY - 10, // Adjust the offset if needed
+        behavior: 'smooth'
+    });
 });
 
+const searchInput = document.getElementById('searchInput');
 const menuContainer = document.getElementById('menuContainer');
 const menuItems = document.querySelectorAll('.container');
 const menuTitles = document.querySelectorAll('.menu-Title');
@@ -1389,7 +1391,7 @@ function orderItem(name, price) {
     const orderDetails = name;
     const totalPrice = price.toFixed(2);
     const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
+    emailjs.send("service_8y2ru2m9zcOrE1i", "template_yrk4mbd", {
         table_number: tableNumber,
         order_details: orderDetails,
         total_price: totalPrice,
@@ -1488,7 +1490,7 @@ function sendOrder() {
     const total = cart.reduce((sum, item) => sum + item.price, 0);
     const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
     const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
+    emailjs.send("service_8y2ru2m9zcOrE1i", "template_yrk4mbd", {
         table_number: tableNumber,
         order_details: orderDetails,
         total_price: total.toFixed(2),
@@ -1503,9 +1505,8 @@ function sendOrder() {
         showStatus('Failed to place order. Please try again.');
     });
 }
-
-
 </script>
+
 
 
 </body>
