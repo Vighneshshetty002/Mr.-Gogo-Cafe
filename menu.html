@@ -21,40 +21,40 @@
     }
 
    nav {
-        background-color: white; /* Added background color to nav */
-        padding: 10px 0; /* Added padding for spacing */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added shadow for effect */
-        }
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    overflow: hidden; /* Ensures that no content overflows */
+}
 
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 3px;
-            justify-content: center; /* Centered the nav items */
-            align-items: center;
-        }
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Center the items horizontally */
+    flex-wrap: wrap; /* Wrap items to the next line if they overflow */
+}
 
-        nav li {
-            margin: 5px 10px; /* Adjusted margin for better spacing */
-        }
+nav li {
+    display: inline-block;
+    margin: 0 10px;
+}
 
-        nav a {
-            color: black;
-            background-color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-            white-space: nowrap; /* Prevents text from wrapping inside the button */
-        }
+nav a {
+    color: white; /* Changed link color */
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap; /* Prevent text from wrapping within the link */
+}
 
-        nav a:hover,
-        nav a.active {
-            background-color: #333;
-            color: white;
-        }
+nav a:hover,
+nav a.active {
+    background-color: #555;
+}
+
 
         
     .search-bar {
