@@ -1316,11 +1316,16 @@ nav {
 
 <script>
 document.getElementById('searchInput').addEventListener('focus', function() {
+    const searchBoxPosition = this.getBoundingClientRect().top + window.scrollY;
+    const scrollOffset = 500; // Adjust this value as needed
+    const targetPosition = Math.max(searchBoxPosition - scrollOffset, 0); // Ensure it doesn't scroll past the top
+
     window.scrollTo({
-        top: this.getBoundingClientRect().top + window.scrollY - 500, // Adjust the offset to scroll more
+        top: targetPosition,
         behavior: 'smooth'
     });
 });
+
   
 const searchInput = document.getElementById('searchInput');
 const menuContainer = document.getElementById('menuContainer');
