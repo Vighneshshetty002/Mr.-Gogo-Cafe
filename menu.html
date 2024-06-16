@@ -1314,9 +1314,13 @@ nav {
 </footer>
 
 
-<script>
 
+<script>
 const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('focus', function() {
+    this.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
 const menuContainer = document.getElementById('menuContainer');
 const menuItems = document.querySelectorAll('.container');
 const menuTitles = document.querySelectorAll('.menu-Title');
