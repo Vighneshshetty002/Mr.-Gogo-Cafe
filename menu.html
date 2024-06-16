@@ -59,19 +59,28 @@ nav {
         }
 
         
-    .search-bar {
-        text-align: center;
-        margin: 20px 0;
-    }
+   /* Search bar styling */
+.search-bar {
+    text-align: center;
+    margin: 20px 0;
+}
 
-    .search-bar input {
-        padding: 10px;
-        width: 80%;
-        max-width: 400px;
-        border: white;
-        border-radius: 5px;
-        font-size: 16px;
-    }
+.search-bar input {
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: black;
+    color: white;
+    transition: border-color 0.3s;
+}
+
+.search-bar input:focus {
+    border-color: #555;
+    outline: none;
+}
 
    .container {
             display: flex;
@@ -1298,6 +1307,7 @@ nav {
     <p>Powered by <a href="https://github.com/Vighneshshetty002"><img src="VS Tech.png"></a></p>
 </footer>
 
+
 <script>
 const searchInput = document.getElementById('searchInput');
 const menuContainer = document.getElementById('menuContainer');
@@ -1309,6 +1319,15 @@ const popupTotal = document.getElementById('popupTotal');
 const popupBtn = document.getElementById('popupBtn');
 
 let cart = [];
+let placeholderIndex = 0;
+const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Pasta"...'];
+
+// Change the placeholder text every few seconds
+function changePlaceholder() {
+    searchInput.placeholder = placeholders[placeholderIndex];
+    placeholderIndex = (placeholderIndex + 1) % placeholders.length;
+}
+setInterval(changePlaceholder, 3000);
 
 // Extract table number from URL
 function getTableNumber() {
@@ -1421,7 +1440,6 @@ function updateCartDisplay() {
         itemDiv.classList.add('popup-item');
         itemDiv.innerHTML = `
             <span>${item.name} - ${item.quantity} x ${item.price / item.quantity} = ${item.price.toFixed(2)}</span>
-            <button onclick="removeFromCart('${item.name}')">Remove</button>
         `;
         popupContent.appendChild(itemDiv);
         total += item.price;
@@ -1460,10 +1478,7 @@ function sendOrder() {
         showStatus('Failed to place order. Please try again.');
     });
 }
-
-
 </script>
-
 
 
 </body>
