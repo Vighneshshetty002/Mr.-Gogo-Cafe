@@ -1323,7 +1323,7 @@ document.getElementById('searchInput').addEventListener('focus', function() {
     const scrollOffset = 200;
 
     // Calculate the target position to scroll to, ensuring it does not scroll past the top
-    const targetPosition = Math.max(searchBoxPosition - scrollOffset, 0);
+    const targetPosition = Math.max(searchBoxPosition - scrollOffset, 5);
 
     // Scroll to the target position with smooth behavior
     window.scrollTo({
