@@ -122,7 +122,7 @@ nav {
             font-weight: bold;
             margin-bottom: 10px;
         }
-       
+
 .description .buttons {
     display: flex;
     gap: 10px;
@@ -405,11 +405,7 @@ nav {
         <img src="Menu Food images/Veg Pizza.jpeg" alt="Veg Pizza">
         <div class="description">
             <h2>Veg Pizza</h2>
-            <p>
-                A delightful medley of fresh veggies on a crispy crust.<br/>
-                Key Ingridients:
-                Crispy crust loaded with veggies like bell peppers, onions etc
-            </p>
+            <p>A savory delight featuring a medley of fresh vegetables atop a crispy crust.</p>
             <p class="price">Price: 109/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Veg Pizza', 109)">Order</button>
@@ -1168,8 +1164,6 @@ nav {
             <button onclick="addToCart('Merry Blue (Black current)', 85)">Add to Cart</button>
         </div>
     </div>
-
-
     <div class="menu-item" id="menuContainer">
         <img src="Menu Food images/1.png" alt="Pizza" />
         <div>
@@ -1321,13 +1315,10 @@ nav {
 
 
 <script>
-
-
-
 const searchInput = document.getElementById('searchInput');
 const menuContainer = document.getElementById('menuContainer');
-const menuItems = menuContainer.querySelectorAll('.menu-item');
-const menuTitles = menuContainer.querySelectorAll('.menu-Title');
+const menuItems = document.querySelectorAll('.menu-item');
+const menuTitles = document.querySelectorAll('.menu-Title');
 
 searchInput.addEventListener('input', filterMenu);
 
@@ -1336,13 +1327,11 @@ function filterMenu() {
     let foundItems = false;
 
     menuTitles.forEach(title => {
-        const category = title.getAttribute('data-category').toLowerCase();
         let categoryHasItems = false;
 
         menuItems.forEach(item => {
             const itemName = item.querySelector('h2').textContent.toLowerCase();
-            const itemCategory = item.getAttribute('data-category').toLowerCase();
-            if (itemName.includes(query) && itemCategory === category) {
+            if (itemName.includes(query)) {
                 item.style.display = 'flex';
                 categoryHasItems = true;
                 foundItems = true;
@@ -1359,11 +1348,6 @@ function filterMenu() {
     }
 }
 
-
-
-
-
-    
 const statusBar = document.getElementById('statusBar');
 const popupOverlay = document.getElementById('popupOverlay');
 const popup = document.getElementById('popup');
@@ -1389,21 +1373,6 @@ function getTableNumber() {
 }
 
 const tableNumber = getTableNumber();
-
-searchInput.addEventListener('input', filterMenu);
-
-function filterMenu() {
-    const query = searchInput.value.toLowerCase();
-    const items = menuContainer.querySelectorAll('.menu-item');
-    items.forEach(item => {
-        const itemName = item.querySelector('h2').textContent.toLowerCase();
-        if (itemName.includes(query)) {
-            item.style.display = 'flex';
-        } else {
-            item.style.display = 'none';
-        }
-    });
-}
 
 function showStatus(message) {
     statusBar.textContent = message;
