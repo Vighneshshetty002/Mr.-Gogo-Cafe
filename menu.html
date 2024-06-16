@@ -1316,15 +1316,22 @@ nav {
 
 <script>
 document.getElementById('searchInput').addEventListener('focus', function() {
+    // Get the position of the search box relative to the viewport
     const searchBoxPosition = this.getBoundingClientRect().top + window.scrollY;
-    const scrollOffset = 500; // Adjust this value as needed
-    const targetPosition = Math.max(searchBoxPosition - scrollOffset, 0); // Ensure it doesn't scroll past the top
 
+    // Define the offset you want above the search box (increase this value as needed)
+    const scrollOffset = 500;
+
+    // Calculate the target position to scroll to, ensuring it does not scroll past the top
+    const targetPosition = Math.max(searchBoxPosition - scrollOffset, 0);
+
+    // Scroll to the target position with smooth behavior
     window.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
     });
 });
+
 
   
 const searchInput = document.getElementById('searchInput');
