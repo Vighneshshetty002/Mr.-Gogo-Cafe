@@ -140,6 +140,7 @@ nav {
     margin-top: 20px;
 }
 
+
    .container {
             display: flex;
             align-items: center;
@@ -1371,49 +1372,8 @@ nav {
 
 
 <script>
-
-
-
 const searchInput = document.getElementById('searchInput');
 const menuContainer = document.getElementById('menuContainer');
-const menuItems = menuContainer.querySelectorAll('.menu-item');
-const menuTitles = menuContainer.querySelectorAll('.menu-Title');
-
-searchInput.addEventListener('input', filterMenu);
-
-function filterMenu() {
-    const query = searchInput.value.toLowerCase();
-    let foundItems = false;
-
-    menuTitles.forEach(title => {
-        const category = title.getAttribute('data-category').toLowerCase();
-        let categoryHasItems = false;
-
-        menuItems.forEach(item => {
-            const itemName = item.querySelector('h2').textContent.toLowerCase();
-            const itemCategory = item.getAttribute('data-category').toLowerCase();
-            if (itemName.includes(query) && itemCategory === category) {
-                item.style.display = 'flex';
-                categoryHasItems = true;
-                foundItems = true;
-            } else {
-                item.style.display = 'none';
-            }
-        });
-
-        title.style.display = categoryHasItems ? 'block' : 'none';
-    });
-
-    if (!foundItems) {
-        menuTitles.forEach(title => title.style.display = 'none');
-    }
-}
-
-
-
-
-
-<script> 
 const statusBar = document.getElementById('statusBar');
 const popupOverlay = document.getElementById('popupOverlay');
 const popup = document.getElementById('popup');
@@ -1445,14 +1405,33 @@ searchInput.addEventListener('input', filterMenu);
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
     const items = menuContainer.querySelectorAll('.menu-item');
-    items.forEach(item => {
-        const itemName = item.querySelector('h2').textContent.toLowerCase();
-        if (itemName.includes(query)) {
-            item.style.display = 'flex';
-        } else {
-            item.style.display = 'none';
-        }
+    const titles = menuContainer.querySelectorAll('.menu-Title');
+
+    let foundItems = false;
+
+    titles.forEach(title => {
+        let categoryHasItems = false;
+        const category = title.getAttribute('data-category').toLowerCase();
+
+        items.forEach(item => {
+            const itemName = item.querySelector('h2').textContent.toLowerCase();
+            const itemCategory = item.getAttribute('data-category').toLowerCase();
+
+            if (itemName.includes(query) && itemCategory === category) {
+                item.style.display = 'flex';
+                categoryHasItems = true;
+                foundItems = true;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        title.style.display = categoryHasItems ? 'block' : 'none';
     });
+
+    if (!foundItems) {
+        titles.forEach(title => title.style.display = 'none');
+    }
 }
 
 function showStatus(message) {
