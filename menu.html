@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mr. Gogo Cafe | Menu</title>
     <style>
-    /* Resetting default margin and padding */
-* {
+        /* Resetting default margin and padding */
+       * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -21,162 +21,107 @@ body {
 }
 
 nav {
-    background-color: white; /* Added background color to nav */
-    padding: 10px 0; /* Added padding for spacing */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added shadow for effect */
-    margin-left: 0px;
-    margin-right: 0px;
-}
+            background-color: white; /* Added background color to nav */
+            padding: 10px 0; /* Added padding for spacing */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added shadow for effect */
+            margin-left: 0px;
+            margin-right: 0px;
+        }
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 0px;
-    justify-content: center; /* Centered the nav items */
-    align-items: center;
-}
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 0px;
+            justify-content: center; /* Centered the nav items */
+            align-items: center;
+        }
 
-nav li {
-    margin: 5px 3px; /* Adjusted margin for better spacing */
-}
+        nav li {
+            margin: 5px 3px; /* Adjusted margin for better spacing */
+        }
 
-nav a {
-    color: black;
-    background-color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-    white-space: nowrap; /* Prevents text from wrapping inside the button */
-}
+        nav a {
+            color: black;
+            background-color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            white-space: nowrap; /* Prevents text from wrapping inside the button */
+        }
 
-nav a:hover,
-nav a.active {
-    background-color: #333;
-    color: white;
-}
+        nav a:hover,
+        nav a.active {
+            background-color: #333;
+            color: white;
+        }
 
-/* Search bar styling */
+        
+   /* Search bar styling */
 .search-bar {
     text-align: center;
-    margin: 20px 0;
+    margin: 5px 10px;
 }
 
 .search-bar input {
+    margin-top: 10px;
+    margin-left: 90px;
     padding: 10px;
-    width: 80%;
+    width: 50%;
     max-width: 400px;
     border: 1px solid white;
     border-radius: 5px;
     font-size: 16px;
-    color: black; /* Change text color to black for better visibility */
-    background-color: white; /* Change background to white for better contrast */
+    background-color: white;
+    color: black;
     transition: border-color 0.3s;
 }
 
 .search-bar input:focus {
+    border-color: #555;
     outline: none;
-    border-color: #007bff; /* Optional: Add a border color change on focus */
 }
 
-.menu-container {
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 800px;
-}
+   .container {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            max-width: 95%; /* Adjust max-width as needed max-width: 800px; */
+            margin: 20px auto;
+            background-color: black; /* Background color for the container */
+            color: white; /* Text color for the description */
+            border-radius: 10px; /* Rounded corners */
+        }
 
-.menu-item {
-    display: none; /* Hide all items initially */
-    align-items: center;
-    gap: 10px;
-    padding: 10px 0;
-    border-bottom: 1px solid #666;
-}
+        .container img {
+            width: 120px; /* Adjust the image size as needed */
+            height: 200px;
+            margin-right: 15px; /* Space between image and text */
+            border-radius: 10px; /* Rounded corners for the image */
+        }
 
-.menu-item img {
-    width: 100px;
-    height: 100px;
-    border-radius: 5px;
-}
+        .description {
+            flex: 1;
+        }
 
-.menu-item .description {
-    flex: 1;
-}
+        .description h2 {
+            margin: 0 0 10px 0;
+            font-size: 25px;
+        }
 
-.menu-item .price {
-    font-size: 16px;
-    font-weight: bold;
-}
+        .description p {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+        }
 
-.menu-item .buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.menu-item .buttons button {
-    padding: 8px 16px;
-    font-size: 14px;
-    background-color: white;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.menu-item .buttons button:hover {
-    background-color: #007bff;
-    color: white;
-}
-
-.menu-Title {
-    display: none; /* Hide all titles initially */
-    background-color: white;
-    color: black;
-    padding: 10px;
-    margin-top: 20px;
-}
-
-.container {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    border: 1px solid #ccc;
-    max-width: 95%; /* Adjust max-width as needed max-width: 800px; */
-    margin: 20px auto;
-    background-color: black; /* Background color for the container */
-    color: white; /* Text color for the description */
-    border-radius: 10px; /* Rounded corners */
-}
-
-.container img {
-    width: 120px; /* Adjust the image size as needed */
-    height: 200px;
-    margin-right: 15px; /* Space between image and text */
-    border-radius: 10px; /* Rounded corners for the image */
-}
-
-.description {
-    flex: 1;
-}
-
-.description h2 {
-    margin: 0 0 10px 0;
-    font-size: 25px;
-}
-
-.description p {
-    margin: 0 0 10px 0;
-    font-size: 16px;
-}
-
-.description .price {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
+        .description .price {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
 .description .buttons {
     display: flex;
@@ -242,186 +187,186 @@ nav a.active {
     color: black;
 }
 
-.menu-Title {
-    font-size: 20px;
-    font-weight: bold;
-    max-width: 95%;
-    margin-left: 10px;
-    border-radius: 5px;
-    background-color: white; 
-    color: black;
-    padding: 10px;
-}
+        .menu-Title{
+            font-size: 20px;
+            font-style: bold;
+            max-width: 95%;
+            margin-left: 10px;
+            border-radius: 5px;
+            background-color: white; 
+            color: black;
+            padding: 10px;
+        }
 
-.title-hr {
-    margin: 10px;
-}
+        .title-hr{
+        margin: 10px;
+        }
 
-.status-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background-color: white;
-    color: black;
-    text-align: center;
-    line-height: 50px;
-    z-index: 10000;
-    display: none;
-    animation: slideIn 0.5s ease-out, slideOut 0.5s 2.5s ease-in forwards;
-}
-
-@keyframes slideIn {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(0); }
-}
-
-@keyframes slideOut {
-    from { transform: translateX(0); }
-    to { transform: translateX(-100%); opacity: 0; }
-}
-
-/* Popup styles */
-.popup-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
-.popup {
-    display: none;
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: black; /* Adjusted background color */
-    border: 1px solid white;
-    border-radius: 15px;
-    padding: 20px;
-    z-index: 1001;
-    color: white;
-    width: 80%; /* Adjusted width */
-    max-height: 100%; /* Adjusted max-height */
-    overflow-y: auto;
-}
-
-.popup h2 {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.popup-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px; /* Added gap for spacing */
-}
-
-.popup-content p {
-    margin: 10px 0;
-}
-
-/* Footer styling */
-footer {
-    text-align: center;
-    padding: 0px 0; /* Reduced padding vertically */
-    background-color: black; /* Adjusted background color */
-    color: white;
-    position: fixed;
-    bottom: 0;
-    width: 100%; /* Adjusted width to fit the screen horizontally */
-    font-size: 12px; /* Reduced font size */
-    z-index: 9999; /* Ensure it's above the popup */
-}
-
-footer img {
-    width: 60px;
-    vertical-align: middle;
-}
-
-/* View Cart Button */
-#popupBtn {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: white;
-    color: black;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    z-index: 10000;
-}
-
-#popupBtn:hover {
-    background-color: #555;
-}
-
-.popup button {
-    margin: 5px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.popup button:hover {
-    background-color: #555;
-    color: white;
-}
-
-/* Adjusted buttons in the popup */
-.popup-buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.popup-buttons button {
-    flex: 1;
-    margin: 0 5px;
-}
-
-@media only screen and (max-width: 600px) {
-    .menu-item-buttons button {
-        margin-top: 10px; /* Added space between buttons */
+        
+    .status-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background-color: white;
+        color: black;
+        text-align: center;
+        line-height: 50px;
+        z-index: 10000;
+        display: none;
+        animation: slideIn 0.5s ease-out, slideOut 0.5s 2.5s ease-in forwards;
     }
-    .popup-item {
+
+    @keyframes slideIn {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(0); }
+    }
+
+    @keyframes slideOut {
+        from { transform: translateX(0); }
+        to { transform: translateX(-100%); opacity: 0; }
+    }
+
+    /* Popup styles */
+    .popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+
+    .popup {
+        display: none;
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: black; /* Adjusted background color */
+        border: 1px solid white;
+        border-radius: 15px;
+        padding: 20px;
+        z-index: 1001;
+        color: white;
+        width: 80%; /* Adjusted width */
+        max-height: 100%; /* Adjusted max-height */
+        overflow-y: auto;
+    }
+
+    .popup h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .popup-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px; /* Added gap for spacing */
+    }
+
+    .popup-content p {
+        margin: 10px 0;
+    }
+
+    /* Footer styling */
+    footer {
+        text-align: center;
+        padding: 0px 0; /* Reduced padding vertically */
+        background-color: black; /* Adjusted background color */
+        color: white;
+        position: fixed;
+        bottom: 0;
+        width: 100%; /* Adjusted width to fit the screen horizontally */
+        font-size: 12px; /* Reduced font size */
+        z-index: 9999; /* Ensure it's above the popup */
+    }
+
+    footer img {
+        width: 60px;
+        vertical-align: middle;
+    }
+
+    /* View Cart Button */
+    #popupBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: white;
+        color: black;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        z-index: 10000;
+    }
+
+    #popupBtn:hover {
+        background-color: #555;
+    }
+
+    .popup button {
+        margin: 5px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .popup button:hover {
+        background-color: #555;
+        color: white;
+    }
+
+    /* Adjusted buttons in the popup */
+    .popup-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
     }
-}
 
-/* Added styles for popup items */
-.popup-item {
-    width: 100%; /* Ensure the item takes up the full width */
-    display: flex; /* Use flexbox layout */
-    justify-content: space-between; /* Align items with space between them */
-    align-items: center; /* Align items vertically */
-    padding: 10px; /* Added padding for spacing */
-    border-bottom: 1px solid #666; /* Added border for separation */
-}
+    .popup-buttons button {
+        flex: 1;
+        margin: 0 5px;
+    }
 
-.popup-item:last-child {
-    border-bottom: none; /* Remove border from the last item */
-}
+    @media only screen and (max-width: 600px) {
+        .menu-item-buttons button {
+            margin-top: 10px; /* Added space between buttons */
+        }
+        .popup-item {
+            width: 100%;
+        }
+    }
 
-.popup-total {
-    margin-top: 20px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.2em;
-}
+    /* Added styles for popup items */
+    .popup-item {
+        width: 100%; /* Ensure the item takes up the full width */
+        display: flex; /* Use flexbox layout */
+        justify-content: space-between; /* Align items with space between them */
+        align-items: center; /* Align items vertically */
+        padding: 10px; /* Added padding for spacing */
+        border-bottom: 1px solid #666; /* Added border for separation */
+    }
 
+    .popup-item:last-child {
+        border-bottom: none; /* Remove border from the last item */
+    }
+
+    .popup-total {
+        margin-top: 20px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
 </style>
 <!-- Add EmailJS SDK -->
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
@@ -1370,8 +1315,49 @@ footer img {
 
 
 <script>
+
+
+
 const searchInput = document.getElementById('searchInput');
 const menuContainer = document.getElementById('menuContainer');
+const menuItems = menuContainer.querySelectorAll('.menu-item');
+const menuTitles = menuContainer.querySelectorAll('.menu-Title');
+
+searchInput.addEventListener('input', filterMenu);
+
+function filterMenu() {
+    const query = searchInput.value.toLowerCase();
+    let foundItems = false;
+
+    menuTitles.forEach(title => {
+        const category = title.getAttribute('data-category').toLowerCase();
+        let categoryHasItems = false;
+
+        menuItems.forEach(item => {
+            const itemName = item.querySelector('h2').textContent.toLowerCase();
+            const itemCategory = item.getAttribute('data-category').toLowerCase();
+            if (itemName.includes(query) && itemCategory === category) {
+                item.style.display = 'flex';
+                categoryHasItems = true;
+                foundItems = true;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        title.style.display = categoryHasItems ? 'block' : 'none';
+    });
+
+    if (!foundItems) {
+        menuTitles.forEach(title => title.style.display = 'none');
+    }
+}
+
+
+
+
+
+    
 const statusBar = document.getElementById('statusBar');
 const popupOverlay = document.getElementById('popupOverlay');
 const popup = document.getElementById('popup');
@@ -1403,33 +1389,14 @@ searchInput.addEventListener('input', filterMenu);
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
     const items = menuContainer.querySelectorAll('.menu-item');
-    const titles = menuContainer.querySelectorAll('.menu-Title');
-
-    let foundItems = false;
-
-    titles.forEach(title => {
-        let categoryHasItems = false;
-        const category = title.getAttribute('data-category').toLowerCase();
-
-        items.forEach(item => {
-            const itemName = item.querySelector('h2').textContent.toLowerCase();
-            const itemCategory = item.getAttribute('data-category').toLowerCase();
-
-            if (itemName.includes(query) && itemCategory === category) {
-                item.style.display = 'flex';
-                categoryHasItems = true;
-                foundItems = true;
-            } else {
-                item.style.display = 'none';
-            }
-        });
-
-        title.style.display = categoryHasItems ? 'block' : 'none';
+    items.forEach(item => {
+        const itemName = item.querySelector('h2').textContent.toLowerCase();
+        if (itemName.includes(query)) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
     });
-
-    if (!foundItems) {
-        titles.forEach(title => title.style.display = 'none');
-    }
 }
 
 function showStatus(message) {
