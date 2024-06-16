@@ -14,6 +14,42 @@ body {
     background-color: black;
 }
 
+nav {
+            background-color: white; /* Added background color to nav */
+            padding: 10px 0; /* Added padding for spacing */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added shadow for effect */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 3px;
+            justify-content: center; /* Centered the nav items */
+            align-items: center;
+        }
+
+        nav li {
+            margin: 5px 10px; /* Adjusted margin for better spacing */
+        }
+
+        nav a {
+            color: black;
+            background-color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            white-space: nowrap; /* Prevents text from wrapping inside the button */
+        }
+
+        nav a:hover,
+        nav a.active {
+            background-color: #333;
+            color: white;
+        }
+    
 .container {
     max-width: 800px;
     margin: 20px auto;
@@ -114,12 +150,41 @@ h1, h2, p {
 a{
     color: white;
 }
+
+ footer {
+        text-align: center;
+        padding: 0px 0; /* Reduced padding vertically */
+        background-color: black; /* Adjusted background color */
+        color: white;
+        position: fixed;
+        bottom: 0;
+        width: 100%; /* Adjusted width to fit the screen horizontally */
+        font-size: 12px; /* Reduced font size */
+        z-index: 9999; /* Ensure it's above the popup */
+    }
+
+    footer img {
+        width: 60px;
+        vertical-align: middle;
+    }
 </style>
 </head>
 <body>
 
+
+<center><img src="gogo-cafe-white.png" width="150px"></center>
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="Specials.html">Specials</a></li>
+            <li><a href="about_us.html">About</a></li>
+        </ul>
+    </nav>
+    <hr>
+    
 <div class="container">
-    <h1>About Us</h1>
+    
     <p>Welcome to Mr.Gogo Cafe!</p>
     
     <p>At Mr.Gogo Cafe, we are passionate about delivering exceptional dining experiences. Our goal is to create a cozy and welcoming atmosphere where food lovers can indulge in delicious meals, refreshing beverages, and delightful desserts.</p>
