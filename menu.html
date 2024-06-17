@@ -1541,14 +1541,14 @@ function filterMenu() {
     let foundItems = false;
 
     menuTitles.forEach(title => {
-        const category = title.getAttribute('data-category').toLowerCase();
+        const category = title.getAttribute('.container').toLowerCase();
         let categoryHasItems = false;
 
         menuItems.forEach(item => {
             const itemName = item.querySelector('.title').textContent.toLowerCase();
-            const itemCategory = item.getAttribute('data-category').toLowerCase();
+            const itemCategory = item.getAttribute('.container').toLowerCase();
             if (itemName.includes(query) && itemCategory === category) {
-                item.style.display = 'flex';
+                item.style.display = 'block';
                 categoryHasItems = true;
                 foundItems = true;
             } else {
