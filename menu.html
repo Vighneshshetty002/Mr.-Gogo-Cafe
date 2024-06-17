@@ -420,7 +420,7 @@ nav {
     
  <div class="container">
          <div class="title">Veg Pizza<br/>
-             <hr style="margin-top:5px;">
+             <hr style="margin-top:10px;">
          </div>
      
     <div class="container-content">
@@ -442,7 +442,7 @@ nav {
 
  <div class="container">
      <div class="title">Kulhad Pizza<br/>
-             <hr>
+             <hr style="margin-top:10px;">
          </div>
      <div class="container-content">
         <img src="Menu Food images/Tasty Kulhad Pizza.jpeg" alt="Veg Pizza">
@@ -462,7 +462,7 @@ nav {
 
 <div class="container">
     <div class="title">Corn Pizza<br/>
-             <hr>
+             <hr style="margin-top:10px;">
          </div>
     <div class="container-content">
         <img src="Menu Food images/Corn Pizza.jpeg" alt="Veg Pizza">
@@ -483,7 +483,7 @@ nav {
 
 <div class="container">
     <div class="title">Paneer Pizza<br/>
-             <hr>
+             <hr style="margin-top:10px;">
          </div>
     <div class="container-content">
         <img src="Menu Food images/Paneer Pizza.jpeg" alt="Veg Pizza">
@@ -504,7 +504,7 @@ nav {
 
 <div class="container">
     <div class="title">Olive Pizza<br/>
-             <hr>
+             <hr style="margin-top:10px;">
          </div>
     <div class="container-content">
         <img src="Menu Food images/Olive Pizza.jpeg" alt="Olive Pizza">
@@ -525,7 +525,7 @@ nav {
 
     <div class="container">
         <div class="title">Jalapeno Pizza<br/>
-             <hr>
+             <hr style="margin-top:10px;">
          </div>
         <div class="container-content">
         <img src="Menu Food images/Jalapeno Pizza.jpg" alt="Olive Pizza">
@@ -545,7 +545,7 @@ nav {
 
     <div class="container">
         <div class="title">Margherita Pizza<br/>
-             <hr>
+             <hr style="margin-top:10px;">
          </div>
         <div class="container-content">
         <img src="Menu Food images/Margherita Pizza.jpg" alt="Olive Pizza">
@@ -573,7 +573,7 @@ nav {
 
     <div class="container">
         <div class="title">Veg Burger<br/>
-             <hr>
+             <hr style="margin-top:10px;">
          </div>
         <div class="container-content">
         <img src="Menu Food images/Veg Burger.webp" alt="Olive Pizza">
@@ -593,7 +593,7 @@ nav {
 
     <div class="container">
         <div class="title">Cheese Burger<br/>
-             <hr>
+             <hr style="margin-top:10px;">
          </div>
         <div class="container-content">
         <img src="Menu Food images/Cheese Burger.jpeg" alt="Olive Pizza">
@@ -612,7 +612,7 @@ nav {
 
     <div class="container">
         <div class="title">Paneer Burger<br/>
-             <hr>
+             <hr style="margin-top:10px;">
          </div>
         <div class="container-content">
         <img src="Menu Food images/Paneer Burger.jpg" alt="Olive Pizza">
@@ -633,7 +633,7 @@ nav {
 
     <div class="container">
         <div class="title">Double Tikki Burger<br/>
-             <hr>
+             <hr style="margin-top:10px;">
          </div>
         <div class="container-content">
         <img src="Menu Food images/Double Tikki Burger.png" alt="Olive Pizza">
@@ -653,7 +653,7 @@ nav {
 
     <div class="container">
         <div class="title">Loaded Burger<br/>
-             <hr>
+             <hr style="margin-top:10px;">
          </div>
         <div class="container-content">
         <img src="Menu Food images/Loaded Burger.jpeg" alt="Olive Pizza">
@@ -684,7 +684,7 @@ nav {
 
     <div class="container">
         <div class="title">Cheese Fries<br/>
-             <hr>
+             <hr style="margin-top:10px;">
          </div>
         <div class="container-content">
         <img src="Menu Food images/Cheese Fries.jpg" alt="Olive Pizza">
@@ -694,7 +694,7 @@ nav {
             <p class="price">Price: 129/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Cheese Fries', 129)">Order</button>
-                <button onclick="addToCart('Cheese Fries', 129)">Add to Cart</button>
+                <button id="addButton-Cheese Fries" onclick="addToCart('Cheese Fries', 129)">Add +</button>
             </div>
         </div>
     </div>
@@ -703,65 +703,84 @@ nav {
     
     
      <div class="container">
+        <div class="title">Tandoori Fries<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Tandoori Fries.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Tandoori Fries</h2>
+            
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 99/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Tandori Fries', 99)">Order</button>
-                <button onclick="addToCart('Tandori Fries', 99)">Add to Cart</button>
+                <button id="addButton-Tandori Fries" onclick="addToCart('Tandori Fries', 99)">Add +</button>
             </div>
         </div>
     </div>
+     </div>
 
 
 
     
   <div class="container">
+        <div class="title">Peri Peri Fries<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Peri Peri Fries.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Peri Peri Fries</h2>
+            
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 89/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Peri Peri Fries', 89)">Order</button>
-                <button onclick="addToCart('Peri Peri Fries', 89)">Add to Cart</button>
+                <button id="addButton-Peri Peri Fries" onclick="addToCart('Peri Peri Fries', 89)">Add +</button>
             </div>
         </div>
     </div>
+  </div>
 
 
 
     
      <div class="container">
+        <div class="title">Salty Fries<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Salty Fries.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Salty Fries</h2>
+            
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 129/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Salty Fries', 129)">Order</button>
-                <button onclick="addToCart('Salty Fries', 129)">Add to Cart</button>
+                <button id="addButton-Salty Fries" onclick="addToCart('Salty Fries', 129)">Add +</button>
             </div>
         </div>
     </div>
-
+     </div>
 
 
     
   <div class="container">
+        <div class="title">Nuggets<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Nuggets.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Nuggests</h2>
+            
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 99/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Nuggets', 99)">Order</button>
-                <button onclick="addToCart('Nuggets', 99)">Add to Cart</button>
+                <button id="addButton-Nuggets" onclick="addToCart('Nuggets', 99)">Add +</button>
             </div>
         </div>
     </div>
+  </div>
 
 
 
@@ -778,30 +797,40 @@ nav {
 
     
  <div class="container">
+        <div class="title">Veg Frankie<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Veg Frankie.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Veg Frankie</h2>
+            
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 79/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Veg Frankie', 79)">Order</button>
-                <button onclick="addToCart('Veg Frankie', 79)">Add to Cart</button>
+                <button id="addButton-Veg Frankie" onclick="addToCart('Veg Frankie', 79)">Add +</button>
             </div>
         </div>
     </div>
+ </div>
     
     
     <div class="container">
+        <div class="title">Paneer Frankie<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Paneer Frankie.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Paneer Frankie</h2>
+           
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 89/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Paneer Frankie', 89)">Order</button>
-                <button onclick="addToCart('Paneer Frankie', 89)">Add to Cart</button>
+                <button id="addButton-Paneer Frankie" onclick="addToCart('Paneer Frankie', 89)">Add +</button>
             </div>
         </div>
+    </div>
     </div>
     
 
@@ -814,51 +843,70 @@ nav {
 
 
      <div class="container">
+        <div class="title">Veg Sandwich<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Veg Sandwich.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Veg Sandwich</h2>
+            
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 79/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Veg Sandwich', 79)">Order</button>
-                <button onclick="addToCart('Veg Sandwich', 79)">Add to Cart</button>
+                <button id="addButton-Veg Sandwich" onclick="addToCart('Veg Sandwich', 79)">Add +</button>
             </div>
         </div>
     </div>
+     </div>
     
     
    <div class="container">
+        <div class="title">Veg Mayo Sandwich<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Veg Mayo Sandwich.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Veg Mayo Sandwich</h2>
+           
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 85/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Veg Mayo Sandwich', 85)">Order</button>
-                <button onclick="addToCart('Veg Mayo Sandwich', 85)">Add to Cart</button>
+                <button id="addButton-Veg Mayo Sandwich" onclick="addToCart('Veg MAyo Sandwich', 85)">Add +</button>
             </div>
         </div>
     </div>
+   </div>
 
 
     
     <div class="container">
+        <div class="title">Corn Sandwich<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Corn Sandwich.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Corn Sandwich</h2>
+            
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 89/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Corn Sandwich', 89)">Order</button>
-                <button onclick="addToCart('Corn Sandwich', 89)">Add to Cart</button>
+                <button id="addButton-Corn Sandwich" onclick="addToCart('Corn Sandwich', 89)">Add +</button>
             </div>
         </div>
+    </div>
     </div>
 
 
 
     
     <div class="container">
+        <div class="title">Corn Mayo Sandwich<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Corn Mayo Sandwich.jpeg" alt="Olive Pizza">
         <div class="description">
             <h2>Corn Mayo Sandwich</h2>
@@ -866,40 +914,51 @@ nav {
             <p class="price">Price: 89/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Corn Mayo Sandwich', 89)">Order</button>
-                <button onclick="addToCart('Corn Mayo Sandwich', 89)">Add to Cart</button>
+                <button id="addButton-Corn Mayo Sandwich" onclick="addToCart('Corn Mayo Sandwich', 89)">Add +</button>
             </div>
         </div>
+    </div>
     </div>
 
 
 
     
     <div class="container">
+        <div class="title">Paneer Sandwich<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Paneer Sandwich.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Paneer Sandwich</h2>
+            
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 89/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Paneer Sandwich', 89)">Order</button>
-                <button onclick="addToCart('Paneer Sandwich', 89)">Add to Cart</button>
+                <button id="addButton-Paneer Sandwich" onclick="addToCart('Paneer Sandwich', 89)">Add +</button>
             </div>
         </div>
+    </div>
     </div>
 
 
     
     <div class="container">
+        <div class="title">Corn Paneer Sandwich<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Corn Paneer Sandwich.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Corn Paneer Sandwich</h2>
+            
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 101/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Corn Paneer Sandwich', 101)">Order</button>
-                <button onclick="addToCart('Corn Paneer Sandwich', 101)">Add to Cart</button>
+                <button id="addButton-Corn Paneer Sandwich" onclick="addToCart('Corn Paneer Sandwich', 101)">Add +</button>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -913,76 +972,101 @@ nav {
 
 
     <div class="container">
+        <div class="title">Samosa<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Samosa.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Samosa</h2>
+            
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 20/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Samosa', 20)">Order</button>
-                <button onclick="addToCart('Samosa', 20)">Add to Cart</button>
+                <button id="addButton-Samosa" onclick="addToCart('Samosa', 20)">Add +</button>
             </div>
         </div>
+    </div>
     </div>
 
     
     <div class="container">
+        <div class="title">Samosa Chat<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Samosa Chat.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Samosa Chat</h2>
+            
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 30/-</p>
             <div class="buttons">
-                <button onclick="orderItem('Samosa', 30)">Order</button>
-                <button onclick="addToCart('Samosa', 30)">Add to Cart</button>
+                <button onclick="orderItem('Samosa Chat', 30)">Order</button>
+                <button id="addButton-Samosa Chat" onclick="addToCart('Samosa Chat', 30)">Add +</button>
             </div>
         </div>
+    </div>
     </div>
 
 
 
     
     <div class="container">
+        <div class="title">Kachori<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Kachori.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Kachori</h2>
+            
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 20/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Kachori', 20)">Order</button>
-                <button onclick="addToCart('Kachori', 20)">Add to Cart</button>
+                <button id="addButton-Kachori" onclick="addToCart('Kachori', 20)">Add +</button>
             </div>
         </div>
+    </div>
     </div>
 
 
     
     <div class="container">
+        <div class="title">Kachori Chat<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Kachori Chat.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Kachori Chat</h2>
+            
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 30/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Kachori Chat', 30)">Order</button>
-                <button onclick="addToCart('Kachori Chat', 30)">Add to Cart</button>
+                <button id="addButton-Kachori Chat" onclick="addToCart('Kachori Chat', 30)">Add +</button>
             </div>
         </div>
+    </div>
     </div>
 
 
     
     <div class="container">
+        <div class="title">Pani Puri<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
         <img src="Menu Food images/Pani Puri.jpeg" alt="Olive Pizza">
         <div class="description">
-            <h2>Pani Puri</h2>
+            
             <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 40/-</p>
             <div class="buttons">
-                <button onclick="orderItem('Kachori', 40)">Order</button>
-                <button onclick="addToCart('Kachori', 40)">Add to Cart</button>
+                <button onclick="orderItem('Pani Puri', 40)">Order</button>
+                <button id="addButton-Pani Puri" onclick="addToCart('Pani Puri', 40)">Add +</button>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -1401,6 +1485,8 @@ nav {
 
 
 <script>
+dconst searchInput = document.getElementById('searchInput');
+const menuContainer = document.getElementById('menuContainer');
 const statusBar = document.getElementById('statusBar');
 const popupOverlay = document.getElementById('popupOverlay');
 const popup = document.getElementById('popup');
@@ -1419,21 +1505,18 @@ function changePlaceholder() {
 }
 setInterval(changePlaceholder, 3000);
 
-// Extract table number from URL
-function getTableNumber() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
-}
-
-const tableNumber = getTableNumber();
+// Scroll to the top when search input is focused
+searchInput.addEventListener('focus', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 searchInput.addEventListener('input', filterMenu);
 
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
-    const items = menuContainer.querySelectorAll('.menu-item');
+    const items = menuContainer.querySelectorAll('.container');
     items.forEach(item => {
-        const itemName = item.querySelector('h2').textContent.toLowerCase();
+        const itemName = item.querySelector('.title').textContent.toLowerCase();
         if (itemName.includes(query)) {
             item.style.display = 'flex';
         } else {
@@ -1461,10 +1544,59 @@ function orderItem(name, price) {
         order_date_time: orderDateTime
     })
     .then(function(response) {
-        console.log('SUCCESS!', response.status, response.text);
         showStatus('Order placed successfully!');
     }, function(error) {
-        console.log('FAILED...', error);
+        showStatus('Failed to place order. Please try again.');
+    });
+}
+
+function addToCart(name, price) {
+    const addButton = document.getElementById(`addButton-${name}`);
+    addButton.outerHTML = `
+        <div class="quantity-controls">
+const searchInput = document.getElementById('searchInput');
+const menuItems = document.querySelectorAll('.container');
+let placeholderIndex = 0;
+const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Pasta"...'];
+
+// Change the placeholder text every few seconds
+function changePlaceholder() {
+    searchInput.placeholder = placeholders[placeholderIndex];
+    placeholderIndex = (placeholderIndex + 1) % placeholders.length;
+}
+setInterval(changePlaceholder, 3000);
+
+// Scroll to the top when search input is focused
+searchInput.addEventListener('focus', () => {
+    window.scrollTo({ top: searchInput.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+});
+
+searchInput.addEventListener('input', filterMenu);
+
+function filterMenu() {
+    const query = searchInput.value.toLowerCase();
+    menuItems.forEach(item => {
+        const itemName = item.querySelector('h2').textContent.toLowerCase();
+        if (itemName.includes(query)) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+function orderItem(name, price) {
+    const orderDetails = name;
+    const totalPrice = price.toFixed(2);
+    const orderDateTime = new Date().toLocaleString();
+    emailjs.send("service_8y2ru2m", "template_yrk4mbd", {
+        table_number: tableNumber,
+        order_details: orderDetails,
+        total_price: totalPrice,
+        order_date_time: orderDateTime
+    }).then(function(response) {
+        showStatus('Order placed successfully!');
+    }, function(error) {
         showStatus('Failed to place order. Please try again.');
     });
 }
@@ -1560,18 +1692,16 @@ function sendOrder() {
         order_details: orderDetails,
         total_price: total.toFixed(2),
         order_date_time: orderDateTime
-    })
-    .then(function(response) {
-        console.log('SUCCESS!', response.status, response.text);
+    }).then(function(response) {
         showStatus('Order placed successfully!');
         cart = [];
         updateCartDisplay();
         closePopup();
     }, function(error) {
-        console.log('FAILED...', error);
         showStatus('Failed to place order. Please try again.');
     });
 }
+
 
 </script>
 
