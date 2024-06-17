@@ -57,39 +57,7 @@ nav {
             background-color: #333;
             color: white;
         }
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+     
    /* Search bar styling */
 .search-bar {
     text-align: center;
@@ -303,29 +271,6 @@ nav {
         max-height: 100%; /* Adjusted max-height */
         overflow-y: auto;
     }
-
-
-
-
-
-
-    
-#namePopup {
-    display: flex;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-        
 
     .popup h2 {
         margin-bottom: 20px;
@@ -1734,35 +1679,6 @@ function sendOrder() {
         showStatus('Failed to place order. Please try again.');
     });
 }
-
-
-
-window.addEventListener('load', () => {
-    const userName = localStorage.getItem('userName');
-    if (!userName) {
-        document.getElementById('namePopup').style.display = 'flex';
-    }
-});
-
-function saveName() {
-    const userName = document.getElementById('userNameInput').value;
-    if (userName) {
-        localStorage.setItem('userName', userName);
-        document.getElementById('namePopup').style.display = 'none';
-        useName(userName); // Call the function to use the name immediately if needed
-    } else {
-        alert('Please enter your name.');
-    }
-}
-
-function useName(name) {
-    // Example of using the name
-    console.log(`Welcome, ${name}!`);
-    // Use the name wherever needed
-}
-
-
-
 </script>
 
 
