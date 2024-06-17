@@ -86,10 +86,11 @@ nav {
 
 .container {
     display: flex;
+    flex-direction: column; /* Stack items vertically first */
     align-items: center;
     padding: 20px;
     border: 1px solid #ccc;
-    max-width: 95%; /* Adjust max-width as needed */
+    max-width: 800px; /* Adjust max-width as needed */
     margin: 20px auto;
     background-color: black; /* Background color for the container */
     color: white; /* Text color for the description */
@@ -97,27 +98,30 @@ nav {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Soft shadow for a lifted effect */
 }
 
-.container dtitle{
-    align-items: center;
-}
-        
 .container img {
     width: 150px; /* Adjust the image size as needed */
-    height: 200px;
+    height: auto;
     margin-right: 15px; /* Space between image and text */
     border-radius: 10px; /* Rounded corners for the image */
+}
+
+.container-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px; /* Space below the title */
+    text-align: center;
+    width: 100%;
 }
 
 .description {
     flex: 1;
     text-align: left; /* Align text to the left */
-}
-
-.description h2 {
-    margin: 0 0 10px 0;
-    font-size: 24px;
-    font-weight: bold;
-    color: white; /* Ensure the title is white */
 }
 
 .description p {
@@ -140,7 +144,7 @@ nav {
 }
 
 .description button {
-    padding: 10px 20px;
+    padding: 8px 16px;
     font-size: 14px;
     background-color: white;
     color: black;
