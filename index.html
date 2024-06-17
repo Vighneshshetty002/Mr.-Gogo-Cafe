@@ -221,153 +221,41 @@
 </footer>
          
     <script>
-        const searchInput = document.getElementById('searchInput');
-const menuItems = document.querySelectorAll('.container');
-let placeholderIndex = 0;
-const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Pasta"...'];
+        const text = "Welcome to Mr. Gogo Cafe! Delicious treats await you. Explore our menu and enjoy the cozy ambiance. Visit us today!";
+        const textElement = document.getElementById("typewriter-text");
+        const maxHeight = 200;
 
-// Change the placeholder text every few seconds
-function changePlaceholder() {
-    searchInput.placeholder = placeholders[placeholderIndex];
-    placeholderIndex = (placeholderIndex + 1) % placeholders.length;
-}
-setInterval(changePlaceholder, 3000);
+        let index = 0;
 
-// Scroll to the top when search input is focused
-searchInput.addEventListener('focus', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-searchInput.addEventListener('input', filterMenu);
-
-function filterMenu() {
-    const query = searchInput.value.toLowerCase();
-    menuItems.forEach(item => {
-        const itemName = item.querySelector('.title').textContent.toLowerCase();
-        if (itemName.includes(query)) {
-            item.style.display = 'flex';
-        } else {
-            item.style.display = 'none';
+        function typeWriter() {
+            if (index < text.length) {
+                textElement.textContent += text.charAt(index);
+                index++;
+                adjustHeight();
+                setTimeout(typeWriter, 50);
+            }
         }
-    });
-}
 
-function orderItem(name, price) {
-    const orderDetails = name;
-    const totalPrice = price.toFixed(2);
-    const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2m", "template_yrk4mbd", {
-        table_number: tableNumber,
-        order_details: orderDetails,
-        total_price: totalPrice,
-        order_date_time: orderDateTime
-    }).then(function(response) {
-        showStatus('Order placed successfully!');
-    }, function(error) {
-        showStatus('Failed to place order. Please try again.');
-    });
-}
+        function adjustHeight() {
+            const lineHeight = parseInt(window.getComputedStyle(textElement).lineHeight);
+            const numLines = Math.ceil(textElement.clientHeight / lineHeight);
+            const newHeight = Math.min(numLines * lineHeight, maxHeight);
+            textElement.style.height = newHeight + "px";
+        }
 
-function addToCart(name, price) {
-    const addButton = document.getElementById(`addButton-${name}`);
-    addButton.outerHTML = `
-        <div class="quantity-controls">
-            <button onclick="decrementQuantity('${name}', ${price}, this)">-</button>
-            <span>1</span>
-            <button onclick="incrementQuantity('${name}', ${price}, this)">+</button>
-        </div>
-    `;
-    const item = { name, price, quantity: 1 };
-    cart.push(item);
-    updateCartDisplay();
-    showStatus('Item added to cart.');
-}
+        window.onload = function () {
+            typeWriter();
+            setTimeout(showDishes, 1000);
+        }
 
-function incrementQuantity(itemName, itemPrice, element) {
-    const quantityElement = element.previousElementSibling;
-    let quantity = parseInt(quantityElement.textContent);
-    quantity++;
-    quantityElement.textContent = quantity;
-    updateCartItem(itemName, itemPrice);
-}
-
-function decrementQuantity(itemName, itemPrice, element) {
-    const quantityElement = element.nextElementSibling;
-    let quantity = parseInt(quantityElement.textContent);
-    if (quantity > 1) {
-        quantity--;
-        quantityElement.textContent = quantity;
-        updateCartItem(itemName, -itemPrice);
-    } else {
-        const parent = element.parentElement;
-        parent.outerHTML = `<button id="addButton-${itemName}" onclick="addToCart('${itemName}', ${itemPrice})">Add +</button>`;
-        removeFromCart(itemName);
-    }
-}
-
-function updateCartItem(itemName, priceChange) {
-    const item = cart.find(item => item.name === itemName);
-    if (item) {
-        item.quantity += priceChange > 0 ? 1 : -1;
-        item.price += priceChange;
-        updateCartDisplay();
-    }
-}
-
-function removeFromCart(itemName) {
-    const itemIndex = cart.findIndex(item => item.name === itemName);
-    if (itemIndex > -1) {
-        cart.splice(itemIndex, 1);
-        showStatus('Item removed from cart.');
-        updateCartDisplay();
-    }
-}
-
-function updateCartDisplay() {
-    popupContent.innerHTML = '';
-    let total = 0;
-    cart.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add('popup-item');
-        itemDiv.innerHTML = `
-            <span>${item.name} - ${item.quantity} x ${item.price / item.quantity} = ${item.price.toFixed(2)}</span>
-        `;
-        popupContent.appendChild(itemDiv);
-        total += item.price;
-    });
-    popupTotal.textContent = `Total: ${total.toFixed(2)}`;
-    popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
-}
-
-function togglePopup() {
-    const isVisible = popup.style.display === 'block';
-    popup.style.display = isVisible ? 'none' : 'block';
-    popupOverlay.style.display = isVisible ? 'none' : 'block';
-}
-
-function closePopup() {
-    popup.style.display = 'none';
-    popupOverlay.style.display = 'none';
-}
-
-function sendOrder() {
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-    const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
-    const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2m", "template_yrk4mbd", {
-        table_number: tableNumber,
-        order_details: orderDetails,
-        total_price: total.toFixed(2),
-        order_date_time: orderDateTime
-    }).then(function(response) {
-        showStatus('Order placed successfully!');
-        cart = [];
-        updateCartDisplay();
-        closePopup();
-    }, function(error) {
-        showStatus('Failed to place order. Please try again.');
-    });
-}
+        function showDishes() {
+            const dishes = document.querySelectorAll(".popular-dish");
+            dishes.forEach((dish, index) => {
+                setTimeout(() => {
+                    dish.classList.add("active");
+                }, index * 500);
+            });
+        }
     </script>
 </body>
 </html>
