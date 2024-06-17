@@ -1498,6 +1498,7 @@ const popup = document.getElementById('popup');
 const popupContent = document.getElementById('popupContent');
 const popupTotal = document.getElementById('popupTotal');
 const popupBtn = document.getElementById('popupBtn');
+const containers = document.querySelectorAll('.container');
 
 let cart = [];
 let placeholderIndex = 0;
@@ -1512,19 +1513,11 @@ setInterval(changePlaceholder, 3000);
 
 // Scroll to search input on focus
 searchInput.addEventListener('focus', () => {
-    window.scrollTo({ top: searchInput.offsetTop - 500, behavior: 'smooth' });
+    window.scrollTo({ top: searchInput.offsetTop - 50, behavior: 'smooth' });
 });
 
-// Extract table number from URL
-function getTableNumber() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
-}
-
-const tableNumber = getTableNumber();
-
 searchInput.addEventListener('input', filterMenu);
-    
+
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
     containers.forEach(container => {
@@ -1550,7 +1543,7 @@ function orderItem(name, price) {
     const totalPrice = price.toFixed(2);
     const orderDateTime = new Date().toLocaleString();
     emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-        table_number: tableNumber,
+        table_number: getTableNumber(),
         order_details: orderDetails,
         total_price: totalPrice,
         order_date_time: orderDateTime
@@ -1651,7 +1644,7 @@ function sendOrder() {
     const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
     const orderDateTime = new Date().toLocaleString();
     emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-        table_number: tableNumber,
+        table_number: getTableNumber(),
         order_details: orderDetails,
         total_price: total.toFixed(2),
         order_date_time: orderDateTime
@@ -1667,7 +1660,13 @@ function sendOrder() {
         showStatus('Failed to place order. Please try again.');
     });
 }
+
+function getTableNumber() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
+}
 </script>
+
 
 
 
