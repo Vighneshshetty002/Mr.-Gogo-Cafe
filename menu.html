@@ -1512,7 +1512,7 @@ setInterval(changePlaceholder, 3000);
 
 // Scroll to search input on focus
 searchInput.addEventListener('focus', () => {
-    window.scrollTo({ top: searchInput.offsetTop - 200, behavior: 'smooth' });
+    window.scrollTo({ top: searchInput.offsetTop - 2000, behavior: 'smooth' });
 });
 
 // Extract table number from URL
@@ -1559,9 +1559,7 @@ function filterMenu() {
         title.style.display = categoryHasItems ? 'block' : 'none';
     });
 
-    if (!foundItems) {
-        menuTitles.forEach(title => title.style.display = 'none');
-    }
+ 
 }
 
 
