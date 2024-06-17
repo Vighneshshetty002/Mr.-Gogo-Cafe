@@ -1554,6 +1554,57 @@ function addToCart(name, price) {
     const addButton = document.getElementById(`addButton-${name}`);
     addButton.outerHTML = `
         <div class="quantity-controls">
+const searchInput = document.getElementById('searchInput');
+const menuItems = document.querySelectorAll('.container');
+let placeholderIndex = 0;
+const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Pasta"...'];
+
+// Change the placeholder text every few seconds
+function changePlaceholder() {
+    searchInput.placeholder = placeholders[placeholderIndex];
+    placeholderIndex = (placeholderIndex + 1) % placeholders.length;
+}
+setInterval(changePlaceholder, 3000);
+
+// Scroll to the top when search input is focused
+searchInput.addEventListener('focus', () => {
+    window.scrollTo({ top: searchInput.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+});
+
+searchInput.addEventListener('input', filterMenu);
+
+function filterMenu() {
+    const query = searchInput.value.toLowerCase();
+    menuItems.forEach(item => {
+        const itemName = item.querySelector('h2').textContent.toLowerCase();
+        if (itemName.includes(query)) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+function orderItem(name, price) {
+    const orderDetails = name;
+    const totalPrice = price.toFixed(2);
+    const orderDateTime = new Date().toLocaleString();
+    emailjs.send("service_8y2ru2m", "template_yrk4mbd", {
+        table_number: tableNumber,
+        order_details: orderDetails,
+        total_price: totalPrice,
+        order_date_time: orderDateTime
+    }).then(function(response) {
+        showStatus('Order placed successfully!');
+    }, function(error) {
+        showStatus('Failed to place order. Please try again.');
+    });
+}
+
+function addToCart(name, price) {
+    const addButton = document.getElementById(`addButton-${name}`);
+    addButton.outerHTML = `
+        <div class="quantity-controls">
             <button onclick="decrementQuantity('${name}', ${price}, this)">-</button>
             <span>1</span>
             <button onclick="incrementQuantity('${name}', ${price}, this)">+</button>
@@ -1641,8 +1692,7 @@ function sendOrder() {
         order_details: orderDetails,
         total_price: total.toFixed(2),
         order_date_time: orderDateTime
-    })
-    .then(function(response) {
+    }).then(function(response) {
         showStatus('Order placed successfully!');
         cart = [];
         updateCartDisplay();
