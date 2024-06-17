@@ -84,44 +84,51 @@ nav {
     outline: none;
 }
 
-   .container {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            border: 1px solid #ccc;
-            max-width: 95%; /* Adjust max-width as needed max-width: 800px; */
-            margin: 20px auto;
-            background-color: black; /* Background color for the container */
-            color: white; /* Text color for the description */
-            border-radius: 10px; /* Rounded corners */
-        }
+.container {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    max-width: 600px; /* Adjust max-width as needed */
+    margin: 20px auto;
+    background-color: black; /* Background color for the container */
+    color: white; /* Text color for the description */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Soft shadow for a lifted effect */
+}
 
-        .container img {
-            width: 120px; /* Adjust the image size as needed */
-            height: 200px;
-            margin-right: 15px; /* Space between image and text */
-            border-radius: 10px; /* Rounded corners for the image */
-        }
+.container img {
+    width: 150px; /* Adjust the image size as needed */
+    height: auto;
+    margin-right: 15px; /* Space between image and text */
+    border-radius: 10px; /* Rounded corners for the image */
+}
 
-        .description {
-            flex: 1;
-        }
+.description {
+    flex: 1;
+    text-align: left; /* Align text to the left */
+}
 
-        .description h2 {
-            margin: 0 0 10px 0;
-            font-size: 25px;
-        }
+.description h2 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: white; /* Ensure the title is white */
+}
 
-        .description p {
-            margin: 0 0 10px 0;
-            font-size: 16px;
-        }
+.description p {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    line-height: 1.5; /* Improve readability */
+    color: #ddd; /* Slightly lighter gray for text */
+}
 
-        .description .price {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+.description .price {
+    font-size: 20px;
+    font-weight: bold;
+    color: white; /* Ensure the price stands out */
+    margin-bottom: 10px;
+}
 
 .description .buttons {
     display: flex;
@@ -129,7 +136,7 @@ nav {
 }
 
 .description button {
-    padding: 8px 16px;
+    padding: 10px 20px;
     font-size: 14px;
     background-color: white;
     color: black;
