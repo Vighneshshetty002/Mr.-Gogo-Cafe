@@ -1523,7 +1523,7 @@ searchInput.addEventListener('input', filterMenu);
 
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
-    container.forEach(container => {
+    containers.forEach(container => {
         const itemName = container.querySelector('.title').textContent.toLowerCase();
         if (itemName.includes(query)) {
             container.style.display = 'block';
@@ -1532,7 +1532,7 @@ function filterMenu() {
         }
     });
 }
-
+    
 function showStatus(message) {
     statusBar.textContent = message;
     statusBar.style.display = 'block';
