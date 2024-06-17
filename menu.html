@@ -1524,9 +1524,9 @@ function getTableNumber() {
 const tableNumber = getTableNumber();
 
 searchInput.addEventListener('input', filterMenu);
+    
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
-    const containers = document.querySelectorAll('.container);
     containers.forEach(container => {
         const itemName = container.querySelector('.title').textContent.toLowerCase();
         if (itemName.includes(query)) {
