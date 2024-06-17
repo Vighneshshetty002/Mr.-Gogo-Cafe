@@ -1523,21 +1523,73 @@ function getTableNumber() {
 
 const tableNumber = getTableNumber();
 
-searchInput.addEventListener('input', filterMenu);
+
+
+
+
+
+
+
+
+
+
+
+    searchInput.addEventListener('input', filterMenu);
 
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
-    const containers = document.querySelectorAll('.container');
+    let foundItems = false;
 
-    containers.forEach(container => {
-        const itemName = container.querySelector('.title').textContent.toLowerCase();
-        if (itemName.includes(query)) {
-            container.style.display = 'block';
-        } else {
-            container.style.display = 'none';
-        }
+    menuTitles.forEach(title => {
+        const category = title.getAttribute('data-category').toLowerCase();
+        let categoryHasItems = false;
+
+        menuItems.forEach(item => {
+            const itemName = item.querySelector('h2').textContent.toLowerCase();
+            const itemCategory = item.getAttribute('data-category').toLowerCase();
+            if (itemName.includes(query) && itemCategory === category) {
+                item.style.display = 'flex';
+                categoryHasItems = true;
+                foundItems = true;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        title.style.display = categoryHasItems ? 'block' : 'none';
     });
+
+    if (!foundItems) {
+        menuTitles.forEach(title => title.style.display = 'none');
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 function showStatus(message) {
     statusBar.textContent = message;
