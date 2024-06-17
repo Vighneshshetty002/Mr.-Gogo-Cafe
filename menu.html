@@ -1485,7 +1485,7 @@ nav {
 </footer>
 
 
-<script>
+const searchInput = document.getElementById('searchInput');
 const statusBar = document.getElementById('statusBar');
 const popupOverlay = document.getElementById('popupOverlay');
 const popup = document.getElementById('popup');
@@ -1504,6 +1504,11 @@ function changePlaceholder() {
 }
 setInterval(changePlaceholder, 3000);
 
+// Scroll to search input on focus
+searchInput.addEventListener('focus', () => {
+    window.scrollTo({ top: searchInput.offsetTop - 50, behavior: 'smooth' });
+});
+
 // Extract table number from URL
 function getTableNumber() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -1516,13 +1521,14 @@ searchInput.addEventListener('input', filterMenu);
 
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
-    const items = menuContainer.querySelectorAll('.menu-item');
-    items.forEach(item => {
-        const itemName = item.querySelector('h2').textContent.toLowerCase();
+    const containers = document.querySelectorAll('.container');
+
+    containers.forEach(container => {
+        const itemName = container.querySelector('.title').textContent.toLowerCase();
         if (itemName.includes(query)) {
-            item.style.display = 'flex';
+            container.style.display = 'block';
         } else {
-            item.style.display = 'none';
+            container.style.display = 'none';
         }
     });
 }
@@ -1657,8 +1663,8 @@ function sendOrder() {
         showStatus('Failed to place order. Please try again.');
     });
 }
-
 </script>
+
 
 
 
