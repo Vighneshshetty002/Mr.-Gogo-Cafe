@@ -1503,7 +1503,8 @@ const containers = document.querySelectorAll('.container');
 
 let cart = [];
 let placeholderIndex = 0;
-const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Pasta"...'];
+const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Fries"...', 'Search "Frankie"...' , 'Search "Sandwich"...' , 'Search "Chats"...' , 'Search "Pasta"...',
+                     'Search "Maggie"...', 'Search "Rice"...' , 'Search "Mocatails"...', 'Search "Milk Shakes"...', 'Search "Beverages"...'];
 
 // Change the placeholder text every few seconds
 function changePlaceholder() {
@@ -1521,7 +1522,7 @@ searchInput.addEventListener('input', filterMenu);
 
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
-    title.forEach(container => {
+    container.forEach(container => {
         const itemName = container.querySelector('.title').textContent.toLowerCase();
         if (itemName.includes(query)) {
             container.style.display = 'block';
