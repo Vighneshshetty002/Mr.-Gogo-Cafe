@@ -1473,7 +1473,8 @@ nav {
 <div id="popupOverlay" class="popup-overlay"></div>
 <!-- Popup -->
 <div id="popup" class="popup">
-    <h2>Cart</h2>
+    <center><img src="gogo-cafe-white.png" width="100px"></center>
+    <h2>Items in Your Cart!!</h2>
     <div class="popup-content" id="popupContent"></div>
     <div class="popup-total" id="popupTotal">Total: $0.00</div>
     <div class="popup-buttons">
@@ -1523,7 +1524,7 @@ function filterMenu() {
     containers.forEach(container => {
         const itemName = container.querySelector('.title').textContent.toLowerCase();
         if (itemName.includes(query)) {
-            container.style.display = 'block';
+            title.style.display = 'block';
         } else {
             container.style.display = 'none';
         }
