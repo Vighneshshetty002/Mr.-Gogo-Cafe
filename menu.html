@@ -1401,57 +1401,6 @@ nav {
 
 
 <script>
-document.getElementById('searchInput').addEventListener('focus', function() {
-    // Get the position of the search box relative to the viewport
-    const searchBoxPosition = this.getBoundingClientRect().top + window.scrollY;
-
-    // Define the offset you want above the search box (increase this value as needed)
-    const scrollOffset = 200;
-    
-
-    // Calculate the target position to scroll to, ensuring it does not scroll past the top
-    const targetPosition = Math.max(searchBoxPosition - scrollOffset, 5000);
-
-    // Scroll to the target position with smooth behavior
-    window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-    });
-});
-
-
-  
-const searchInput = document.getElementById('searchInput');
-const menuContainer = document.getElementById('menuContainer');
-const menuItems = document.querySelectorAll('.container');
-const menuTitles = document.querySelectorAll('.menu-Title');
-
-searchInput.addEventListener('input', filterMenu);
-
-function filterMenu() {
-    const query = searchInput.value.toLowerCase();
-    let foundItems = false;
-
-    menuItems.forEach(item => {
-        const itemName = item.querySelector('h2').textContent.toLowerCase();
-        if (itemName.includes(query)) {
-            item.style.display = 'flex';
-            foundItems = true;
-        } else {
-            item.style.display = 'none';
-        }
-    });
-
-    menuTitles.forEach(title => {
-        const nextElement = title.nextElementSibling;
-        if (nextElement && nextElement.style.display === 'flex') {
-            title.style.display = 'block';
-        } else {
-            title.style.display = 'none';
-        }
-    });
-}
-
 const statusBar = document.getElementById('statusBar');
 const popupOverlay = document.getElementById('popupOverlay');
 const popup = document.getElementById('popup');
@@ -1478,6 +1427,21 @@ function getTableNumber() {
 
 const tableNumber = getTableNumber();
 
+searchInput.addEventListener('input', filterMenu);
+
+function filterMenu() {
+    const query = searchInput.value.toLowerCase();
+    const items = menuContainer.querySelectorAll('.menu-item');
+    items.forEach(item => {
+        const itemName = item.querySelector('h2').textContent.toLowerCase();
+        if (itemName.includes(query)) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
 function showStatus(message) {
     statusBar.textContent = message;
     statusBar.style.display = 'block';
@@ -1490,15 +1454,17 @@ function orderItem(name, price) {
     const orderDetails = name;
     const totalPrice = price.toFixed(2);
     const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2m9zcOrE1i", "template_yrk4mbd", {
+    emailjs.send("service_8y2ru2m", "template_yrk4mbd", {
         table_number: tableNumber,
         order_details: orderDetails,
         total_price: totalPrice,
         order_date_time: orderDateTime
     })
     .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
         showStatus('Order placed successfully!');
     }, function(error) {
+        console.log('FAILED...', error);
         showStatus('Failed to place order. Please try again.');
     });
 }
@@ -1589,21 +1555,24 @@ function sendOrder() {
     const total = cart.reduce((sum, item) => sum + item.price, 0);
     const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
     const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2m9zcOrE1i", "template_yrk4mbd", {
+    emailjs.send("service_8y2ru2m", "template_yrk4mbd", {
         table_number: tableNumber,
         order_details: orderDetails,
         total_price: total.toFixed(2),
         order_date_time: orderDateTime
     })
     .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
         showStatus('Order placed successfully!');
         cart = [];
         updateCartDisplay();
         closePopup();
     }, function(error) {
+        console.log('FAILED...', error);
         showStatus('Failed to place order. Please try again.');
     });
 }
+
 </script>
 
 
