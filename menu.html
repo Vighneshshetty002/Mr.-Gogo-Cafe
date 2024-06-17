@@ -1521,10 +1521,10 @@ searchInput.addEventListener('input', filterMenu);
 
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
-    containers.forEach(container => {
+    title.forEach(container => {
         const itemName = container.querySelector('.title').textContent.toLowerCase();
         if (itemName.includes(query)) {
-            title.style.display = 'block';
+            container.style.display = 'block';
         } else {
             container.style.display = 'none';
         }
