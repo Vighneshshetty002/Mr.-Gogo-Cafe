@@ -388,9 +388,10 @@ nav {
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
     (function(){
-        emailjs.init("ZTLLkEu2m9zcOrE1i");
+        emailjs.init("XczWITHclZUj0KXpz");
     })();
 </script>
+
 </head>
 <body>
     <center><img src="gogo-cafe-white.png" width="150px"></center>
@@ -1485,8 +1486,6 @@ nav {
 
 
 <script>
-dconst searchInput = document.getElementById('searchInput');
-const menuContainer = document.getElementById('menuContainer');
 const statusBar = document.getElementById('statusBar');
 const popupOverlay = document.getElementById('popupOverlay');
 const popup = document.getElementById('popup');
@@ -1505,18 +1504,21 @@ function changePlaceholder() {
 }
 setInterval(changePlaceholder, 3000);
 
-// Scroll to the top when search input is focused
-searchInput.addEventListener('focus', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+// Extract table number from URL
+function getTableNumber() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
+}
+
+const tableNumber = getTableNumber();
 
 searchInput.addEventListener('input', filterMenu);
 
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
-    const items = menuContainer.querySelectorAll('.container');
+    const items = menuContainer.querySelectorAll('.menu-item');
     items.forEach(item => {
-        const itemName = item.querySelector('.title').textContent.toLowerCase();
+        const itemName = item.querySelector('h2').textContent.toLowerCase();
         if (itemName.includes(query)) {
             item.style.display = 'flex';
         } else {
@@ -1537,66 +1539,17 @@ function orderItem(name, price) {
     const orderDetails = name;
     const totalPrice = price.toFixed(2);
     const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2m", "template_yrk4mbd", {
+    emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
         table_number: tableNumber,
         order_details: orderDetails,
         total_price: totalPrice,
         order_date_time: orderDateTime
     })
     .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
         showStatus('Order placed successfully!');
     }, function(error) {
-        showStatus('Failed to place order. Please try again.');
-    });
-}
-
-function addToCart(name, price) {
-    const addButton = document.getElementById(`addButton-${name}`);
-    addButton.outerHTML = `
-        <div class="quantity-controls">
-const searchInput = document.getElementById('searchInput');
-const menuItems = document.querySelectorAll('.container');
-let placeholderIndex = 0;
-const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Pasta"...'];
-
-// Change the placeholder text every few seconds
-function changePlaceholder() {
-    searchInput.placeholder = placeholders[placeholderIndex];
-    placeholderIndex = (placeholderIndex + 1) % placeholders.length;
-}
-setInterval(changePlaceholder, 3000);
-
-// Scroll to the top when search input is focused
-searchInput.addEventListener('focus', () => {
-    window.scrollTo({ top: searchInput.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
-});
-
-searchInput.addEventListener('input', filterMenu);
-
-function filterMenu() {
-    const query = searchInput.value.toLowerCase();
-    menuItems.forEach(item => {
-        const itemName = item.querySelector('h2').textContent.toLowerCase();
-        if (itemName.includes(query)) {
-            item.style.display = 'flex';
-        } else {
-            item.style.display = 'none';
-        }
-    });
-}
-
-function orderItem(name, price) {
-    const orderDetails = name;
-    const totalPrice = price.toFixed(2);
-    const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2m", "template_yrk4mbd", {
-        table_number: tableNumber,
-        order_details: orderDetails,
-        total_price: totalPrice,
-        order_date_time: orderDateTime
-    }).then(function(response) {
-        showStatus('Order placed successfully!');
-    }, function(error) {
+        console.log('FAILED...', error);
         showStatus('Failed to place order. Please try again.');
     });
 }
@@ -1687,21 +1640,23 @@ function sendOrder() {
     const total = cart.reduce((sum, item) => sum + item.price, 0);
     const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
     const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2m", "template_yrk4mbd", {
+    emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
         table_number: tableNumber,
         order_details: orderDetails,
         total_price: total.toFixed(2),
         order_date_time: orderDateTime
-    }).then(function(response) {
+    })
+    .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
         showStatus('Order placed successfully!');
         cart = [];
         updateCartDisplay();
         closePopup();
     }, function(error) {
+        console.log('FAILED...', error);
         showStatus('Failed to place order. Please try again.');
     });
 }
-
 
 </script>
 
