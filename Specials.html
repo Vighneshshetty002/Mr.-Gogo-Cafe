@@ -55,6 +55,24 @@
             color: white;
         }
 
+                footer {
+        text-align: center;
+        padding: 0px 0; /* Reduced padding vertically */
+        background-color: black; /* Adjusted background color */
+        color: white;
+        position: fixed;
+        bottom: 0;
+        width: 100%; /* Adjusted width to fit the screen horizontally */
+        font-size: 12px; /* Reduced font size */
+        z-index: 9999; /* Ensure it's above the popup */
+    }
+
+    footer img {
+        width: 60px;
+        vertical-align: middle;
+    }
+
+
         .container {
             padding-top: 80px; /* Adjust padding to account for fixed navbar */
             
@@ -260,6 +278,10 @@
         </div>
     </div>
 
+    <footer>
+    <p>Powered by <a href="https://github.com/Vighneshshetty002"><img src="VS Tech.png"></a></p>
+</footer>
+    
     <script>
         function showStatus(message) {
             const statusBar = document.getElementById('statusBar');
