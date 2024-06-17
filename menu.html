@@ -1512,7 +1512,7 @@ setInterval(changePlaceholder, 3000);
 
 // Scroll to search input on focus
 searchInput.addEventListener('focus', () => {
-    window.scrollTo({ top: searchInput.offsetTop - 2000, behavior: 'smooth' });
+    window.scrollTo({ top: searchInput.offsetTop - 500, behavior: 'smooth' });
 });
 
 // Extract table number from URL
@@ -1534,33 +1534,29 @@ const tableNumber = getTableNumber();
 
 
 
+
+
     searchInput.addEventListener('input', filterMenu);
 
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
-    let foundItems = false;
+    const containers = document.querySelectorAll('.title');
 
-    menuTitles.forEach(title => {
-        const category = title.getAttribute('.container').toLowerCase();
-        let categoryHasItems = false;
-
-        menuItems.forEach(item => {
-            const itemName = item.querySelector('.title').textContent.toLowerCase();
-            const itemCategory = item.getAttribute('.container').toLowerCase();
-            if (itemName.includes(query) && itemCategory === category) {
-                item.style.display = 'block';
-                categoryHasItems = true;
-                foundItems = true;
-            } else {
-                item.style.display = 'none';
-            }
-        });
-
-        title.style.display = categoryHasItems ? 'block' : 'none';
+    containers.forEach(container => {
+        const itemName = container.querySelector('.title').textContent.toLowerCase();
+        if (itemName.includes(query)) {
+            container.style.display = 'block';
+        } else {
+            container.style.display = 'none';
+        }
     });
-
- 
 }
+
+
+
+
+
+
 
 
 
