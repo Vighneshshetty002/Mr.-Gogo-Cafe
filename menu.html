@@ -3369,7 +3369,7 @@ function sendOrder() {
     const total = cart.reduce((sum, item) => sum + item.price, 0);
     const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
     const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2m9zcOrE1i", "template_yrk4mbd", {
+    emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
         table_number: tableNumber,
         order_details: orderDetails,
         total_price: total.toFixed(2),
