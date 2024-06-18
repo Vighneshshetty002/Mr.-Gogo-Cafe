@@ -1578,6 +1578,95 @@ function addToCart(name, price) {
     `;
     const item = { name, price, quantity: 1 };
     cart.push(item);
+const statusBar = document.getElementById('statusBar');
+const popupOverlay = document.getElementById('popupOverlay');
+const popup = document.getElementById('popup');
+const popupContent = document.getElementById('popupContent');
+const popupTotal = document.getElementById('popupTotal');
+const popupBtn = document.getElementById('popupBtn');
+const searchInput = document.getElementById('searchInput');
+const menuContainer = document.getElementById('menuContainer');
+
+let cart = [];
+let placeholderIndex = 0;
+const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Pasta"...'];
+
+// Change the placeholder text every few seconds
+function changePlaceholder() {
+    searchInput.placeholder = placeholders[placeholderIndex];
+    placeholderIndex = (placeholderIndex + 1) % placeholders.length;
+}
+setInterval(changePlaceholder, 3000);
+
+// Extract table number from URL
+function getTableNumber() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
+}
+
+const tableNumber = getTableNumber();
+
+searchInput.addEventListener('input', filterMenu);
+
+function filterMenu() {
+    const query = searchInput.value.toLowerCase();
+    const items = menuContainer.querySelectorAll('.container');
+    let hasVisibleItems = false;
+
+    items.forEach(item => {
+        const itemName = item.querySelector('.title').textContent.toLowerCase();
+        if (itemName.includes(query)) {
+            item.style.display = 'block';
+            hasVisibleItems = true;
+        } else {
+            item.style.display = 'none';
+        }
+    });
+
+    // If no items are visible, display a message
+    if (!hasVisibleItems) {
+        menuContainer.insertAdjacentHTML('beforeend', '<p>No items found</p>');
+    }
+}
+
+function showStatus(message) {
+    statusBar.textContent = message;
+    statusBar.style.display = 'block';
+    setTimeout(() => {
+        statusBar.style.display = 'none';
+    }, 3000);
+}
+
+function orderItem(name, price) {
+    const orderDetails = name;
+    const totalPrice = price.toFixed(2);
+    const orderDateTime = new Date().toLocaleString();
+    emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
+        table_number: tableNumber,
+        order_details: orderDetails,
+        total_price: totalPrice,
+        order_date_time: orderDateTime
+    })
+    .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+        showStatus('Order placed successfully!');
+    }, function(error) {
+        console.log('FAILED...', error);
+        showStatus('Failed to place order. Please try again.');
+    });
+}
+
+function addToCart(name, price) {
+    const addButton = document.getElementById(`addButton-${name}`);
+    addButton.outerHTML = `
+        <div class="quantity-controls">
+            <button onclick="decrementQuantity('${name}', ${price}, this)">-</button>
+            <span>1</span>
+            <button onclick="incrementQuantity('${name}', ${price}, this)">+</button>
+        </div>
+    `;
+    const item = { name, price, quantity: 1 };
+    cart.push(item);
     updateCartDisplay();
     showStatus('Item added to cart.');
 }
@@ -1654,7 +1743,7 @@ function sendOrder() {
     const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
     const orderDateTime = new Date().toLocaleString();
     emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-        table_number: getTableNumber(),
+        table_number: tableNumber,
         order_details: orderDetails,
         total_price: total.toFixed(2),
         order_date_time: orderDateTime
@@ -1669,11 +1758,6 @@ function sendOrder() {
         console.log('FAILED...', error);
         showStatus('Failed to place order. Please try again.');
     });
-}
-
-function getTableNumber() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
 }
 </script>
 
