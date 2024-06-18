@@ -393,7 +393,14 @@ nav {
 
 </head>
 <body>
-
+<!-- Welcome Popup -->
+<div id="welcomeOverlay" class="welcome-overlay"></div>
+<div id="welcomePopup" class="welcome-popup">
+    <h2>Welcome to Mr. Gogo Cafe!</h2>
+    <p>Please enter your name:</p>
+    <input type="text" id="nameInput" placeholder="Your Name">
+    <button id="welcomeBtn">Submit</button>
+</div>
 
 
     Namaskaram!! Let's start this flavorful journey with your name.(Enter Your Name)
@@ -1808,72 +1815,14 @@ function decrementQuantity(itemName, itemPrice, element) {
     }
 }
 
-function updateCartItem(itemName, priceChange) {
-    const item = cart.find(item => item.name === itemName);
-    if (item) {
-        item.quantity += priceChange > 0 ? 1 : -1;
-        item.price += priceChange;
-        updateCartDisplay();
-    }
-}
-
-function removeFromCart(itemName) {
-    const itemIndex = cart.findIndex(item => item.name === itemName);
-    if (itemIndex > -1) {
-        cart.splice(itemIndex, 1);
-        showStatus('Item removed from cart.');
-        updateCartDisplay();
-    }
-}
-
-function updateCartDisplay() {
-    popupContent.innerHTML = '';
-    let total = 0;
-    cart.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add('popup-item');
-        itemDiv.innerHTML = `
-            <span>${item.name} - ${item.quantity} x ${item.price / item.quantity} = ${item.price.toFixed(2)}</span>
-        `;
-        popupContent.appendChild(itemDiv);
-        total += item.price;
-    });
-    popupTotal.textContent = `Total: ${total.toFixed(2)}`;
-    popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
-}
-
-function togglePopup() {
-    const isVisible = popup.style.display === 'block';
-    popup.style.display = isVisible ? 'none' : 'block';
-    popupOverlay.style.display = isVisible ? 'none' : 'block';
-}
-
-function closePopup() {
-    popup.style.display = 'none';
-    popupOverlay.style.display = 'none';
-}
-
-function sendOrder() {
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-    const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
-    const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-        table_number: tableNumber,
-        order_details: orderDetails,
-        total_price: total.toFixed(2),
-        order_date_time: orderDateTime
-    })
-    .then(function(response) {
-        console.log('SUCCESS!', response.status, response.text);
-        showStatus('Order placed successfully!');
-        cart = [];
-        updateCartDisplay();
-        closePopup();
-    }, function(error) {
-        console.log('FAILED...', error);
-        showStatus('Failed to place order. Please try again.');
-    });
-}
+<!-- Welcome Popup -->
+<div id="welcomeOverlay" class="welcome-overlay"></div>
+<div id="welcomePopup" class="welcome-popup">
+    <h2>Welcome to Mr. Gogo Cafe!</h2>
+    <p>Please enter your name:</p>
+    <input type="text" id="nameInput" placeholder="Your Name">
+    <button id="welcomeBtn">Submit</button>
+</div>
 </script>
 
 
