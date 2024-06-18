@@ -12,8 +12,6 @@
     box-sizing: border-box;
 }
 
-
-    
 body {
     background-color: black;
     font-family: 'Poppins', sans-serif;
@@ -59,59 +57,7 @@ nav {
             background-color: #333;
             color: white;
         }
-    .welcome-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
-.welcome-popup {
-    display: none;
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    z-index: 1001;
-    color: black;
-    text-align: center;
-    width: 80%;
-    max-width: 400px;
-}
-
-.welcome-popup h2 {
-    margin-bottom: 20px;
-}
-
-.welcome-popup input {
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.welcome-popup button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.welcome-popup button:hover {
-    background-color: #0056b3;
-}
+     
    /* Search bar styling */
 .search-bar {
     text-align: center;
@@ -447,14 +393,7 @@ nav {
 
 </head>
 <body>
-<!-- Welcome Popup -->
-<div id="welcomeOverlay" class="welcome-overlay"></div>
-<div id="welcomePopup" class="welcome-popup">
-    <h2>Welcome to Mr. Gogo Cafe!</h2>
-    <p>Please enter your name:</p>
-    <input type="text" id="nameInput" placeholder="Your Name">
-    <button id="welcomeBtn">Submit</button>
-</div>
+
 
 
     Namaskaram!! Let's start this flavorful journey with your name.(Enter Your Name)
@@ -1639,210 +1578,6 @@ function addToCart(name, price) {
     `;
     const item = { name, price, quantity: 1 };
     cart.push(item);
-const statusBar = document.getElementById('statusBar');
-const popupOverlay = document.getElementById('popupOverlay');
-const popup = document.getElementById('popup');
-const popupContent = document.getElementById('popupContent');
-const popupTotal = document.getElementById('popupTotal');
-const popupBtn = document.getElementById('popupBtn');
-const searchInput = document.getElementById('searchInput');
-const menuContainer = document.getElementById('menuContainer');
-
-let cart = [];
-let placeholderIndex = 0;
-const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Pasta"...'];
-
-// Change the placeholder text every few seconds
-function changePlaceholder() {
-    searchInput.placeholder = placeholders[placeholderIndex];
-    placeholderIndex = (placeholderIndex + 1) % placeholders.length;
-}
-setInterval(changePlaceholder, 3000);
-
-// Extract table number from URL
-function getTableNumber() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
-}
-
-const tableNumber = getTableNumber();
-
-searchInput.addEventListener('input', filterMenu);
-
-function filterMenu() {
-    const query = searchInput.value.toLowerCase();
-    const items = menuContainer.querySelectorAll('.container');
-    let hasVisibleItems = false;
-
-    items.forEach(item => {
-        const itemName = item.querySelector('.title').textContent.toLowerCase();
-        if (itemName.includes(query)) {
-            item.style.display = 'block';
-            hasVisibleItems = true;
-        } else {
-            item.style.display = 'none';
-        }
-    });
-
-    // If no items are visible, display a message
-    if (!hasVisibleItems) {
-        menuContainer.insertAdjacentHTML('beforeend', '<p>No items found</p>');
-    }
-}
-
-function showStatus(message) {
-    statusBar.textContent = message;
-    statusBar.style.display = 'block';
-    setTimeout(() => {
-        statusBar.style.display = 'none';
-    }, 3000);
-}
-
-function orderItem(name, price) {
-    const orderDetails = name;
-    const totalPrice = price.toFixed(2);
-    const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-        table_number: tableNumber,
-        order_details: orderDetails,
-        total_price: totalPrice,
-        order_date_time: orderDateTime
-    })
-    .then(function(response) {
-        console.log('SUCCESS!', response.status, response.text);
-        showStatus('Order placed successfully!');
-    }, function(error) {
-        console.log('FAILED...', error);
-        showStatus('Failed to place order. Please try again.');
-    });
-}
-
-function addToCart(name, price) {
-    const addButton = document.getElementById(`addButton-${name}`);
-    addButton.outerHTML = `
-        <div class="quantity-controls">
-            <button onclick="decrementQuantity('${name}', ${price}, this)">-</button>
-            <span>1</span>
-            <button onclick="incrementQuantity('${name}', ${price}, this)">+</button>
-        </div>
-    `;
-    const item = { name, price, quantity: 1 };
-    cart.push(item);
-    updateCartDisplay();
-    showStatus('Item added to cart.');
-}
-
-function incrementQuantity(itemName, itemPrice, element) {
-    const quantityElement = element.previousElementSibling;
-    let quantity = parseInt(quantityElement.textContent);
-    quantity++;
-const statusBar = document.getElementById('statusBar');
-const popupOverlay = document.getElementById('popupOverlay');
-const popup = document.getElementById('popup');
-const popupContent = document.getElementById('popupContent');
-const popupTotal = document.getElementById('popupTotal');
-const popupBtn = document.getElementById('popupBtn');
-const searchInput = document.getElementById('searchInput');
-const menuContainer = document.getElementById('menuContainer');
-
-let cart = [];
-let placeholderIndex = 0;
-const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Pasta"...'];
-
-// Change the placeholder text every few seconds
-function changePlaceholder() {
-    searchInput.placeholder = placeholders[placeholderIndex];
-    placeholderIndex = (placeholderIndex + 1) % placeholders.length;
-}
-setInterval(changePlaceholder, 3000);
-
-// Extract table number from URL
-function getTableNumber() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
-}
-
-const tableNumber = getTableNumber();
-
-searchInput.addEventListener('input', filterMenu);
-
-function filterMenu() {
-    const query = searchInput.value.toLowerCase();
-    const items = document.querySelectorAll('.container');
-    let hasVisibleItems = false;
-
-    items.forEach(item => {
-        const itemName = item.querySelector('.title').textContent.toLowerCase();
-        if (itemName.includes(query)) {
-            item.style.display = 'block';
-            hasVisibleItems = true;
-        } else {
-            item.style.display = 'none';
-        }
-    });
-
-    // Handle the visibility of category titles
-    const categories = document.querySelectorAll('.menu-Title');
-    categories.forEach(category => {
-        const categoryItems = category.nextElementSibling.querySelectorAll('.container');
-        const visibleItems = Array.from(categoryItems).some(item => item.style.display === 'block');
-        category.style.display = visibleItems ? 'block' : 'none';
-    });
-
-    // If no items are visible, display a message
-    if (!hasVisibleItems) {
-        if (!document.querySelector('.no-results')) {
-            const noResultsMessage = document.createElement('p');
-            noResultsMessage.classList.add('no-results');
-            noResultsMessage.textContent = 'No items found';
-            menuContainer.appendChild(noResultsMessage);
-        }
-    } else {
-        const noResultsMessage = document.querySelector('.no-results');
-        if (noResultsMessage) {
-            noResultsMessage.remove();
-        }
-    }
-}
-
-function showStatus(message) {
-    statusBar.textContent = message;
-    statusBar.style.display = 'block';
-    setTimeout(() => {
-        statusBar.style.display = 'none';
-    }, 3000);
-}
-
-function orderItem(name, price) {
-    const orderDetails = name;
-    const totalPrice = price.toFixed(2);
-    const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-        table_number: tableNumber,
-        order_details: orderDetails,
-        total_price: totalPrice,
-        order_date_time: orderDateTime
-    })
-    .then(function(response) {
-        console.log('SUCCESS!', response.status, response.text);
-        showStatus('Order placed successfully!');
-    }, function(error) {
-        console.log('FAILED...', error);
-        showStatus('Failed to place order. Please try again.');
-    });
-}
-
-function addToCart(name, price) {
-    const addButton = document.getElementById(`addButton-${name}`);
-    addButton.outerHTML = `
-        <div class="quantity-controls">
-            <button onclick="decrementQuantity('${name}', ${price}, this)">-</button>
-            <span>1</span>
-            <button onclick="incrementQuantity('${name}', ${price}, this)">+</button>
-        </div>
-    `;
-    const item = { name, price, quantity: 1 };
-    cart.push(item);
     updateCartDisplay();
     showStatus('Item added to cart.');
 }
@@ -1869,14 +1604,77 @@ function decrementQuantity(itemName, itemPrice, element) {
     }
 }
 
-<!-- Welcome Popup -->
-<div id="welcomeOverlay" class="welcome-overlay"></div>
-<div id="welcomePopup" class="welcome-popup">
-    <h2>Welcome to Mr. Gogo Cafe!</h2>
-    <p>Please enter your name:</p>
-    <input type="text" id="nameInput" placeholder="Your Name">
-    <button id="welcomeBtn">Submit</button>
-</div>
+function updateCartItem(itemName, priceChange) {
+    const item = cart.find(item => item.name === itemName);
+    if (item) {
+        item.quantity += priceChange > 0 ? 1 : -1;
+        item.price += priceChange;
+        updateCartDisplay();
+    }
+}
+
+function removeFromCart(itemName) {
+    const itemIndex = cart.findIndex(item => item.name === itemName);
+    if (itemIndex > -1) {
+        cart.splice(itemIndex, 1);
+        showStatus('Item removed from cart.');
+        updateCartDisplay();
+    }
+}
+
+function updateCartDisplay() {
+    popupContent.innerHTML = '';
+    let total = 0;
+    cart.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('popup-item');
+        itemDiv.innerHTML = `
+            <span>${item.name} - ${item.quantity} x ${item.price / item.quantity} = ${item.price.toFixed(2)}</span>
+        `;
+        popupContent.appendChild(itemDiv);
+        total += item.price;
+    });
+    popupTotal.textContent = `Total: ${total.toFixed(2)}`;
+    popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
+}
+
+function togglePopup() {
+    const isVisible = popup.style.display === 'block';
+    popup.style.display = isVisible ? 'none' : 'block';
+    popupOverlay.style.display = isVisible ? 'none' : 'block';
+}
+
+function closePopup() {
+    popup.style.display = 'none';
+    popupOverlay.style.display = 'none';
+}
+
+function sendOrder() {
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
+    const orderDateTime = new Date().toLocaleString();
+    emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
+        table_number: getTableNumber(),
+        order_details: orderDetails,
+        total_price: total.toFixed(2),
+        order_date_time: orderDateTime
+    })
+    .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+        showStatus('Order placed successfully!');
+        cart = [];
+        updateCartDisplay();
+        closePopup();
+    }, function(error) {
+        console.log('FAILED...', error);
+        showStatus('Failed to place order. Please try again.');
+    });
+}
+
+function getTableNumber() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
+}
 </script>
 
 
