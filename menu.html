@@ -12,24 +12,7 @@
     box-sizing: border-box;
 }
 
-.welcome-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
 
-.welcome-popup {
-    display: none;
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50
-  }
     
 body {
     background-color: black;
@@ -76,7 +59,59 @@ nav {
             background-color: #333;
             color: white;
         }
-     
+    .welcome-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.welcome-popup {
+    display: none;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 1001;
+    color: black;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+}
+
+.welcome-popup h2 {
+    margin-bottom: 20px;
+}
+
+.welcome-popup input {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.welcome-popup button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.welcome-popup button:hover {
+    background-color: #0056b3;
+}
    /* Search bar styling */
 .search-bar {
     text-align: center;
