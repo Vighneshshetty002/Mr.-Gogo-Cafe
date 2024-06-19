@@ -244,49 +244,43 @@ nav {
     }
 
     /* Popup styles */
-    .popup-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-    }
+    
+Copy code
+.welcome-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
 
-    .popup {
-        display: none;
-        position: fixed;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: black; /* Adjusted background color */
-        border: 1px solid white;
-        border-radius: 15px;
-        padding: 20px;
-        z-index: 1001;
-        color: white;
-        width: 80%; /* Adjusted width */
-        max-height: 100%; /* Adjusted max-height */
-        overflow-y: auto;
-    }
+.welcome-popup {
+    display: none;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 1001;
+    color: black;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+}
 
-    .popup h2 {
-        margin-bottom: 20px;
-        text-align: center;
-    }
+.welcome-popup h2 {
+    margin-bottom: 20px;
+}
 
-    .popup-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px; /* Added gap for spacing */
-    }
-
-    .popup-content p {
-        margin: 10px 0;
-    }
+.welcome-popup input {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
 
     /* Footer styling */
     footer {
@@ -393,6 +387,14 @@ nav {
 
 </head>
 <body>
+<!-- Welcome Popup -->
+<div id="welcomeOverlay" class="welcome-overlay"></div>
+<div id="welcomePopup" class="welcome-popup">
+    <h2>Welcome to Mr. Gogo Cafe!</h2>
+    <p>Please enter your name to continue:</p>
+    <input type="text" id="nameInput" placeholder="Your Name">
+    <button id="welcomeBtn">Submit</button>
+</div>
 
 
 
@@ -1507,12 +1509,42 @@ const popup = document.getElementById('popup');
 const popupContent = document.getElementById('popupContent');
 const popupTotal = document.getElementById('popupTotal');
 const popupBtn = document.getElementById('popupBtn');
+const welcomePopup = document.getElementById('welcomePopup');
+const welcomeOverlay = document.getElementById('welcomeOverlay');
+const nameInput = document.getElementById('nameInput');
+const welcomeBtn = document.getElementById('welcomeBtn');
 const containers = document.querySelectorAll('.container');
 
 let cart = [];
 let placeholderIndex = 0;
-const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Fries"...', 'Search "Frankie"...' , 'Search "Sandwich"...' , 'Search "Chats"...' , 'Search "Pasta"...',
-                     'Search "Maggie"...', 'Search "Rice"...' , 'Search "Mocatails"...', 'Search "Milk Shakes"...', 'Search "Beverages"...'];
+const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Fries"...', 'Search "Frankie"...', 'Search "Sandwich"...', 'Search "Chats"...', 'Search "Pasta"...', 'Search "Maggie"...', 'Search "Rice"...', 'Search "Mocktails"...', 'Search "Milk Shakes"...', 'Search "Beverages"...'];
+
+// Show welcome popup
+function showWelcomePopup() {
+    welcomePopup.style.display = 'block';
+    welcomeOverlay.style.display = 'block';
+}
+
+// Hide welcome popup and save name
+function hideWelcomePopup() {
+    const userName = nameInput.value;
+    if (userName.trim() !== '') {
+        localStorage.setItem('userName', userName);
+        welcomePopup.style.display = 'none';
+        welcomeOverlay.style.display = 'none';
+    } else {
+        alert('Please enter your name.');
+    }
+}
+
+welcomeBtn.addEventListener('click', hideWelcomePopup);
+
+// Show the popup on page load if the name is not already saved
+window.onload = function () {
+    if (!localStorage.getItem('userName')) {
+        showWelcomePopup();
+    }
+};
 
 // Change the placeholder text every few seconds
 function changePlaceholder() {
@@ -1539,7 +1571,7 @@ function filterMenu() {
         }
     });
 }
-    
+
 function showStatus(message) {
     statusBar.textContent = message;
     statusBar.style.display = 'block';
