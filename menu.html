@@ -58,28 +58,7 @@ nav {
             color: white;
         }
 
-
-    .popup-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
-.popup {
-    display: none;
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 15px;
-}
+        
    /* Search bar styling */
 .search-bar {
     text-align: center;
@@ -121,7 +100,7 @@ nav {
 
 .container img {
     width: 150px; /* Adjust the image size as needed */
-    height: 250px;
+    height: 200px;
     margin-right: 15px; /* Space between image and text */
     border-radius: 10px; /* Rounded corners for the image */
 }
@@ -162,7 +141,7 @@ nav {
 
 .description .buttons {
     display: flex;
-    gap: 5px;
+    gap: 10px;
 }
 
 .description button {
@@ -266,44 +245,50 @@ nav {
     }
 
     /* Popup styles */
-    
-Copy code
-.welcome-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
+    .popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
 
-.welcome-popup {
-    display: none;
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    z-index: 1001;
-    color: black;
-    text-align: center;
-    width: 80%;
-    max-width: 400px;
-}
+    .popup {
+        display: none;
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: black; /* Adjusted background color */
+        border: 1px solid white;
+        border-radius: 15px;
+        padding: 20px;
+        z-index: 1001;
+        color: white;
+        width: 80%; /* Adjusted width */
+        max-height: 100%; /* Adjusted max-height */
+        overflow-y: auto;
+    }
 
-.welcome-popup h2 {
-    margin-bottom: 20px;
-}
+    .popup h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
 
-.welcome-popup input {
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 20px;
-}
+    .popup-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px; /* Added gap for spacing */
+    }
+
+    .popup-content p {
+        margin: 10px 0;
+    }
+
     /* Footer styling */
     footer {
         text-align: center;
@@ -409,22 +394,6 @@ Copy code
 
 </head>
 <body>
-<!-- Welcome Popup -->
-<div id="welcomeOverlay" class="welcome-overlay"></div>
-<div id="welcomePopup" class="welcome-popup">
-    <h2>Welcome to Mr. Gogo Cafe!</h2>
-    <p>Please enter your name to continue:</p>
-    <input type="text" id="nameInput" placeholder="Your Name">
-    <button id="welcomeBtn">Submit</button>
-</div>
-
-
-
-    Namaskaram!! Let's start this flavorful journey with your name.(Enter Your Name)
-    
-    
-    
-    
     <center><img src="gogo-cafe-white.png" width="150px"></center>
 
     
@@ -443,7 +412,7 @@ Copy code
         <input type="text" id="searchInput" placeholder="Search your favorite dishes...">
     </div>
 
-    
+
 
     <br/>
 <div class="menu-Title">
@@ -459,8 +428,8 @@ Copy code
         <img src="Menu Food images/Veg Pizza.jpeg" alt="Veg Pizza">
         <div class="description">
             
-           <p>A medley of fresh veggies on a crispy crust.</p>
-            <p> loaded with veggies like bell peppers, onions etc.</p>
+           <p>A delightful medley of fresh veggies on a crispy crust.</p><br/>
+            <p>Key Ingridrients: Crispy crust loaded with veggies like bell peppers, onions etc.</p>
             <p class="price">Price: 109/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Veg Pizza', 109)">Order</button>
@@ -479,8 +448,8 @@ Copy code
      <div class="container-content">
         <img src="Menu Food images/Tasty Kulhad Pizza.jpeg" alt="Veg Pizza">
         <div class="description">
-            <p>Authentic Indian flavors served in a clay pot(Kulhad)</p>
-            <p>filled with Desi veggies, Cheese and spices etc.</p>
+            <p>Authentic desi flavors served in a traditional clay pot(Kulhad)</p><br/>
+            <p>Key Ingridrients: Desi veggies,Cheese and spices etc.</p>
             <p class="price">Price: 199/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Kulhad Pizza', 199)">Order</button>
@@ -500,8 +469,8 @@ Copy code
         <img src="Menu Food images/Corn Pizza.jpeg" alt="Veg Pizza">
         <div class="description">
             
-            <p>Sweet corn and cheese, a perfect match</p>
-            <p>with Sweet corn, cheese, and a hint of Indian herbs etc.</p>
+            <p>Juicy corn kernels and gooey cheese - a match made in heaven!</p><br/>
+            <p>Key Ingridrients: Sweet corn, gooey cheese, and a hint of Indian herbs etc.</p>
             <p class="price">Price: 129/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Corn Pizza', 129)">Order</button>
@@ -521,8 +490,8 @@ Copy code
         <img src="Menu Food images/Paneer Pizza.jpeg" alt="Veg Pizza">
         <div class="description">
             
-             <p>Creamy paneer and aromatic spices,</p><br/>
-            <p> tangy tomatoes and aromatic spices etc.</p>
+             <p>Creamy cottage cheese(Paneer) and aromatic spices, a vegetarian's delight.</p><br/>
+            <p>Key Ingridrients: Soft paneer, tangy tomatoes, and aromatic spices etc.</p>
             <p class="price">Price: 129/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Paneer Pizza', 129)">Order</button>
@@ -542,8 +511,8 @@ Copy code
         <img src="Menu Food images/Olive Pizza.jpeg" alt="Olive Pizza">
         <div class="description">
             
-             <p>Bold flavors of black olives and zesty sauce</p><br/>
-            <p>with melted cheese, and a zesty tomato etc.</p>
+             <p>A Mediterranean twist with the bold flavors of black olives.</p><br/>
+            <p>Key Ingridrients: Sliced black olives, melted cheese, and a zesty tomato etc.</p>
             <p class="price">Price: 149/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Olive Pizza', 149)">Order</button>
@@ -563,8 +532,8 @@ Copy code
         <img src="Menu Food images/Jalapeno Pizza.jpg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Fiery jalapenos balanced with a cheese blend</p>
-            <p> and a spicy tomato sauce etc.</p>
+            <p>Fiery jalapenos that pack a punch, balanced with zesty sauce.</p><br/>
+            <p>Key Ingridrients:  Fiery jalapenos, cheese blend, and a spicy tomato sauce etc.</p>
             <p class="price">Price: 149/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Jaba Peno Pizza', 149)">Order</button>
@@ -583,8 +552,8 @@ Copy code
         <img src="Menu Food images/Margherita Pizza.jpg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Queen Of Pizzas</p><br/>
-            <p>filled with Fresh tomatoes, mozzarella, and basil on a crispy crust etc.</p>
+            <p>The classic combo of tomatoes, mozzarella, and basil, simply irresistible.</p><br/>
+            <p>Key Ingridrients: Fresh tomatoes, mozzarella, and basil on a crispy crust etc.</p>
             <p class="price">Price: 149/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Margherita Pizza', 149)">Order</button>
@@ -610,9 +579,8 @@ Copy code
         <div class="container-content">
         <img src="Menu Food images/Veg Burger.webp" alt="Olive Pizza">
         <div class="description">
-             
-            <p>A satisfying blend of spiced potato patty, crisp veggies,</p>
-            <p>and tangy sauces, all in a soft bun - a classic favorite!</p>
+            
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price:90/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Veg Burger', 90)">Order</button>
@@ -631,8 +599,7 @@ Copy code
         <div class="container-content">
         <img src="Menu Food images/Cheese Burger.jpeg" alt="Olive Pizza">
         <div class="description">
-            <p>Melted cheese and a juicy veg patty topped with melted cheese   </p>
-            <p>and crunchy veggies - a cheesy delight in every bite!</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 99/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Cheese Burger', 99)">Order</button>
@@ -652,8 +619,7 @@ Copy code
         <img src="Menu Food images/Paneer Burger.jpg" alt="Olive Pizza">
         <div class="description">
             
-            <p>A Soft  Paneer combined with masala spices and fresh veggies,</p>
-            <p>  creating a burst of flavors. - a delicious twist on a classic!</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 99/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Paneer Burger', 99)">Order</button>
@@ -674,8 +640,7 @@ Copy code
         <img src="Menu Food images/Double Tikki Burger.png" alt="Olive Pizza">
         <div class="description">
             
-            <p>Two mouthwatering tikkis paired with fresh veggies and zesty sauces</p>
-            <p>- a flavorful veggie treat!</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 119/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Double Tikki Burger', 119)">Order</button>
@@ -695,8 +660,7 @@ Copy code
         <img src="Menu Food images/Loaded Burger.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Stacked high with cheese, veggies, and sauces for a hearty and filling burger experience.</p>
-            <p>- a loaded burger for big appetites!</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 149/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Loaded Burger', 149)">Order</button>
@@ -727,8 +691,7 @@ Copy code
         <img src="Menu Food images/Cheese Fries.jpg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Crispy fries smothered in a generous helping of melted cheese</p>
-            <p>- a snack lover's dream!</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 129/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Cheese Fries', 129)">Order</button>
@@ -748,8 +711,7 @@ Copy code
         <img src="Menu Food images/Tandoori Fries.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Crispy fries tossed in a bold blend of tandoori spices, offering a spicy and aromatic twist.</p>
-            <p> - a perfect fusion of flavors!</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 99/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Tandori Fries', 99)">Order</button>
@@ -770,7 +732,7 @@ Copy code
         <img src="Menu Food images/Peri Peri Fries.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Golden fries coated in a peri peri seasoning, packing a flavorful punch in every bite.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 89/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Peri Peri Fries', 89)">Order</button>
@@ -791,7 +753,7 @@ Copy code
         <img src="Menu Food images/Salty Fries.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Classic fries seasoned with the perfect amount of salt, creating a simple yet satisfying snack.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 129/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Salty Fries', 129)">Order</button>
@@ -811,7 +773,7 @@ Copy code
         <img src="Menu Food images/Nuggets.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Bite-sized chunks of tender, breaded vegetable goodness, perfect for dipping in your favorite sauce.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 99/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Nuggets', 99)">Order</button>
@@ -843,7 +805,7 @@ Copy code
         <img src="Menu Food images/Veg Frankie.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>A flavorful mix of spiced veggies wrapped in a soft roti, creating a satisfying and portable meal.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 79/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Veg Frankie', 79)">Order</button>
@@ -862,7 +824,7 @@ Copy code
         <img src="Menu Food images/Paneer Frankie.jpeg" alt="Olive Pizza">
         <div class="description">
            
-            <p>Tender pieces of marinated paneer combined with veggies and wrapped in a soft roti for a delightful twist.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 89/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Paneer Frankie', 89)">Order</button>
@@ -889,7 +851,7 @@ Copy code
         <img src="Menu Food images/Veg Sandwich.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>A creamy and tangy combination of fresh veggies and mayonnaise, nestled between soft bread slices.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 79/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Veg Sandwich', 79)">Order</button>
@@ -908,7 +870,7 @@ Copy code
         <img src="Menu Food images/Veg Mayo Sandwich.jpeg" alt="Olive Pizza">
         <div class="description">
            
-            <p>Tender pieces of marinated paneer combined with veggies and wrapped in a soft roti for a delightful twist.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 85/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Veg Mayo Sandwich', 85)">Order</button>
@@ -928,7 +890,7 @@ Copy code
         <img src="Menu Food images/Corn Sandwich.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Sweet and juicy corn kernels paired with crunchy veggies, tucked between slices of soft bread.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 89/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Corn Sandwich', 89)">Order</button>
@@ -948,7 +910,8 @@ Copy code
         <div class="container-content">
         <img src="Menu Food images/Corn Mayo Sandwich.jpeg" alt="Olive Pizza">
         <div class="description">
-            <p>A perfect blend of sweet corn, creamy mayonnaise, and fresh veggies, all in a soft bread sandwich.</p>
+            <h2>Corn Mayo Sandwich</h2>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 89/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Corn Mayo Sandwich', 89)">Order</button>
@@ -969,7 +932,7 @@ Copy code
         <img src="Menu Food images/Paneer Sandwich.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Soft, marinated paneer slices combined with fresh veggies, creating a protein-packed sandwich delight.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 89/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Paneer Sandwich', 89)">Order</button>
@@ -989,7 +952,7 @@ Copy code
         <img src="Menu Food images/Corn Paneer Sandwich.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>A mouth-watering combination of sweet corn, tender paneer, and crunchy veggies, sandwiched between soft bread.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 101/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Corn Paneer Sandwich', 101)">Order</button>
@@ -1017,7 +980,7 @@ Copy code
         <img src="Menu Food images/Samosa.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Crispy, triangular pastry filled with spiced potatoes and peas. A classic Indian snack that's savory and satisfying.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 20/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Samosa', 20)">Order</button>
@@ -1036,7 +999,7 @@ Copy code
         <img src="Menu Food images/Samosa Chat.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Samosas topped with tangy chutneys, yogurt, and sev. A delightful mix of flavors and textures in every bite.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 30/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Samosa Chat', 30)">Order</button>
@@ -1057,7 +1020,7 @@ Copy code
         <img src="Menu Food images/Kachori.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Fluffy, deep-fried pastry filled with spiced lentils or beans. A popular North Indian snack that's crispy and flavorful.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 20/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Kachori', 20)">Order</button>
@@ -1077,7 +1040,7 @@ Copy code
         <img src="Menu Food images/Kachori Chat.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Kachoris served with tangy chutneys, yogurt, and sev. A mouth-watering snack that combines crispy and creamy textures.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 30/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Kachori Chat', 30)">Order</button>
@@ -1097,7 +1060,7 @@ Copy code
         <img src="Menu Food images/Pani Puri.jpeg" alt="Olive Pizza">
         <div class="description">
             
-            <p>Crisp, hollow puris filled with potatoes, chickpeas, and tangy water. A beloved street food that explodes with flavors in your mouth.</p>
+            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
             <p class="price">Price: 40/-</p>
             <div class="buttons">
                 <button onclick="orderItem('Pani Puri', 40)">Order</button>
@@ -1107,394 +1070,522 @@ Copy code
     </div>
     </div>
 
+    <br>
+    <br><br>
+    <div class="menu-Title">
+        <b> <p>Pasta</p></b>
+    </div>
+    <div class="container">
+        <div class="title">White Sause Pasta<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/white sause pasta.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Creamy pasta in a luscious white sauce made with garlic,parmesan, and herbs, perfect for a delightful meal.</p>
+            <p class="price">Price: 140/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('White Sause Pasta', 140)">Order</button>
+                <button id="addButton-White Sause Pasta" onclick="addToCart('White Sause Pasta', 140)">Add +</button>
+            </div>
+        </div>
+    </div>
+    </div>
 
+    <div class="container">
+        <div class="title">Red Sause Pasta<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/Red sause pasta.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Aromatic red sauce pasta with rich tomatoes, fresh herbs,and spices, topped with basil and Parmesan.</p>
+            <p class="price">Price: 140/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Red Sause Pasta', 140)">Order</button>
+                <button id="addButton-Red Sause Pasta" onclick="addToCart('Red Sause Pasta', 140)">Add +</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <br>
+    <br><br>
+    <div class="menu-Title">
+        <b> <p>Maggie</p></b>
+    </div>
+    <div class="container">
+        <div class="title">Plain Maggie<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/plain maggie.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Classic Maggi noodles, cooked with a simple blend of spices and a touch of Indian herbs for a comforting meal.</p>
+            <p class="price">Price: 50/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Plain Maggie', 50)">Order</button>
+                <button id="addButton-Plain Maggie" onclick="addToCart('Plain Maggie', 50)">Add +</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="container">
+        <div class="title">Veggie Maggie<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/veggie maggie.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Veggie Maggie combines maggie with assorted vegetables and aromatic spices, offering a quick and flavorful meal option.</p>
+            <p class="price">Price: 60/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Veggie Maggie', 60)">Order</button>
+                <button id="addButton-Veggie Maggie" onclick="addToCart('Veggie Maggie', 60)">Add +</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="container">
+        <div class="title">Cheese Maggie<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/cheese maggie.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Cheese Maggie includes boiled noodles tossed in a creamy cheese sauce, seasoned with aromatic spices and fresh herbs.</p>
+            <p class="price">Price: 70/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Cheese Maggie', 70)">Order</button>
+                <button id="addButton-Cheese Maggie" onclick="addToCart('Cheese Maggie', 70)">Add +</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="container">
+        <div class="title">Tandoori Maggie<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Tandoori Maggie features boiled noodles infused with tandoori spices, mixed with grilled vegetables, and garnished with fresh cilantro.</p>
+            <p class="price">Price: 70/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Tandoori Maggie', 60)">Order</button>
+                <button id="addButton-Tandoori Maggie" onclick="addToCart('Tandoori Maggie', 70)">Add +</button>
+            </div>
+        </div>
+    </div>
+    </div>
     
-    
-<-----------------------------------STOP---------------------------------->
-
-<h1 style="color: blue;">After This Changes Changes are Done By Mr. Shrishail M Nandargi!!</h1>
-    
-
-
-    
     <br>
     <br><br>
     <div class="menu-Title">
-        <b> <p style="background-color: white; color: black;">Pasta</p></b>
+        <b> <p>Rice</p></b>
     </div>
-    <br><br>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>White Sause Pasta</h2>
-            <p>140/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('White Sause Pasta', 140)">Order</button>
-            <button onclick="addToCart('White Sause Pasta', 140)">Add to Cart</button>
+    <div class="container">
+        <div class="title">Fried Rice<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/fried rice.jpeg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Savory fried rice cooked with a medley of vegetables, eggs, and soy sauce, garnished with fresh spring onions.
+            </p>
+            <p class="price">Price: 90/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Fried Rice', 90)">Order</button>
+                <button id="addButton-Fried Rice" onclick="addToCart('Fried Rice', 90)">Add +</button>
+            </div>
         </div>
     </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Red Sause Pasta</h2>
-            <p>140/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Red Sause Pasta', 140)">Order</button>
-            <button onclick="addToCart('Red Sause Pasta', 140)">Add to Cart</button>
-        </div>
     </div>
 
-    <br>
-    <br><br>
-    <div class="menu-Title">
-        <b> <p style="background-color: white; color: black;">Maggie</p></b>
-    </div>
-    <br><br>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Plain Maggie</h2>
-            <p>50/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Plain Maggie', 50)">Order</button>
-            <button onclick="addToCart('Plain Maggie', 50)">Add to Cart</button>
+    <div class="container">
+        <div class="title">Gobi Manchurian<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/gobi manchurian.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Crispy cauliflower florets tossed in a spicy, tangy sauce with onions, bell peppers, and aromatic Indian spices.</p>
+            <p class="price">Price: 90/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Gobi Manchurian', 90)">Order</button>
+                <button id="addButton-Gobi Manchurian" onclick="addToCart('Gobi Manchurian', 90)">Add +</button>
+            </div>
         </div>
     </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Veggie Maggie</h2>
-            <p>60/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Veggie Maggie', 60)">Order</button>
-            <button onclick="addToCart('Veggie Maggie', 60)">Add to Cart</button>
+    </div>
+    <div class="container">
+        <div class="title">Gobi Rice<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/gobi rice.jpeg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Fluffy rice stir-fried with tender cauliflower florets, onions, bell peppers, and aromatic spices,full of flavors.</p>
+            <p class="price">Price: 150/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Gobi Rice', 150)">Order</button>
+                <button id="addButton-Gobi Rice" onclick="addToCart('Gobi Rice', 150)">Add +</button>
+            </div>
         </div>
     </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Cheese Maggie</h2>
-            <p>70/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Cheese Maggie', 70)">Order</button>
-            <button onclick="addToCart('Cheese Maggie', 70)">Add to Cart</button>
+    </div>
+    <div class="container">
+        <div class="title">Noodles<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/noodles.webp" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Stir-fried noodles tossed with fresh vegetables and savory sauces,with delicious blend of textures and flavors.</p>
+            <p class="price">Price: 90/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Noodles', 90)">Order</button>
+                <button id="addButton-Noodles" onclick="addToCart('Noodles', 90)">Add +</button>
+            </div>
         </div>
     </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Tandoori Maggie</h2>
-            <p>70/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Tandoori Maggie', 70)">Order</button>
-            <button onclick="addToCart('Tandoori Maggie', 70)">Add to Cart</button>
+    </div>
+    <div class="container">
+        <div class="title">Bhendi Kayi Fry<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/bhendi kayi fry.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Crispy, stir-fried okra seasoned with Indian spices for a flavorful and crunchy experience.</p>
+            <p class="price">Price: 75/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Bhendi Kayi Fry', 75)">Order</button>
+                <button id="addButton-Bhendi Kayi Fry" onclick="addToCart('Bhendi Kayi Fry', 75)">Add +</button>
+            </div>
         </div>
     </div>
-
-    <br>
-    <br><br>
-    <div class="menu-Title">
-        <b> <p style="background-color: white; color: black;">Rice</p></b>
     </div>
-    <br><br>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Fried Rice</h2>
-            <p>90/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Fried Rice', 90)">Order</button>
-            <button onclick="addToCart('Fried Rice', 90)">Add to Cart</button>
+    <div class="container">
+        <div class="title">Bhendi Fry<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/bhedni fry.jpeg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Crispy okra cooked with aromatic Indian spices, creating a delicious and flavorful dish.</p>
+            <p class="price">Price: 80/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Bhendi Fry', 80)">Order</button>
+                <button id="addButton-Bhendi Fry" onclick="addToCart('Bhendi Fry', 80)">Add +</button>
+            </div>
         </div>
     </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Gobi Manchurian</h2>
-            <p>90/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Gobi Manchurian', 90)">Order</button>
-            <button onclick="addToCart('Gobi Manchurian', 90)">Add to Cart</button>
+    </div>
+    <div class="container">
+        <div class="title">Crispy Corn<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/cripsy corn.webp" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Corn kernels are deep-fried to perfection, seasoned with spices, and served crispy and flavorful.</p>
+            <p class="price">Price: 80/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Crispy Corn', 80)">Order</button>
+                <button id="addButton-Crispy Corn" onclick="addToCart('Crispy Corn', 80)">Add +</button>
+            </div>
         </div>
     </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Gobi Rice</h2>
-            <p>150/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Gobi Rice', 150)">Order</button>
-            <button onclick="addToCart('Gobi Rice', 150)">Add to Cart</button>
+    </div>
+    <div class="container">
+        <div class="title">Momos<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/momos.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Steamed dumplings filled with a savory mixture of vegetables or meat, typically served with a spicy dipping sauce.</p>
+            <p class="price">Price: 99/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Momos', 99)">Order</button>
+                <button id="addButton-Momos" onclick="addToCart('Momos', 99)">Add +</button>
+            </div>
         </div>
     </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Noodles</h2>
-            <p>90/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Noodles', 90)">Order</button>
-            <button onclick="addToCart('Noodles', 90)">Add to Cart</button>
-        </div>
-    </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Bhendi Kayi Fry</h2>
-            <p>75/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Bhendi Kayi Fry', 75)">Order</button>
-            <button onclick="addToCart('Bhendi Kayi Fry', 75)">Add to Cart</button>
-        </div>
-    </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Bhendi Fry</h2>
-            <p>80/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Bhendi Fry', 80)">Order</button>
-            <button onclick="addToCart('Bhendi Fry', 80)">Add to Cart</button>
-        </div>
-    </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Crispy Corn</h2>
-            <p>80/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Crispy Corn', 80)">Order</button>
-            <button onclick="addToCart('Crispy Corn', 80)">Add to Cart</button>
-        </div>
-    </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Momos</h2>
-            <p>99/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Momos', 99)">Order</button>
-            <button onclick="addToCart('Momos', 99)">Add to Cart</button>
-        </div>
     </div>
 
     <br>
     <br><br>
     <div class="menu-Title">
-        <b> <p style="background-color: white; color: black;">Mocktails</p></b>
+        <b> <p>Mocktails</p></b>
     </div>
-    <br><br>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Blended Scotch (lagoon)</h2>
-            <p>85/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Blended Scotch (lagoon)', 85)">Order</button>
-            <button onclick="addToCart('Blended Scotch (lagoon)', 85)">Add to Cart</button>
-        </div>
-    </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Mojito</h2>
-            <p>90/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Mojito', 90)">Order</button>
-            <button onclick="addToCart('Mojito', 90)">Add to Cart</button>
+    <div class="container">
+        <div class="title">Blended Scotch(lagoon)<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/blended.avif" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>A refreshing cocktail with blended Scotch whisky, tropical fruit flavors, and a hint of citrus.</p>
+            <p class="price">Price: 85/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Blended Scotch(lagoon)', 85)">Order</button>
+                <button id="addButton-Blended Scotch(lagoon)" onclick="addToCart('Blended Scotch(lagoon)', 85)">Add +</button>
+            </div>
         </div>
     </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Pina Colade (Pineapple)</h2>
-            <p>80/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Pina Colade (Pineapple)', 80)">Order</button>
-            <button onclick="addToCart('Pina Colade (Pineapple)', 80)">Add to Cart</button>
+    </div>
+    <div class="container">
+        <div class="title">Mojito<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/mojito.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>A refreshing cocktail featuring rum, fresh mint, lime juice, sugar, and sparkling water, perfect for any occasion.</p>
+            <p class="price">Price: 85/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Mojito', 90)">Order</button>
+                <button id="addButton-Mojito" onclick="addToCart('Mojito', 90)">Add +</button>
+            </div>
         </div>
     </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Passion of Strawberry</h2>
-            <p>80/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Passion of Strawberry', 80)">Order</button>
-            <button onclick="addToCart('Passion of Strawberry', 80)">Add to Cart</button>
+    </div>
+    <div class="container">
+        <div class="title">Pina Colade(Pineapple)<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/pina colade.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>A tropical blend of rum, coconut cream, and pineapple juice, garnished with a pineapple slice.</p>
+            <p class="price">Price: 80/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Pina Colade(Pineapple)', 80)">Order</button>
+                <button id="addButton-Pina Colade(Pineapple)" onclick="addToCart('Pina Colade(Pineapple)', 80)">Add +</button>
+            </div>
         </div>
     </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Merry Blue (Black current)</h2>
-            <p>85/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Merry Blue (Black current)', 85)">Order</button>
-            <button onclick="addToCart('Merry Blue (Black current)', 85)">Add to Cart</button>
+    </div>
+    <div class="container">
+        <div class="title">Passion of Strawberry<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/passion of strawberry.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>A delightful mix of fresh strawberries, tangy passion fruit, citrus splash, and a hint of sweetness.</p>
+            <p class="price">Price: 80/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Passion Of Strawberry', 80)">Order</button>
+                <button id="addButton-Passion of Strawberry" onclick="addToCart('Passion of Strawberry', 80)">Add +</button>
+            </div>
         </div>
     </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Lemon Peach iced</h2>
-            <p>101/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Lemon Peach iced', 101)">Order</button>
-            <button onclick="addToCart('Lemon Peach iced', 101)">Add to Cart</button>
+    </div>
+    <div class="container">
+        <div class="title">Merry Blue(Black Current)<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/merry blue.jpeg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>Merry Blue (Black Currant): A refreshing blend of juicy black currants, zesty lemon, and a touch of sweetness, perfect for any time.</p>
+            <p class="price">Price: 85/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Merry Blue(Black Current)', 85)">Order</button>
+                <button id="addButton-Merry Blue(Black Current)" onclick="addToCart('Merry Blue(Black Current)', 85)">Add +</button>
+            </div>
         </div>
     </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Lemon Soda</h2>
-            <p>50/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Lemon Soda', 50)">Order</button>
-            <button onclick="addToCart('Lemon Soda', 50)">Add to Cart</button>
+    </div>
+    <div class="container">
+        <div class="title">Lemon Peach iced<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/lemon peached.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>A refreshing fusion of tangy lemon and sweet peach, served chilled with a hint of mint, perfect for hot summer days.</p>
+            <p class="price">Price: 101/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Lemon Peach iced', 101)">Order</button>
+                <button id="addButton-Lemon Peach iced" onclick="addToCart('Lemon Peach iced', 101)">Add +</button>
+            </div>
         </div>
     </div>
-
-    <br>
-    <br><br>
-    <div class="menu-Title">
-        <b> <p style="background-color: white; color: black;">Milk Shake</p></b>
     </div>
-    <br><br>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Cold Coffee</h2>
-            <p>90/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Cold Coffee', 90)">Order</button>
-            <button onclick="addToCart('Cold Coffee', 90)">Add to Cart</button>
+    <div class="container">
+        <div class="title">Lemon Soda<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/lemon soda.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>A zesty blend of fresh lemon juice and sparkling soda, served chilled for a refreshing burst of citrus flavor.</p>
+            <p class="price">Price: 50/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Lemon Soda', 50)">Order</button>
+                <button id="addButton-Lemon Soda" onclick="addToCart('Lemon Soda', 50)">Add +</button>
+            </div>
         </div>
     </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Oreo Shake</h2>
-            <p>99/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Oreo Shake', 99)">Order</button>
-            <button onclick="addToCart('Oreo Shake', 99)">Add to Cart</button>
-        </div>
-    </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Berry Milk Shake</h2>
-            <p>99/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Berry Milk Shake', 99)">Order</button>
-            <button onclick="addToCart('Berry Milk Shake', 99)">Add to Cart</button>
-        </div>
-    </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Pineapple Milk Shake</h2>
-            <p>99/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Pineapple Milk Shake', 99)">Order</button>
-            <button onclick="addToCart('Pineapple Milk Shake', 99)">Add to Cart</button>
-        </div>
     </div>
 
     <br>
     <br><br>
     <div class="menu-Title">
-        <b> <p style="background-color: white; color: black;">Beverages</p></b>
+        <b> <p>Milkshake</p></b>
     </div>
-    <br><br>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Tea</h2>
-            <p>15/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Tea', 15)">Order</button>
-            <button onclick="addToCart('Tea', 15)">Add to Cart</button>
-        </div>
-    </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Lemon Tea</h2>
-            <p>20/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
-        </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Lemon Tea', 20)">Order</button>
-            <button onclick="addToCart('Lemon Tea', 20)">Add to Cart</button>
+    <div class="container">
+        <div class="title">Cold Coffee<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/cold cofee.jpeg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>A smooth and creamy blend of chilled coffee, milk, and sugar, perfect for a refreshing pick-me-up on a warm day.</p>
+            <p class="price">Price: 85/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Cold Coffee', 85)">Order</button>
+                <button id="addButton-Cold Coffee" onclick="addToCart('Cold Coffee', 85)">Add +</button>
+            </div>
         </div>
     </div>
-    <div class="menu-item" id="menuContainer">
-        <img src="Menu Food images/1.png" alt="Pizza" />
-        <div>
-            <h2>Coffee</h2>
-            <p>20/-</p>
-            <p>Freshly baked bagel topped with cream<br> cheese, smoked salmon, and capers.</p>
+    </div>
+    <div class="container">
+        <div class="title">Oreo Shake<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/oreo shake.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>A delightful concoction blending crushed Oreo cookies with creamy milk and topped with whipped cream, a treat for cookie lovers.</p>
+            <p class="price">Price: 99/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Oreo Shake', 99)">Order</button>
+                <button id="addButton-Oreo Shake" onclick="addToCart('Oreo Shake', 99)">Add +</button>
+            </div>
         </div>
-        <div class="menu-item-buttons">
-            <button onclick="orderItem('Coffee', 20)">Order</button>
-            <button onclick="addToCart('Coffee', 20)">Add to Cart</button>
+    </div>
+    </div>
+    <div class="container">
+        <div class="title">Berry Milk Shake<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/berry milk shake.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>A luscious blend of mixed berries, milk, and a hint of sweetness, topped with whipped cream, a refreshing delight for berry enthusiasts.</p>
+            <p class="price">Price: 99/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Berry Milk Shake', 99)">Order</button>
+                <button id="addButton-Berry Milk Shake" onclick="addToCart('Berry Milk Shake', 99)">Add +</button>
+            </div>
         </div>
+    </div>
+    </div>
+    <div class="container">
+        <div class="title">Pineapple Milk Shake<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/pineapple milkshake.jpeg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>A tropical indulgence featuring fresh pineapple blended with creamy milk, creating a refreshing and fruity beverage with a smooth texture.</p>
+            <p class="price">Price: 99/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Pineapple Milk Shake', 99)">Order</button>
+                <button id="addButton-Pineapple Milk Shake" onclick="addToCart('Pineapple Milk Shake', 99)">Add +</button>
+            </div>
+        </div>
+    </div>
     </div>
 
+    <br>
+    <br><br>
+    <div class="menu-Title">
+        <b> <p>Beverages</p></b>
+    </div>
+    <div class="container">
+        <div class="title">Tea<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/tea.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>A soothing infusion of tea leaves, offering a warm and comforting beverage with a delicate aroma and rich flavor.</p>
+            <p class="price">Price: 15/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Tea', 15)">Order</button>
+                <button id="addButton-Tea" onclick="addToCart('Tea', 15)">Add +</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="container">
+        <div class="title">Lemon Tea<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/lemon tea.webp" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>A refreshing blend of tea with a zesty lemon twist, providing a tangy and invigorating flavor.</p>
+            <p class="price">Price: 20/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Lemon Tea', 20)">Order</button>
+                <button id="addButton-Lemon Tea" onclick="addToCart('Lemon Tea', 20)">Add +</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="container">
+        <div class="title">Coffee<br/>
+             <hr style="margin-top:10px;">
+         </div>
+        <div class="container-content">
+        <img src="Menu Food images/coffee.jpg" alt="Olive Pizza">
+        <div class="description">
+            
+            <p>A rich, aromatic brew made from freshly roasted coffee beans, delivering a bold and energizing flavor.</p>
+            <p class="price">Price: 20/-</p>
+            <div class="buttons">
+                <button onclick="orderItem('Tea', 15)">Order</button>
+                <button id="addButton-Coffee" onclick="addToCart('Coffee', 20)">Add +</button>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <!-- Status bar -->
@@ -1504,13 +1595,11 @@ Copy code
 <div id="popupOverlay" class="popup-overlay"></div>
 <!-- Popup -->
 <div id="popup" class="popup">
-    <center><img src="gogo-cafe-white.png" width="100px"></center>
-    <hr><br/>
-    <h2>Items in Your Cart!!</h2>
+    <h2>Cart</h2>
     <div class="popup-content" id="popupContent"></div>
-    <div class="popup-total" id="popupTotal">Total: $0.00</div><br/>
+    <div class="popup-total" id="popupTotal">Total: $0.00</div>
     <div class="popup-buttons">
-        <button onclick="sendOrder()">Place Order</button>
+        <button onclick="sendOrder()">Send Order</button>
         <button onclick="closePopup()">Close</button>
     </div>
 </div>
@@ -1523,50 +1612,18 @@ Copy code
     <p>Powered by <a href="https://github.com/Vighneshshetty002"><img src="VS Tech.png"></a></p>
 </footer>
 
+
 <script>
-const searchInput = document.getElementById('searchInput');
 const statusBar = document.getElementById('statusBar');
 const popupOverlay = document.getElementById('popupOverlay');
 const popup = document.getElementById('popup');
 const popupContent = document.getElementById('popupContent');
 const popupTotal = document.getElementById('popupTotal');
 const popupBtn = document.getElementById('popupBtn');
-const welcomePopup = document.getElementById('welcomePopup');
-const welcomeOverlay = document.getElementById('welcomeOverlay');
-const nameInput = document.getElementById('nameInput');
-const welcomeBtn = document.getElementById('welcomeBtn');
-const containers = document.querySelectorAll('.container');
 
 let cart = [];
 let placeholderIndex = 0;
-const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Fries"...', 'Search "Frankie"...', 'Search "Sandwich"...', 'Search "Chats"...', 'Search "Pasta"...', 'Search "Maggie"...', 'Search "Rice"...', 'Search "Mocktails"...', 'Search "Milk Shakes"...', 'Search "Beverages"...'];
-
-// Show welcome popup
-function showWelcomePopup() {
-    welcomePopup.style.display = 'block';
-    welcomeOverlay.style.display = 'block';
-}
-
-// Hide welcome popup and save name
-function hideWelcomePopup() {
-    const userName = nameInput.value;
-    if (userName.trim() !== '') {
-        localStorage.setItem('userName', userName);
-        welcomePopup.style.display = 'none';
-        welcomeOverlay.style.display = 'none';
-    } else {
-        alert('Please enter your name.');
-    }
-}
-
-welcomeBtn.addEventListener('click', hideWelcomePopup);
-
-// Show the popup on page load if the name is not already saved
-window.onload = function () {
-    if (!localStorage.getItem('userName')) {
-        showWelcomePopup();
-    }
-};
+const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Pasta"...'];
 
 // Change the placeholder text every few seconds
 function changePlaceholder() {
@@ -1575,21 +1632,25 @@ function changePlaceholder() {
 }
 setInterval(changePlaceholder, 3000);
 
-// Scroll to search input on focus
-searchInput.addEventListener('focus', () => {
-    window.scrollTo({ top: searchInput.offsetTop - 50, behavior: 'smooth' });
-});
+// Extract table number from URL
+function getTableNumber() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
+}
+
+const tableNumber = getTableNumber();
 
 searchInput.addEventListener('input', filterMenu);
 
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
-    containers.forEach(container => {
-        const itemName = container.querySelector('.title').textContent.toLowerCase();
+    const items = menuContainer.querySelectorAll('.menu-item');
+    items.forEach(item => {
+        const itemName = item.querySelector('h2').textContent.toLowerCase();
         if (itemName.includes(query)) {
-            container.style.display = 'block';
+            item.style.display = 'flex';
         } else {
-            container.style.display = 'none';
+            item.style.display = 'none';
         }
     });
 }
@@ -1607,7 +1668,7 @@ function orderItem(name, price) {
     const totalPrice = price.toFixed(2);
     const orderDateTime = new Date().toLocaleString();
     emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-        table_number: getTableNumber(),
+        table_number: tableNumber,
         order_details: orderDetails,
         total_price: totalPrice,
         order_date_time: orderDateTime
@@ -1708,7 +1769,7 @@ function sendOrder() {
     const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
     const orderDateTime = new Date().toLocaleString();
     emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-        table_number: getTableNumber(),
+        table_number: tableNumber,
         order_details: orderDetails,
         total_price: total.toFixed(2),
         order_date_time: orderDateTime
@@ -1725,13 +1786,7 @@ function sendOrder() {
     });
 }
 
-function getTableNumber() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
-}
 </script>
-
-
 
 
 
