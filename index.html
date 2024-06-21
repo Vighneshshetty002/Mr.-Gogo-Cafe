@@ -184,7 +184,7 @@
             display: inline-block;
         }
 
-        .menu-button-glow:hover::after {
+        .menu-button-glow::after {
             content: '';
             position: absolute;
             top: -5px;
@@ -195,6 +195,12 @@
             background: rgba(255, 255, 255, 0.2);
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
             z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .menu-button-glow:hover::after {
+            opacity: 1;
         }
 
         /* Mobile Styles */
@@ -233,7 +239,7 @@
     <div class="container">
         <div class="text-container">
             <p id="typewriter-text"></p>
-            <img src="cursor-image.png" alt="Cursor" class="cursor-image" id="cursor-image">
+            <img src="gogo-cafe-white.png" alt="Cursor" class="cursor-image" id="cursor-image">
         </div>
 
         <div class="popular-dishes-container">
@@ -285,7 +291,6 @@
 
         function moveCursor() {
             const textRect = textElement.getBoundingClientRect();
-            const cursorRect = cursorImage.getBoundingClientRect();
             cursorImage.style.top = `${textRect.top + window.scrollY}px`;
             cursorImage.style.left = `${textRect.left + window.scrollX + textElement.offsetWidth}px`;
         }
