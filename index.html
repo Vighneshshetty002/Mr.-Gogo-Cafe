@@ -110,6 +110,7 @@
             transition: background-color 0.3s, color 0.3s;
             margin-top: 20px;
             display: inline-block;
+            position: relative;
         }
 
         .menu-button:hover {
@@ -203,6 +204,26 @@
             opacity: 1;
         }
 
+        .blast-effect {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .blast-effect.active {
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
         /* Mobile Styles */
         @media (max-width: 768px) {
             .container {
@@ -267,6 +288,7 @@
         const text = "Welcome to Mr. Gogo Cafe! Delicious treats await you. Explore our menu and enjoy the cozy ambiance. Visit us today!";
         const textElement = document.getElementById("typewriter-text");
         const cursorImage = document.getElementById("cursor-image");
+        const button = document.querySelector(".menu-button");
         const maxHeight = 200;
         let index = 0;
 
@@ -296,13 +318,30 @@
         }
 
         function moveToButton() {
-            const button = document.querySelector(".menu-button");
             const buttonRect = button.getBoundingClientRect();
-            cursorImage.style.transition = "transform 1s ease-in-out";
-            cursorImage.style.transform = `translate(${buttonRect.left + window.scrollX}px, ${buttonRect.top + window.scrollY}px)`;
+            cursorImage.style.transition = "transform 1s ease-in-out, top 1s ease-in-out, left 1s ease-in-out";
+            cursorImage.style.top = `${buttonRect.top + window.scrollY + buttonRect.height / 2}px`;
+            cursorImage.style.left = `${buttonRect.left + window.scrollX + buttonRect.width / 2}px`;
+            cursorImage.style.transform = "translate(-50%, -50%) scale(2)";
             setTimeout(() => {
-                button.classList.add("glow");
+                createBlastEffect(buttonRect);
             }, 1000);
+        }
+
+        function createBlastEffect(rect) {
+            const blast = document.createElement("div");
+            blast.classList.add("blast-effect");
+            blast.style.top = `${rect.top + window.scrollY + rect.height / 2}px`;
+            blast.style.left = `${rect.left + window.scrollX + rect.width / 2}px`;
+            document.body.appendChild(blast);
+            setTimeout(() => {
+                blast.classList.add("active");
+            }, 0);
+            setTimeout(() => {
+                blast.classList.remove("active");
+                document.body.removeChild(blast);
+                cursorImage.style.display = "none";
+            }, 1500);
         }
 
         window.onload = function () {
