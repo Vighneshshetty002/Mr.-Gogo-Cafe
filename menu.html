@@ -1727,6 +1727,7 @@ const popupTotal = document.getElementById('popupTotal');
 const popupBtn = document.getElementById('popupBtn');
 const containers = document.querySelectorAll('.container');
 const menuTitles = document.querySelectorAll('.menu-Title');
+const titleHrs = document.querySelectorAll('.title-hr');
 
 let cart = [];
 let placeholderIndex = 0;
@@ -1756,6 +1757,9 @@ function filterMenu() {
         if (itemName.includes(query)) {
             container.style.display = 'block';
             container.previousElementSibling.style.display = 'block'; // Show the title
+            if (container.previousElementSibling.previousElementSibling && container.previousElementSibling.previousElementSibling.classList.contains('title-hr')) {
+                container.previousElementSibling.previousElementSibling.style.display = 'block'; // Show the hr
+            }
             foundMatch = true;
         } else {
             container.style.display = 'none';
@@ -1765,12 +1769,21 @@ function filterMenu() {
     menuTitles.forEach(title => {
         if (!foundMatch) {
             title.style.display = 'block'; // Show all titles if no match found
+            if (title.previousElementSibling && title.previousElementSibling.classList.contains('title-hr')) {
+                title.previousElementSibling.style.display = 'block'; // Show all hrs if no match found
+            }
         } else {
             const nextContainer = title.nextElementSibling;
             if (nextContainer && nextContainer.style.display === 'none') {
                 title.style.display = 'none'; // Hide title if its container is hidden
+                if (title.previousElementSibling && title.previousElementSibling.classList.contains('title-hr')) {
+                    title.previousElementSibling.style.display = 'none'; // Hide the hr if the container is hidden
+                }
             } else {
                 title.style.display = 'block'; // Show title if its container is visible
+                if (title.previousElementSibling && title.previousElementSibling.classList.contains('title-hr')) {
+                    title.previousElementSibling.style.display = 'block'; // Show the hr if the container is visible
+                }
             }
         }
     });
