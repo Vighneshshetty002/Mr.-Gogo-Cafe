@@ -1726,6 +1726,7 @@ const popupContent = document.getElementById('popupContent');
 const popupTotal = document.getElementById('popupTotal');
 const popupBtn = document.getElementById('popupBtn');
 const containers = document.querySelectorAll('.container');
+const menuTitles = document.querySelectorAll('.menu-Title');
 
 let cart = [];
 let placeholderIndex = 0;
@@ -1748,16 +1749,33 @@ searchInput.addEventListener('input', filterMenu);
 
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
+    let foundMatch = false;
+
     containers.forEach(container => {
         const itemName = container.querySelector('.title').textContent.toLowerCase();
         if (itemName.includes(query)) {
             container.style.display = 'block';
+            container.previousElementSibling.style.display = 'block'; // Show the title
+            foundMatch = true;
         } else {
             container.style.display = 'none';
         }
     });
+
+    menuTitles.forEach(title => {
+        if (!foundMatch) {
+            title.style.display = 'block'; // Show all titles if no match found
+        } else {
+            const nextContainer = title.nextElementSibling;
+            if (nextContainer && nextContainer.style.display === 'none') {
+                title.style.display = 'none'; // Hide title if its container is hidden
+            } else {
+                title.style.display = 'block'; // Show title if its container is visible
+            }
+        }
+    });
 }
-    
+
 function showStatus(message) {
     statusBar.textContent = message;
     statusBar.style.display = 'block';
