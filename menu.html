@@ -1793,6 +1793,15 @@ function filterMenu() {
             hr.style.display = 'block'; // Show hr if either the title or container is visible
         }
     });
+
+    scrollToFirstMatch();
+}
+
+function scrollToFirstMatch() {
+    const firstVisibleContainer = Array.from(containers).find(container => container.style.display === 'block');
+    if (firstVisibleContainer) {
+        firstVisibleContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 function showStatus(message) {
