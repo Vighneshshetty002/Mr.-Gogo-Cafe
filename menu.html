@@ -1757,34 +1757,40 @@ function filterMenu() {
         if (itemName.includes(query)) {
             container.style.display = 'block';
             container.previousElementSibling.style.display = 'block'; // Show the title
-            if (container.previousElementSibling.previousElementSibling && container.previousElementSibling.previousElementSibling.classList.contains('title-hr')) {
-                container.previousElementSibling.previousElementSibling.style.display = 'block'; // Show the hr
+            if (container.querySelector('.title-hr')) {
+                container.querySelector('.title-hr').style.display = 'block'; // Show the hr within the container
             }
             foundMatch = true;
         } else {
             container.style.display = 'none';
+            if (container.querySelector('.title-hr')) {
+                container.querySelector('.title-hr').style.display = 'none'; // Hide the hr within the container
+            }
         }
     });
 
     menuTitles.forEach(title => {
-        if (!foundMatch) {
-            title.style.display = 'block'; // Show all titles if no match found
-            if (title.previousElementSibling && title.previousElementSibling.classList.contains('title-hr')) {
-                title.previousElementSibling.style.display = 'block'; // Show all hrs if no match found
+        const nextContainer = title.nextElementSibling;
+        if (foundMatch && nextContainer && nextContainer.style.display === 'none') {
+            title.style.display = 'none'; // Hide title if its container is hidden
+            if (title.nextElementSibling && title.nextElementSibling.classList.contains('title-hr')) {
+                title.nextElementSibling.style.display = 'none'; // Hide the hr if the container is hidden
             }
         } else {
-            const nextContainer = title.nextElementSibling;
-            if (nextContainer && nextContainer.style.display === 'none') {
-                title.style.display = 'none'; // Hide title if its container is hidden
-                if (title.previousElementSibling && title.previousElementSibling.classList.contains('title-hr')) {
-                    title.previousElementSibling.style.display = 'none'; // Hide the hr if the container is hidden
-                }
-            } else {
-                title.style.display = 'block'; // Show title if its container is visible
-                if (title.previousElementSibling && title.previousElementSibling.classList.contains('title-hr')) {
-                    title.previousElementSibling.style.display = 'block'; // Show the hr if the container is visible
-                }
+            title.style.display = 'block'; // Show title if its container is visible
+            if (title.nextElementSibling && title.nextElementSibling.classList.contains('title-hr')) {
+                title.nextElementSibling.style.display = 'block'; // Show the hr if the container is visible
             }
+        }
+    });
+
+    titleHrs.forEach(hr => {
+        const prevTitle = hr.previousElementSibling;
+        const nextContainer = hr.nextElementSibling;
+        if (foundMatch && nextContainer && nextContainer.style.display === 'none' && prevTitle && prevTitle.style.display === 'none') {
+            hr.style.display = 'none'; // Hide hr if both the title and container are hidden
+        } else {
+            hr.style.display = 'block'; // Show hr if either the title or container is visible
         }
     });
 }
