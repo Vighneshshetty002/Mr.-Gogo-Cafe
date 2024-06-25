@@ -22,11 +22,17 @@ body {
 
 
 
-        #greeting {
+          #greeting {
             margin: 20px;
             font-size: 24px;
             font-weight: bold;
         }
+        #userNameDisplay {
+            margin: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+        
 
 
         
@@ -406,7 +412,8 @@ nav {
 <body>
 <div id="greeting"></div>
 
-
+<div id="greeting"></div>
+    <div id="userNameDisplay">Hii Hello</div>
     Namaskaram!! Let's start this flavorful journey with your name.(Enter Your Name)
     
     
@@ -1740,6 +1747,7 @@ const containers = document.querySelectorAll('.container');
 const menuTitles = document.querySelectorAll('.menu-Title');
 const titleHrs = document.querySelectorAll('.title-hr');
 const greeting = document.getElementById('greeting');
+const userNameDisplay = document.getElementById('userNameDisplay');
 
 let cart = [];
 let placeholderIndex = 0;
@@ -1755,6 +1763,7 @@ let userName = '';
             userName = prompt('Please enter your name:');
             if (userName) {
                 greeting.textContent = `Hey ${userName}, explore our menu`;
+                userNameDisplay.textContent = `Namaskaram, ${userName}!`;
             } else {
                 greeting.textContent = `Hey, explore our menu`;
             }
@@ -1833,6 +1842,7 @@ function orderItem(name, price) {
     const orderDateTime = new Date().toLocaleString();
     emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
         table_number: getTableNumber(),
+        user_name: userName,
         order_details: orderDetails,
         total_price: totalPrice,
         order_date_time: orderDateTime
