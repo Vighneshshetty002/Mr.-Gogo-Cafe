@@ -1795,7 +1795,7 @@ nav {
         function scrollToFirstMatch() {
             const firstVisibleContainer = Array.from(containers).find(container => container.style.display === 'block');
             if (firstVisibleContainer) {
-                firstVisibleContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                window.scrollTo({ top: firstVisibleContainer.offsetTop - 200, behavior: 'smooth' }); // Increased offset
             }
         }
 
@@ -1866,77 +1866,75 @@ nav {
         function updateCartItem(itemName, priceChange) {
             const item = cart.find(item => item.name === itemName);
             if (item) {
-                item.quantity += price
-                Change > 0 ? 1 : -1;
+                item.quantity += priceChange > 0 ? 1 : -1;
                 item.price += priceChange;
                 updateCartDisplay();
+            }
         }
-    }
 
-
-    function removeFromCart(itemName) {
-        const itemIndex = cart.findIndex(item => item.name === itemName);
-        if (itemIndex > -1) {
-            cart.splice(itemIndex, 1);
-            showStatus('Item removed from cart.');
-            updateCartDisplay();
+        function removeFromCart(itemName) {
+            const itemIndex = cart.findIndex(item => item.name === itemName);
+            if (itemIndex > -1) {
+                cart.splice(itemIndex, 1);
+                showStatus('Item removed from cart.');
+                updateCartDisplay();
+            }
         }
-    }
 
-    function updateCartDisplay() {
-        popupContent.innerHTML = '';
-        let total = 0;
-        cart.forEach(item => {
-            const itemDiv = document.createElement('div');
-            itemDiv.classList.add('popup-item');
-            itemDiv.innerHTML = `
-                <span>${item.name} - ${item.quantity} x ${item.price / item.quantity} = ${item.price.toFixed(2)}</span>
-            `;
-            popupContent.appendChild(itemDiv);
-            total += item.price;
-        });
-        popupTotal.textContent = `Total: ${total.toFixed(2)}`;
-        popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
-    }
+        function updateCartDisplay() {
+            popupContent.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('popup-item');
+                itemDiv.innerHTML = `
+                    <span>${item.name} - ${item.quantity} x ${item.price / item.quantity} = ${item.price.toFixed(2)}</span>
+                `;
+                popupContent.appendChild(itemDiv);
+                total += item.price;
+            });
+            popupTotal.textContent = `Total: ${total.toFixed(2)}`;
+            popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
+        }
 
-    function togglePopup() {
-        const isVisible = popup.style.display === 'block';
-        popup.style.display = isVisible ? 'none' : 'block';
-        popupOverlay.style.display = isVisible ? 'none' : 'block';
-    }
+        function togglePopup() {
+            const isVisible = popup.style.display === 'block';
+            popup.style.display = isVisible ? 'none' : 'block';
+            popupOverlay.style.display = isVisible ? 'none' : 'block';
+        }
 
-    function closePopup() {
-        popup.style.display = 'none';
-        popupOverlay.style.display = 'none';
-    }
+        function closePopup() {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+        }
 
-    function sendOrder() {
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
-        const orderDateTime = new Date().toLocaleString();
-        emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-            table_number: getTableNumber(),
-            order_details: orderDetails,
-            total_price: total.toFixed(2),
-            order_date_time: orderDateTime
-        })
-        .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
-            showStatus('Order placed successfully!');
-            cart = [];
-            updateCartDisplay();
-            closePopup();
-        }, function(error) {
-            console.log('FAILED...', error);
-            showStatus('Failed to place order. Please try again.');
-        });
-    }
+        function sendOrder() {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
+            const orderDateTime = new Date().toLocaleString();
+            emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
+                table_number: getTableNumber(),
+                order_details: orderDetails,
+                total_price: total.toFixed(2),
+                order_date_time: orderDateTime
+            })
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                showStatus('Order placed successfully!');
+                cart = [];
+                updateCartDisplay();
+                closePopup();
+            }, function(error) {
+                console.log('FAILED...', error);
+                showStatus('Failed to place order. Please try again.');
+            });
+        }
 
-    function getTableNumber() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
-    }
-</script>
+        function getTableNumber() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
+        }
+    </script>
 
 
 
