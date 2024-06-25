@@ -1731,8 +1731,8 @@ const titleHrs = document.querySelectorAll('.title-hr');
 
 let cart = [];
 let placeholderIndex = 0;
-const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Fries"...', 'Search "Frankie"...' , 'Search "Sandwich"...' , 'Search "Chats"...' , 'Search "Pasta"...',
-                     'Search "Maggie"...', 'Search "Rice"...' , 'Search "Mocatails"...', 'Search "Milk Shakes"...', 'Search "Beverages"...'];
+const placeholders = ['Search "Pizza"...', 'Search "Burger"...', 'Search "Fries"...', 'Search "Frankie"...', 'Search "Sandwich"...', 'Search "Chats"...', 'Search "Pasta"...',
+                     'Search "Maggie"...', 'Search "Rice"...', 'Search "Mocktails"...', 'Search "Milk Shakes"...', 'Search "Beverages"...'];
 
 // Change the placeholder text every few seconds
 function changePlaceholder() {
@@ -1746,7 +1746,13 @@ searchInput.addEventListener('focus', () => {
     window.scrollTo({ top: searchInput.offsetTop - 50, behavior: 'smooth' });
 });
 
-searchInput.addEventListener('input', filterMenu);
+let typingTimer;
+const typingInterval = 500; // milliseconds
+
+searchInput.addEventListener('input', () => {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(filterMenu, typingInterval);
+});
 
 function filterMenu() {
     const query = searchInput.value.toLowerCase();
@@ -1781,7 +1787,7 @@ function filterMenu() {
         }
     });
 
-    scrollToFirstMatch();
+    setTimeout(scrollToFirstMatch, 100); // Delay to wait for keyboard to hide
 }
 
 function scrollToFirstMatch() {
