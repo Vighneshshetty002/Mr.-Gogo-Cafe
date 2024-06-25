@@ -20,6 +20,17 @@ body {
     text-align: center;
 }
 
+
+
+        #greeting {
+            margin: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+
+        
+
 nav {
             background-color: white; /* Added background color to nav */
             padding: 10px 0; /* Added padding for spacing */
@@ -393,7 +404,7 @@ nav {
 
 </head>
 <body>
-
+<div id="greeting"></div>
 
 
     Namaskaram!! Let's start this flavorful journey with your name.(Enter Your Name)
@@ -1728,6 +1739,7 @@ const popupBtn = document.getElementById('popupBtn');
 const containers = document.querySelectorAll('.container');
 const menuTitles = document.querySelectorAll('.menu-Title');
 const titleHrs = document.querySelectorAll('.title-hr');
+const greeting = document.getElementById('greeting');
 
 let cart = [];
 let placeholderIndex = 0;
@@ -1736,6 +1748,18 @@ const placeholders = [
     'Search "Maggie"...', 'Search "Rice"...', 'Search "Mocktails"...', 'Search "Milk Shakes"...', 'Search "Beverages"...'
 ];
 
+let userName = '';
+
+        // Prompt for user's name when the page loads
+        window.onload = function() {
+            userName = prompt('Please enter your name:');
+            if (userName) {
+                greeting.textContent = `Hey ${userName}, explore our menu`;
+            } else {
+                greeting.textContent = `Hey, explore our menu`;
+            }
+        };
+    
 // Change the placeholder text every few seconds
 function changePlaceholder() {
     searchInput.placeholder = placeholders[placeholderIndex];
