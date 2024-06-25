@@ -437,7 +437,13 @@ nav {
         <input type="text" id="searchInput" placeholder="Search your favorite dishes...">
     </div>
 
-    
+    <!-- User Name Modal -->
+    <div id="userNameModal">
+        <h2>Welcome to Our Restaurant!</h2>
+        <p>Please enter your name:</p>
+        <input type="text" id="userNameInput">
+        <button onclick="submitUserName()">Submit</button>
+    </div>
 
     <br/>
 <div class="menu-Title">
@@ -1748,6 +1754,8 @@ const menuTitles = document.querySelectorAll('.menu-Title');
 const titleHrs = document.querySelectorAll('.title-hr');
 const greeting = document.getElementById('greeting');
 const userNameDisplay = document.getElementById('userNameDisplay');
+const userNameModal = document.getElementById('userNameModal');
+const userNameInput = document.getElementById('userNameInput');
 
 let cart = [];
 let placeholderIndex = 0;
@@ -1757,17 +1765,22 @@ const placeholders = [
 ];
 
 let userName = '';
-
-        // Prompt for user's name when the page loads
+     // Show modal for user's name when the page loads
         window.onload = function() {
-            userName = prompt('Please enter your name:');
+            userNameModal.style.display = 'block';
+        };
+
+        // Handle the submission of the user's name
+        function submitUserName() {
+            userName = userNameInput.value.trim();
             if (userName) {
                 greeting.textContent = `Hey ${userName}, explore our menu`;
-                userNameDisplay.textContent = `Namaskaram, ${userName}!`;
+                userNameDisplay.textContent = `Welcome, ${userName}!`;
+                userNameModal.style.display = 'none';
             } else {
-                greeting.textContent = `Hey, explore our menu`;
+                alert('Please enter your name.');
             }
-        };
+        }
     
 // Change the placeholder text every few seconds
 function changePlaceholder() {
@@ -1944,6 +1957,7 @@ function sendOrder() {
     const orderDateTime = new Date().toLocaleString();
     emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
         table_number: getTableNumber(),
+        user_name: userName,
         order_details: orderDetails,
         total_price: total.toFixed(2),
         order_date_time: orderDateTime
