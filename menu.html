@@ -1784,13 +1784,14 @@ nav {
     <p>Powered by <a href="https://github.com/Vighneshshetty002"><img src="VS Tech.png"></a></p>
 </footer>
 
-    <script>
+     <script>
         const userNameModal = document.getElementById('userNameModal');
         const userNameInput = document.getElementById('userNameInput');
         const greeting = document.getElementById('greeting');
         const userNameDisplay = document.getElementById('userNameDisplay');
         const userNameSpan = document.getElementById('userNameSpan');
         const userNameSpan2 = document.getElementById('userNameSpan2');
+        const submitUserNameButton = document.getElementById('submitUserNameButton');
 
         let userName = '';
 
@@ -1812,6 +1813,8 @@ nav {
                 alert('Please enter your name.');
             }
         }
+
+        submitUserNameButton.addEventListener('click', submitUserName);
 
         const searchInput = document.getElementById('searchInput');
         const statusBar = document.getElementById('statusBar');
@@ -1908,7 +1911,7 @@ nav {
                 body: JSON.stringify({
                     Messages: [{
                         From: {
-                            Email: "your_email@example.com",
+                            Email: "vighneshshetty002@gmail.com",
                             Name: "Your Name"
                         },
                         To: [{
