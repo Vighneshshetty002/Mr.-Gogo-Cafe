@@ -21,21 +21,46 @@ body {
 }
 
 
-
-          #greeting {
-            margin: 20px;
-            font-size: 24px;
-            font-weight: bold;
+ .user-name-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
         }
-        #userNameDisplay {
-            margin: 20px;
-            font-size: 18px;
-            color: #333;
+        .user-name-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: black;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
         }
-        
-
-
-        
+        .user-name-popup img {
+            max-width: 100px;
+            margin-bottom: 20px;
+        }
+        .user-name-popup input {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+        }
+        .user-name-popup button {
+            padding: 10px 20px;
+            background: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }      
 
 nav {
             background-color: white; /* Added background color to nav */
@@ -437,14 +462,16 @@ nav {
         <input type="text" id="searchInput" placeholder="Search your favorite dishes...">
     </div>
 
-    <!-- User Name Modal -->
-    <div id="userNameModal">
-        <h2>Welcome to Our Restaurant!</h2>
-        <p>Please enter your name:</p>
-        <input type="text" id="userNameInput">
-        <button onclick="submitUserName()">Submit</button>
+     <!-- User Name Modal -->
+    <div id="userNameModal" class="user-name-modal">
+        <div class="user-name-popup">
+            <img src="gogo-cafe-white.png" alt="Cafe Logo">
+            <h2>Welcome to Mr. Gogo Cafe!</h2>
+            <p>Please enter your name to explore the menu:</p>
+            <input type="text" id="userNameInput" placeholder="Your Name">
+            <button onclick="submitUserName()">Submit</button>
+        </div>
     </div>
-
     <br/>
 <div class="menu-Title">
     <b><p>Pizza</p></b>
@@ -1774,9 +1801,8 @@ let userName = '';
         function submitUserName() {
             userName = userNameInput.value.trim();
             if (userName) {
-                greeting.textContent = `Hey ${userName}, explore our menu`;
-                userNameDisplay.textContent = `Welcome, ${userName}!`;
                 userNameModal.style.display = 'none';
+                showStatus(`Hey ${userName}, explore through our menu!`);
             } else {
                 alert('Please enter your name.');
             }
