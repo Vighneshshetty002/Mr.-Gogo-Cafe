@@ -1784,243 +1784,295 @@ nav {
     <p>Powered by <a href="https://github.com/Vighneshshetty002"><img src="VS Tech.png"></a></p>
 </footer>
 
-<script>
-const searchInput = document.getElementById('searchInput');
-const statusBar = document.getElementById('statusBar');
-const popupOverlay = document.getElementById('popupOverlay');
-const popup = document.getElementById('popup');
-const popupContent = document.getElementById('popupContent');
-const popupTotal = document.getElementById('popupTotal');
-const popupBtn = document.getElementById('popupBtn');
-const containers = document.querySelectorAll('.container');
-const menuTitles = document.querySelectorAll('.menu-Title');
-const titleHrs = document.querySelectorAll('.title-hr');
-const greeting = document.getElementById('greeting');
-const userNameDisplay = document.getElementById('userNameDisplay');
-const userNameModal = document.getElementById('userNameModal');
-const userNameInput = document.getElementById('userNameInput');
+    <script>
+        const userNameModal = document.getElementById('userNameModal');
+        const userNameInput = document.getElementById('userNameInput');
+        const greeting = document.getElementById('greeting');
+        const userNameDisplay = document.getElementById('userNameDisplay');
+        const userNameSpan = document.getElementById('userNameSpan');
+        const userNameSpan2 = document.getElementById('userNameSpan2');
 
-let cart = [];
-let placeholderIndex = 0;
-const placeholders = [
-    'Search "Pizza"...', 'Search "Burger"...', 'Search "Fries"...', 'Search "Frankie"...', 'Search "Sandwich"...', 'Search "Chats"...', 'Search "Pasta"...',
-    'Search "Maggie"...', 'Search "Rice"...', 'Search "Mocktails"...', 'Search "Milk Shakes"...', 'Search "Beverages"...'
-];
+        let userName = '';
 
-let userName = '';
-     // Show modal for user's name when the page loads
+        // Show modal for user's name when the page loads
         window.onload = function() {
-            userNameModal.style.display = 'block';
+            userNameModal.style.display = 'flex';
         };
 
         // Handle the submission of the user's name
         function submitUserName() {
             userName = userNameInput.value.trim();
             if (userName) {
+                greeting.textContent = `Hey ${userName}, explore our menu`;
+                userNameDisplay.textContent = `Welcome, ${userName}!`;
+                userNameSpan.textContent = userName;
+                userNameSpan2.textContent = userName;
                 userNameModal.style.display = 'none';
-                showStatus(`Hey ${userName}, explore through our menu!`);
             } else {
                 alert('Please enter your name.');
             }
         }
-    
-// Change the placeholder text every few seconds
-function changePlaceholder() {
-    searchInput.placeholder = placeholders[placeholderIndex];
-    placeholderIndex = (placeholderIndex + 1) % placeholders.length;
-}
-setInterval(changePlaceholder, 3000);
 
-// Scroll to search input on focus
-searchInput.addEventListener('focus', () => {
-    window.scrollTo({ top: searchInput.offsetTop - 50, behavior: 'smooth' });
-});
+        const searchInput = document.getElementById('searchInput');
+        const statusBar = document.getElementById('statusBar');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popup = document.getElementById('popup');
+        const popupContent = document.getElementById('popupContent');
+        const popupTotal = document.getElementById('popupTotal');
+        const popupBtn = document.getElementById('popupBtn');
+        const containers = document.querySelectorAll('.container');
+        const menuTitles = document.querySelectorAll('.menu-Title');
+        const titleHrs = document.querySelectorAll('.title-hr');
 
-let typingTimer;
-const typingInterval = 500; // milliseconds
+        let cart = [];
+        let placeholderIndex = 0;
+        const placeholders = [
+            'Search "Pizza"...', 'Search "Burger"...', 'Search "Fries"...', 'Search "Frankie"...', 'Search "Sandwich"...', 'Search "Chats"...', 'Search "Pasta"...',
+            'Search "Maggie"...', 'Search "Rice"...', 'Search "Mocktails"...', 'Search "Milk Shakes"...', 'Search "Beverages"...'
+        ];
 
-searchInput.addEventListener('input', () => {
-    clearTimeout(typingTimer);
-    typingTimer = setTimeout(filterMenu, typingInterval);
-});
-
-function filterMenu() {
-    const query = searchInput.value.toLowerCase();
-    let foundMatch = false;
-    const resultsContainer = document.createElement('div');
-    resultsContainer.id = 'searchResultsContainer';
-
-    containers.forEach(container => {
-        const itemName = container.querySelector('.title').textContent.toLowerCase();
-        if (itemName.includes(query)) {
-            const containerClone = container.cloneNode(true);
-            resultsContainer.appendChild(containerClone);
-            foundMatch = true;
+        // Change the placeholder text every few seconds
+        function changePlaceholder() {
+            searchInput.placeholder = placeholders[placeholderIndex];
+            placeholderIndex = (placeholderIndex + 1) % placeholders.length;
         }
-    });
+        setInterval(changePlaceholder, 3000);
 
-    document.querySelectorAll('#searchResultsContainer').forEach(el => el.remove()); // Remove previous results
-    if (foundMatch) {
-        searchInput.insertAdjacentElement('afterend', resultsContainer);
-    }
+        // Scroll to search input on focus
+        searchInput.addEventListener('focus', () => {
+            window.scrollTo({ top: searchInput.offsetTop - 50, behavior: 'smooth' });
+        });
 
-    menuTitles.forEach(title => {
-        const nextContainer = title.nextElementSibling;
-        if (nextContainer && nextContainer.style.display === 'none') {
-            title.style.display = 'none'; // Hide title if its container is hidden
-        } else {
-            title.style.display = 'block'; // Show title if its container is visible
+        let typingTimer;
+        const typingInterval = 500; // milliseconds
+
+        searchInput.addEventListener('input', () => {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(filterMenu, typingInterval);
+        });
+
+        function filterMenu() {
+            const query = searchInput.value.toLowerCase();
+            let foundMatch = false;
+            const resultsContainer = document.createElement('div');
+            resultsContainer.id = 'searchResultsContainer';
+
+            containers.forEach(container => {
+                const itemName = container.querySelector('.title').textContent.toLowerCase();
+                if (itemName.includes(query)) {
+                    const containerClone = container.cloneNode(true);
+                    resultsContainer.appendChild(containerClone);
+                    foundMatch = true;
+                }
+            });
+
+            document.querySelectorAll('#searchResultsContainer').forEach(el => el.remove()); // Remove previous results
+            if (foundMatch) {
+                searchInput.insertAdjacentElement('afterend', resultsContainer);
+            }
+
+            menuTitles.forEach(title => {
+                const nextContainer = title.nextElementSibling;
+                if (nextContainer && nextContainer.style.display === 'none') {
+                    title.style.display = 'none'; // Hide title if its container is hidden
+                } else {
+                    title.style.display = 'block'; // Show title if its container is visible
+                }
+            });
+
+            titleHrs.forEach(hr => {
+                const prevContainer = hr.previousElementSibling;
+                if (prevContainer && prevContainer.style.display === 'none') {
+                    hr.style.display = 'none'; // Hide hr if its previous container is hidden
+                } else {
+                    hr.style.display = 'block'; // Show hr if its previous container is visible
+                }
+            });
         }
-    });
 
-    titleHrs.forEach(hr => {
-        const prevContainer = hr.previousElementSibling;
-        if (prevContainer && prevContainer.style.display === 'none') {
-            hr.style.display = 'none'; // Hide hr if its previous container is hidden
-        } else {
-            hr.style.display = 'block'; // Show hr if its previous container is visible
+        function showStatus(message) {
+            statusBar.textContent = message;
+            statusBar.style.display = 'block';
+            setTimeout(() => {
+                statusBar.style.display = 'none';
+            }, 3000);
         }
-    });
-}
 
-function showStatus(message) {
-    statusBar.textContent = message;
-    statusBar.style.display = 'block';
-    setTimeout(() => {
-        statusBar.style.display = 'none';
-    }, 3000);
-}
+        async function sendMailjetEmail(subject, htmlContent) {
+            const response = await fetch("https://api.mailjet.com/v3.1/send", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Basic " + btoa("ba79c4cd6eccff7749dddb6da7bbce72:7a53c6f65e618f1f712a3dac4e33ae5c")
+                },
+                body: JSON.stringify({
+                    Messages: [{
+                        From: {
+                            Email: "your_email@example.com",
+                            Name: "Your Name"
+                        },
+                        To: [{
+                            Email: "recipient@example.com",
+                            Name: "Recipient Name"
+                        }],
+                        Subject: subject,
+                        HTMLPart: htmlContent
+                    }]
+                })
+            });
 
-function orderItem(name, price) {
-    const orderDetails = name;
-    const totalPrice = price.toFixed(2);
-    const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-        table_number: getTableNumber(),
-        user_name: userName,
-        order_details: orderDetails,
-        total_price: totalPrice,
-        order_date_time: orderDateTime
-    })
-    .then(function(response) {
-        console.log('SUCCESS!', response.status, response.text);
-        showStatus('Order placed successfully!');
-    }, function(error) {
-        console.log('FAILED...', error);
-        showStatus('Failed to place order. Please try again.');
-    });
-}
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
 
-function addToCart(name, price) {
-    const addButton = document.getElementById(`addButton-${name}`);
-    addButton.outerHTML = `
-        <div class="quantity-controls">
-            <button onclick="decrementQuantity('${name}', ${price}, this)">-</button>
-            <span>1</span>
-            <button onclick="incrementQuantity('${name}', ${price}, this)">+</button>
-        </div>
-    `;
-    const item = { name, price, quantity: 1 };
-    cart.push(item);
-    updateCartDisplay();
-    showStatus('Item added to cart.');
-}
+            return await response.json();
+        }
 
-function incrementQuantity(itemName, itemPrice, element) {
-    const quantityElement = element.previousElementSibling;
-    let quantity = parseInt(quantityElement.textContent);
-    quantity++;
-    quantityElement.textContent = quantity;
-    updateCartItem(itemName, itemPrice);
-}
+        function orderItem(name, price) {
+            const orderDetails = name;
+            const totalPrice = price.toFixed(2);
+            const orderDateTime = new Date().toLocaleString();
+            const subject = "New Order Received Mr. Gogo Cafe!!";
+            const htmlContent = `
+                <center>
+                    Table Number: ${getTableNumber()}<br/><br/>
+                    User Name: ${userName}<br/><br/>
+                    Order Details:<br/><br/>
+                    ${orderDetails}<br/><br/>
+                    Total Price: ₹${totalPrice}<br/><br/>
+                    Date and Time: ${orderDateTime}<br/><br/><br/>
+                </center>
+            `;
 
-function decrementQuantity(itemName, itemPrice, element) {
-    const quantityElement = element.nextElementSibling;
-    let quantity = parseInt(quantityElement.textContent);
-    if (quantity > 1) {
-        quantity--;
-        quantityElement.textContent = quantity;
-        updateCartItem(itemName, -itemPrice);
-    } else {
-        const parent = element.parentElement;
-        parent.outerHTML = `<button id="addButton-${itemName}" onclick="addToCart('${itemName}', ${itemPrice})">Add +</button>`;
-        removeFromCart(itemName);
-    }
-}
+            sendMailjetEmail(subject, htmlContent)
+                .then(response => {
+                    console.log('SUCCESS!', response);
+                    showStatus('Order placed successfully!');
+                })
+                .catch(error => {
+                    console.log('FAILED...', error);
+                    showStatus('Failed to place order. Please try again.');
+                });
+        }
 
-function updateCartItem(itemName, priceChange) {
-    const item = cart.find(item => item.name === itemName);
-    if (item) {
-        item.quantity += priceChange > 0 ? 1 : -1;
-        item.price += priceChange;
-        updateCartDisplay();
-    }
-}
+        function addToCart(name, price) {
+            const addButton = document.getElementById(`addButton-${name}`);
+            addButton.outerHTML = `
+                <div class="quantity-controls">
+                    <button onclick="decrementQuantity('${name}', ${price}, this)">-</button>
+                    <span>1</span>
+                    <button onclick="incrementQuantity('${name}', ${price}, this)">+</button>
+                </div>
+            `;
+            const item = { name, price, quantity: 1 };
+            cart.push(item);
+            updateCartDisplay();
+            showStatus('Item added to cart.');
+        }
 
-function removeFromCart(itemName) {
-    const itemIndex = cart.findIndex(item => item.name === itemName);
-    if (itemIndex > -1) {
-        cart.splice(itemIndex, 1);
-        showStatus('Item removed from cart.');
-        updateCartDisplay();
-    }
-}
+        function incrementQuantity(itemName, itemPrice, element) {
+            const quantityElement = element.previousElementSibling;
+            let quantity = parseInt(quantityElement.textContent);
+            quantity++;
+            quantityElement.textContent = quantity;
+            updateCartItem(itemName, itemPrice);
+        }
 
-function updateCartDisplay() {
-    popupContent.innerHTML = '';
-    let total = 0;
-    cart.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add('popup-item');
-        itemDiv.innerHTML = `
-            <span>${item.name} - ${item.quantity} x ${item.price / item.quantity} = ${item.price.toFixed(2)}</span>
-        `;
-        popupContent.appendChild(itemDiv);
-        total += item.price;
-    });
-    popupTotal.textContent = `Total: ${total.toFixed(2)}`;
-    popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
-}
+        function decrementQuantity(itemName, itemPrice, element) {
+            const quantityElement = element.nextElementSibling;
+            let quantity = parseInt(quantityElement.textContent);
+            if (quantity > 1) {
+                quantity--;
+                quantityElement.textContent = quantity;
+                updateCartItem(itemName, -itemPrice);
+            } else {
+                const parent = element.parentElement;
+                parent.outerHTML = `<button id="addButton-${itemName}" onclick="addToCart('${itemName}', ${itemPrice})">Add +</button>`;
+                removeFromCart(itemName);
+            }
+        }
 
-function togglePopup() {
-    const isVisible = popup.style.display === 'block';
-    popup.style.display = isVisible ? 'none' : 'block';
-    popupOverlay.style.display = isVisible ? 'none' : 'block';
-}
+        function updateCartItem(itemName, priceChange) {
+            const item = cart.find(item => item.name === itemName);
+            if (item) {
+                item.quantity += priceChange > 0 ? 1 : -1;
+                item.price += priceChange;
+                updateCartDisplay();
+            }
+        }
 
-function closePopup() {
-    popup.style.display = 'none';
-    popupOverlay.style.display = 'none';
-}
+        function removeFromCart(itemName) {
+            const itemIndex = cart.findIndex(item => item.name === itemName);
+            if (itemIndex > -1) {
+                cart.splice(itemIndex, 1);
+                showStatus('Item removed from cart.');
+                updateCartDisplay();
+            }
+        }
 
-function sendOrder() {
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-    const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
-    const orderDateTime = new Date().toLocaleString();
-    emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
-        table_number: getTableNumber(),
-        user_name: userName,
-        order_details: orderDetails,
-        total_price: total.toFixed(2),
-        order_date_time: orderDateTime
-    })
-    .then(function(response) {
-        console.log('SUCCESS!', response.status, response.text);
-        showStatus('Order placed successfully!');
-        cart = [];
-        updateCartDisplay();
-        closePopup();
-    }, function(error) {
-        console.log('FAILED...', error);
-        showStatus('Failed to place order. Please try again.');
-    });
-}
+        function updateCartDisplay() {
+            popupContent.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('popup-item');
+                itemDiv.innerHTML = `
+                    <span>${item.name} - ${item.quantity} x ${item.price / item.quantity} = ${item.price.toFixed(2)}</span>
+                `;
+                popupContent.appendChild(itemDiv);
+                total += item.price;
+            });
+            popupTotal.textContent = `Total: ${total.toFixed(2)}`;
+            popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
+        }
 
-function getTableNumber() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
-}
-</script>
+        function togglePopup() {
+            const isVisible = popup.style.display === 'block';
+            popup.style.display = isVisible ? 'none' : 'block';
+            popupOverlay.style.display = isVisible ? 'none' : 'block';
+        }
+
+        function closePopup() {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+        }
+
+        function sendOrder() {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
+            const orderDateTime = new Date().toLocaleString();
+            const subject = "New Order Received Mr. Gogo Cafe!!";
+            const htmlContent = `
+                <center>
+                    Table Number: ${getTableNumber()}<br/><br/>
+                    User Name: ${userName}<br/><br/>
+                    Order Details:<br/><br/>
+                    ${orderDetails}<br/><br/>
+                    Total Price: ₹${total.toFixed(2)}<br/><br/>
+                    Date and Time: ${orderDateTime}<br/><br/><br/>
+                </center>
+            `;
+
+            sendMailjetEmail(subject, htmlContent)
+                .then(response => {
+                    console.log('SUCCESS!', response);
+                    showStatus('Order placed successfully!');
+                    cart = [];
+                    updateCartDisplay();
+                    closePopup();
+                })
+                .catch(error => {
+                    console.log('FAILED...', error);
+                    showStatus('Failed to place order. Please try again.');
+                });
+        }
+
+        function getTableNumber() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
+        }
+    </script>
+
 
 
 
