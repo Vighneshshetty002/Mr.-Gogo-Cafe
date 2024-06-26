@@ -21,53 +21,35 @@ body {
 }
 
 
- .user-name-modal {
+ #userNameModal {
             display: none;
             position: fixed;
-            max-width: 95%;
-            max-height: 95%;
-            margin-top: 10px;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            
-            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .user-name-popup {
-            padding-top: 30px;
-            padding-bottom: 80px;
-            position: fixed;
-            width: 95%;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: black;
+
+        #userNameModalContent {
+            background-color: black;
             color: white;
             padding: 20px;
             border-radius: 10px;
             text-align: center;
         }
-        .user-name-popup img {
-            max-width: 100px;
-            margin-bottom: 20px;
-        }
-        .user-name-popup input {
-            padding: 10px;
-            width: 80%;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: none;
-        }
-        .user-name-popup button {
-            padding: 10px 20px;
-            background: white;
-            color: black;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }      
 
+        #greeting, #userNameDisplay {
+            margin: 20px;
+            font-size: 1.5em;
+        }
+
+        #userNameDisplay {
+            display: none;
+        }
 nav {
             background-color: white; /* Added background color to nav */
             padding: 10px 0; /* Added padding for spacing */
@@ -1896,33 +1878,43 @@ nav {
         }
 
         async function sendMailjetEmail(subject, htmlContent) {
-            const response = await fetch("https://api.mailjet.com/v3.1/send", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Basic " + btoa("ba79c4cd6eccff7749dddb6da7bbce72:7a53c6f65e618f1f712a3dac4e33ae5c")
-                },
-                body: JSON.stringify({
-                    Messages: [{
-                        From: {
-                            Email: "vighneshshetty002@gmail.com",
-                            Name: "Your Name"
-                        },
-                        To: [{
-                            Email: "recipient@example.com",
-                            Name: "Recipient Name"
-                        }],
-                        Subject: subject,
-                        HTMLPart: htmlContent
-                    }]
-                })
-            });
+            try {
+                const response = await fetch("https://api.mailjet.com/v3.1/send", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Basic " + btoa("ba79c4cd6eccff7749dddb6da7bbce72:7a53c6f65e618f1f712a3dac4e33ae5c")
+                    },
+                    body: JSON.stringify({
+                        Messages: [{
+                            From: {
+                                Email: "vighneshshetty002@gmail.com",
+                                Name: "Your Name"
+                            },
+                            To: [{
+                                Email: "recipient@example.com",
+                                Name: "Recipient Name"
+                            }],
+                            Subject: subject,
+                            HTMLPart: htmlContent
+                        }]
+                    })
+                });
 
-            if (!response.ok) {
-                throw new Error(`Error: ${response.status}`);
+                if (!response.ok) {
+                    console.error(`Error: ${response.status}`);
+                    const errorText = await response.text();
+                    console.error(`Error text: ${errorText}`);
+                    throw new Error(`Error: ${response.status} - ${errorText}`);
+                }
+
+                const data = await response.json();
+                console.log('Email sent successfully:', data);
+                return data;
+            } catch (error) {
+                console.error('Failed to send email:', error);
+                throw error;
             }
-
-            return await response.json();
         }
 
         function orderItem(name, price) {
