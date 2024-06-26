@@ -470,22 +470,16 @@ nav {
         <input type="text" id="searchInput" placeholder="Search your favorite dishes...">
     </div>
 </center>
-     <!-- User Name Modal -->
-    <div id="userNameModal" class="user-name-modal">
-        <div class="user-name-popup">
+      <!-- Modal for user name input -->
+    <div id="userNameModal">
+        <div id="userNameModalContent">
+            <img src="gogo-cafe-white.png" alt="Gogo Cafe" style="width: 100px;">
             <br/>
-            <br/>
-            <img src="gogo-cafe-white.png" alt="Cafe Logo"><hr>
-            <br/>
-            <br/>
-            <h2>Greetings from Mr. Gogo Cafe!!</h2>
-            <br/>
-            <p>Before we tempt your taste buds, May we know your Name?</p>
-            <br/>
-            <input type="text" id="userNameInput" placeholder="Your Name">
-            <button onclick="submitUserName()">Submit</button>
-            <br/>
-            <br/>
+            <hr>
+            <h2>Welcome to Gogo Cafe!</h2><br/>
+            <p>Please enter your name to continue:</p>
+            <input type="text" id="userNameInput" placeholder="Your Name"><br/>
+            <button id="submitUserNameButton">Submit</button>
         </div>
     </div>
     <br/>
