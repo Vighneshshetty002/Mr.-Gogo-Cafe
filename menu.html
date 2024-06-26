@@ -78,7 +78,7 @@ nav {
 
 
 /* Name styling */
-.user-popup-overlay {
+.popup-overlay {
             display: none;
             position: fixed;
             top: 0;
@@ -88,7 +88,7 @@ nav {
             background: rgba(0, 0, 0, 0.5);
             z-index: 1000;
         }
-        .user-popup {
+        .popup {
             display: none;
             position: fixed;
             top: 50%;
@@ -101,18 +101,18 @@ nav {
             border-radius: 10px;
             text-align: center;
         }
-        .user-popup img {
+        .popup img {
             max-width: 100px;
             margin-bottom: 20px;
         }
-        .user-popup input {
+        .popup input {
             padding: 10px;
             width: 80%;
             margin-bottom: 20px;
             border-radius: 5px;
             border: none;
         }
-        .user-popup button {
+        .popup button {
             padding: 10px 20px;
             background: white;
             color: black;
@@ -120,6 +120,8 @@ nav {
             border-radius: 5px;
             cursor: pointer;
         }
+
+
     
      
    /* Search bar styling */
@@ -466,16 +468,19 @@ nav {
 
 
 
-<!-- User Name Popup -->
-    <div id="userPopupOverlay" class="user-popup-overlay">
-        <div id="userPopup" class="user-popup">
+
+<!-- Name Popup -->
+    <div id="namePopupOverlay" class="popup-overlay">
+        <div id="namePopup" class="popup">
             <img src="gogo-cafe-white.png" alt="Cafe Logo">
             <h2>Welcome to Mr. Gogo Cafe!</h2>
             <p>Please enter your name to explore the menu:</p>
             <input type="text" id="userNameInput" placeholder="Your Name">
-            <button onclick="submitUserName()">Submit</button>
+            <button onclick="submitName()">Submit</button>
         </div>
     </div>
+
+
 
 
     
@@ -500,14 +505,13 @@ nav {
         <input type="text" id="searchInput" placeholder="Search your favorite dishes...">
     </div>
 
-     User Name Modal 
+    <!-- User Name Modal -->
     <div id="userNameModal">
         <h2>Welcome to Our Restaurant!</h2>
         <p>Please enter your name:</p>
         <input type="text" id="userNameInput">
         <button onclick="submitUserName()">Submit</button>
     </div>
-    
 
     <br/>
 <div class="menu-Title">
@@ -1808,9 +1812,6 @@ nav {
 <script>
 const searchInput = document.getElementById('searchInput');
 const statusBar = document.getElementById('statusBar');
-const userPopupOverlay = document.getElementById('userPopupOverlay');
-const userPopup = document.getElementById('userPopup');
-const userNameInput = document.getElementById('userNameInput');
 const popupOverlay = document.getElementById('popupOverlay');
 const popup = document.getElementById('popup');
 const popupContent = document.getElementById('popupContent');
@@ -1831,7 +1832,6 @@ const placeholders = [
     'Search "Maggie"...', 'Search "Rice"...', 'Search "Mocktails"...', 'Search "Milk Shakes"...', 'Search "Beverages"...'
 ];
 
-
 let userName = '';
      // Show modal for user's name when the page loads
         window.onload = function() {
@@ -1840,16 +1840,14 @@ let userName = '';
 
         // Show name popup on page load
         window.onload = function() {
-            userPopupOverlay.style.display = 'block';
-            userPopup.style.display = 'block';
+            namePopupOverlay.style.display = 'block';
         };
-    
+
         function submitName() {
             const name = userNameInput.value.trim();
             if (name) {
                 userName = name;
-                userPopupOverlay.style.display = 'none';
-                userPopup.style.display = 'none';
+                namePopupOverlay.style.display = 'none';
                 showStatus(`Hey ${userName}, explore through our menu!`);
             } else {
                 alert('Please enter your name');
