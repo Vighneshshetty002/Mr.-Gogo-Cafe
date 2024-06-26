@@ -1761,7 +1761,9 @@ nav {
     <p>Powered by <a href="https://github.com/Vighneshshetty002"><img src="VS Tech.png"></a></p>
 </footer>
 
-     <script>
+<script>
+        console.log("Script loaded");
+
         const userNameModal = document.getElementById('userNameModal');
         const userNameInput = document.getElementById('userNameInput');
         const greeting = document.getElementById('greeting');
@@ -1774,12 +1776,15 @@ nav {
 
         // Show modal for user's name when the page loads
         window.onload = function() {
+            console.log("Window loaded, showing modal");
             userNameModal.style.display = 'flex';
         };
 
         // Handle the submission of the user's name
         function submitUserName() {
+            console.log("Submit button clicked");
             userName = userNameInput.value.trim();
+            console.log("User name entered:", userName);
             if (userName) {
                 greeting.textContent = `Hey ${userName}, explore our menu`;
                 userNameDisplay.textContent = `Welcome, ${userName}!`;
