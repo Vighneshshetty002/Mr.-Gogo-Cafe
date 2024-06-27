@@ -51,7 +51,8 @@ body {
             display: none;
         }
 
-         #submitUserNameButton {
+        /* Style for the submit button */
+        #submitUserNameButton {
             background-color: white;
             color: black;
             border: none;
@@ -1777,7 +1778,7 @@ nav {
 </footer>
 
 <script>
- console.log("Script loaded");
+        console.log("Script loaded");
 
         const userNameModal = document.getElementById('userNameModal');
         const userNameInput = document.getElementById('userNameInput');
@@ -1805,7 +1806,7 @@ nav {
                 userNameDisplay.textContent = `Welcome, ${userName}!`;
                 userNameSpan.textContent = userName;
                 userNameSpan2.textContent = userName;
-                userNameModal.style.display = 'none';
+                userNameModal.style.display = 'none'; // Hide the modal
             } else {
                 alert('Please enter your name.');
             }
