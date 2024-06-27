@@ -50,6 +50,21 @@ body {
         #userNameDisplay {
             display: none;
         }
+
+         #submitUserNameButton {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #submitUserNameButton:hover {
+            background-color: grey;
+        }
 nav {
             background-color: white; /* Added background color to nav */
             padding: 10px 0; /* Added padding for spacing */
@@ -1762,7 +1777,7 @@ nav {
 </footer>
 
 <script>
-        console.log("Script loaded");
+ console.log("Script loaded");
 
         const userNameModal = document.getElementById('userNameModal');
         const userNameInput = document.getElementById('userNameInput');
@@ -1780,18 +1795,17 @@ nav {
             userNameModal.style.display = 'flex';
         };
 
-     let userName = '';
-     // Show modal for user's name when the page loads
-        window.onload = function() {
-            userNameModal.style.display = 'block';
-        };
-
         // Handle the submission of the user's name
         function submitUserName() {
+            console.log("Submit button clicked");
             userName = userNameInput.value.trim();
+            console.log("User name entered:", userName);
             if (userName) {
+                greeting.textContent = `Hey ${userName}, explore our menu`;
+                userNameDisplay.textContent = `Welcome, ${userName}!`;
+                userNameSpan.textContent = userName;
+                userNameSpan2.textContent = userName;
                 userNameModal.style.display = 'none';
-                showStatus(`Hey ${userName}, explore through our menu!`);
             } else {
                 alert('Please enter your name.');
             }
