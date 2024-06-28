@@ -21,7 +21,7 @@ body {
 }
 
 
- #userNameModal {
+#userNameModal {
             display: none;
             position: fixed;
             top: 0;
@@ -452,6 +452,12 @@ nav {
     
     <center><img src="gogo-cafe-white.png" width="150px"></center>
 
+    <div id="greeting"></div>
+    <div id="userNameDisplay"></div>
+
+    <!-- Example sections where the user's name is used -->
+    <p>Hello <span id="userNameSpan"></span>, welcome to our Cafe!</p>
+    <p>Dear <span id="userNameSpan2"></span>, please enjoy your meal!</p>
     
     
 <nav>
@@ -469,8 +475,7 @@ nav {
     </div>
 </center>
 
-    
-       <!-- Modal for user name input -->
+    <!-- Modal for user name input -->
     <div id="userNameModal">
         <div id="userNameModalContent">
             <img src="gogo-cafe-white.png" alt="Gogo Cafe" style="width: 100px;">
@@ -480,7 +485,6 @@ nav {
             <button id="submitUserNameButton">Submit</button>
         </div>
     </div>
-
     
 <div class="menu-Title">
     <b><p>Pizza</p></b>
