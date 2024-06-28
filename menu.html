@@ -1903,40 +1903,20 @@ nav {
         }, 3000);
     }
 
-    async function sendMailjetEmail(subject, htmlContent) {
+    // Function to send email using EmailJS
+    async function sendEmailJS(subject, htmlContent) {
         try {
-            const response = await fetch("https://api.mailjet.com/v3.1/send", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Basic " + btoa("ba79c4cd6eccff7749dddb6da7bbce72:7a53c6f65e618f1f712a3dac4e33ae5c")
-                },
-                body: JSON.stringify({
-                    Messages: [{
-                        From: {
-                            Email: "vighneshshettymusic@gmail.com",
-                            Name: "Mr. Gogo Cafe"
-                        },
-                        To: [{
-                            Email: "vighneshshetty002@gmail.com",
-                            Name: "Customer"
-                        }],
-                        Subject: subject,
-                        HTMLPart: htmlContent
-                    }]
-                })
-            });
+            const templateParams = {
+                subject: subject,
+                message: htmlContent,
+                to_email: "vighneshshetty002@gmail.com",
+                from_name: "Mr. Gogo Cafe"
+            };
 
-            if (!response.ok) {
-                console.error(`Error: ${response.status}`);
-                const errorText = await response.text();
-                console.error(`Error text: ${errorText}`);
-                throw new Error(`Error: ${response.status} - ${errorText}`);
-            }
+            const response = await emailjs.send('service_8y2ru2g', 'template_yrk4mbd', templateParams);
 
-            const data = await response.json();
-            console.log('Email sent successfully:', data);
-            return data;
+            console.log('Email sent successfully:', response.status, response.text);
+            return response;
         } catch (error) {
             console.error('Failed to send email:', error);
             throw error;
@@ -1959,7 +1939,7 @@ nav {
             </center>
         `;
 
-        sendMailjetEmail(subject, htmlContent)
+        sendEmailJS(subject, htmlContent)
             .then(response => {
                 console.log('SUCCESS!', response);
                 showStatus('Order placed successfully!');
@@ -2041,15 +2021,16 @@ nav {
         popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
     }
 
-    function togglePopup() {
-        const isVisible = popup.style.display === 'block';
-        popup.style.display = isVisible ? 'none' : 'block';
-        popupOverlay.style.display = isVisible ? 'none' : 'block';
+    function showPopup() {
+        popupOverlay.style.display = 'block';
     }
 
     function closePopup() {
-        popup.style.display = 'none';
         popupOverlay.style.display = 'none';
+    }
+
+    function getTableNumber() {
+        return "15"; // Example table number
     }
 
     function sendOrder() {
@@ -2068,7 +2049,7 @@ nav {
             </center>
         `;
 
-        sendMailjetEmail(subject, htmlContent)
+        sendEmailJS(subject, htmlContent)
             .then(response => {
                 console.log('SUCCESS!', response);
                 showStatus('Order placed successfully!');
@@ -2082,10 +2063,7 @@ nav {
             });
     }
 
-    function getTableNumber() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('table') || 'unknown'; // default to 'unknown' if not found
-    }
+    document.getElementById('orderButton').addEventListener('click', sendOrder);
 </script>
 
 
