@@ -2017,8 +2017,12 @@ nav {
             popupContent.appendChild(itemDiv);
             total += item.price;
         });
-        popupTotal.textContent = `Total: ${total.toFixed(2)}`;
+        popupTotal.textContent = `Total: ₹${total.toFixed(2)}`;
         popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
+    }
+
+    function togglePopup() {
+        popup.style.display = popup.style.display === 'none' ? 'block' : 'none';
     }
 
     function showPopup() {
