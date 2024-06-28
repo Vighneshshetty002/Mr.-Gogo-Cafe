@@ -2025,7 +2025,7 @@ function closePopup() {
 
     function sendOrder() {
         const total = cart.reduce((sum, item) => sum + item.price, 0);
-        const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('  |  ');
+        const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('|');
         const orderDateTime = new Date().toLocaleString();
         const tableNumber = getTableNumber();
 
