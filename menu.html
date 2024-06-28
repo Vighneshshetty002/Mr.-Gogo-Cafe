@@ -1904,13 +1904,14 @@ nav {
     }
 
     // Function to send email using EmailJS
-    async function sendEmailJS(subject, htmlContent) {
+    async function sendEmailJS(tableNumber, userName, orderDetails, totalPrice, orderDateTime) {
         try {
             const templateParams = {
-                subject: subject,
-                message: htmlContent,
-                to_email: "vighneshshetty002@gmail.com",
-                from_name: "Mr. Gogo Cafe"
+                table_number: tableNumber,
+                user_name: userName,
+                order_details: orderDetails,
+                total_price: totalPrice,
+                order_date_time: orderDateTime
             };
 
             const response = await emailjs.send('service_8y2ru2g', 'template_yrk4mbd', templateParams);
@@ -1927,19 +1928,9 @@ nav {
         const orderDetails = name;
         const totalPrice = price.toFixed(2);
         const orderDateTime = new Date().toLocaleString();
-        const subject = "New Order Received Mr. Gogo Cafe!!";
-        const htmlContent = `
-            <center>
-                Table Number: ${getTableNumber()}<br/><br/>
-                User Name: ${userName}<br/><br/>
-                Order Details:<br/><br/>
-                ${orderDetails}<br/><br/>
-                Total Price: ₹${totalPrice}<br/><br/>
-                Date and Time: ${orderDateTime}<br/><br/><br/>
-            </center>
-        `;
+        const tableNumber = getTableNumber();
 
-        sendEmailJS(subject, htmlContent)
+        sendEmailJS(tableNumber, userName, orderDetails, totalPrice, orderDateTime)
             .then(response => {
                 console.log('SUCCESS!', response);
                 showStatus('Order placed successfully!');
@@ -2041,19 +2032,9 @@ nav {
         const total = cart.reduce((sum, item) => sum + item.price, 0);
         const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
         const orderDateTime = new Date().toLocaleString();
-        const subject = "New Order Received Mr. Gogo Cafe!!";
-        const htmlContent = `
-            <center>
-                Table Number: ${getTableNumber()}<br/><br/>
-                User Name: ${userName}<br/><br/>
-                Order Details:<br/><br/>
-                ${orderDetails}<br/><br/>
-                Total Price: ₹${total.toFixed(2)}<br/><br/>
-                Date and Time: ${orderDateTime}<br/><br/><br/>
-            </center>
-        `;
+        const tableNumber = getTableNumber();
 
-        sendEmailJS(subject, htmlContent)
+        sendEmailJS(tableNumber, userName, orderDetails, total.toFixed(2), orderDateTime)
             .then(response => {
                 console.log('SUCCESS!', response);
                 showStatus('Order placed successfully!');
@@ -2069,6 +2050,7 @@ nav {
 
     document.getElementById('orderButton').addEventListener('click', sendOrder);
 </script>
+
 
 
 
