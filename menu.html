@@ -2013,24 +2013,19 @@ nav {
     }
 
     function togglePopup() {
-        popup.style.display = popup.style.display === 'none' ? 'block' : 'none';
-    }
+    const isVisible = popup.style.display === 'block';
+    popup.style.display = isVisible ? 'none' : 'block';
+    popupOverlay.style.display = isVisible ? 'none' : 'block';
+}
 
-    function showPopup() {
-        popupOverlay.style.display = 'block';
-    }
-
-    function closePopup() {
-        popupOverlay.style.display = 'none';
-    }
-
-    function getTableNumber() {
-        return "15"; // Example table number
-    }
+function closePopup() {
+    popup.style.display = 'none';
+    popupOverlay.style.display = 'none';
+}
 
     function sendOrder() {
         const total = cart.reduce((sum, item) => sum + item.price, 0);
-        const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
+        const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('  |  ');
         const orderDateTime = new Date().toLocaleString();
         const tableNumber = getTableNumber();
 
