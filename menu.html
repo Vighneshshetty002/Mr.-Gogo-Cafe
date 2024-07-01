@@ -1874,6 +1874,9 @@ nav {
             console.log("Add to Cart clicked for", name, price);
             const sanitizedId = `addButton-${name.replace(/\s+/g, '')}`;
             const addButton = document.getElementById(sanitizedId);
+            console.log("addButton:", addButton);
+            if (!addButton) return;
+
             addButton.outerHTML = `
                 <div class="quantity-controls">
                     <button onclick="decrementQuantity('${name}', ${price}, this)">-</button>
@@ -1883,6 +1886,7 @@ nav {
             `;
             const item = { name, price, quantity: 1 };
             cart.push(item);
+            console.log("Cart after adding item:", cart);
             updateCartDisplay();
             showStatus('Item added to cart.');
         }
@@ -1913,6 +1917,7 @@ nav {
         }
 
         function updateCartItem(itemName, priceChange) {
+            console.log("Updating cart item", itemName, priceChange);
             const item = cart.find(item => item.name === itemName);
             if (item) {
                 item.quantity += priceChange > 0 ? 1 : -1;
@@ -1922,6 +1927,7 @@ nav {
         }
 
         function removeFromCart(itemName) {
+            console.log("Removing item from cart", itemName);
             const itemIndex = cart.findIndex(item => item.name === itemName);
             if (itemIndex > -1) {
                 cart.splice(itemIndex, 1);
