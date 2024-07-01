@@ -1781,270 +1781,204 @@ nav {
     <p>Powered by <a href="https://github.com/Vighneshshetty002"><img src="VS Tech.png"></a></p>
 </footer>
 
-<script>
-    console.log("Script loaded");
+    <script>
+        console.log("Script loaded");
 
-    const userNameModal = document.getElementById('userNameModal');
-    const userNameInput = document.getElementById('userNameInput');
-    const greeting = document.getElementById('greeting');
-    const userNameDisplay = document.getElementById('userNameDisplay');
-    const userNameSpan = document.getElementById('userNameSpan');
-    const userNameSpan2 = document.getElementById('userNameSpan2');
-    const submitUserNameButton = document.getElementById('submitUserNameButton');
+        const userNameModal = document.getElementById('userNameModal');
+        const userNameInput = document.getElementById('userNameInput');
+        const greeting = document.getElementById('greeting');
+        const userNameDisplay = document.getElementById('userNameDisplay');
+        const userNameSpan = document.getElementById('userNameSpan');
+        const userNameSpan2 = document.getElementById('userNameSpan2');
+        const submitUserNameButton = document.getElementById('submitUserNameButton');
 
-    let userName = '';
+        let userName = '';
 
-    // Show modal for user's name when the page loads
-    window.onload = function() {
-        console.log("Window loaded, showing modal");
-        userNameModal.style.display = 'flex';
-    };
+        // Show modal for user's name when the page loads
+        window.onload = function() {
+            console.log("Window loaded, showing modal");
+            userNameModal.style.display = 'flex';
+        };
 
-    // Handle the submission of the user's name
-    function submitUserName() {
-        console.log("Submit button clicked");
-        userName = userNameInput.value.trim();
-        console.log("User name entered:", userName);
-        if (userName) {
-            greeting.textContent = `Hey ${userName}, explore our menu`;
-            userNameDisplay.textContent = `Welcome, ${userName}!`;
-            userNameSpan.textContent = userName;
-            userNameSpan2.textContent = userName;
-            userNameModal.style.display = 'none'; // Hide the modal
-        } else {
-            alert('Please enter your name.');
-        }
-    }
-
-    submitUserNameButton.addEventListener('click', submitUserName);
-
-    const searchInput = document.getElementById('searchInput');
-    const statusBar = document.getElementById('statusBar');
-    const popupOverlay = document.getElementById('popupOverlay');
-    const popup = document.getElementById('popup');
-    const popupContent = document.getElementById('popupContent');
-    const popupTotal = document.getElementById('popupTotal');
-    const popupBtn = document.getElementById('popupBtn');
-    const containers = document.querySelectorAll('.container');
-    const menuTitles = document.querySelectorAll('.menu-Title');
-    const titleHrs = document.querySelectorAll('.title-hr');
-
-    let cart = [];
-    let placeholderIndex = 0;
-    const placeholders = [
-        'Search "Pizza"...', 'Search "Burger"...', 'Search "Fries"...', 'Search "Frankie"...', 'Search "Sandwich"...', 'Search "Chats"...', 'Search "Pasta"...',
-        'Search "Maggie"...', 'Search "Rice"...', 'Search "Mocktails"...', 'Search "Milk Shakes"...', 'Search "Beverages"...'
-    ];
-
-    // Change the placeholder text every few seconds
-    function changePlaceholder() {
-        searchInput.placeholder = placeholders[placeholderIndex];
-        placeholderIndex = (placeholderIndex + 1) % placeholders.length;
-    }
-    setInterval(changePlaceholder, 3000);
-
-    // Scroll to search input on focus
-    searchInput.addEventListener('focus', () => {
-        window.scrollTo({ top: searchInput.offsetTop - 50, behavior: 'smooth' });
-    });
-
-    let typingTimer;
-    const typingInterval = 500; // milliseconds
-
-    searchInput.addEventListener('input', () => {
-        clearTimeout(typingTimer);
-        typingTimer = setTimeout(filterMenu, typingInterval);
-    });
-
-    function filterMenu() {
-        const query = searchInput.value.toLowerCase();
-        let foundMatch = false;
-        const resultsContainer = document.createElement('div');
-        resultsContainer.id = 'searchResultsContainer';
-
-        containers.forEach(container => {
-            const itemName = container.querySelector('.title').textContent.toLowerCase();
-            if (itemName.includes(query)) {
-                const containerClone = container.cloneNode(true);
-                resultsContainer.appendChild(containerClone);
-                foundMatch = true;
-            }
-        });
-
-        document.querySelectorAll('#searchResultsContainer').forEach(el => el.remove()); // Remove previous results
-        if (foundMatch) {
-            searchInput.insertAdjacentElement('afterend', resultsContainer);
-        }
-
-        menuTitles.forEach(title => {
-            const nextContainer = title.nextElementSibling;
-            if (nextContainer && nextContainer.style.display === 'none') {
-                title.style.display = 'none'; // Hide title if its container is hidden
+        // Handle the submission of the user's name
+        function submitUserName() {
+            console.log("Submit button clicked");
+            userName = userNameInput.value.trim();
+            console.log("User name entered:", userName);
+            if (userName) {
+                greeting.textContent = `Hey ${userName}, explore our menu`;
+                userNameDisplay.textContent = `Welcome, ${userName}!`;
+                userNameModal.style.display = 'none'; // Hide the modal
             } else {
-                title.style.display = 'block'; // Show title if its container is visible
+                alert('Please enter your name.');
             }
-        });
+        }
 
-        titleHrs.forEach(hr => {
-            const prevContainer = hr.previousElementSibling;
-            if (prevContainer && prevContainer.style.display === 'none') {
-                hr.style.display = 'none'; // Hide hr if its previous container is hidden
-            } else {
-                hr.style.display = 'block'; // Show hr if its previous container is visible
+        submitUserNameButton.addEventListener('click', submitUserName);
+
+        const statusBar = document.getElementById('statusBar');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popup = document.getElementById('popup');
+        const popupContent = document.getElementById('popupContent');
+        const popupTotal = document.getElementById('popupTotal');
+        const popupBtn = document.getElementById('popupBtn');
+        const containers = document.querySelectorAll('.container-content');
+
+        let cart = [];
+
+        function showStatus(message) {
+            statusBar.textContent = message;
+            statusBar.style.display = 'block';
+            setTimeout(() => {
+                statusBar.style.display = 'none';
+            }, 3000);
+        }
+
+        // Function to send email using EmailJS
+        async function sendEmailJS(tableNumber, userName, orderDetails, totalPrice, orderDateTime) {
+            try {
+                const templateParams = {
+                    table_number: tableNumber,
+                    user_name: userName,
+                    order_details: orderDetails,
+                    total_price: totalPrice,
+                    order_date_time: orderDateTime
+                };
+
+                const response = await emailjs.send('service_8y2ru2g', 'template_yrk4mbd', templateParams);
+
+                console.log('Email sent successfully:', response.status, response.text);
+                return response;
+            } catch (error) {
+                console.error('Failed to send email:', error);
+                throw error;
             }
-        });
-    }
-
-    function showStatus(message) {
-        statusBar.textContent = message;
-        statusBar.style.display = 'block';
-        setTimeout(() => {
-            statusBar.style.display = 'none';
-        }, 3000);
-    }
-
-    // Function to send email using EmailJS
-    async function sendEmailJS(tableNumber, userName, orderDetails, totalPrice, orderDateTime) {
-        try {
-            const templateParams = {
-                table_number: tableNumber,
-                user_name: userName,
-                order_details: orderDetails,
-                total_price: totalPrice,
-                order_date_time: orderDateTime
-            };
-
-            const response = await emailjs.send('service_8y2ru2g', 'template_yrk4mbd', templateParams);
-
-            console.log('Email sent successfully:', response.status, response.text);
-            return response;
-        } catch (error) {
-            console.error('Failed to send email:', error);
-            throw error;
         }
-    }
 
-    function orderItem(name, price) {
-        const orderDetails = name;
-        const totalPrice = price.toFixed(2);
-        const orderDateTime = new Date().toLocaleString();
-        const tableNumber = getTableNumber();
+        function orderItem(name, price) {
+            const orderDetails = name;
+            const totalPrice = price.toFixed(2);
+            const orderDateTime = new Date().toLocaleString();
+            const tableNumber = getTableNumber();
 
-        sendEmailJS(tableNumber, userName, orderDetails, totalPrice, orderDateTime)
-            .then(response => {
-                console.log('SUCCESS!', response);
-                showStatus('Order placed successfully!');
-            })
-            .catch(error => {
-                console.log('FAILED...', error);
-                showStatus('Failed to place order. Please try again.');
-            });
-    }
-
-    function addToCart(name, price) {
-        const addButton = document.getElementById(`addButton-${name}`);
-        addButton.outerHTML = `
-            <div class="quantity-controls">
-                <button onclick="decrementQuantity('${name}', ${price}, this)">-</button>
-                <span>1</span>
-                <button onclick="incrementQuantity('${name}', ${price}, this)">+</button>
-            </div>
-        `;
-        const item = { name, price, quantity: 1 };
-        cart.push(item);
-        updateCartDisplay();
-        showStatus('Item added to cart.');
-    }
-
-    function incrementQuantity(itemName, itemPrice, element) {
-        const quantityElement = element.previousElementSibling;
-        let quantity = parseInt(quantityElement.textContent);
-        quantity++;
-        quantityElement.textContent = quantity;
-        updateCartItem(itemName, itemPrice);
-    }
-
-    function decrementQuantity(itemName, itemPrice, element) {
-        const quantityElement = element.nextElementSibling;
-        let quantity = parseInt(quantityElement.textContent);
-        if (quantity > 1) {
-            quantity--;
-            quantityElement.textContent = quantity;
-            updateCartItem(itemName, -itemPrice);
-        } else {
-            const parent = element.parentElement;
-            parent.outerHTML = `<button id="addButton-${itemName}" onclick="addToCart('${itemName}', ${itemPrice})">Add +</button>`;
-            removeFromCart(itemName);
+            sendEmailJS(tableNumber, userName, orderDetails, totalPrice, orderDateTime)
+                .then(response => {
+                    console.log('SUCCESS!', response);
+                    showStatus('Order placed successfully!');
+                })
+                .catch(error => {
+                    console.log('FAILED...', error);
+                    showStatus('Failed to place order. Please try again.');
+                });
         }
-    }
 
-    function updateCartItem(itemName, priceChange) {
-        const item = cart.find(item => item.name === itemName);
-        if (item) {
-            item.quantity += priceChange > 0 ? 1 : -1;
-            item.price += priceChange;
-            updateCartDisplay();
-        }
-    }
-
-    function removeFromCart(itemName) {
-        const itemIndex = cart.findIndex(item => item.name === itemName);
-        if (itemIndex > -1) {
-            cart.splice(itemIndex, 1);
-            showStatus('Item removed from cart.');
-            updateCartDisplay();
-        }
-    }
-
-    function updateCartDisplay() {
-        popupContent.innerHTML = '';
-        let total = 0;
-        cart.forEach(item => {
-            const itemDiv = document.createElement('div');
-            itemDiv.classList.add('popup-item');
-            itemDiv.innerHTML = `
-                <span>${item.name} - ${item.quantity} x ${item.price / item.quantity} = ${item.price.toFixed(2)}</span>
+        function addToCart(name, price) {
+            const addButton = document.getElementById(`addButton-${name}`);
+            addButton.outerHTML = `
+                <div class="quantity-controls">
+                    <button onclick="decrementQuantity('${name}', ${price}, this)">-</button>
+                    <span>1</span>
+                    <button onclick="incrementQuantity('${name}', ${price}, this)">+</button>
+                </div>
             `;
-            popupContent.appendChild(itemDiv);
-            total += item.price;
-        });
-        popupTotal.textContent = `Total: ₹${total.toFixed(2)}`;
-        popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
-    }
+            const item = { name, price, quantity: 1 };
+            cart.push(item);
+            updateCartDisplay();
+            showStatus('Item added to cart.');
+        }
 
-    function togglePopup() {
-    const isVisible = popup.style.display === 'block';
-    popup.style.display = isVisible ? 'none' : 'block';
-    popupOverlay.style.display = isVisible ? 'none' : 'block';
-}
+        function incrementQuantity(itemName, itemPrice, element) {
+            const quantityElement = element.previousElementSibling;
+            let quantity = parseInt(quantityElement.textContent);
+            quantity++;
+            quantityElement.textContent = quantity;
+            updateCartItem(itemName, itemPrice);
+        }
 
-function closePopup() {
-    popup.style.display = 'none';
-    popupOverlay.style.display = 'none';
-}
+        function decrementQuantity(itemName, itemPrice, element) {
+            const quantityElement = element.nextElementSibling;
+            let quantity = parseInt(quantityElement.textContent);
+            if (quantity > 1) {
+                quantity--;
+                quantityElement.textContent = quantity;
+                updateCartItem(itemName, -itemPrice);
+            } else {
+                const parent = element.parentElement;
+                parent.outerHTML = `<button id="addButton-${itemName}" onclick="addToCart('${itemName}', ${itemPrice})">Add +</button>`;
+                removeFromCart(itemName);
+            }
+        }
 
-    function sendOrder() {
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('\n');
-        const orderDateTime = new Date().toLocaleString();
-        const tableNumber = getTableNumber();
-
-        sendEmailJS(tableNumber, userName, orderDetails, total.toFixed(2), orderDateTime)
-            .then(response => {
-                console.log('SUCCESS!', response);
-                showStatus('Order placed successfully!');
-                cart = [];
+        function updateCartItem(itemName, priceChange) {
+            const item = cart.find(item => item.name === itemName);
+            if (item) {
+                item.quantity += priceChange > 0 ? 1 : -1;
+                item.price += priceChange;
                 updateCartDisplay();
-                closePopup();
-            })
-            .catch(error => {
-                console.log('FAILED...', error);
-                showStatus('Failed to place order. Please try again.');
-            });
-    }
+            }
+        }
 
-    document.getElementById('orderButton').addEventListener('click', sendOrder);
-</script>
+        function removeFromCart(itemName) {
+            const itemIndex = cart.findIndex(item => item.name === itemName);
+            if (itemIndex > -1) {
+                cart.splice(itemIndex, 1);
+                showStatus('Item removed from cart.');
+                updateCartDisplay();
+            }
+        }
+
+        function updateCartDisplay() {
+            popupContent.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('popup-item');
+                itemDiv.innerHTML = `
+                    <span>${item.name} - ${item.quantity} x ${item.price / item.quantity} = ${item.price.toFixed(2)}</span>
+                `;
+                popupContent.appendChild(itemDiv);
+                total += item.price;
+            });
+            popupTotal.textContent = `Total: ₹${total.toFixed(2)}`;
+            popupBtn.style.display = cart.length > 0 ? 'block' : 'none';
+        }
+
+        function togglePopup() {
+            const isVisible = popup.style.display === 'block';
+            popup.style.display = isVisible ? 'none' : 'block';
+            popupOverlay.style.display = isVisible ? 'none' : 'block';
+        }
+
+        function closePopup() {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+        }
+
+        function sendOrder() {
+            console.log("sendOrder function called"); // Add this line
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('\n');
+            const orderDateTime = new Date().toLocaleString();
+            const tableNumber = getTableNumber();
+
+            console.log("Sending order with details:", { tableNumber, userName, orderDetails, total, orderDateTime }); // Add this line
+
+            sendEmailJS(tableNumber, userName, orderDetails, total.toFixed(2), orderDateTime)
+                .then(response => {
+                    console.log('SUCCESS!', response);
+                    showStatus('Order placed successfully!');
+                    cart = [];
+                    updateCartDisplay();
+                    closePopup();
+                })
+                .catch(error => {
+                    console.log('FAILED...', error);
+                    showStatus('Failed to place order. Please try again.');
+                });
+        }
+
+        document.getElementById('orderButton').addEventListener('click', sendOrder);
+    </script>
 
 
 
