@@ -1781,7 +1781,7 @@ nav {
     <p>Powered by <a href="https://github.com/Vighneshshetty002"><img src="VS Tech.png"></a></p>
 </footer>
 
-    <script>
+<script>
         console.log("Script loaded");
 
         const userNameModal = document.getElementById('userNameModal');
@@ -1871,7 +1871,9 @@ nav {
         }
 
         function addToCart(name, price) {
-            const addButton = document.getElementById(`addButton-${name.replace(/\s+/g, '')}`);
+            console.log("Add to Cart clicked for", name, price);
+            const sanitizedId = `addButton-${name.replace(/\s+/g, '')}`;
+            const addButton = document.getElementById(sanitizedId);
             addButton.outerHTML = `
                 <div class="quantity-controls">
                     <button onclick="decrementQuantity('${name}', ${price}, this)">-</button>
@@ -1886,6 +1888,7 @@ nav {
         }
 
         function incrementQuantity(itemName, itemPrice, element) {
+            console.log("Increment quantity for", itemName);
             const quantityElement = element.previousElementSibling;
             let quantity = parseInt(quantityElement.textContent);
             quantity++;
@@ -1894,6 +1897,7 @@ nav {
         }
 
         function decrementQuantity(itemName, itemPrice, element) {
+            console.log("Decrement quantity for", itemName);
             const quantityElement = element.nextElementSibling;
             let quantity = parseInt(quantityElement.textContent);
             if (quantity > 1) {
@@ -1902,7 +1906,8 @@ nav {
                 updateCartItem(itemName, -itemPrice);
             } else {
                 const parent = element.parentElement;
-                parent.outerHTML = `<button id="addButton-${itemName.replace(/\s+/g, '')}" onclick="addToCart('${itemName}', ${itemPrice})">Add +</button>`;
+                const sanitizedId = `addButton-${itemName.replace(/\s+/g, '')}`;
+                parent.outerHTML = `<button id="${sanitizedId}" onclick="addToCart('${itemName}', ${itemPrice})">Add +</button>`;
                 removeFromCart(itemName);
             }
         }
@@ -1926,6 +1931,7 @@ nav {
         }
 
         function updateCartDisplay() {
+            console.log("Updating cart display");
             popupContent.innerHTML = '';
             let total = 0;
             cart.forEach(item => {
@@ -1958,8 +1964,6 @@ nav {
             const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('\n');
             const orderDateTime = new Date().toLocaleString();
             const tableNumber = getTableNumber();
-
-            console.log("Sending order with details:", { tableNumber, userName, orderDetails, total, orderDateTime });
 
             sendEmailJS(tableNumber, userName, orderDetails, total.toFixed(2), orderDateTime)
                 .then(response => {
