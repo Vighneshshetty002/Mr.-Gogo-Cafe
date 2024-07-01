@@ -1781,7 +1781,7 @@ nav {
     <p>Powered by <a href="https://github.com/Vighneshshetty002"><img src="VS Tech.png"></a></p>
 </footer>
 
-<script>
+ <script>
         console.log("Script loaded");
 
         const userNameModal = document.getElementById('userNameModal');
@@ -1832,51 +1832,28 @@ nav {
             }, 3000);
         }
 
-        // Function to send email using EmailJS
-        async function sendEmailJS(tableNumber, userName, orderDetails, totalPrice, orderDateTime) {
-            try {
-                const templateParams = {
-                    table_number: tableNumber,
-                    user_name: userName,
-                    order_details: orderDetails,
-                    total_price: totalPrice,
-                    order_date_time: orderDateTime
-                };
-
-                const response = await emailjs.send('service_8y2ru2g', 'template_yrk4mbd', templateParams);
-
-                console.log('Email sent successfully:', response.status, response.text);
-                return response;
-            } catch (error) {
-                console.error('Failed to send email:', error);
-                throw error;
-            }
-        }
-
         function orderItem(name, price) {
             const orderDetails = name;
             const totalPrice = price.toFixed(2);
             const orderDateTime = new Date().toLocaleString();
-            const tableNumber = getTableNumber();
-
-            sendEmailJS(tableNumber, userName, orderDetails, totalPrice, orderDateTime)
-                .then(response => {
-                    console.log('SUCCESS!', response);
-                    showStatus('Order placed successfully!');
-                })
-                .catch(error => {
-                    console.log('FAILED...', error);
-                    showStatus('Failed to place order. Please try again.');
-                });
+            emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
+                table_number: getTableNumber(),
+                order_details: orderDetails,
+                total_price: totalPrice,
+                order_date_time: orderDateTime
+            })
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                showStatus('Order placed successfully!');
+            }, function(error) {
+                console.log('FAILED...', error);
+                showStatus('Failed to place order. Please try again.');
+            });
         }
 
         function addToCart(name, price) {
             console.log("Add to Cart clicked for", name, price);
-            const sanitizedId = `addButton-${name.replace(/\s+/g, '')}`;
-            const addButton = document.getElementById(sanitizedId);
-            console.log("addButton:", addButton);
-            if (!addButton) return;
-
+            const addButton = document.getElementById(`addButton-${name.replace(/\s+/g, '')}`);
             addButton.outerHTML = `
                 <div class="quantity-controls">
                     <button onclick="decrementQuantity('${name}', ${price}, this)">-</button>
@@ -1886,7 +1863,6 @@ nav {
             `;
             const item = { name, price, quantity: 1 };
             cart.push(item);
-            console.log("Cart after adding item:", cart);
             updateCartDisplay();
             showStatus('Item added to cart.');
         }
@@ -1910,8 +1886,7 @@ nav {
                 updateCartItem(itemName, -itemPrice);
             } else {
                 const parent = element.parentElement;
-                const sanitizedId = `addButton-${itemName.replace(/\s+/g, '')}`;
-                parent.outerHTML = `<button id="${sanitizedId}" onclick="addToCart('${itemName}', ${itemPrice})">Add +</button>`;
+                parent.outerHTML = `<button id="addButton-${itemName.replace(/\s+/g, '')}" onclick="addToCart('${itemName}', ${itemPrice})">Add +</button>`;
                 removeFromCart(itemName);
             }
         }
@@ -1969,23 +1944,23 @@ nav {
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('\n');
             const orderDateTime = new Date().toLocaleString();
-            const tableNumber = getTableNumber();
-
-            sendEmailJS(tableNumber, userName, orderDetails, total.toFixed(2), orderDateTime)
-                .then(response => {
-                    console.log('SUCCESS!', response);
-                    showStatus('Order placed successfully!');
-                    cart = [];
-                    updateCartDisplay();
-                    closePopup();
-                })
-                .catch(error => {
-                    console.log('FAILED...', error);
-                    showStatus('Failed to place order. Please try again.');
-                });
+            emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
+                table_number: getTableNumber(),
+                order_details: orderDetails,
+                total_price: total.toFixed(2),
+                order_date_time: orderDateTime
+            })
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                showStatus('Order placed successfully!');
+                cart = [];
+                updateCartDisplay();
+                closePopup();
+            }, function(error) {
+                console.log('FAILED...', error);
+                showStatus('Failed to place order. Please try again.');
+            });
         }
-
-        document.getElementById('orderButton').addEventListener('click', sendOrder);
 
         function getTableNumber() {
             // Implement your logic to get the table number here
