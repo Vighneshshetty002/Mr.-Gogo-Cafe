@@ -1788,8 +1788,6 @@ nav {
         const userNameInput = document.getElementById('userNameInput');
         const greeting = document.getElementById('greeting');
         const userNameDisplay = document.getElementById('userNameDisplay');
-        const userNameSpan = document.getElementById('userNameSpan');
-        const userNameSpan2 = document.getElementById('userNameSpan2');
         const submitUserNameButton = document.getElementById('submitUserNameButton');
 
         let userName = '';
@@ -1873,7 +1871,7 @@ nav {
         }
 
         function addToCart(name, price) {
-            const addButton = document.getElementById(`addButton-${name}`);
+            const addButton = document.getElementById(`addButton-${name.replace(/\s+/g, '')}`);
             addButton.outerHTML = `
                 <div class="quantity-controls">
                     <button onclick="decrementQuantity('${name}', ${price}, this)">-</button>
@@ -1904,7 +1902,7 @@ nav {
                 updateCartItem(itemName, -itemPrice);
             } else {
                 const parent = element.parentElement;
-                parent.outerHTML = `<button id="addButton-${itemName}" onclick="addToCart('${itemName}', ${itemPrice})">Add +</button>`;
+                parent.outerHTML = `<button id="addButton-${itemName.replace(/\s+/g, '')}" onclick="addToCart('${itemName}', ${itemPrice})">Add +</button>`;
                 removeFromCart(itemName);
             }
         }
@@ -1955,13 +1953,13 @@ nav {
         }
 
         function sendOrder() {
-            console.log("sendOrder function called"); // Add this line
+            console.log("sendOrder function called");
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('\n');
             const orderDateTime = new Date().toLocaleString();
             const tableNumber = getTableNumber();
 
-            console.log("Sending order with details:", { tableNumber, userName, orderDetails, total, orderDateTime }); // Add this line
+            console.log("Sending order with details:", { tableNumber, userName, orderDetails, total, orderDateTime });
 
             sendEmailJS(tableNumber, userName, orderDetails, total.toFixed(2), orderDateTime)
                 .then(response => {
@@ -1978,8 +1976,12 @@ nav {
         }
 
         document.getElementById('orderButton').addEventListener('click', sendOrder);
-    </script>
 
+        function getTableNumber() {
+            // Implement your logic to get the table number here
+            return 'Table 1'; // Example table number
+        }
+    </script>
 
 
 
