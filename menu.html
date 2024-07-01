@@ -1781,7 +1781,7 @@ nav {
     <p>Powered by <a href="https://github.com/Vighneshshetty002"><img src="VS Tech.png"></a></p>
 </footer>
 
-    <script>
+   <script>
         console.log("Script loaded");
 
         const userNameModal = document.getElementById('userNameModal');
@@ -1920,7 +1920,7 @@ nav {
                 const itemDiv = document.createElement('div');
                 itemDiv.classList.add('popup-item');
                 itemDiv.innerHTML = `
-                    <span>${item.name} - ${item.quantity} x ${item.price / item.quantity} = ₹${item.price.toFixed(2)}</span>
+                    <span>${item.name} - ${item.quantity} x ₹${(item.price / item.quantity).toFixed(2)} = ₹${item.price.toFixed(2)}</span>
                 `;
                 popupContent.appendChild(itemDiv);
                 total += item.price;
@@ -1943,7 +1943,7 @@ nav {
         function sendOrder() {
             console.log("sendOrder function called");
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ${item.price / item.quantity}`).join('<br/>');
+            const orderDetails = cart.map(item => `${item.name} - ${item.quantity} x ₹${(item.price / item.quantity).toFixed(2)}`).join('<br/>');
             const orderDateTime = new Date().toLocaleString();
             emailjs.send("service_8y2ru2g", "template_yrk4mbd", {
                 table_number: getTableNumber(),
